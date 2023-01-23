@@ -9,22 +9,25 @@ class Observation:
         self.endTime = self.startTime+relativedelta(seconds = float(self.duration))
     @classmethod
     def fromLine(cls, line): #this is bad but whatever
-        rawText = line
-        split = line.split('|')
-        startTime = stringToTime(split[0])
-        occupied = split[1] #probably always 1
-        targetName = split[2][:-2] # the minus two gets rid of the '_1','_2' etc at end of names.
-        move = split[3] #probably always 1
-        RA = split[4]
-        Dec = split[5]
-        exposureTime = split[6]
-        numExposures = split[7]
-        duration = float(exposureTime)*float(numExposures) #seconds
-        filter = split[8]
-        description = split[9]
-        descSplit = description.split(" ")
-        dRA,dDec = descSplit[10],descSplit[12][:-1]
-        return cls(startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,dRA,dDec,description)
+        try:
+            rawText = line
+            split = line.split('|')
+            startTime = stringToTime(split[0])
+            occupied = split[1] #probably always 1
+            targetName = split[2][:-2] # the minus two gets rid of the '_1','_2' etc at end of names.
+            move = split[3] #probably always 1
+            RA = split[4]
+            Dec = split[5]
+            exposureTime = split[6]
+            numExposures = split[7]
+            duration = float(exposureTime)*float(numExposures) #seconds
+            filter = split[8]
+            description = split[9]
+            descSplit = description.split(" ")
+            dRA,dDec = descSplit[10],descSplit[12][:-1]
+            return cls(startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,dRA,dDec,description)
+        except Exception as e:
+            raise Exception("Failed to create observation from line \""+line+"\"")
 
     #generate a Scheduler.txt line
     def genLine(self,num):
