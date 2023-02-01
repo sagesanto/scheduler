@@ -30,7 +30,7 @@ class Observation:
             raise Exception("Failed to create observation from line \""+line+"\"")
 
     #generate a Scheduler.txt line
-    def genLine(self,num):
+    def genLine(self,num): #num is the number (1-index) of times this object has been added to the schedule
         line = timeToString(self.startTime)
         attr = ["1",self.targetName+"_"+str(num),"1",self.RA,self.Dec,self.exposureTime,self.numExposures,self.filter,self.description]
         for attribute in attr:
@@ -92,8 +92,6 @@ class Schedule:
                 lines += task.genLine(namesDict[name])+"\n"
             else:
                 lines += "\n"+task.genLine()+"\n\n"
-
-
         print("Enter filename for outputted schedule:",end=" ")
         filename = input()
         with open(filename,"w") as f:
@@ -103,6 +101,14 @@ class Schedule:
         # do the work of converting to usable txt file
         # don't forget to add the template at the top
         # convert time back from time object
+    def toDict(self):
+        dct = {}
+        for task in self.tasks:
+            dct[task.startTime] = [task, self.lineNumber(task)]
+        return dct
+
+    def lineNumber(self,task):
+        return self.tasks.index(task)
 
     def summarize(self):
         summary = "Schedule with "+str(len(self.targets.keys()))+" targets\n"
