@@ -1,4 +1,4 @@
-import os, sys, fileinput
+import os, sys, fileinput, pytz
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -62,9 +62,11 @@ class AutoFocus:
 
 
 class Schedule:
+    def __new__(cls, *args, **kwargs):
+        return super(Schedule, cls).__new__(cls)
     def __init__(self, tasks=[],targets={}): #tasks are AutoFocus or Observation objects, targets is dict of target name to target object
-        self.tasks = tasks
-        self.targets = targets
+        self.tasks = []
+        self.targets = {}
     def appendTask(self,task):
         if isinstance(task,Observation):
             name = task.targetName
@@ -81,15 +83,15 @@ class Schedule:
         #add an autoFocus loop to the schedule
     def toTxt(self):
         lines = "DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description\n\n"
-        namesDict = {} #map names of objects to the number of times theyve been observed
+        self.namesDict = {} #map names of objects to the number of times theyve been observed
         for task in self.tasks:
             if isinstance(task, Observation):
                 name = task.targetName
-                if name not in namesDict.keys():
-                    namesDict[name] = 1
+                if name not in self.namesDict.keys():
+                    self.namesDict[name] = 1
                 else:
-                    namesDict[name] +=1
-                lines += task.genLine(namesDict[name])+"\n"
+                    self. namesDict[name] +=1
+                lines += task.genLine(self.namesDict[name])+"\n"
             else:
                 lines += "\n"+task.genLine()+"\n\n"
         print("Enter filename for outputted schedule:",end=" ")
@@ -130,7 +132,8 @@ class Schedule:
 
 #take time as string from scheduler, return time object
 def stringToTime(tstring): #example input: 2022-12-26T05:25:00.000
-    return datetime.strptime(tstring,'%Y-%m-%dT%I:%M:%S.000')
+    time = datetime.strptime(tstring,'%Y-%m-%dT%I:%M:%S.000')
+    return time.replace(tzinfo=pytz.UTC)
 
 def timeToString(time):
     return datetime.strftime(time,'%Y-%m-%dT%I:%M:%S.000')
@@ -142,7 +145,6 @@ def readSchedule(filename):
     with open(filename,'r') as f:
         lines = f.readlines()
     cleanedLines = [l.replace("\n",'') for l in lines if l !="\n"]
-
     for line in cleanedLines:
         if 'DateTime' in line: #ignore the template at the top
             continue
