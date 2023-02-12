@@ -4,8 +4,8 @@ from dateutil.relativedelta import relativedelta
 
 class Observation:
     # hell on earth, preferred method is fromLine
-    def __init__(self,startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,dRA,dDec,description): #etc
-        self.startTime, self.targetName, self.RA, self.Dec, self.exposureTime, self.numExposures, self.duration, self.filter, self.dRA, self.dDec,self.description = startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,dRA, dDec,description
+    def __init__(self,startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,ephemTime,dRA,dDec,description): #etc
+        self.startTime, self.targetName, self.RA, self.Dec, self.exposureTime, self.numExposures, self.duration, self.filter, self.ephemTime, self.dRA, self.dDec,self.description = startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,ephemTime,dRA, dDec,description
         self.endTime = self.startTime+relativedelta(seconds = float(self.duration))
     @classmethod
     def fromLine(cls, line): #this is bad but whatever
@@ -24,8 +24,8 @@ class Observation:
             filter = split[8]
             description = split[9]
             descSplit = description.split(" ")
-            dRA,dDec = descSplit[10],descSplit[12][:-1]
-            return cls(startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,dRA,dDec,description)
+            ephemTime,dRA,dDec = descSplit[2],descSplit[10],descSplit[12][:-1] # ephemTime is the time the observation should be centered around
+            return cls(startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,ephemTime,dRA,dDec,description)
         except Exception as e:
             raise Exception("Failed to create observation from line \""+line+"\"")
 

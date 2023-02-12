@@ -34,14 +34,17 @@ def checkSunrise(schedule):
     #                    latitude=34.36, longitude=-117.63)
     # s = sun(loc.observer, date=datetime.now(timezone.utc), tzinfo=timezone.utc)
     # sunriseUTC = s["sunrise"]
-    #REPLACE THIS WITH ABOVE COMMENTED CODE:
-    sunriseUTC = stringToTime("2022-12-26T10:00:00.000")
+    sunriseUTC = stringToTime("2022-12-26T10:00:00.000")     #REPLACE THIS WITH ABOVE COMMENTED CODE
     end = len(schedule.tasks)-1
     lastLine = schedule.tasks[end]
     sunriseDiff = sunriseUTC - lastLine.endTime
     if sunriseDiff < timedelta(hours=1):
         return 1, sunriseErrorMaker(sunriseUTC,lastLine,sunriseDiff,end)
     return 0,noError()
+
+
+def offsetFromCenter(observation):
+
 
 
 overlapTest = Test("Overlap",scheduleOverlap)
@@ -54,7 +57,7 @@ goodSchedule = readSchedule("files/exampleGoodSchedule.txt")
 badSchedule = readSchedule("files/exampleBadSchedule.txt")
 #bad schedule should fail every test in the following ways:
 #   - Time Overlap Error: lines 1 and 2 should overlap
-#   -
+#   - Sunrise Error: last observation happens too close to "sunrise"
 
 
 print("-"*10)
