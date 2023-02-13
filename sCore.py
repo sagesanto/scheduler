@@ -111,7 +111,7 @@ class Schedule:
         return dct
 
     def lineNumber(self,task):
-        return self.tasks.index(task)
+        return self.tasks.index(task) + 1
 
     def summarize(self):
         summary = "Schedule with "+str(len(self.targets.keys()))+" targets\n"

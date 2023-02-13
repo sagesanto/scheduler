@@ -6,7 +6,7 @@ class Error:
     def out(self):
         if self.output is not None:
             return self.output()
-        return self.eType+" encountered on line(s) " + str(self.lineNum) + " with message \"" + self.message + "\""
+        return "Error"+" encountered on \033[1;33mline(s) " + str(self.lineNum) + "\033[0;0m with message \"" + self.message + "\""
 
 class Test:
     def __init__(self,name,function): #function returns a status code (0=success, 1=fail, -1=unknown) and an error if necessary
