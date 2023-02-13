@@ -7,6 +7,7 @@ class Observation:
     def __init__(self,startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,ephemTime,dRA,dDec,description): #etc
         self.startTime, self.targetName, self.RA, self.Dec, self.exposureTime, self.numExposures, self.duration, self.filter, self.ephemTime, self.dRA, self.dDec,self.description = startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,ephemTime,dRA, dDec,description
         self.endTime = self.startTime+relativedelta(seconds = float(self.duration))
+        self.ephemTime = processEphemTime(self.ephemTime,self.startTime+relativedelta(seconds = float(self.duration)/2))
     @classmethod
     def fromLine(cls, line): #this is bad but whatever
         try:
@@ -24,7 +25,7 @@ class Observation:
             filter = split[8]
             description = split[9]
             descSplit = description.split(" ")
-            ephemTime,dRA,dDec = descSplit[2],descSplit[10],descSplit[12][:-1] # ephemTime is the time the observation should be centered around
+            ephemTime,dRA,dDec = descSplit[4][:-1],descSplit[10],descSplit[12][:-1] # ephemTime is the time the observation should be centered around
             return cls(startTime,targetName,RA,Dec,exposureTime,numExposures,duration,filter,ephemTime,dRA,dDec,description)
         except Exception as e:
             raise Exception("Failed to create observation from line \""+line+"\"")
@@ -129,6 +130,12 @@ class Schedule:
         return summary
 
     #probably will want some helper functions
+
+#to maximize the chances that the ephemTime has the correct date on it (if on border between days, UTC), it will assume the month/day/year of the middle of the observation
+def processEphemTime(eTime, midTime):
+    h = eTime[:2]
+    m = eTime[2:]
+    return midTime.replace(hour=int(h),minute=int(m),second=0)
 
 #take time as string from scheduler, return time object
 def stringToTime(tstring): #example input: 2022-12-26T05:25:00.000
