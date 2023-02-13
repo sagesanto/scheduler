@@ -5,7 +5,7 @@ from astral import LocationInfo, zoneinfo
 from datetime import datetime, timezone,timedelta
 
 #dict of observation durations (seconds) to acceptable offsets (seconds)
-obsTimeOffsets = {300:30,600:60,1200:300,1800:600}
+obsTimeOffsets = {300:30,600:180,1200:300,1800:600}
 
 def overlap(task1,task2):
     return (task1.startTime < task2.endTime and task1.endTime > task2.startTime) or (task2.startTime < task1.endTime and task2.endTime > task1.startTime) #is this right
@@ -26,7 +26,7 @@ def centeringErrorMaker(lineNum,offset,centerTime,correctOffset,midPoint):
     return Error("Time-Centering Error",lineNum,message)
 
 def chronoOrderErrorMaker(lineNum):
-    message = "Line " + lineNum + " starts after the line that follows it!"
+    message = "Line " + str(lineNum) + " starts after the line that follows it!"
     return Error("Chronological Order Error",lineNum,message)
 
 def scheduleOverlap(schedule): #this is all bad
@@ -82,6 +82,8 @@ def checkObservationOffset(obs):
     offset, midPoint = offsetFromCenter(obs)
     return offset<=maxOffset, offset, maxOffset,midPoint
 
+#next tests: RA/Dec Limits, AutoFocus timing
+
 
 #check if task1 starts before task2
 def isBefore(task1,task2):
@@ -100,6 +102,8 @@ badSchedule = readSchedule("files/exampleBadSchedule.txt")
 #bad schedule should fail every test in the following ways:
 #   - Time Overlap Error: lines 1 and 2 should overlap
 #   - Sunrise Error: last observation happens too close to "sunrise"
+#   - Obs Centered: line 1 is centered off of its target
+#   - Chronological Order: line 5 starts after the line after it
 
 
 print("-"*10)
