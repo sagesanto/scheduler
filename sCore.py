@@ -1,6 +1,10 @@
 import os, sys, fileinput, pytz
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import astropy
+from astropy.coordinates import EarthLocation
+from astropy.time import Time
+from astropy import units as u
 
 class Observation:
     # hell on earth, preferred method is fromLine
@@ -137,6 +141,15 @@ def processEphemTime(eTime, midTime):
     m = eTime[2:]
     return midTime.replace(hour=int(h),minute=int(m),second=0)
 
+#convert an angle in decimal, given as a string, to a angle in hour minute second format
+def angleToHMS(angle):
+    h = int(float(angle))
+    m = int(60*(float(angle)-h))
+    s = int(3600*(float(angle)-h-m/60))
+    timeStr = str(h)+":"+str(m)+":"+str(s)
+    time = datetime.strptime(timeStr,'%H:%M:%S')
+    return time
+
 #take time as string from scheduler, return time object
 def stringToTime(tstring): #example input: 2022-12-26T05:25:00.000
     time = datetime.strptime(tstring,'%Y-%m-%dT%I:%M:%S.000')
@@ -144,6 +157,9 @@ def stringToTime(tstring): #example input: 2022-12-26T05:25:00.000
 
 def timeToString(time):
     return datetime.strftime(time,'%Y-%m-%dT%I:%M:%S.000')
+
+def friendlyString(time):
+    return datetime.strftime(time,'%m/%d %I:%M')
 
 #takes existing schedule file, returns schedule object
 def readSchedule(filename):

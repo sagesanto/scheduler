@@ -14,15 +14,15 @@ def noError():
     return Error("No Error",0,"No Error",lambda : "No Error")
 
 def overlapErrorMaker(task1,task2):
-    message = "Lines ending at " + timeToString(task1[0].endTime) + " and starting at " + timeToString(task2[0].startTime) + " overlap."
+    message = "Lines ending at " + friendlyString(task1[0].endTime) + " and starting at " + friendlyString(task2[0].startTime) + " overlap."
     return Error("Time Overlap Error",[task1[1],task2[1]],message)
 
 def sunriseErrorMaker(sunrise,lastTask,timeDiff,lastLineNum):
-    message = "Difference between sunrise ("+timeToString(sunrise)+") and line #" + str(lastLineNum) +" is " + str(timeDiff) +". Must be at least one hour."
+    message = "Difference between sunrise ("+friendlyString(sunrise)+") and line #" + str(lastLineNum) +" is " + str(timeDiff) +". Must be at least one hour."
     return Error("Sunrise Error",lastLineNum,message)
 
 def centeringErrorMaker(lineNum,offset,centerTime,correctOffset,midPoint):
-    message = "Task on line " + str(lineNum) + " is centered at " + timeToString(midPoint) + ", which is "+ str(offset) + " off of its preferred center ("+ timeToString(centerTime) + "). Observations of its duration should have an offset of at most " + str(correctOffset) + "."
+    message = "Task on line " + str(lineNum) + " is centered at " + friendlyString(midPoint) + ", which is "+ str(offset) + " off of its preferred center ("+ friendlyString(centerTime) + "). Observations of its duration should have an offset of at most " + str(correctOffset) + "."
     return Error("Time-Centering Error",lineNum,message)
 
 def chronoOrderErrorMaker(lineNum):
@@ -32,6 +32,10 @@ def chronoOrderErrorMaker(lineNum):
 def autoFocusErrorMaker(lineNum):
     message = "AutoFocus loops are too far apart! Must occur no less than once per hour!"
     return Error("AutoFocus Error",lineNum,message)
+
+def RAdecErrorMaker(lineNum):
+    message = "RA and Dec not within acceptable limits at time of observation"
+    return Error("RA/Dec Error",lineNum,message)
 
 ## ----------Tests--------------
 
@@ -91,7 +95,29 @@ def autoFocusTiming(schedule):
         return 1, autoFocusErrorMaker(schedule.lineNumber(schedule.tasks[-1]))
     return 0,noError()
 
+def RAdeclimits(schedule):
+    for task in schedule.tasks:
+        if isinstance(task,Observation):
+            if not RAinLimits(task,-2,4) or not decInRange(task,0,0):
+                return 1, RAdecErrorMaker(schedule.lineNumber(task))
+    return 0,noError()
+
 #--------Helper Functions---------
+
+def RAinLimits(observation,lim1,lim2):
+    lim1, lim2 = timedelta(hours=lim1), timedelta(hours=lim2)
+    loc = LocationInfo(name='TMO', region='CA, USA', timezone='UTC',latitude=34.36, longitude=-117.63)
+    startTime = Time(observation.startTime, scale='utc', location=loc)
+    endTime = Time(observation.endTime, scale='utc', location=loc)
+    startSidereal = observing_time.sidereal_time('mean')
+    endSidereal = observing_time.sidereal_time('mean')
+    diff1 = startSidereal-angleToHMS(observation.RA)
+    diff2 = endSidereal-angleToHMS(observation.RA)
+    return diff1 > lim1 and diff2 < lim2
+
+def decInRange(observation,above,below):
+    dec = float(observation.Dec)
+    return dec in range(above,below)
 
 #take in an observation and calculate the difference between the middle of the observation window and the generated "ephemTime" of the object
 def offsetFromCenter(observation):
@@ -126,7 +152,8 @@ sunriseTest = Test("Done Before Sunrise",checkSunrise)
 obsCenteredTest = Test("Observations Centered",obsCentered)
 chronOrderTest = Test("Chronological Order", chronologicalOrder)
 autoFocusTest = Test("AutoFocus Timing",autoFocusTiming)
-tests = [overlapTest,sunriseTest,obsCenteredTest,chronOrderTest,autoFocusTest]
+RAdecTest = Test("RA/Dec Limits",RAdeclimits)
+tests = [overlapTest,sunriseTest,obsCenteredTest,chronOrderTest,autoFocusTest,RAdecTest]
 #make schedules
 goodSchedule = readSchedule("files/exampleGoodSchedule.txt")
     #good schedule should pass almost all tests - will fail the autofocus test and the overlap test (doesn't allow 3 minutes between obs)
