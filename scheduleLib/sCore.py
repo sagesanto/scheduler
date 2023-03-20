@@ -1,5 +1,5 @@
 import os, sys, fileinput, pytz
-from datetime import datetime
+from datetime import datetime, time
 from dateutil.relativedelta import relativedelta
 import astropy
 from astropy.coordinates import EarthLocation
@@ -78,7 +78,6 @@ class Schedule:
             if name not in self.targets.keys():
                 self.targets[name] = Target(name)
             self.targets[name].addObservation(task) #make sure this actually works with scope n stuff
-
         self.tasks.append(task)
     def appendTasks(self,tasks):
         for task in tasks:
@@ -143,12 +142,10 @@ def processEphemTime(eTime, midTime):
 
 #convert an angle in decimal, given as a string, to a angle in hour minute second format
 def angleToHMS(angle):
-    h = int(float(angle))
-    m = int(60*(float(angle)-h))
-    s = int(3600*(float(angle)-h-m/60))
-    timeStr = str(h)+":"+str(m)+":"+str(s)
-    time = datetime.strptime(timeStr,'%H:%M:%S')
-    return time
+    h = float(angle)/15
+    m = 60*(h-int(h))
+    s = 60*(m-int(m))
+    return time(hour=int(h),minute=int(m),second=int(s))
 
 #take time as string from scheduler, return time object
 def stringToTime(tstring): #example input: 2022-12-26T05:25:00.000

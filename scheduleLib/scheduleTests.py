@@ -1,10 +1,17 @@
+import sys, warnings
 from scheduleChecker import *
-from sCore import *
+# from sCore import *
 from astral.sun import sun
 from astral import LocationInfo, zoneinfo
-from datetime import datetime, timezone,timedelta
+from datetime import datetime, timezone,timedelta, time
+import astropy.units as u
+from astropy.coordinates import Angle
+from astropy.utils import iers
+from astropy.utils.exceptions import AstropyWarning
 
-debug = True
+warnings.simplefilter('ignore', category=AstropyWarning)
+debug = True #won't be accurate when this is True, change before using!
+
 #dict of observation durations (seconds) to acceptable offsets (seconds)
 obsTimeOffsets = {300:30,600:180,1200:300,1800:600}
 
@@ -98,26 +105,37 @@ def autoFocusTiming(schedule):
 def RAdeclimits(schedule):
     for task in schedule.tasks:
         if isinstance(task,Observation):
-            if not RAinLimits(task,-2,4) or not decInRange(task,0,0):
+            if not RAinLimits(task,-2,4) or not decInRange(task,-20,60):
                 return 1, RAdecErrorMaker(schedule.lineNumber(task))
     return 0,noError()
 
 #--------Helper Functions---------
 
+#astropy gives us sidereal time as an angle in hours, so we need to convert it to a time
+def siderealAngleToTime(angle):
+    hours= angle.hour
+    return time(hour=int(hours),minute=int((hours-int(hours))*60),second=int((((hours-int(hours))*60)-int((hours-int(hours))*60))*60))
+
+#check if the RA is within (siderealTime of the observation) + lim1 and (siderealTime of the observation) + lim2
 def RAinLimits(observation,lim1,lim2):
-    lim1, lim2 = timedelta(hours=lim1), timedelta(hours=lim2)
-    loc = LocationInfo(name='TMO', region='CA, USA', timezone='UTC',latitude=34.36, longitude=-117.63)
+    lim1, lim2 = lim1*u.hourangle, lim2*u.hourangle
+    loc = EarthLocation.from_geodetic('117.63 W', '34.36 N', 100 * u.m)
     startTime = Time(observation.startTime, scale='utc', location=loc)
     endTime = Time(observation.endTime, scale='utc', location=loc)
-    startSidereal = observing_time.sidereal_time('mean')
-    endSidereal = observing_time.sidereal_time('mean')
-    diff1 = startSidereal-angleToHMS(observation.RA)
-    diff2 = endSidereal-angleToHMS(observation.RA)
-    return diff1 > lim1 and diff2 < lim2
+    startSidereal = startTime.sidereal_time('mean')
+    endSidereal = endTime.sidereal_time('mean')
+    RA = Angle(observation.RA, unit=u.deg)
+    success = RA.is_within_bounds(startSidereal+lim1,endSidereal+lim2)
+    if not success and debug:
+        print("RA out of bounds!")
+        print("RA: ",RA.hms," Start: ",startSidereal+lim1," End: ",endSidereal+lim2)
+    return success
 
 def decInRange(observation,above,below):
     dec = float(observation.Dec)
-    return dec in range(above,below)
+    if not (dec > above and dec < below):
+        print("Dec failure! Dec: ",dec,dec in range(above,below))
+    return dec > above and dec < below
 
 #take in an observation and calculate the difference between the middle of the observation window and the generated "ephemTime" of the object
 def offsetFromCenter(observation):
@@ -138,8 +156,8 @@ def isBefore(task1,task2):
     return task1.startTime < task2.startTime
 
 def overlap(task1,task2):
-    start1, end1 = task1.startTime, (task1.endTime+timedelta(minutes=3) if isinstance(task1,Observation) else task1.endTime)
-    start2, end2 = task2.startTime, (task2.endTime+timedelta(minutes=3) if isinstance(task2,Observation) else task2.endTime)
+    start1, end1 = task1.startTime, (task1.endTime+timedelta(minutes=5) if isinstance(task1,Observation) else task1.endTime)
+    start2, end2 = task2.startTime, (task2.endTime+timedelta(minutes=5) if isinstance(task2,Observation) else task2.endTime)
     return (start1 < end2 and end1 > start2) or (start2 < end1 and end2 > start1) #is this right
 
 
@@ -154,20 +172,35 @@ chronOrderTest = Test("Chronological Order", chronologicalOrder)
 autoFocusTest = Test("AutoFocus Timing",autoFocusTiming)
 RAdecTest = Test("RA/Dec Limits",RAdeclimits)
 tests = [overlapTest,sunriseTest,obsCenteredTest,chronOrderTest,autoFocusTest,RAdecTest]
-#make schedules
-goodSchedule = readSchedule("files/exampleGoodSchedule.txt")
-    #good schedule should pass almost all tests - will fail the autofocus test and the overlap test (doesn't allow 3 minutes between obs)
-badSchedule = readSchedule("files/exampleBadSchedule.txt")
-    #bad schedule should fail every test in the following ways:
-    #   - Time Overlap Error: lines 1 and 2 should overlap
-    #   - Sunrise Error: last observation happens too close to "sunrise"
-    #   - Obs Centered: line 1 is centered off of its target
-    #   - Chronological Order: line 5 starts after the line after it
+
+def runTestingSuite(schedule,verbose=True):
+    global tests
+    return checkSchedule(schedule,tests,verbose)
+
 
 #output
-print("-"*10)
-print(goodSchedule.summarize())
-checkSchedule(goodSchedule,tests)
-print("-"*10)
-print(badSchedule.summarize())
-checkSchedule(badSchedule,tests)
+if __name__ == "__main__":
+    if debug:
+        # make schedules
+        goodSchedule = readSchedule("files/exampleGoodSchedule.txt")
+        # good schedule should pass almost all tests - will fail the autofocus test and the overlap test (doesn't allow 3 minutes between obs)
+        badSchedule = readSchedule("files/exampleBadSchedule.txt")
+        # bad schedule should fail every test, as so:
+        #   - Time Overlap Error: lines 1 and 2 should overlap
+        #   - Sunrise Error: last observation happens too close to "sunrise"
+        #   - Obs Centered: line 1 is centered off of its target
+        #   - Chronological Order: line 5 starts after the line after it
+        #   - AutoFocus Timing: line 8 starts more than an hour after the previous autofocus
+        #   - RA/Dec Limits: line 15 is outside of the RA/Dec limits
+        print("-"*10)
+        print(goodSchedule.summarize())
+        checkSchedule(goodSchedule,tests)
+        print("-"*10)
+        print(badSchedule.summarize())
+        checkSchedule(badSchedule,tests)
+        print("-"*10)
+        print("\033[1;31m In debug mode so some inputs simulated! Turn off debug to see accurate results! \033[0;0m")
+
+    else:
+        userSchedule = readSchedule(sys.argv[1])
+        checkSchedule(userSchedule,tests)
