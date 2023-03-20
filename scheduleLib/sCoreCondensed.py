@@ -427,7 +427,7 @@ from astropy import time, units as u
 from astropy.coordinates import AltAz, EarthLocation, SkyCoord
 from astropy.time import Time
 
-schedule = readSchedule("condensedScheduleLib/libFiles/exampleGoodSchedule.txt")
+schedule = readSchedule("scheduleLib/libFiles/exampleGoodSchedule.txt")
 
 def calculateDowntime(schedule):
     schedDict = schedule.toDict()

@@ -1,4 +1,4 @@
-from condensedScheduleLib import sCoreCondensed as sc
+from scheduleLib import sCoreCondensed as sc
 schedule = sc.readSchedule("files/exampleSchedule.txt")
 print(schedule.summarize())
 
