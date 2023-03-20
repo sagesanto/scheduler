@@ -1,1 +1,1 @@
-__all__ = ["sCore", "scheduleChecker","scheduleTests","scoring"]
+__all__ = ["sCoreCondensed"]
