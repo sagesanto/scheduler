@@ -82,6 +82,14 @@ class Schedule:
     def appendTasks(self,tasks):
         for task in tasks:
             self.appendTask(task)
+    def deleteTask(self,task):
+        self.tasks.remove(task)
+        if isinstance(task,Observation):
+            target = self.targets[task.targetName]
+            if task in target.observations:
+                target.observations.remove(task)
+            if target.observations == []:
+                del self.targets[target.name]
     def addAutoFocus(self,desiredTime):
         self.appendTask(AutoFocus(desiredTime))
         #add an autoFocus loop to the schedule
