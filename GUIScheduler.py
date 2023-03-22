@@ -1,12 +1,12 @@
 import sys
-
 from scheduleLib import sCoreCondensed as sc
 schedule = sc.readSchedule("files/exampleSchedule.txt")
 print(schedule.summarize())
 
 #will take the following things as input: [1] path to a folder with lists of ephemerides for each object (filename should be [object name].txt),
 #[2] preferred min time between observations, [3] preferred minimum time between observations of the same object, [4] start time in the format DD-MM-YYYY HH:MM:SS
-
+if len(sys.argv)<5:
+    raise Exception("Not enough arguments provided. Please provide the path to a folder with lists of ephemerides for each object (filename should be [object name].txt), preferred min time between observations (minutes), preferred minimum time between observations of the same object (minutes), and start time in the format DD-MM-YYYY HH:MM:SS")
 ephemsDir, minTimeBetween, minTimeBetweenSame, startTime = sys.argv[1:5]
 startTime = datetime.strptime(startTime, "%d-%m-%Y %H:%M:%S")
 
@@ -64,14 +64,14 @@ class scheduleBuilder:
         obs = obsPack.obs
         obs.startTime, obs.endTime = obsStartTime, obsStartTime + relativedelta(seconds = float(obs.duration))
         schedule.appendTask(obs)
-        self.currentTime = obsStartTime + relativedelta(seconds = float(obs.duration)) + relativedleta(minutes = float(minTimeBetween))
+        self.currentTime = obs.endTime + relativedleta(minutes = float(minTimeBetween))
     def deleteObservation(self,obs): #deletes the given observation and all observations after it - probably better to use some graph structure here but whatever
         index = self.schedule.tasks.index(obs)
         while self.schedule.tasks[index]:
             self.schedule.deleteTask(index)
         self.currentTime = self.observations[index-1][0]
     def nextObservationCandidates(self, potentialObs, startTime): #my head hurts
-        nextObs = {} #dictionary of {observation packages : start times}
+        nextObs = {} #dictionary of {object : next observation package for that object}
         for obj in potentialObs.keys():
             target = self.schedule.targets[obj]
             lastStart = target.observations[-1].startTime
@@ -88,5 +88,15 @@ class scheduleBuilder:
                 break
             else:
                 nextToPlace = presentOptions(nextObs)
-                placeObservation(nextToPlace, nextToPlace.startRange[0])
+                placeObservation(nextToPlace, nextToPlace.obs.startTime)
+    def presentOptions(self, nextObs): #this is where the GUI stuff will go
+        #this function will build a GUI that shows the user the next observation candidates and let them choose which one to place
+        #it will return the observation package that the user chooses
+        #implement the solution for now using the console
+        for obj in nextObs.keys():
+            print("Possible observation of "+obj+" at "+nextObs[obj].obs.startTime)
+        print("Please enter the name of the object you would like to observe next.")
+        choice = input()
+        return nextObs[choice]
+
 
