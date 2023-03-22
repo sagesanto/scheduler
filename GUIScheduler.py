@@ -47,10 +47,13 @@ def loadPotentialObs(ephemsDir, startTime):
         potentialObs[obs.targetName] = objObs
     return potentialObs
 
-def objNextObs(potentialObs,startTime):
-    for time in potentialObs[start].startRange:
+def objNextObs(ObjPotentialObs,startTime):
+    for time in ObjPotentialObs[startTime].startRange: #we're checking if the observation indicated by the provided start time can start at one of the times in its range start at any time in the range
         if time > startTime:
-            return obj, obj[start], time
+            pkg = ObjPotentialObs[startTime]
+            pkg.obs.startTime = time
+            pkg.obs.endTime = pkg.obs.startTime+pkg.obs.duration
+            return pkg
     return None
 
 class scheduleBuilder:
@@ -75,9 +78,7 @@ class scheduleBuilder:
             for start in potentialObs[obj].keys():
                 candidate = objNextObs(potentialObs[obj], max(start,lastStart+relativedelta(minutes = minTimeBetweenSame)))
                 if candidate:
-        #TODO: do something with the start time returned by objNextObs!!!!
-
-                    nextObs[candidate[0]] = candidate[1]
+                    nextObs[obj] = candidate
                     break
         return nextObs
     def buildScheduleLoop(self, potentialObs):
