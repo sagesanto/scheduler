@@ -3,7 +3,8 @@ import sys,os, flet as ft
 #control = widget
 # controls can contain other controls
 
-#refs are bassically forward declarations for controls - you can create a variable and have it store a ref. you set the ref to a control later, and then the ref can be used to access the control.
+#refs are basically forward declarations for controls - you can create a variable and have it store a ref.
+# #you set the ref to a control later, and then the ref can be used to access the control.
 # #this is useful for things like buttons, where you want to be able to access the button later to change its text or something
 #access later with [ref name].current.[field] = [new value]
 # #for example, if you want to change the text of a button, you can do something like this:
@@ -50,7 +51,7 @@ import sys,os, flet as ft
 def main(page: ft.Page):
     # using flet ("ft"), python port of flutter
     # colors
-    blue = ft.colors.BLUE_400
+    blue = ft.colors.BLUE_600
     red = ft.colors.RED_400
     green = ft.colors.GREEN_400
     orange = ft.colors.ORANGE_800
@@ -60,7 +61,6 @@ def main(page: ft.Page):
     page.bgcolor = white
     # styles
     titleText = lambda t,c: ft.Text(t, color=c, style=ft.TextThemeStyle.DISPLAY_MEDIUM, weight=ft.FontWeight.BOLD)
-    print(titleText("hello",blue))
     headerText = lambda t,c: ft.Text(t, color=c, style=ft.TextThemeStyle.HEADLINE_LARGE, weight=ft.FontWeight.BOLD)
     bodyText = lambda t,c: ft.Text(t, color=c, style=ft.TextThemeStyle.BODY_LARGE, weight=ft.FontWeight.NORMAL)
     buttonStyle = lambda c: ft.ButtonStyle(color=ft.colors.WHITE,bgcolor=c)
@@ -82,8 +82,8 @@ def main(page: ft.Page):
     #use a container to add a border to titleBox:
     titleBoxContainer = ft.Container(titleBox, border=ft.border.all(2, blue), border_radius = ft.border_radius.all(5), margin=ft.margin.all(10), padding=ft.padding.all(10))
     page.add(titleBoxContainer)
-    scheduleList = ft.ListView(expand=True, controls=[containerize(bodyText("No Data",blue))], spacing=10)
-    scheduleButtonRow = containerize(ft.Row(
+    scheduleList = ft.ListView(expand=True, controls=[(bodyText("No Data",blue))], spacing=10)
+    scheduleButtonRow = ft.Row(
         controls=[
                    ft.ElevatedButton(text="Export", style=buttonStyle(green)),
                    ft.ElevatedButton(text="Analyze", style=buttonStyle(blue)),
@@ -91,7 +91,7 @@ def main(page: ft.Page):
                    ft.ElevatedButton(text="Delete", style=buttonStyle(red))
                 ],
                 spacing=20
-            ))
+            )
 
     col = ft.Column(spacing=20, controls= [containerize(headerText("Schedule", blue)),containerize(scheduleList), containerize(scheduleButtonRow)])
     scheduleContainer = ft.Container(col, border=ft.border.all(2, blue), border_radius=10, margin=10, padding=10)
@@ -106,16 +106,17 @@ def main(page: ft.Page):
     # ))
     # page.add(scheduleBox)
 
-    page.add(scheduleContainer)
+    # page.add(scheduleContainer)
 
     # to the right of scheduleBox is a box called "Choose Next" that displays a horizontal list of possible observations, with a button to place each one
-    chooseNextList = ft.ListView(expand=True, data=[], spacing=10)
+    chooseNextList = ft.ListView(expand=True, controls=[bodyText("Missing Data",blue)], spacing=10)
     chooseNextBox = ft.Column(
         controls=[
             containerize(headerText("Choose Next", blue)),
             containerize(chooseNextList)
-        ]
+        ],spacing=20
     )
+    chooseNextContainer = ft.Container(chooseNextBox, border=ft.border.all(2, blue), border_radius=10, margin=10, padding=10)
 
     # the loadedFiles box is a vertical container to the right of schedule box with the title "Loaded Files" and a list of the files loaded into the program, half as tall as the other boxes
     loadedFiles = ft.ListView(expand=True, data=[], spacing=10)
@@ -136,14 +137,18 @@ def main(page: ft.Page):
     )
 
     loadedBox = ft.Column(controls=[loadedFilesBox, loadedObjectsBox])
-    page.add(chooseNextBox)
 
-    page.add(loadedFilesBox)
+    # page.add(chooseNextContainer)
+
+    # page.add(loadedFilesBox)
 
     # page.add(loadedBox)
     # the windowsBox is a horizontal grid with the next observation window on the left and the candidate observation window on the right, then to the right is the loaded objects box at the top and the loaded files box at the bottom
-    windowsBox = ft.Row(controls=[(scheduleContainer), (chooseNextBox), (loadedBox)], spacing=10)
+
+    windowsRow = ft.Row(expand=True, controls=[scheduleContainer, chooseNextContainer], spacing=10)
+    windowsBox = ft.Container(windowsRow, border=ft.border.all(2, blue), border_radius=10, margin=10, padding=10)
     page.add(windowsBox)
+
     page.update()
 
 
