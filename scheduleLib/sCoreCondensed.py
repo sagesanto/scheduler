@@ -486,7 +486,7 @@ def calculateScore(schedule):
     c["numTargets"] = len(schedule.targets)
     c["numObs"] = len(schedule.tasks)
 
-    score = (c["meridian"])/(c["errors"]*c["downtime"])*(2*c["numTargets"]+c["numObs"]) * 80
+    score = (c["meridian"])/(c["errors"]*c["downtime"])*(2*c["numTargets"]+c["numObs"]) * 80 #this needs tuning
     print("Score:",int(score))
 
 #What makes a good schedule?
