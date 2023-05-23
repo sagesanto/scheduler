@@ -1,4 +1,5 @@
 geckodriver.log
 OffsetMaps**/**
-
-
+**/example/
+**/photometrics/
+**/TargetSelect**
