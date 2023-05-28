@@ -1,9 +1,9 @@
 #---standard
-import json, pandas as pd, time, os, asyncio, sys, numpy as np, logging
+import json, pandas as pd, time, os, asyncio, sys, numpy as np, logging, pytz
 from colorlog import ColoredFormatter
 
 #---webtools
-import httpx #this and selenium are our main tools for interacting with the web
+import httpx
 from io import BytesIO # to support in saving images
 from PIL import Image #to save uncertainty map images
 from bs4 import BeautifulSoup #to parse html files
@@ -11,6 +11,7 @@ from bs4 import BeautifulSoup #to parse html files
 #--- astronomy stuff
 from astropy.time import Time
 from astral import LocationInfo, zoneinfo
+from astral import sun
 from datetime import datetime, timezone,timedelta
 from astropy.coordinates import Angle
 
@@ -24,6 +25,7 @@ stream = logging.StreamHandler()
 stream.setLevel(LOG_LEVEL)
 stream.setFormatter(formatter)
 
+utc=pytz.UTC
 
 def remove_tags(html):
     # parse html content
@@ -37,41 +39,72 @@ def remove_tags(html):
     return ' '.join(soup.stripped_strings)
 
 class TargetSelector:
-    def __init__(self, startTimeUTC="now", errorRange=360, nObsMax=1000, vMagMax=21.5,
-                 scoreMin=50, maxHoursBeforeTransit=6.75, minHoursBeforeTransit=0,
+    def __init__(self, startTimeUTC="now", endTimeUTC = "sunrise", errorRange=360, nObsMax=1000, vMagMax=21.5,
+                 scoreMin=0, minRA = 'sunset', maxRA='sunrise',
                  decMax=65, decMin=-25, altitudeLimit = 0, obsCode = 654, obsName="TMO", region="CA, USA", obsTimezone="UTC", obsLat=34.36, obsLon=-117.63):
 
+        #set up the logger
         self.logger = logging.getLogger(__name__)
         self.logger.addHandler(stream)
 
-        if startTimeUTC != 'now':
+        #set location
+        self.observatory = LocationInfo(name=obsName, region=region, timezone=obsTimezone, latitude=obsLat,
+                                        longitude=obsLon)
+        #find sunrise and sunset
+        s = sun.sun(self.observatory.observer, date=datetime.now(timezone.utc), tzinfo=timezone.utc)
+        self.sunriseUTC = s["sunrise"]
+        self.sunsetUTC = sun.time_at_elevation(self.observatory.observer,-10)
+
+        #parse start time
+        if startTimeUTC == "sunset":
+            startTimeUTC = self.sunsetUTC
+        elif startTimeUTC != 'now':
             now_dt = datetime.utcnow()
-            startTime_dt = datetime.strptime(startTimeUTC, '%Y-%m-%dT%H:%M')
+            startTime_dt = utc.localize(datetime.strptime(startTimeUTC, '%Y-%m-%dT%H:%M'))
             if now_dt < startTime_dt:
                 startTimeUTC = startTime_dt
             else:
-                self.logger.warning('Observation date should be in future. Setting current date time')
+                print('Observation date should be in future. Setting current date time')
         else:
             startTimeUTC = datetime.utcnow()
 
+
+        startTimeUTC = utc.localize(startTimeUTC)
+        # if startTimeUTC < self.sunsetUTC:
+        #     print("Entered time is before local sunset. Setting start time to local sunset.")
+        #     startTimeUTC = self.sunsetUTC
+
+        #NOTE: the "sunrise" keyword is actually referring to our close time, which is one hour before sunrise
+        if endTimeUTC == "sunrise":
+            endTimeUTC = self.sunriseUTC - timedelta(hours = 1)
+        else:
+            endTimeUTC = datetime.strptime(endTimeUTC, '%Y-%m-%dT%H:%M')
+
+        if startTimeUTC.tzinfo is None:
+            startTimeUTC = utc.localize(startTimeUTC)
         self.startTime = startTimeUTC
+        self.endTime = endTimeUTC
+        self.siderealStart = Time(self.startTime, scale='utc').sidereal_time(kind="apparent",longitude=self.observatory.longitude)
+
+        print("Diff:",self.sunsetUTC-self.startTime)
+        self.minHoursBeforeTransit = min(max(self.sunsetUTC-self.startTime,timedelta(hours=-2)),timedelta(hours=0)).total_seconds()/3600
+        self.maxHoursBeforeTransit = (self.endTime-self.startTime).total_seconds()/3600
+
+        print("Starting at",self.startTime.strftime("%Y-%m-%d %H:%M"),"and ending at",self.endTime.strftime("%Y-%m-%d %H:%M"))
+        print("Allowing",self.minHoursBeforeTransit,"hours minimum before transit and",self.maxHoursBeforeTransit, "hours after.")
         self.errorRange = errorRange
         self.nObsMax = nObsMax
         self.vMagMax = vMagMax
         self.scoreMin = scoreMin
-        self.maxHoursBeforeTransit = maxHoursBeforeTransit
-        self.minHoursBeforeTransit = minHoursBeforeTransit
         self.decMax = decMax
         self.decMin = decMin
         self.altitudeLimit = altitudeLimit
         self.obsCode = obsCode
-        self.outputDir = "TargetSelect-" + datetime.now().strftime("%m_%d_%Y-%H_%M_%S")+"/"
+        self.outputDir = "testingOutputs/TargetSelect-" + datetime.now().strftime("%m_%d_%Y-%H_%M_%S")+"/"
         self.ephemDir = self.outputDir+"/ephemeridesDir/"
         os.mkdir(self.outputDir)
         os.mkdir(self.ephemDir)
 
-        self.observatory = LocationInfo(name=obsName, region=region, timezone=obsTimezone, latitude=obsLat, longitude=obsLon)
-        self.siderealStart = Time(self.startTime, scale='utc').sidereal_time(kind="apparent", longitude=self.observatory.longitude)
 
         #init navtej's mpc retriever
         self.mpc = mpcObj()
@@ -135,11 +168,11 @@ class TargetSelector:
         print("Before pruning, we started with", original,"objects.")
 
         conditions = [
-            (self.objDf['Score'] <= self.scoreMin),
-            (self.objDf['V'] >= self.vMagMax),
-            (self.objDf['NObs'] >= self.nObsMax),
-            (self.objDf['TransitDiff'] <= self.minHoursBeforeTransit) | (self.objDf['TransitDiff'] >= self.maxHoursBeforeTransit),
-            (self.objDf['Decl.'] <= self.decMin) | (self.objDf['Decl.'] >= self.decMax)
+            (self.objDf['Score'] < self.scoreMin),
+            (self.objDf['V'] > self.vMagMax),
+            (self.objDf['NObs'] > self.nObsMax),
+            (self.objDf['TransitDiff'] < self.minHoursBeforeTransit) | (self.objDf['TransitDiff'] > self.maxHoursBeforeTransit),
+            (self.objDf['Decl.'] < self.decMin) | (self.objDf['Decl.'] > self.decMax)
         ]
 
         removedReasons = ["score", "magnitude", "nObs", "RA", "Declination"]
@@ -175,7 +208,7 @@ class TargetSelector:
             offsetDict[desig] = None #this will get changed to an error url, if we find one
             #make sure we're notstarting in the past
             start_at = 0
-            now_dt = datetime.utcnow()
+            now_dt = utc.localize(datetime.utcnow())
             if now_dt < self.startTime:
                 start_at = round((self.startTime - now_dt).total_seconds() / 3600.) + 1
 
@@ -218,10 +251,13 @@ class TargetSelector:
         await self.offsetClient.aclose()
 
     def pruneByError(self):
-        print("\033[1;32mUncertainties retrieved. Here are the targets that meet all criteria: \033[0;0m")
+        print("\033[1;32mUncertainties retrieved:\033[0;0m")
+        print(self.filtDf.to_string())
         self.filtDf = self.filtDf.loc[self.filtDf['Uncertainty'] <= self.errorRange]
         outputFilename = self.outputDir+"Targets.csv"
         self.filtDf.to_csv(outputFilename, index=False)
+        self.objDf.to_csv(self.outputDir+"All.csv",index=False)
+        print("\033[1;32mHere are the targets that meet all criteria:\033[0;0m")
         print(self.filtDf.to_string())
 
     #this isn't terribly elegant
@@ -259,8 +295,9 @@ class TargetSelector:
             #get the correct exposure string based on the vMag
             exposure = str(TargetSelector.findExposure(float(vMag)))
 
-            dRa = i[3]
-            dDec = i[4]
+            #dRA and dDec come in arcsec/sec, we need /minute
+            dRa = str(round(float(i[3])*60,2))
+            dDec = str(round(float(i[4])*60,2))
 
             #for the description, we need RA and Dec in sexagesimal
             sexagesimal = i[1].to_string("hmsdms").split(" ")
@@ -281,8 +318,6 @@ class TargetSelector:
             with open(outFilename,"w") as f:
                 f.write('\n'.join(TargetSelector.formatEphems(ephems,desig)))
         print("Ephemeris saved! Find them in",self.ephemDir)
-
-
 
 if __name__ == '__main__':
     # programStartTime = time.time()
@@ -305,7 +340,3 @@ if __name__ == '__main__':
 
     # totalDuration = time.time() - programStartTime
     # targetFinder.logger.info(f'Completed with total runtime of %.2f seconds.' % totalDuration)
-
-
-
-
