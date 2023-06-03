@@ -101,6 +101,7 @@ class TargetSelector:
 
         print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",
               self.endTime.strftime("%Y-%m-%d %H:%M"))
+        #i open my wallet and it's full of blood
         print("Allowing", self.minHoursBeforeTransit, "hours minimum before transit and", self.maxHoursBeforeTransit,
               "hours after.")
         self.errorRange = errorRange
