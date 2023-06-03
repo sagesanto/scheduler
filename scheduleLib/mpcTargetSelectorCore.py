@@ -16,14 +16,7 @@ from datetime import datetime, timezone, timedelta
 from astropy.coordinates import Angle
 
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
-
-LOGFORMAT = "  %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(message)s%(reset)s"
-LOG_LEVEL = logging.ERROR
-logging.root.setLevel(LOG_LEVEL)
-formatter = ColoredFormatter(LOGFORMAT)
-stream = logging.StreamHandler()
-stream.setLevel(LOG_LEVEL)
-stream.setFormatter(formatter)
+from . import mpcUtils
 
 utc = pytz.UTC
 
@@ -41,13 +34,29 @@ def remove_tags(html):
 
 class TargetSelector:
     def __init__(self, startTimeUTC="now", endTimeUTC="sunrise", errorRange=360, nObsMax=1000, vMagMax=21.5,
-                 scoreMin=0, minRA='sunset', maxRA='sunrise',
-                 decMax=65, decMin=-25, altitudeLimit=0, obsCode=654, obsName="TMO", region="CA, USA",
+                 scoreMin=0, decMax=65, decMin=-25, altitudeLimit=0, obsCode=654, obsName="TMO", region="CA, USA",
                  obsTimezone="UTC", obsLat=34.36, obsLon=-117.63):
+        """
+        The TargetSelector object, around which the MPC target selector is built
+        :param startTimeUTC: The earliest start time for an observing window. Can be "now", "sunset", or of the form "%Y-%m-%d %H:%M"
+        :param endTimeUTC: The latest time the last observation can end. Can be "sunrise" or of the form "%Y-%m-%d %H:%M". NOTE: "sunrise" actually refers to the time one hour before sunrise. . .
+        :param errorRange: The max absolute sigma that a target can have and still be selected
+        :param nObsMax: The maximum number of times an object can have already been observed and still be selected
+        :param vMagMax: The maximum magnitude of viable targets
+        :param scoreMin: The minimum score of viable targets
+        :param decMax: The maximum declination of viable targets
+        :param decMin: The minimum declination of viable targets
+        :param altitudeLimit: The lower altitude limit for ephemeris generation, below which ephemeris lines will not be generated
+        :param obsCode: The MPC observatory code of the observatory
+        :param obsName: The name of the observatory
+        :param region: The region of the observatory. Must be a valid initializer for astral.LocationInfo.region
+        :param obsTimezone: The timezone of the observatory. Must be a valid initializer for astral.LocationInfo.timezone
+        :param obsLat: The latitude of the observatory. Must be a valid initializer for astral.LocationInfo.latitude
+        :param obsLon: The longitude of the observatory. Must be a valid intializer for astral.LocationInfo.longitude
+        """
 
         # set up the logger
         self.logger = logging.getLogger(__name__)
-        self.logger.addHandler(stream)
 
         # set location
         self.observatory = LocationInfo(name=obsName, region=region, timezone=obsTimezone, latitude=obsLat,
@@ -59,7 +68,7 @@ class TargetSelector:
         now_dt = datetime.utcnow()
         now_dt = utc.localize(now_dt)
 
-        if self.sunriseUTC < now_dt: #if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
+        if self.sunriseUTC < now_dt:  # if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
             print("Adjusting sunrise...")
             self.sunriseUTC = self.sunriseUTC + timedelta(days=1)
         self.sunsetUTC = sun.time_at_elevation(self.observatory.observer, -10)
@@ -68,7 +77,7 @@ class TargetSelector:
         if startTimeUTC == "sunset":
             startTimeUTC = self.sunsetUTC
         elif startTimeUTC != 'now':
-            startTime_dt = utc.localize(datetime.strptime(startTimeUTC, '%Y-%m-%dT%H:%M'))
+            startTime_dt = utc.localize(datetime.strptime(startTimeUTC, '%Y-%m-%d %H:%M'))
             if now_dt < startTime_dt:
                 startTimeUTC = startTime_dt
             else:
@@ -85,7 +94,7 @@ class TargetSelector:
         if endTimeUTC == "sunrise":
             endTimeUTC = self.sunriseUTC - timedelta(hours=1)
         else:
-            endTimeUTC = datetime.strptime(endTimeUTC, '%Y-%m-%dT%H:%M')
+            endTimeUTC = datetime.strptime(endTimeUTC, '%Y-%m-%d %H:%M')
 
         if startTimeUTC.tzinfo is None:
             startTimeUTC = utc.localize(startTimeUTC)
@@ -101,7 +110,7 @@ class TargetSelector:
 
         print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",
               self.endTime.strftime("%Y-%m-%d %H:%M"))
-        #i open my wallet and it's full of blood
+        # i open my wallet and it's full of blood
         print("Allowing", self.minHoursBeforeTransit, "hours minimum before transit and", self.maxHoursBeforeTransit,
               "hours after.")
         self.errorRange = errorRange
@@ -112,10 +121,9 @@ class TargetSelector:
         self.decMin = decMin
         self.altitudeLimit = altitudeLimit
         self.obsCode = obsCode
+        #TODO: Stop using this:
         self.outputDir = "testingOutputs/TargetSelect-" + datetime.now().strftime("%m_%d_%Y-%H_%M_%S") + "/"
-        self.ephemDir = self.outputDir + "/ephemeridesDir/"
         os.mkdir(self.outputDir)
-        os.mkdir(self.ephemDir)
 
         # init navtej's mpc retriever
         self.mpc = mpcObj()
@@ -133,7 +141,8 @@ class TargetSelector:
         self.offsetClient = httpx.AsyncClient(follow_redirects=True, timeout=60.0)
 
     @staticmethod
-    def convertMPC(obj):  # convert a named tuple mpc object from navtej's code to lists that can be put in a df
+    def _convertMPC(obj):
+        # Internal: convert a named tuple mpc object from navtej's code to lists that can be put in a df
         l = [obj.designation, obj.score, obj.discovery_datetime, obj.ra, obj.dec, obj.vmag, obj.updated, obj.note,
              obj.num_obs, obj.arc_length, obj.hmag, obj.not_seen_days]
         for i in range(len(l)):
@@ -142,7 +151,11 @@ class TargetSelector:
         return l
 
     @staticmethod
-    def extractUncertainty(name, offsetDict, logger):
+    def _extractUncertainty(name, offsetDict, logger):
+        """
+        Internal: Take the name of an object and an offsetDict, as produced in fetchUncertainties, and extract + format + process the uncertainty values for the target
+        :return: The maximum absolute uncertainty of the object, to be compared with self.errorRange
+        """
         if name not in offsetDict.keys():
             logger.debug("Couldn't find", name, "in offsetDict")
             return None
@@ -165,56 +178,80 @@ class TargetSelector:
 
         return max(maxRA, maxDec)
 
-    def timeUntilTransit(self, ra):
+    def timeUntilTransit(self, ra: float):
+        """
+        Time until a target with an RA of ra transits (at the observatory)
+        :return: Time until transit in hours, float
+        """
         ra = Angle(str(ra) + "h")
         return (ra - self.siderealStart).hour
 
-    def makeMpcDataFrame(self):
+    def makeMpcDataframe(self):
+        """
+        Make a dataframe of MPC targets from the named tuples returned by self.mpc.neo_confirm_list. Store as self.objDf
+        """
         self.mpc.get_neo_list()
         # this is a dictionary of designations to their mpcObjects
         for obj in self.mpc.neo_confirm_list:
             self.mpcObjDict[obj.designation] = obj
-            targetList = TargetSelector.convertMPC(obj)
+            targetList = TargetSelector._convertMPC(obj)
             newRow = dict(zip(self.objDf.columns, targetList))
             self.objDf.loc[len(self.objDf)] = newRow
 
     def pruneMpcDf(self):
+        """
+        Filter self.objDf (populated by makeMpcDataframe) by magnitude, score, hour angle, declination, and number of observations
+        """
+
+        # calculate time until transit for each object
         self.objDf['TransitDiff'] = self.objDf.apply(lambda row: self.timeUntilTransit(row['R.A.']), axis=1)
+        # original length of the dataframe
         original = len(self.objDf.index)
-        # removed = pd.DataFrame(index=list(self.objDf.columns))
         print("Before pruning, we started with", original, "objects.")
 
+        # establish the conditions for *excluding* a target
         conditions = [
             (self.objDf['Score'] < self.scoreMin),
             (self.objDf['V'] > self.vMagMax),
             (self.objDf['NObs'] > self.nObsMax),
             (self.objDf['TransitDiff'] < self.minHoursBeforeTransit) | (
-                        self.objDf['TransitDiff'] > self.maxHoursBeforeTransit),
+                    self.objDf['TransitDiff'] > self.maxHoursBeforeTransit),
             (self.objDf['Decl.'] < self.decMin) | (self.objDf['Decl.'] > self.decMax)
         ]
 
         removedReasons = ["score", "magnitude", "nObs", "RA", "Declination"]
+
+        # decide whether each target should be removed, and mark the reason why
         self.objDf["removed"] = np.select(conditions, removedReasons)
+        # create a dataframe from only the targets not marked for removal
         self.filtDf = self.objDf.loc[(self.objDf["removed"] == "0")]
 
         for reason in removedReasons:
             print("Removed", len(self.objDf.loc[(self.objDf["removed"] == reason)].index), "targets because of their",
                   reason)
 
-        print("In total, removed", len(self.objDf.index) - len(self.filtDf.index), "targets.")
+        print("In total, removed", original - len(self.filtDf.index), "targets.")
         print("\033[1;32mNumber of desirable targets found: " + str(len(self.filtDf.index)) + ' \033[0;0m')
-
-        # filtDf['Updated'] = filtDf.apply(lambda row: slice(row['Updated']), axis=1)
 
         self.filtDf = self.filtDf.sort_values(by=["TransitDiff"], ascending=True)
         return
 
     async def getObjectUncertainty(self, desig, errURL):
+        """
+        Asynchronously get the html of the uncertainty page for an object, given its temporary designation and the url of the page
+        :return: A tuple, (designation, html)
+        """
         offsetReq = await self.offsetClient.get(errURL)
         soup = BeautifulSoup(offsetReq.content, 'html.parser')
         return tuple([desig, soup])
 
     async def fetchUncertainties(self):
+        """
+        Asynchronously get the uncertainties of the targets in the filtered dataframe
+        """
+        # this works like:
+        # filtDf -> designations -> ephemeris pages -> uncertainty links -> uncertainty values -> inserted into filtDf
+
         print("Fetching uncertainties of the targets - this may take a while. . .")
         post_params = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
                        'W': 'j',
@@ -267,101 +304,60 @@ class TargetSelector:
             offsetDict.setdefault(des, []).append(off)
 
         self.filtDf["Uncertainty"] = self.filtDf.apply(
-            lambda row: TargetSelector.extractUncertainty(row['Temp_Desig'], offsetDict, self.logger), axis=1)
+            lambda row: TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger), axis=1)
 
     async def killClients(self):
+        """
+        Mandatory: close the internal clients
+        """
         await self.offsetClient.aclose()
 
     def pruneByError(self):
-        print("\033[1;32mUncertainties retrieved:\033[0;0m")
-        print(self.filtDf.to_string())
+        """
+        Remove targets with "Uncertainty" values > self.errorRange from the running filtered dataframe
+        """
         self.filtDf = self.filtDf.loc[self.filtDf['Uncertainty'] <= self.errorRange]
+
+    def saveCSVs(self):
+        """
+        Save csvs of the filtered and unfiltered targets to outputDir
+        """
         outputFilename = self.outputDir + "Targets.csv"
         self.filtDf.to_csv(outputFilename, index=False)
         self.objDf.to_csv(self.outputDir + "All.csv", index=False)
-        print("\033[1;32mHere are the targets that meet all criteria:\033[0;0m")
-        print(self.filtDf.to_string())
 
-    # this isn't terribly elegant
-    # TODO: make this less hardcoded
-    @staticmethod
-    def findExposure(magnitude):
-        if magnitude < 19.5:
-            return "1.0|300.0"
-        if magnitude < 20.5:
-            return "1.0|600.0"
-        if magnitude < 21.0:
-            return "2.0|600.0"
-        if magnitude < 21.5:
-            return "3.0|600.0"
+    def fetchEphem(self, desig):
+        """
+        Return the ephemeris for a target, using the TargetSelector object's startTime and altitude limits
+        :param desig: The temporary designation of the target
+        :return: a Dictionary of {startTimeDt: ephemLine}
+        """
+        return mpcUtils.pullEphem(self.mpc, desig, self.startTime, self.altitudeLimit)
 
-    @staticmethod
-    def formatEphems(ephems, desig):
-        # our goal here is to take an object returned from self.mpc.get_ephemeris() and convert it to the scheduler format
-        ephemList = ["DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"]
-        for i in ephems:
-            # the dateTime in the ephems list is a Time object, need to convert it to string
-            i[0].format = "fits"
-            i[0].out_subfmt = "date_hms"
-            date = i[0].value
-            i[0].format = "iso"
-            i[0].out_subfmt = "date_hm"
-            inBetween = i[0].value
-            dateTime = datetime.strptime(inBetween, "%Y-%m-%d %H:%M")
-            # name
-            target = desig
-            # convert the skycoords object to decimal
-            coords = i[1].to_string("decimal").replace(" ", "|")
+    def fetchFilteredEphemerides(self):
+        """
+        Return the ephemerides of only targets that passed filtering. Note: must be called after filtering has been done to return anything meaningful
+        :return: a Dictionary of {designation: {startTimeDt: ephemLine}}
+        """
+        return mpcUtils.pullEphems(self.mpc, self.filtDf.Temp_Desig, self.startTime, self.altitudeLimit)
 
-            vMag = i[2]
-            # get the correct exposure string based on the vMag
-            exposure = str(TargetSelector.findExposure(float(vMag)))
+    def fetchAllEphemerides(self):
+        """
+        Return the ephemerides of all targets from the initial selection
+        :return: a Dictionary of {designation: {startTimeDt: ephemLine}}
+        """
+        return mpcUtils.pullEphems(self.mpc, self.objDf.Temp_Desig, self.startTime, self.altitudeLimit)
 
-            # dRA and dDec come in arcsec/sec, we need /minute
-            dRa = str(round(float(i[3]) * 60, 2))
-            dDec = str(round(float(i[4]) * 60, 2))
-
-            # for the description, we need RA and Dec in sexagesimal
-            sexagesimal = i[1].to_string("hmsdms").split(" ")
-            # the end of the scheduler line must have a description that looks like this
-            description = "\'MPC Asteroid " + target + ", UT: " + datetime.strftime(dateTime, "%H%M") + " RA: " + \
-                          sexagesimal[0] + " DEC: " + sexagesimal[1] + " dRA: " + dRa + " dDEC: " + dDec + "\'"
-
-            lineList = [date, "1", target, "1", coords, exposure, "CLEAR", description]
-            expLine = "|".join(lineList)
-            ephemList.append(expLine)
-
-        return ephemList
-
-    def saveFilteredEphemerides(self):
-        print("Fetching and saving ephemeris for these targets. . .")
-        for desig in self.filtDf.Temp_Desig:
-            outFilename = self.ephemDir + desig + "_ephems.txt"
-            ephems = self.mpc.get_ephemeris(desig, when=self.startTime.strftime('%Y-%m-%dT%H:%M'),
-                                            altitude_limit=self.altitudeLimit, get_uncertainty=None)
-            with open(outFilename, "w") as f:
-                f.write('\n'.join(TargetSelector.formatEphems(ephems, desig)))
-        print("Ephemeris saved! Find them in", self.ephemDir)
+def saveEphemerides(ephems, saveDir):
+    """
+    Save each set of ephemerides to the file [dir]/[desig]_ephems.txt
+    :param ephems: The ephemerides to save, in {designation: {startTimeDt: ephemLine}} form
+    :param saveDir: The directory to save to
+    """
+    for desig in ephems.keys():
+        outFilename = saveDir + desig + "_ephems.txt"
+        ephemLines = ephems[desig].values()
+        with open(outFilename, "w") as f:
+            f.write('\n'.join(ephemLines))
 
 
-if __name__ == '__main__':
-    # programStartTime = time.time()
-
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-
-    targetFinder = TargetSelector()
-    targetFinder.makeMpcDataFrame()
-    targetFinder.pruneMpcDf()
-    loop.run_until_complete(targetFinder.fetchUncertainties())
-    targetFinder.pruneByError()
-
-    # partialDuration = time.time()-programStartTime
-    # targetFinder.logger.info(f'\nFetched and filtered targets in %.2f seconds.' % partialDuration)
-
-    loop.run_until_complete(targetFinder.killClients())
-
-    targetFinder.saveFilteredEphemerides()
-
-    # totalDuration = time.time() - programStartTime
-    # targetFinder.logger.info(f'Completed with total runtime of %.2f seconds.' % totalDuration)
