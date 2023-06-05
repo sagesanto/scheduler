@@ -3,4 +3,4 @@ geckodriver.log
 OffsetMaps**/**
 **/example/
 **/photometrics/
-testingOutputs/
+**/testingOutputs/**

@@ -1,20 +1,40 @@
-import asyncio, logging, sys, os
+import asyncio, logging, sys, os, argparse, shutil
 from datetime import datetime
 from colorlog import ColoredFormatter
 from scheduleLib import mpcTargetSelectorCore as targetCore
+from httpx import RemoteProtocolError
 
 # --- set up logging ---
 LOGFORMAT = "  %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(message)s%(reset)s"
 LOG_LEVEL = logging.ERROR
-logging.root.setLevel(LOG_LEVEL)  # this may cause problems if used with other programs
+logging.root.setLevel(LOG_LEVEL)
 formatter = ColoredFormatter(LOGFORMAT)
 stream = logging.StreamHandler()
 stream.setLevel(LOG_LEVEL)
 stream.setFormatter(formatter)
 
-# --- prepare ephem save ---
-ephemDir = "testingOutputs/TargetSelect-" + datetime.now().strftime("%m_%d_%Y-%H_%M_%S") + "/ephemeridesDir/"
-os.mkdir(ephemDir)
+# --- take command line arguments ---
+parser = argparse.ArgumentParser(description='Fetch and downselect MPC targets')
+parser.add_argument('csvOutputDir', type=str,
+                    help='Path to output generated csvs. Will be created if does not exist')
+parser.add_argument('ephemDir', type=str,
+                    help='Path to output final ephemerides. Will be created if does not exist')
+parser.add_argument('-o', '-overwrite', action='store_true', dest="overwrite", help='if the indicated output directories already exist, empty them before running')
+
+args = parser.parse_args()
+
+csvOutputDir = args.csvOutputDir
+ephemDir = args.ephemDir
+
+
+# --- prepare save dirs ---
+for directory in [csvOutputDir, ephemDir]:
+    if not os.path.exists(directory):
+        os.mkdir(directory)
+    elif args.overwrite:
+        shutil.rmtree(directory)
+        os.mkdir(directory)
+
 
 # --- prepare async event loop ---
 loop = asyncio.new_event_loop()
@@ -39,11 +59,15 @@ targetFinder.pruneByError()
 print("\033[1;32mHere are the targets that meet all criteria:\033[0;0m")
 print(targetFinder.filtDf.to_string())
 
-targetFinder.saveCSVs()
+targetFinder.saveCSVs(csvOutputDir)
 
 # --- save ---
 print("Fetching and saving ephemeris for these targets. . .")
-targetCore.saveEphemerides(targetFinder.fetchFilteredEphemerides(),ephemDir)
+try:
+    targetCore.saveEphemerides(targetFinder.fetchFilteredEphemerides(), args.ephemDir)
+except RemoteProtocolError as e:
+    print("\033[1;33m"+"Encountered fatal server error while fetching ephemeris. Error is as follows:\033[0;0m")
+    print(repr(e))
 
 # --- clean up ---
 loop.run_until_complete(targetFinder.killClients())

@@ -38,8 +38,8 @@ class TargetSelector:
                  obsTimezone="UTC", obsLat=34.36, obsLon=-117.63):
         """
         The TargetSelector object, around which the MPC target selector is built
-        :param startTimeUTC: The earliest start time for an observing window. Can be "now", "sunset", or of the form "%Y-%m-%d %H:%M"
-        :param endTimeUTC: The latest time the last observation can end. Can be "sunrise" or of the form "%Y-%m-%d %H:%M". NOTE: "sunrise" actually refers to the time one hour before sunrise. . .
+        :param startTimeUTC: The earliest start time for an observing window. Can be ``"now"``, ``"sunset"``, or of the form ``"%Y%m%d %H%M"``
+        :param endTimeUTC: The latest time the last observation can end. Can be ``"sunrise"`` or of the form ``"%Y%m%d %H%M"``. *NOTE "sunrise" actually refers to the time one hour before sunrise. . .*
         :param errorRange: The max absolute sigma that a target can have and still be selected
         :param nObsMax: The maximum number of times an object can have already been observed and still be selected
         :param vMagMax: The maximum magnitude of viable targets
@@ -50,9 +50,9 @@ class TargetSelector:
         :param obsCode: The MPC observatory code of the observatory
         :param obsName: The name of the observatory
         :param region: The region of the observatory. Must be a valid initializer for astral.LocationInfo.region
-        :param obsTimezone: The timezone of the observatory. Must be a valid initializer for astral.LocationInfo.timezone
-        :param obsLat: The latitude of the observatory. Must be a valid initializer for astral.LocationInfo.latitude
-        :param obsLon: The longitude of the observatory. Must be a valid intializer for astral.LocationInfo.longitude
+        :param obsTimezone: The timezone of the observatory. Must be a valid initializer for ``astral.LocationInfo.timezone``
+        :param obsLat: The latitude of the observatory. Must be a valid initializer for ``astral.LocationInfo.latitude``
+        :param obsLon: The longitude of the observatory. Must be a valid intializer for ``astral.LocationInfo.longitude``
         """
 
         # set up the logger
@@ -121,9 +121,6 @@ class TargetSelector:
         self.decMin = decMin
         self.altitudeLimit = altitudeLimit
         self.obsCode = obsCode
-        #TODO: Stop using this:
-        self.outputDir = "testingOutputs/TargetSelect-" + datetime.now().strftime("%m_%d_%Y-%H_%M_%S") + "/"
-        os.mkdir(self.outputDir)
 
         # init navtej's mpc retriever
         self.mpc = mpcObj()
@@ -318,13 +315,12 @@ class TargetSelector:
         """
         self.filtDf = self.filtDf.loc[self.filtDf['Uncertainty'] <= self.errorRange]
 
-    def saveCSVs(self):
+    def saveCSVs(self, path):
         """
         Save csvs of the filtered and unfiltered targets to outputDir
         """
-        outputFilename = self.outputDir + "Targets.csv"
-        self.filtDf.to_csv(outputFilename, index=False)
-        self.objDf.to_csv(self.outputDir + "All.csv", index=False)
+        self.filtDf.to_csv(path + "/Targets.csv")
+        self.objDf.to_csv(path + "/All.csv")
 
     def fetchEphem(self, desig):
         """
@@ -348,9 +344,10 @@ class TargetSelector:
         """
         return mpcUtils.pullEphems(self.mpc, self.objDf.Temp_Desig, self.startTime, self.altitudeLimit)
 
+
 def saveEphemerides(ephems, saveDir):
     """
-    Save each set of ephemerides to the file [dir]/[desig]_ephems.txt
+    Save each set of ephemerides to the file [saveDir]/[desig]_ephems.txt
     :param ephems: The ephemerides to save, in {designation: {startTimeDt: ephemLine}} form
     :param saveDir: The directory to save to
     """
@@ -359,5 +356,3 @@ def saveEphemerides(ephems, saveDir):
         ephemLines = ephems[desig].values()
         with open(outFilename, "w") as f:
             f.write('\n'.join(ephemLines))
-
-
