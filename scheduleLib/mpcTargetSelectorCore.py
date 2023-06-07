@@ -1,5 +1,6 @@
 # ---standard
 import json, pandas as pd, time, os, asyncio, sys, numpy as np, logging, pytz
+import matplotlib.colors as mcolors, matplotlib.pyplot as plt
 from colorlog import ColoredFormatter
 
 # ---webtools
@@ -14,12 +15,20 @@ from astral import LocationInfo, zoneinfo
 from astral import sun
 from datetime import datetime, timezone, timedelta
 from astropy.coordinates import Angle
+from numpy import sqrt
+from astropy import units as u
 
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
-from . import mpcUtils
+import mpcUtils
 
 utc = pytz.UTC
 
+BLACK = [0,0,0]
+RED = [255,0,0]
+GREEN = [0,255,0]
+BLUE = [0,0,255]
+ORANGE = [255, 191, 0]
+PURPLE = [221,160,221]
 
 def remove_tags(html):
     # parse html content
@@ -31,9 +40,11 @@ def remove_tags(html):
     # return data by retrieving the tag content
     return ' '.join(soup.stripped_strings)
 
+def rootMeanSquared(vals):
+    return sqrt(1/len(vals)*sum([i**2 for i in vals]))
 
 class TargetSelector:
-    def __init__(self, startTimeUTC="now", endTimeUTC="sunrise", errorRange=360, nObsMax=1000, vMagMax=21.5,
+    def __init__(self, startTimeUTC="now", endTimeUTC="sunrise", raMaxRMSE=360, decMaxRMSE=360, nObsMax=1000, vMagMax=21.5,
                  scoreMin=0, decMax=65, decMin=-25, altitudeLimit=0, obsCode=654, obsName="TMO", region="CA, USA",
                  obsTimezone="UTC", obsLat=34.36, obsLon=-117.63):
         """
@@ -113,7 +124,8 @@ class TargetSelector:
         # i open my wallet and it's full of blood
         print("Allowing", self.minHoursBeforeTransit, "hours minimum before transit and", self.maxHoursBeforeTransit,
               "hours after.")
-        self.errorRange = errorRange
+        self.raMaxRMSE = raMaxRMSE
+        self.decMaxRMSE = decMaxRMSE
         self.nObsMax = nObsMax
         self.vMagMax = vMagMax
         self.scoreMin = scoreMin
@@ -133,6 +145,7 @@ class TargetSelector:
                      ])
         self.mpcObjDict = {}
         self.filtDf = pd.DataFrame()
+        self.uncertaintyStorage = {} #this will be {desig : (RAlist,Declist,list[color])}
 
         # init web client for retrieving offsets
         self.offsetClient = httpx.AsyncClient(follow_redirects=True, timeout=60.0)
@@ -147,8 +160,7 @@ class TargetSelector:
                 l[i] = None
         return l
 
-    @staticmethod
-    def _extractUncertainty(name, offsetDict, logger):
+    def _extractUncertainty(self,name, offsetDict, logger,graph,savePath):
         """
         Internal: Take the name of an object and an offsetDict, as produced in fetchUncertainties, and extract + format + process the uncertainty values for the target
         :return: The maximum absolute uncertainty of the object, to be compared with self.errorRange
@@ -160,7 +172,22 @@ class TargetSelector:
         for a in soup.findAll('a', href=True):
             a.extract()
         text = soup.findAll('pre')[0].get_text()
-        textList = text.replace("!", '').replace("+", '').split("\n")
+
+        colorList = []
+        #find the color of the error points (indicated by the characters at the end of the line)
+        textList = text.split("\n")[1:-1]
+        for line in textList:
+            color = GREEN
+            if "!!" in line:
+                color = RED
+            elif "!" in line:
+                color = ORANGE
+            elif "***" in line:
+                color = BLACK
+            colorList.append(color)
+        if BLACK in colorList:
+            print(name,"is a near-approach!")
+        textList= [a.replace("!", '').replace("+", '').replace("*",'') for a in textList]
         splitList = [[x for x in a.split(" ") if x] for a in textList if a]  # lol
         splitList = [a[0:2] for a in splitList]  # sometimes it will have weird stuff (like "MBA soln") at the end,
         #                                        but in my experience the numbers always come first, so we can just slice them
@@ -170,10 +197,30 @@ class TargetSelector:
             print("uh oh, missing RA or Dec errors for target", name)
             print("list of text:", textList)
             print("splitList:", splitList)
-        maxRA = max(abs(min(raList)), abs(max(raList)))
-        maxDec = max(abs(min(decList)), abs(max(decList)))
 
-        return max(maxRA, maxDec)
+        #calculate RMSE
+        rmsRA = rootMeanSquared(raList)
+        rmsDec = rootMeanSquared(decList)
+
+
+        # recreate error plots
+        if graph:
+            fig, ax = plt.subplots()
+            ax.invert_xaxis()
+            plt.title(name,fontsize=18)
+            plt.suptitle("RMS: "+str(round(rmsRA,3))+", "+str(round(rmsDec,3)))
+            ax.scatter(raList,decList, c=np.array(colorList) / 255.0)
+            plt.errorbar(np.mean(raList),np.mean(decList),xerr = rmsRA,yerr=rmsDec)
+            plt.show()
+            if savePath is not None:
+                plt.savefig(savePath+"/"+name+".png")
+            plt.close()
+
+        # maxRA = max(abs(min(raList)), abs(max(raList)))
+        # maxDec = max(abs(min(decList)), abs(max(decList)))
+
+        # return max(maxRA, maxDec)
+        return rmsRA,rmsDec
 
     def timeUntilTransit(self, ra: float):
         """
@@ -232,6 +279,148 @@ class TargetSelector:
 
         self.filtDf = self.filtDf.sort_values(by=["TransitDiff"], ascending=True)
         return
+    
+    @staticmethod
+    def toDecimal(angle:Angle):
+        return float(angle.to_string(decimal=True))  #ew
+
+    @staticmethod
+    def toSexagesimal(angle:Angle):
+        return angle.to_string()
+
+    @staticmethod
+    def ensureAngle(angle):
+        """
+        Return angle as an astropy Angle, converting if necessary
+        :param angle: float, int, hms Sexagesimal string, hms tuple, or astropy Angle
+        :return: angle, as an astropy Angle
+        """
+        if not isinstance(angle,Angle):
+            try:
+                if isinstance(angle, str) or isinstance(angle, tuple):
+                        angle = Angle(angle)
+                else:
+                    angle = Angle(angle,unit=u.deg)
+            except Exception as err:
+                print("Error in converting", angle, "to angle")
+                raise err
+        return angle
+
+    @staticmethod
+    def ensureFloat(angle):
+        """
+        Return angle as an astropy Angle, converting if necessary
+        :param angle: float or astropy Angle
+        :return: decimal angle, as a float
+        """
+        if not isinstance(angle,float):
+            if isinstance(angle,Angle):
+                angle = TargetSelector.toDecimal(angle)
+            else:
+                angle = float(angle)
+        return angle
+
+
+    @staticmethod
+    def getHourAngleLimits(dec):
+        """
+        Get the hour angle limits of the target's observability window based on its dec.
+        :param dec: float, int, or astropy Angle
+        :return: A tuple of Angle objects representing the upper and lower hour angle limits
+        """
+        dec = TargetSelector.ensureFloat(dec)
+
+        horizonBox = {   #{range(decWindow):tuple(minAlt,maxAlt)}
+              range(-38, -36): (0, 0),
+              range(-36, -34): (-35, 42.6104),
+              range(-34, -32): (-35, 45.9539),
+              range(-32, -30): (-35, 48.9586),
+              range(-30, -28): (-35, 51.6945),
+              range(-28, -26): (-35, 54.2121),
+              range(-26, -24): (-35, 56.5487),
+              range(-24, -22): (-35, 58.7332),
+              range(-22, 0): (-35, 60),
+              range(0, 46): (-52.5, 60),
+              range(46,56): (-37.5,60),
+              range(56, 66): (-30, 60),
+              range(66, 74): (0, 0)
+          }
+        for decRange in horizonBox:
+            if dec in decRange:  # man this is miserable
+                finalDecRange = horizonBox[decRange]
+                return tuple([Angle(finalDecRange[0],unit=u.deg),Angle(finalDecRange[1],unit=u.deg)])
+        return None
+
+
+    def siderealToDate(self,siderealAngle:Angle):
+        """
+        Convert an angle representing a sidereal time to UTC by relating it to local sidereal time
+        :param siderealAngle: astropy Angle
+        :return: datetime object, utc
+        """
+        # ---convert from sidereal to UTC---
+        # find the difference between the sidereal observability start time and the sidereal start time of the program
+        siderealFromStart = siderealAngle - self.siderealStart
+        # add that offset to the utc start time of the program (we know siderealStart is local sidereal time at startTime, so we use it as our reference)
+        timeUTC = self.startTime + timedelta(
+            hours=siderealFromStart.hour / 1.0027)  # one solar hour is 1.0027 sidereal hours
+
+        return timeUTC
+
+
+    def calculateObservability(self,objRA,objDec,dRA,dDec):
+        """
+        Calculate the start and end times of the observability window for an object, taking into account its velocity
+        :param objRA: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
+        :param objDec: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
+        :param dRA: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
+        :param dDec: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
+        :return: tuple(datetime) The start and end times of the window in UTC
+        """
+        #convert inputs to astropy Angle objects (if they aren't already)
+        objRA,objDec,dRA,dDec = TargetSelector.ensureAngle(objRA), TargetSelector.ensureAngle(objDec), TargetSelector.ensureAngle(dRA), TargetSelector.ensureAngle(dDec)
+
+        #we'll start with the naive window and shorten/lengthen it based on the object's speed
+        hourAngleWindow = TargetSelector.getHourAngleLimits(objDec)
+        siderealAngleWindow = (objRA,objRA)+hourAngleWindow
+
+        #for now, we're not going to subtract the length of the exposure from the end of the window - the scheduler should be able to handle it
+
+        #---use the speed of the object to trim its observability window---
+
+        # find the end of the window
+        if dRA > 0:
+            raMaxT = siderealAngleWindow[0] + (siderealAngleWindow[1] - objRA)/dRA
+        else:
+            raMaxT = siderealAngleWindow[1]
+        if dDec > 0:
+            decMaxT = siderealAngleWindow[0] + (self.decMax-objDec)/dDec
+        else:
+            decMaxT = siderealAngleWindow[1]
+        endObsTime = min(min(raMaxT, decMaxT), siderealAngleWindow[1])
+
+
+        # find the beginning of the window
+        if dRA < 0:
+            raMinT = endObsTime + (objRA - siderealAngleWindow[0]) / dRA  #latestEndTime + (initialRA - minimumRA) / dRA
+                                                                                      # = latestEndTime + (distance to edge of window)/-speed  -->  dRA is always negative in this clause                                                                   # = latestEndTime - time before runs off edge
+                                                                                      # = earliest start time
+        else:
+            raMinT = siderealAngleWindow[0] #default begin time, this is the earliest we will consider starting
+
+        if dDec < 0:
+            decMinT = endObsTime + (objDec - self.decMin) / dDec
+        else:
+            decMinT = siderealAngleWindow[0] #default begin time
+
+        print("raMinT:",raMinT.hms,"decMinT:",decMinT.hms)
+        beginObsTime = max(max(raMinT, decMinT), siderealAngleWindow[0])
+        print("beginObsTime:",beginObsTime.hms)
+
+        return tuple([beginObsTime,endObsTime])
+
+
+
 
     async def getObjectUncertainty(self, desig, errURL):
         """
@@ -242,14 +431,13 @@ class TargetSelector:
         soup = BeautifulSoup(offsetReq.content, 'html.parser')
         return tuple([desig, soup])
 
-    async def fetchUncertainties(self):
+    async def fetchUncertainties(self,graph=False,savePath = None):
         """
         Asynchronously get the uncertainties of the targets in the filtered dataframe
         """
         # this works like:
         # filtDf -> designations -> ephemeris pages -> uncertainty links -> uncertainty values -> inserted into filtDf
 
-        print("Fetching uncertainties of the targets - this may take a while. . .")
         post_params = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
                        'W': 'j',
                        'obj': 'P10POWX', 'Parallax': '1', 'obscode': self.obsCode, 'long': '',
@@ -276,7 +464,7 @@ class TargetSelector:
             except (httpx.ConnectError, httpx.HTTPError) as err:
                 self.logger.error('Failed to connect/retrieve data from MPC. Stopping')
                 self.logger.error(err)
-                raise err  # this will have to be handled by a wrapper if one is written
+                exit()  # this will have to be handled by a wrapper if one is written
             if mpc_request.status_code == 200:
                 # extract 'pre' tags from reply
                 soup = BeautifulSoup(mpc_request.text, 'html.parser')
@@ -300,8 +488,8 @@ class TargetSelector:
         for des, off in offsets:
             offsetDict.setdefault(des, []).append(off)
 
-        self.filtDf["Uncertainty"] = self.filtDf.apply(
-            lambda row: TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger), axis=1)
+        self.filtDf= pd.concat((self.filtDf,
+            self.filtDf.apply(lambda row: pd.Series(self._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
 
     async def killClients(self):
         """
@@ -311,9 +499,11 @@ class TargetSelector:
 
     def pruneByError(self):
         """
-        Remove targets with "Uncertainty" values > self.errorRange from the running filtered dataframe
+        Remove targets with rms values > acceptable from the running filtered dataframe
         """
-        self.filtDf = self.filtDf.loc[self.filtDf['Uncertainty'] <= self.errorRange]
+        self.filtDf = self.filtDf.loc[self.filtDf['rmsRA'] <= self.raMaxRMSE]
+        self.filtDf = self.filtDf.loc[self.filtDf['rmsDec'] <= self.decMaxRMSE]
+
 
     def saveCSVs(self, path):
         """

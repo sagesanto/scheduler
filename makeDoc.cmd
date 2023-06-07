@@ -1,1 +1,1 @@
-pdoc ./scheduleLib
+pdoc ./scheduleLib/photometrics
