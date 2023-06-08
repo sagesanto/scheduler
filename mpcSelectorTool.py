@@ -1,8 +1,12 @@
+#Sage Santomenna 2023
+
 import asyncio, logging, sys, os, argparse, shutil
 from datetime import datetime
 from colorlog import ColoredFormatter
 from scheduleLib import mpcTargetSelectorCore as targetCore
 from httpx import RemoteProtocolError
+
+#Sage Santomenna 2023
 
 # --- set up logging ---
 LOGFORMAT = "  %(log_color)s%(levelname)-8s%(reset)s | %(log_color)s%(message)s%(reset)s"

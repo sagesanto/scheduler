@@ -1,8 +1,10 @@
+#Sage Santomenna 2023
+
 import unittest
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 from astropy.coordinates import Angle
 from astropy import units as u
-from scheduleLib import teleUtils
+from scheduleLib import generalUtils
 
 class Test(unittest.TestCase):
 

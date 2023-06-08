@@ -1,3 +1,5 @@
+#Sage Santomenna 2023
+
 from astropy.coordinates import Angle
 from astropy import units as u
 
@@ -31,7 +33,7 @@ def ensureAngle(angle):
             else:
                 angle = Angle(angle, unit=u.deg)
         except Exception as err:
-            print("Error in converting", angle, "to angle")
+            print("Error converting", angle, "to angle")
             raise err
     return angle
 

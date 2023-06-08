@@ -1,4 +1,15 @@
+#Sage Santomenna 2023
+
+from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 from datetime import datetime
+from scheduleLib import asyncUtils
+import pytz
+
+import httpx
+from bs4 import BeautifulSoup
+from scheduleLib import generalUtils
+
+#Sage Santomenna 2023
 
 # this isn't terribly elegant
 def _findExposure(magnitude):
@@ -64,16 +75,50 @@ def pullEphem(mpcInst, desig, whenDt, altitudeLimit):
                                               altitude_limit=altitudeLimit, get_uncertainty=None), desig)
 
 
-def pullEphems(mpcInst, designations: list, whenDt: datetime, altitudeLimit):
+def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit):
     """
     Use pullEphem to pull ephemerides for multiple targets, given a list of their designations. Requires internet connection.
     :param mpcInst: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
     :param designations: A list of designations (strings) of the targets to retrieve
     :param whenDt: A datetime object representing the time for which the ephemeris should be generated
-    :param altitudeLimit: The lower altitude limit, below which ephemeris lines will not be generated
+    :param minAltitudeLimit: The lower altitude limit, below which ephemeris lines will not be generated
     :return: a Dictionary of {designation: {startTimeDt: ephemLine}}
     """
     ephemsDict = {}
     for desig in designations:
-        ephemsDict[desig] = pullEphem(mpcInst,desig, whenDt, altitudeLimit)
+        ephemsDict[desig] = pullEphem(mpcInst,desig, whenDt, minAltitudeLimit)
     return ephemsDict
+
+async def asyncMultiEphem(designations,whenDt: datetime, minAltitudeLimit,mpc: mpcObj, asyncHelper: asyncUtils.AsyncHelper, mpcPostURL = 'https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi' ):
+    """
+    Asynchronously retrieve ephemerides for multiple targets. Requires internet connection. Must be called in an asyncio loop using run_until_complete.
+    :param designations: A list of designations (strings) of the targets to retrieve
+    :param whenDt: A datetime object representing the time for which the ephemeris should be generated
+    :param minAltitudeLimit: The lower altitude limit, below which ephemeris lines will not be generated
+    :param mpc: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
+    :param asyncHelper: An instance of the asyncHelper class
+    :return: Result of query in _____ form
+    """
+    urls = [mpcPostURL] * len(designations)
+    postContents = []
+    defaultPostParams = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
+                   'W': 'j',
+                   'obj': 'None', 'Parallax': '1', 'obscode': 654, 'long': '',
+                   'lat': '', 'alt': '', 'int': mpc.int, 'start': None, 'raty': mpc.raty,
+                   'mot': mpc.mot,
+                   'dmot': mpc.dmot, 'out': mpc.out, 'sun': mpc.supress_output,
+                   'oalt': str(minAltitudeLimit)
+                   }
+    start_at = 0
+    now_dt = pytz.UTC.localize(datetime.utcnow())
+    if now_dt < whenDt:
+        start_at = round((whenDt - now_dt).total_seconds() / 3600.) + 1
+    for objectName in designations:
+        newPostContent = defaultPostParams.copy()
+        newPostContent["start"] = start_at
+        newPostContent["obj"] = objectName
+        postContents.append(newPostContent)
+
+    ephemResults = asyncHelper.asyncMultiGet(urls,designations,soup=True,postContent=postContents)
+
+    #### Parse ephem results here!!!!!!!

@@ -1,3 +1,5 @@
+#Sage Santomenna 2023
+
 # ---standard
 import json, pandas as pd, time, os, asyncio, sys, numpy as np, logging, pytz
 import matplotlib.colors as mcolors, matplotlib.pyplot as plt
@@ -16,11 +18,10 @@ from astral import sun
 from datetime import datetime, timezone, timedelta
 from astropy.coordinates import Angle
 from numpy import sqrt
-from astropy import units as u
+
 
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
-import scheduleLib.mpcUtils as mpcUtils
-import scheduleLib.teleUtils as teleUtils
+from scheduleLib import mpcUtils, generalUtils, asyncUtils
 
 utc = pytz.UTC
 
@@ -97,9 +98,6 @@ class TargetSelector:
             startTimeUTC = datetime.utcnow()
 
         startTimeUTC = utc.localize(startTimeUTC)
-        # if startTimeUTC < self.sunsetUTC:
-        #     print("Entered time is before local sunset. Setting start time to local sunset.")
-        #     startTimeUTC = self.sunsetUTC
 
         # NOTE: the "sunrise" keyword is actually referring to our close time, which is one hour before sunrise
         if endTimeUTC == "sunrise":
@@ -149,6 +147,9 @@ class TargetSelector:
 
         # init web client for retrieving offsets
         self.offsetClient = httpx.AsyncClient(follow_redirects=True, timeout=60.0)
+
+        #init AsyncHelper
+        self.asyncHelper = asyncUtils.AsyncHelper(followRedirects=True)
 
     @staticmethod
     def _convertMPC(obj):
@@ -297,61 +298,6 @@ class TargetSelector:
 
         return timeUTC
 
-
-    def calculateObservability(self,objRA,objDec,dRA,dDec):
-        """
-        Calculate the start and end times of the observability window for an object, taking into account its velocity
-        :param objRA: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
-        :param objDec: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
-        :param dRA: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
-        :param dDec: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
-        :return: tuple(datetime) The start and end times of the window in UTC
-        """
-        #convert inputs to astropy Angle objects (if they aren't already)
-        objRA,objDec,dRA,dDec = teleUtils.ensureAngle(objRA), teleUtils.ensureAngle(objDec), teleUtils.ensureAngle(dRA), teleUtils.ensureAngle(dDec)
-
-        #we'll start with the naive window and shorten/lengthen it based on the object's speed
-        hourAngleWindow = teleUtils.getHourAngleLimits(objDec)
-        siderealAngleWindow = (objRA,objRA)+hourAngleWindow
-
-        #for now, we're not going to subtract the length of the exposure from the end of the window - the scheduler should be able to handle it
-
-        #---use the speed of the object to trim its observability window---
-
-        # find the end of the window
-        if dRA > 0:
-            raMaxT = siderealAngleWindow[0] + (siderealAngleWindow[1] - objRA)/dRA
-        else:
-            raMaxT = siderealAngleWindow[1]
-        if dDec > 0:
-            decMaxT = siderealAngleWindow[0] + (self.decMax-objDec)/dDec
-        else:
-            decMaxT = siderealAngleWindow[1]
-        endObsTime = min(min(raMaxT, decMaxT), siderealAngleWindow[1])
-
-
-        # find the beginning of the window
-        if dRA < 0:
-            raMinT = endObsTime + (objRA - siderealAngleWindow[0]) / dRA  #latestEndTime + (initialRA - minimumRA) / dRA
-                                                                                      # = latestEndTime + (distance to edge of window)/-speed  -->  dRA is always negative in this clause                                                                   # = latestEndTime - time before runs off edge
-                                                                                      # = earliest start time
-        else:
-            raMinT = siderealAngleWindow[0] #default begin time, this is the earliest we will consider starting
-
-        if dDec < 0:
-            decMinT = endObsTime + (objDec - self.decMin) / dDec
-        else:
-            decMinT = siderealAngleWindow[0] #default begin time
-
-        print("raMinT:",raMinT.hms,"decMinT:",decMinT.hms)
-        beginObsTime = max(max(raMinT, decMinT), siderealAngleWindow[0])
-        print("beginObsTime:",beginObsTime.hms)
-
-        return tuple([beginObsTime,endObsTime])
-
-
-
-
     async def getObjectUncertainty(self, desig, errURL):
         """
         Asynchronously get the html of the uncertainty page for an object, given its temporary designation and the url of the page
@@ -360,6 +306,81 @@ class TargetSelector:
         offsetReq = await self.offsetClient.get(errURL)
         soup = BeautifulSoup(offsetReq.content, 'html.parser')
         return tuple([desig, soup])
+
+
+    async def fetchUncertainties(self,graph=False,savePath = None):
+        """
+        Asynchronously get the uncertainties of the targets in the filtered dataframe
+        """
+        # this works like:
+        # filtDf -> designations -> ephemeris pages -> uncertainty links -> uncertainty values -> inserted into filtDf
+
+        post_params = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
+                       'W': 'j',
+                       'obj': 'P10POWX', 'Parallax': '1', 'obscode': self.obsCode, 'long': '',
+                       'lat': '', 'alt': '', 'int': self.mpc.int, 'start': None, 'raty': self.mpc.raty,
+                       'mot': self.mpc.mot,
+                       'dmot': self.mpc.dmot, 'out': self.mpc.out, 'sun': self.mpc.supress_output,
+                       'oalt': str(self.altitudeLimit)
+                       }
+        imageDict = {}  # for image maps, desig:mapURL
+        offsetRequestTasks = []  # will store our async tasks for retrieving offsets
+
+        desigs = []
+        urls = []
+
+        # TODO: image maps
+        for desig in self.filtDf.Temp_Desig:
+            # make sure we're not starting in the past
+            start_at = 0
+            now_dt = utc.localize(datetime.utcnow())
+            if now_dt < self.startTime:
+                start_at = round((self.startTime - now_dt).total_seconds() / 3600.) + 1
+
+            post_params["start"] = start_at
+            post_params["obj"] = desig
+            try:
+                #this clearly isn't asynchronous, i've just already initialized the client and have yet to get rid of it
+                mpc_request = await self.offsetClient.post(self.mpc.mpc_post_url, data=post_params)
+            except (httpx.ConnectError, httpx.HTTPError) as err:
+                self.logger.error('Failed to connect to/retrieve data from the MPC. Stopping')
+                self.logger.error(err)
+                exit()  # this will have to be handled by a wrapper if one is written
+            if mpc_request.status_code == 200:
+                # extract 'pre' tags from reply
+                soup = BeautifulSoup(mpc_request.text, 'html.parser')
+                ephem = soup.find_all('pre')[0].contents
+                num_recs = len(ephem)
+
+                if num_recs == 1:
+                    self.logger.warning('Target is not observable')
+
+                else:
+                    errUrl = ephem[3].get('href')
+                    urls.append(errUrl)
+                    desigs.append(desigs)
+
+
+        # # now actually make all the requests
+        #thanks to our handy-dandy async helper !!!!!!!!!!
+
+        offsetDict = await self.asyncHelper.asyncMultiGet(urls,desigs,soup=True)
+
+        self.filtDf= pd.concat((self.filtDf,
+            self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
+
+    def calculateObservability(self,desig):
+        """
+        Calculate the start and end times of the observability window for an object by querying its ephemeris and clipping at sunrise/sunset
+        :param desig: The designation of the object to be queried - must be a valid MPC temp identifier
+        """
+        pass
+
+
+
+        #we'll start with the naive window and shorten/lengthen it based on the object's speed
+        hourAngleWindow = generalUtils.getHourAngleLimits(objDec)
+        siderealAngleWindow = (objRA,objRA)+hourAngleWindow
 
     async def fetchUncertainties(self,graph=False,savePath = None):
         """
