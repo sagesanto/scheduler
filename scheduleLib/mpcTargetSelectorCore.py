@@ -19,7 +19,8 @@ from numpy import sqrt
 from astropy import units as u
 
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
-import mpcUtils
+import scheduleLib.mpcUtils as mpcUtils
+import scheduleLib.teleUtils as teleUtils
 
 utc = pytz.UTC
 
@@ -51,7 +52,6 @@ class TargetSelector:
         The TargetSelector object, around which the MPC target selector is built
         :param startTimeUTC: The earliest start time for an observing window. Can be ``"now"``, ``"sunset"``, or of the form ``"%Y%m%d %H%M"``
         :param endTimeUTC: The latest time the last observation can end. Can be ``"sunrise"`` or of the form ``"%Y%m%d %H%M"``. *NOTE "sunrise" actually refers to the time one hour before sunrise. . .*
-        :param errorRange: The max absolute sigma that a target can have and still be selected
         :param nObsMax: The maximum number of times an object can have already been observed and still be selected
         :param vMagMax: The maximum magnitude of viable targets
         :param scoreMin: The minimum score of viable targets
@@ -159,8 +159,8 @@ class TargetSelector:
             if l[i] == "":
                 l[i] = None
         return l
-
-    def _extractUncertainty(self,name, offsetDict, logger,graph,savePath):
+    @staticmethod
+    def _extractUncertainty(name, offsetDict, logger,graph,savePath):
         """
         Internal: Take the name of an object and an offsetDict, as produced in fetchUncertainties, and extract + format + process the uncertainty values for the target
         :return: The maximum absolute uncertainty of the object, to be compared with self.errorRange
@@ -279,77 +279,7 @@ class TargetSelector:
 
         self.filtDf = self.filtDf.sort_values(by=["TransitDiff"], ascending=True)
         return
-    
-    @staticmethod
-    def toDecimal(angle:Angle):
-        return float(angle.to_string(decimal=True))  #ew
 
-    @staticmethod
-    def toSexagesimal(angle:Angle):
-        return angle.to_string()
-
-    @staticmethod
-    def ensureAngle(angle):
-        """
-        Return angle as an astropy Angle, converting if necessary
-        :param angle: float, int, hms Sexagesimal string, hms tuple, or astropy Angle
-        :return: angle, as an astropy Angle
-        """
-        if not isinstance(angle,Angle):
-            try:
-                if isinstance(angle, str) or isinstance(angle, tuple):
-                        angle = Angle(angle)
-                else:
-                    angle = Angle(angle,unit=u.deg)
-            except Exception as err:
-                print("Error in converting", angle, "to angle")
-                raise err
-        return angle
-
-    @staticmethod
-    def ensureFloat(angle):
-        """
-        Return angle as an astropy Angle, converting if necessary
-        :param angle: float or astropy Angle
-        :return: decimal angle, as a float
-        """
-        if not isinstance(angle,float):
-            if isinstance(angle,Angle):
-                angle = TargetSelector.toDecimal(angle)
-            else:
-                angle = float(angle)
-        return angle
-
-
-    @staticmethod
-    def getHourAngleLimits(dec):
-        """
-        Get the hour angle limits of the target's observability window based on its dec.
-        :param dec: float, int, or astropy Angle
-        :return: A tuple of Angle objects representing the upper and lower hour angle limits
-        """
-        dec = TargetSelector.ensureFloat(dec)
-
-        horizonBox = {   #{range(decWindow):tuple(minAlt,maxAlt)}
-              range(-38, -36): (0, 0),
-              range(-36, -34): (-35, 42.6104),
-              range(-34, -32): (-35, 45.9539),
-              range(-32, -30): (-35, 48.9586),
-              range(-30, -28): (-35, 51.6945),
-              range(-28, -26): (-35, 54.2121),
-              range(-26, -24): (-35, 56.5487),
-              range(-24, -22): (-35, 58.7332),
-              range(-22, 0): (-35, 60),
-              range(0, 46): (-52.5, 60),
-              range(46,56): (-37.5,60),
-              range(56, 66): (-30, 60),
-              range(66, 74): (0, 0)
-          }
-        for decRange in horizonBox:
-            if dec in decRange:  # man this is miserable
-                finalDecRange = horizonBox[decRange]
-                return tuple([Angle(finalDecRange[0],unit=u.deg),Angle(finalDecRange[1],unit=u.deg)])
-        return None
 
 
     def siderealToDate(self,siderealAngle:Angle):
@@ -371,17 +301,17 @@ class TargetSelector:
     def calculateObservability(self,objRA,objDec,dRA,dDec):
         """
         Calculate the start and end times of the observability window for an object, taking into account its velocity
-        :param objRA: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
-        :param objDec: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
-        :param dRA: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
-        :param dDec: astropy `Angle` or coercible with `TargetSelector.ensureAngle()`
+        :param objRA: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
+        :param objDec: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
+        :param dRA: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
+        :param dDec: astropy `Angle` or coercible with `teleUtils.ensureAngle()`
         :return: tuple(datetime) The start and end times of the window in UTC
         """
         #convert inputs to astropy Angle objects (if they aren't already)
-        objRA,objDec,dRA,dDec = TargetSelector.ensureAngle(objRA), TargetSelector.ensureAngle(objDec), TargetSelector.ensureAngle(dRA), TargetSelector.ensureAngle(dDec)
+        objRA,objDec,dRA,dDec = teleUtils.ensureAngle(objRA), teleUtils.ensureAngle(objDec), teleUtils.ensureAngle(dRA), teleUtils.ensureAngle(dDec)
 
         #we'll start with the naive window and shorten/lengthen it based on the object's speed
-        hourAngleWindow = TargetSelector.getHourAngleLimits(objDec)
+        hourAngleWindow = teleUtils.getHourAngleLimits(objDec)
         siderealAngleWindow = (objRA,objRA)+hourAngleWindow
 
         #for now, we're not going to subtract the length of the exposure from the end of the window - the scheduler should be able to handle it
@@ -489,7 +419,7 @@ class TargetSelector:
             offsetDict.setdefault(des, []).append(off)
 
         self.filtDf= pd.concat((self.filtDf,
-            self.filtDf.apply(lambda row: pd.Series(self._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
+            self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
 
     async def killClients(self):
         """
