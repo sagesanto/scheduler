@@ -1,6 +1,6 @@
 #Sage Santomenna 2023
 
-from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
+from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpc
 from datetime import datetime
 from scheduleLib import asyncUtils
 import pytz
@@ -89,36 +89,90 @@ def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit):
         ephemsDict[desig] = pullEphem(mpcInst,desig, whenDt, minAltitudeLimit)
     return ephemsDict
 
-async def asyncMultiEphem(designations,whenDt: datetime, minAltitudeLimit,mpc: mpcObj, asyncHelper: asyncUtils.AsyncHelper, mpcPostURL = 'https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi' ):
+async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper, mpcPostURL ='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi'):
     """
-    Asynchronously retrieve ephemerides for multiple targets. Requires internet connection. Must be called in an asyncio loop using run_until_complete.
-    :param designations: A list of designations (strings) of the targets to retrieve
-    :param whenDt: A datetime object representing the time for which the ephemeris should be generated
+    Asynchronously retrieve ephemerides for multiple objects. Requires internet connection.
+    :param designations: A list of designations (strings) of the targets to objects
+    :param when: 'now', a datetime object representing the time for which the ephemeris should be generated, or a string in the format 'YYYY-MM-DDTHH:MM:SS'
     :param minAltitudeLimit: The lower altitude limit, below which ephemeris lines will not be generated
-    :param mpc: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
+    :param mpcInst: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
     :param asyncHelper: An instance of the asyncHelper class
     :return: Result of query in _____ form
     """
     urls = [mpcPostURL] * len(designations)
-    postContents = []
+    postContents = {}
     defaultPostParams = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
                    'W': 'j',
                    'obj': 'None', 'Parallax': '1', 'obscode': 654, 'long': '',
-                   'lat': '', 'alt': '', 'int': mpc.int, 'start': None, 'raty': mpc.raty,
-                   'mot': mpc.mot,
-                   'dmot': mpc.dmot, 'out': mpc.out, 'sun': mpc.supress_output,
+                   'lat': '', 'alt': '', 'int': mpcInst.int, 'start': None, 'raty': mpcInst.raty,
+                   'mot': mpcInst.mot,
+                   'dmot': mpcInst.dmot, 'out': mpcInst.out, 'sun': mpcInst.supress_output,
                    'oalt': str(minAltitudeLimit)
                    }
     start_at = 0
     now_dt = pytz.UTC.localize(datetime.utcnow())
-    if now_dt < whenDt:
-        start_at = round((whenDt - now_dt).total_seconds() / 3600.) + 1
+    if when != "now":
+        if isinstance(when,str):  # if we've been given a string, convert it to dt. Otherwise, assume we have a dt and carry on
+            when = datetime.strptime(when, '%Y-%m-%dT%H:%M')
+        if now_dt < when:
+            start_at = round((when - now_dt).total_seconds() / 3600.) + 1
+
     for objectName in designations:
         newPostContent = defaultPostParams.copy()
         newPostContent["start"] = start_at
         newPostContent["obj"] = objectName
-        postContents.append(newPostContent)
+        postContents[objectName] = newPostContent
 
-    ephemResults = asyncHelper.asyncMultiGet(urls,designations,soup=True,postContent=postContents)
+    ephemResults = await asyncHelper.multiGet(urls, designations, soup=True, postContent=postContents.values())
+
+    ephemDict = {}
+    failedList = []
+
+    for designation in designations:
+        if designation not in ephemResults.keys() or ephemResults[designation] is None:
+            print("Request for ephemeris for candidate",designation, "failed. Will retry.")
+            failedList.append(designation)
+
+    if len(failedList):
+        print("Retrying...")
+        retryPost = [postContents[a] for a in failedList]
+        retryEphems = await asyncHelper.multiGet([mpcPostURL] * len(failedList), failedList, soup=True, postContent=retryPost)
+
+        for retryDesignation in failedList:
+            if retryDesignation not in retryEphems.keys() or retryEphems[retryDesignation] is None:
+                print("Request for",retryDesignation, "failed on retry. Eliminating and moving on.")
+                ephemDict[retryDesignation] = None
+            else:
+                ephemResults[retryDesignation] = retryEphems[retryDesignation]
+
+    designations = ephemResults.keys()
+    
+    for designation in designations:
+        #parse valid ephems
+        ephem = ephemResults[designation]
+        num_recs = len(ephem)
+
+        # get object coordinates
+        if num_recs == 1:
+            self.logger.warning('Target is not observable')
+        else:
+            obs_list = []
+            ephem_entry_num = -1
+            for i in range(0, num_recs - 3, 4):
+                # get datetime, ra, dec, vmag and motion
+                if i == 0:
+                    obs_rec = ephem[i].split('\n')[-1].replace('\n', '')
+                else:
+                    obs_rec = ephem[i].replace('\n', '').replace('!', '').replace('*', '')
+
+                # keep a running count of ephem entries
+                ephem_entry_num += 1
+
+                # parse obs_rec
+                obs_datetime, coords, vmag, v_ra, v_dec = mpcInst._mpc__parse_ephemeris(obs_rec)
+
+                delta_err = None
+
+                obs_list.append((obs_datetime, coords, vmag, v_ra, v_dec, delta_err))
 
     #### Parse ephem results here!!!!!!!

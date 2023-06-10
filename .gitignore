@@ -1,2 +1,5 @@
 /.idea/
 **/testingOutputs/**
+*/*.log
+*/*.db
+*.db

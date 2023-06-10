@@ -217,10 +217,6 @@ class TargetSelector:
                 plt.savefig(savePath+"/"+name+".png")
             plt.close()
 
-        # maxRA = max(abs(min(raList)), abs(max(raList)))
-        # maxDec = max(abs(min(decList)), abs(max(decList)))
-
-        # return max(maxRA, maxDec)
         return rmsRA,rmsDec
 
     def timeUntilTransit(self, ra: float):
@@ -364,7 +360,7 @@ class TargetSelector:
         # # now actually make all the requests
         #thanks to our handy-dandy async helper !!!!!!!!!!
 
-        offsetDict = await self.asyncHelper.asyncMultiGet(urls,desigs,soup=True)
+        offsetDict = await self.asyncHelper.multiGet(urls, desigs, soup=True)
 
         self.filtDf= pd.concat((self.filtDf,
             self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
