@@ -35,8 +35,8 @@ class AsyncHelper:
 
         if designations is not None and len(designations) != len(URLlist):
             raise ValueError("asyncMultiRequest: provided designation length does not match url list length")
-        if designations is not None and len(designations) != len(URLlist):
-            raise ValueError("asyncMultiRequest: provided designation length does not match url list length")
+        if postContent is not None and len(postContent) != len(URLlist):
+            raise ValueError("asyncMultiRequest: provided postContent length does not match url list length")
 
         if designations is None:
             designations = URLlist

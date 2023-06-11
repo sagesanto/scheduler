@@ -44,7 +44,6 @@ class Candidate:
         :param entry: a dictionary returned (inside a list) from a database query
         :return: Candidate object
         """
-        print("entry:",entry)
         CandidateName, CandidateType = entry.pop("CandidateName"), entry.pop("CandidateType")
         d = {}
         for key, value in entry.items():
@@ -70,7 +69,7 @@ class CandidateDatabase(SQLDatabase):
             self.logger.info("Connection confirmed")
         else:
             raise sqlite3.DatabaseError("Connection to candidate database failed")
-        self.__existingIDs = []  #get and store a list of existing IDs. risk of collision low, so I'm not too worried
+        self.__existingIDs = []  #get and store a list of existing IDs. risk of collision low, so I'm not too worried about not calling this before making ids
 
     def timeToString(self,dt):
         try:
@@ -174,6 +173,15 @@ class CandidateDatabase(SQLDatabase):
     def fetchIDs(self):
         self.__existingIDs = [row["ID"] for row in self.table_query("Candidates", "ID", '', []) if row]
 
+    def isFieldProtected(self,field):
+        return field in ["Author","DateAdded", "DateLastEdited", "ID"]
+
+    def removeInvalidFields(self,dictionary):
+        for key, value in dictionary.items():
+            if key not in validFields or self.isFieldProtected(key):
+                self.logger.warning("Warning: Invalid field: can't edit field or add field \'"+dictionary.pop(key)+"\'")
+        return dictionary
+
     def candidatesAddedSince(self,when):
         """
         Query the database for candidates added since 'when'
@@ -185,10 +193,19 @@ class CandidateDatabase(SQLDatabase):
             return None
         queryResult = self.table_query("Candidates","*","DateAdded > ?",[when],returnAsCandidate=True)
         if queryResult:
-            return [Candidate.fromDatabaseEntry(row) for row in queryResult]
+            return queryResult
         else:
-            self.logger.warning("Recieved empty query result for candidates added since "+when)
+            self.logger.warning("Received empty query result for candidates added since "+when)
             return None
+
+    def editCandidateByID(self,ID,updateDict):
+        updateDict = self.removeInvalidFields(updateDict)
+        if len(updateDict):
+            updateDict["DateLastEdited"] = self.timestamp()
+
+        self.table_update("Candidates",updateDict,"ID = "+str(ID))
+
+
 
 
 if __name__ == '__main__':
@@ -202,5 +219,6 @@ if __name__ == '__main__':
 
     db.fetchIDs()
 
-    print(db.candidatesAddedSince("2023-07-09 12:17:28"))
+    print(db.candidatesAddedSince("2023-05-09 12:17:28"))
+    db.editCandidateByID("203609125038556",{"CVal1":"Edit test"})
 

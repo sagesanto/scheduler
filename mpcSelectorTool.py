@@ -71,10 +71,13 @@ targetFinder.saveCSVs(csvOutputDir)
 # --- save ---
 print("Fetching and saving ephemeris for these targets. . .")
 try:
-    targetCore.saveEphemerides(targetFinder.fetchFilteredEphemerides(), ephemDir)
+    filteredEphems = loop.run_until_complete(targetFinder.fetchFilteredEphemerides())
+    print("Filtered ephems:",filteredEphems)
+    targetCore.saveEphemerides(filteredEphems, ephemDir)
 except RemoteProtocolError as e:
     print("\033[1;33m"+"Encountered fatal server error while fetching ephemeris. Error is as follows:\033[0;0m")
     print(repr(e))
+    raise e
 
 # --- clean up ---
 loop.run_until_complete(targetFinder.killClients())

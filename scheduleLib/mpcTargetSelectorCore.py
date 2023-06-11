@@ -467,11 +467,12 @@ class TargetSelector:
         """
         return mpcUtils.pullEphem(self.mpc, desig, self.startTime, self.altitudeLimit)
 
-    def fetchFilteredEphemerides(self):
+    async def fetchFilteredEphemerides(self):
         """
         Return the ephemerides of only targets that passed filtering. Note: must be called after filtering has been done to return anything meaningful
         :return: a Dictionary of {designation: {startTimeDt: ephemLine}}
         """
+        # return await mpcUtils.asyncMultiEphem(list(self.filtDf.Temp_Desig), self.startTime, self.altitudeLimit, self.mpc, self.asyncHelper, self.logger,autoFormat=True)
         return mpcUtils.pullEphems(self.mpc, self.filtDf.Temp_Desig, self.startTime, self.altitudeLimit)
 
     def fetchAllEphemerides(self):
@@ -489,7 +490,8 @@ def saveEphemerides(ephems, saveDir):
     :param saveDir: The directory to save to
     """
     for desig in ephems.keys():
-        outFilename = saveDir + desig + "_ephems.txt"
+        outFilename = saveDir + "/"+ desig + "_ephems.txt"
         ephemLines = ephems[desig].values()
         with open(outFilename, "w") as f:
             f.write('\n'.join(ephemLines))
+            print("Saved ephem for",desig,"to",outFilename)

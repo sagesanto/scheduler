@@ -9,7 +9,6 @@ import httpx
 from bs4 import BeautifulSoup
 from scheduleLib import generalUtils
 
-#Sage Santomenna 2023
 
 # this isn't terribly elegant
 def _findExposure(magnitude):
@@ -25,9 +24,13 @@ def _findExposure(magnitude):
 
 
 def _formatEphem(ephems, desig):
+    print("Ephems in formatEphem:",ephems)
+    print(len(ephems))
+    print("Desigs:",desig)
     # Internal: take an object in the form returned from self.mpc.get_ephemeris() and convert each line to the scheduler format, before returning it in a dictionary of {startDt : line}
     ephemDict = {None: "DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"}
     for i in ephems:
+        print(i)
         # the dateTime in the ephems list is a Time object, need to convert it to string
         i[0].format = "fits"
         i[0].out_subfmt = "date_hms"
@@ -57,8 +60,9 @@ def _formatEphem(ephems, desig):
 
         lineList = [date, "1", target, "1", coords, exposure, "CLEAR", description]
         expLine = "|".join(lineList)
+        print("EXPLINE:",expLine)
         ephemDict[datetime] = expLine
-
+    print("EPHEMDICT AT END",ephemDict)
     return ephemDict
 
 
@@ -71,8 +75,10 @@ def pullEphem(mpcInst, desig, whenDt, altitudeLimit):
     :param altitudeLimit: The lower altitude limit, below which ephemeris lines will not be generated
     :return: A Dictionary {startTimeDt: ephemLine}
     """
-    return _formatEphem(mpcInst.get_ephemeris(desig, when=whenDt.strftime('%Y-%m-%dT%H:%M'),
+    returner = _formatEphem(mpcInst.get_ephemeris(desig, when=whenDt.strftime('%Y-%m-%dT%H:%M'),
                                               altitude_limit=altitudeLimit, get_uncertainty=None), desig)
+    print("RETURNER",returner)
+    return returner
 
 
 def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit):
@@ -89,7 +95,7 @@ def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit):
         ephemsDict[desig] = pullEphem(mpcInst,desig, whenDt, minAltitudeLimit)
     return ephemsDict
 
-async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper, mpcPostURL ='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi'):
+async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper, logger, autoFormat=False, mpcPostURL ='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi'):
     """
     Asynchronously retrieve ephemerides for multiple objects. Requires internet connection.
     :param designations: A list of designations (strings) of the targets to objects
@@ -123,7 +129,7 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
         newPostContent["obj"] = objectName
         postContents[objectName] = newPostContent
 
-    ephemResults = await asyncHelper.multiGet(urls, designations, soup=True, postContent=postContents.values())
+    ephemResults = await asyncHelper.multiGet(urls, designations, soup=True, postContent=list(postContents.values()))
 
     ephemDict = {}
     failedList = []
@@ -149,30 +155,35 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
     
     for designation in designations:
         #parse valid ephems
-        ephem = ephemResults[designation]
-        num_recs = len(ephem)
+        ephem = ephemResults[designation][0]
+        ephem = ephem.find_all('pre')[0].contents
+        numRecs = len(ephem)
 
         # get object coordinates
-        if num_recs == 1:
-            self.logger.warning('Target is not observable')
+        if numRecs == 1:
+            logger.warning('Target '+designation+' is not observable')
+            obsList = None
         else:
-            obs_list = []
+            obsList = []
             ephem_entry_num = -1
-            for i in range(0, num_recs - 3, 4):
+            for i in range(0, numRecs - 3, 4):
                 # get datetime, ra, dec, vmag and motion
                 if i == 0:
-                    obs_rec = ephem[i].split('\n')[-1].replace('\n', '')
+                    obsRec = ephem[i].split('\n')[-1].replace('\n', '')
                 else:
-                    obs_rec = ephem[i].replace('\n', '').replace('!', '').replace('*', '')
+                    obsRec = ephem[i].replace('\n', '').replace('!', '').replace('*', '')
 
                 # keep a running count of ephem entries
                 ephem_entry_num += 1
 
                 # parse obs_rec
-                obs_datetime, coords, vmag, v_ra, v_dec = mpcInst._mpc__parse_ephemeris(obs_rec)
+                obsDatetime,coords,vMag,vRa,vDec = mpcInst._MPCNeoConfirm__parse_ephemeris(obsRec)
 
-                delta_err = None
+                deltaErr = None
 
-                obs_list.append((obs_datetime, coords, vmag, v_ra, v_dec, delta_err))
-
+                obsList.append((obsDatetime,coords,vMag,vRa,vDec,deltaErr))
+            if autoFormat:
+                obsList=_formatEphem(obsList,designation)
+            ephemDict[designation]=obsList
+        return ephemDict
     #### Parse ephem results here!!!!!!!
