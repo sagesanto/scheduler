@@ -26,6 +26,8 @@ def _findExposure(magnitude):
 def _formatEphem(ephems, desig):
     # Internal: take an object in the form returned from self.mpc.get_ephemeris() and convert each line to the scheduler format, before returning it in a dictionary of {startDt : line}
     ephemDict = {None: "DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"}
+    if ephems is None:
+        return None
     for i in ephems:
         # the dateTime in the ephems list is a Time object, need to convert it to string
         i[0].format = "fits"
@@ -60,7 +62,7 @@ def _formatEphem(ephems, desig):
     return ephemDict
 
 
-def pullEphem(mpcInst, desig, whenDt, altitudeLimit):
+def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat = False):
     """
     Fetch the ephemeris of a target from the MPC NEO confirmation database, given a valid designation. Requires internet connection.
     :param mpcInst: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
@@ -69,12 +71,15 @@ def pullEphem(mpcInst, desig, whenDt, altitudeLimit):
     :param altitudeLimit: The lower altitude limit, below which ephemeris lines will not be generated
     :return: A Dictionary {startTimeDt: ephemLine}
     """
-    returner = _formatEphem(mpcInst.get_ephemeris(desig, when=whenDt.strftime('%Y-%m-%dT%H:%M'),
-                                              altitude_limit=altitudeLimit, get_uncertainty=None), desig)
+    returner = mpcInst.get_ephemeris(desig, when=whenDt.strftime('%Y-%m-%dT%H:%M'),
+                                              altitude_limit=altitudeLimit, get_uncertainty=None)
+    if schedulerFormat:
+        returner = _formatEphem(returner, desig)
+
     return returner
 
 
-def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit):
+def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit, schedulerFormat = False):
     """
     Use pullEphem to pull ephemerides for multiple targets, given a list of their designations. Requires internet connection.
     :param mpcInst: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
@@ -85,7 +90,7 @@ def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit):
     """
     ephemsDict = {}
     for desig in designations:
-        ephemsDict[desig] = pullEphem(mpcInst,desig, whenDt, minAltitudeLimit)
+        ephemsDict[desig] = pullEphem(mpcInst,desig, whenDt, minAltitudeLimit,schedulerFormat)
     return ephemsDict
 
 async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper, logger, autoFormat=False, mpcPostURL ='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi'):

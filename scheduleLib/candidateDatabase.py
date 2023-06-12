@@ -6,7 +6,7 @@ import time
 from photometrics.sql_database import SQLDatabase
 from datetime import datetime
 
-validFields = ["Author","DateAdded","DateLastEdited","ID",'Night', 'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
+validFields = ["Author","DateAdded","DateLastEdited","ID",'Night', 'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 def filter(record):
     info = sys.exc_info()
@@ -75,6 +75,8 @@ class CandidateDatabase(SQLDatabase):
             raise sqlite3.DatabaseError("Connection to candidate database failed")
         self.__existingIDs = []  #get and store a list of existing IDs. risk of collision low, so I'm not too worried about not calling this before making ids
 
+    def __del__(self):
+        self.close()
     def timeToString(self,dt):
         try:
             if isinstance(dt,str):  # if we get a string, check that it's valid by casting it to dt and back. If it isn't, we'll return None
@@ -181,9 +183,13 @@ class CandidateDatabase(SQLDatabase):
         return field in ["Author","DateAdded", "DateLastEdited", "ID"]
 
     def removeInvalidFields(self,dictionary):
+        badKeys = []
         for key, value in dictionary.items():
             if key not in validFields or self.isFieldProtected(key):
-                logAndPrint("Warning: Invalid field: can't edit field or add field \'"+dictionary.pop(key)+"\'",self.logger.warning)
+                logAndPrint("Warning: Invalid field: can't edit field or add field \'"+key+"\'",self.logger.warning)
+                badKeys.append(key)
+        for key in badKeys:
+            dictionary.pop(key)
         return dictionary
 
     def candidatesAddedSince(self,when):

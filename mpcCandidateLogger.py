@@ -13,7 +13,7 @@ from scheduleLib.mpcTargetSelectorCore import TargetSelector
 # validFields = ["Author","DateAdded","DateLastEdited","ID",'Night', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 lookback = 8  #max hours ago targets that we will edit could have been added
-interval = 1  #minutes between running
+interval = 15  #minutes between running
 
 def filter(record):
     info = sys.exc_info()
@@ -28,14 +28,25 @@ logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', filename='m
                     datefmt='%m/%d/%Y %H:%M:%S', level=logging.INFO)
 logger.addFilter(filter)
 
-def listEntryToCandidate(entry,db):
+def getVelocities(desig,mpc):  #get dRA and dDec
+    ephems = mpcUtils.pullEphem(mpc,desig,dt.now(),0)
+    if ephems:
+        first = ephems[0]
+        return first[3],first[4]
+    return None, None
+def listEntryToCandidate(entry,db,mpc):
     constructDict = {}
     CandidateName = entry.designation
     CandidateType = "MPC NEO"
     constructDict["RA"], constructDict["Dec"] = entry.ra, entry.dec
     constructDict["Magnitude"] = entry.vmag
     constructDict["Updated"] =  db.timeToString(mpcUtils.updatedStringToDatetime(entry.updated))
-
+    dRA, dDec = getVelocities(CandidateName,mpc)
+    #currently, can't get nObs and Score from mpc_neo_confirm. not going to implement it myself - we'll go without
+    if dRA and dDec:
+        constructDict["dRA"], constructDict["dDec"] = dRA, dDec
+    else:
+        logAndPrint("Couldn't find velocities for "+CandidateName,logger.warning)
     return Candidate(CandidateName,CandidateType,**constructDict)
 
 def candidateIsRemoved(candidate):
@@ -55,23 +66,22 @@ def updateCandidate(dbCandidate:Candidate,listCandidate:Candidate,dbConnection:C
 
 async def main():
     #use all this helpful infrastructure !
-    dbConnection = CandidateDatabase("./candidate database.db","MPCLogger")
     mpc = mpcObj()
     targetSelector = TargetSelector()
 
     while True:
+        dbConnection = CandidateDatabase("./candidate database.db", "MPCLogger")
         logAndPrint("--- Grabbing ---",logger.info)
-        lastCandidates = {}
         currentCandidates = {}  # store desig:candidate for each candidate in the MPC's list of current candidates
         mpc.get_neo_list()  #prompt the mpc object to fetch the list
 
         for entry in mpc.neo_confirm_list:  #access the list and create dict
-            ent = listEntryToCandidate(entry,dbConnection)  #transform list entries to candidates
+            ent = listEntryToCandidate(entry,dbConnection,mpc)  #transform list entries to candidates
+            print(ent)
             currentCandidates[ent.CandidateName] = ent
 
         desigs = currentCandidates.keys()
         offsetDict = await targetSelector.fetchUncertainties(desigs)
-        extractedDict = {}
         for desig in desigs:  #loop over the candidates and find their uncertainties, adding them to the candidate object
             uncertainties = TargetSelector._extractUncertainty(desig, offsetDict,logger,graph=False,savePath="testingOutputs/plots")  #why did i protect this? who knows
             if uncertainties is not None:
@@ -95,6 +105,7 @@ async def main():
                         continue
                     logAndPrint("A candidate matching "+desig+" was found in the database. Will check for updates.",logger.info)
                     if needsUpdate(candidate,dbCandidates[desig],dbConnection):
+                        logAndPrint("Updating "+desig,logger.info)
                         updateCandidate(dbCandidates[desig],candidate,dbConnection)
                         updated.append(candidate)
                     else:
@@ -122,15 +133,14 @@ async def main():
             newID = dbConnection.insertCandidate(candidate)
             logAndPrint("Created new candidate with desig "+candidate.CandidateName+" and ID "+str(newID)+".",logger.info)
 
-
-
         print("New ("+str(len(new))+"):",new)
         print("Static ("+str(len(static))+"):",static)
         print("Updated ("+str(len(updated))+"):",updated)
         print("Removed ("+str(len(removed))+"):",removed)
 
-        logAndPrint("Done. will run again at "+dbConnection.timeToString(dt.now()+timedelta(minutes=interval)),logger.info)
+        logAndPrint("Done. will run again at "+dbConnection.timeToString(dt.now()+timedelta(minutes=interval))+" PST.",logger.info)
         print("\n")
+        del dbConnection  #close the connection to let others use it
         time.sleep(interval*60)
 
 
