@@ -56,7 +56,7 @@ targetFinder.makeMpcDataframe()
 targetFinder.pruneMpcDf()
 
 print("Fetching and (optionally) plotting uncertainties of the targets - this may take a while. . .")
-loop.run_until_complete(targetFinder.fetchUncertainties(graph=True,savePath=plotDir))
+loop.run_until_complete(targetFinder.getFilteredUncertainties(graph=True,savePath=plotDir))
 
 print("\033[1;32mUncertainties retrieved:\033[0;0m")
 print(targetFinder.filtDf.to_string())
@@ -72,8 +72,8 @@ targetFinder.saveCSVs(csvOutputDir)
 print("Fetching and saving ephemeris for these targets. . .")
 try:
     filteredEphems = loop.run_until_complete(targetFinder.fetchFilteredEphemerides())
-    print("Filtered ephems:",filteredEphems)
     targetCore.saveEphemerides(filteredEphems, ephemDir)
+    print("Fetched. Find them in",ephemDir)
 except RemoteProtocolError as e:
     print("\033[1;33m"+"Encountered fatal server error while fetching ephemeris. Error is as follows:\033[0;0m")
     print(repr(e))

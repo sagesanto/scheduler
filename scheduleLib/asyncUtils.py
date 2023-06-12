@@ -10,7 +10,6 @@ class AsyncHelper:
     """
     def __init__(self,followRedirects:bool):
         self.client = httpx.AsyncClient(follow_redirects=followRedirects, timeout=60.0)
-        print("Async helper initialized. Remember to await methods")
 
     def __del__(self):
         # Close connection when this object is destroyed

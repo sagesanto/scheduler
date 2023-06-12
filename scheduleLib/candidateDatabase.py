@@ -6,7 +6,7 @@ import time
 from photometrics.sql_database import SQLDatabase
 from datetime import datetime
 
-validFields = ["Author","DateAdded","DateLastEdited","ID",'Night', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
+validFields = ["Author","DateAdded","DateLastEdited","ID",'Night', 'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 def filter(record):
     info = sys.exc_info()
@@ -16,8 +16,10 @@ def filter(record):
 
     return True
 
-def generateID():
-    return uuid.uuid4().node
+def generateID(candidateName,candidateType,author):
+    hashed = str(hash(candidateName+candidateType+author))
+
+    return int(hashed)
 
 
 class Candidate:
@@ -160,7 +162,7 @@ class CandidateDatabase(SQLDatabase):
         candidate = candidate.asDict()
         candidate["Author"] = self.__author
         candidate["DateAdded"] = self.timestamp()
-        id = generateID()
+        id = generateID(candidate["CandidateName"],candidate["CandidateType"],self.__author)
         candidate["ID"] = id
         try:
             self.insert_records("Candidates", candidate)
@@ -214,11 +216,13 @@ if __name__ == '__main__':
 
     db.logger.addFilter(filter)
 
+    print(generateID("C440NCZ","MPC","MPClogger"))
+
     candidate = Candidate("Test","Test",Notes="test")
     print(db.insertCandidate(candidate))
-
-    db.fetchIDs()
-
-    print(db.candidatesAddedSince("2023-05-09 12:17:28"))
-    db.editCandidateByID("203609125038556",{"CVal1":"Edit test"})
+    #
+    # db.fetchIDs()
+    #
+    # print(db.candidatesAddedSince("2023-05-09 12:17:28"))
+    # db.editCandidateByID("203609125038556",{"CVal1":"Edit test"})
 

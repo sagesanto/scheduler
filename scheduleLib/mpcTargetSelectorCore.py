@@ -112,13 +112,13 @@ class TargetSelector:
         self.siderealStart = Time(self.startTime, scale='utc').sidereal_time(kind="apparent",
                                                                              longitude=self.observatory.longitude)
 
-        print("Length of window:", self.endTime - self.startTime)
+        print("Length of window:", self.endTime - self.startTime, "(h:m:s)")
         self.minHoursBeforeTransit = min(max(self.sunsetUTC - self.startTime, timedelta(hours=-2)),
                                          timedelta(hours=0)).total_seconds() / 3600
         self.maxHoursBeforeTransit = (self.endTime - self.startTime).total_seconds() / 3600
 
         print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",
-              self.endTime.strftime("%Y-%m-%d %H:%M"))
+              self.endTime.strftime("%Y-%m-%d %H:%M"), "UTC")
         # i open my wallet and it's full of blood
         print("Allowing", self.minHoursBeforeTransit, "hours minimum before transit and", self.maxHoursBeforeTransit,
               "hours after.")
@@ -161,13 +161,13 @@ class TargetSelector:
                 l[i] = None
         return l
     @staticmethod
-    def _extractUncertainty(name, offsetDict, logger,graph,savePath):
+    def _extractUncertainty(name, offsetDict, logger,graph=False,savePath=None):
         """
         Internal: Take the name of an object and an offsetDict, as produced in fetchUncertainties, and extract + format + process the uncertainty values for the target
         :return: The maximum absolute uncertainty of the object, to be compared with self.errorRange
         """
         if name not in offsetDict.keys():
-            logger.debug("Couldn't find", name, "in offsetDict")
+            logger.debug("Couldn't find "+ name + " in offsetDict")
             return None
         soup = offsetDict[name][0]  # for whatever reason, the value is a list and i don't feel like fixing it
         for a in soup.findAll('a', href=True):
@@ -296,15 +296,21 @@ class TargetSelector:
 
     async def getObjectUncertainty(self, desig, errURL):
         """
-        Asynchronously get the html of the uncertainty page for an object, given its temporary designation and the url of the page
+        Get the html of the uncertainty page for an object, given its temporary designation and the url of the page
         :return: A tuple, (designation, html)
         """
         offsetReq = await self.offsetClient.get(errURL)
         soup = BeautifulSoup(offsetReq.content, 'html.parser')
         return tuple([desig, soup])
 
+    async def getFilteredUncertainties(self,graph=False,savePath=None):
+        desigs = list(self.filtDf.Temp_Desig)
+        offsetDict = await self.fetchUncertainties(desigs)
+        self.filtDf= pd.concat((self.filtDf,
+            self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
 
-    async def fetchUncertainties(self,graph=False,savePath = None):
+
+    async def fetchUncertainties(self, designations: list):
         """
         Asynchronously get the uncertainties of the targets in the filtered dataframe
         """
@@ -324,9 +330,8 @@ class TargetSelector:
 
         desigs = []
         urls = []
-
         # TODO: image maps
-        for desig in self.filtDf.Temp_Desig:
+        for desig in designations:
             # make sure we're not starting in the past
             start_at = 0
             now_dt = utc.localize(datetime.utcnow())
@@ -341,6 +346,7 @@ class TargetSelector:
             except (httpx.ConnectError, httpx.HTTPError) as err:
                 self.logger.error('Failed to connect to/retrieve data from the MPC. Stopping')
                 self.logger.error(err)
+                print('Failed to connect to/retrieve data from the MPC. Stopping')
                 exit()  # this will have to be handled by a wrapper if one is written
             if mpc_request.status_code == 200:
                 # extract 'pre' tags from reply
@@ -354,16 +360,17 @@ class TargetSelector:
                 else:
                     errUrl = ephem[3].get('href')
                     urls.append(errUrl)
-                    desigs.append(desigs)
-
+                    desigs.append(desig)
+            else:
+                raise ConnectionError
 
         # # now actually make all the requests
         #thanks to our handy-dandy async helper !!!!!!!!!!
-
         offsetDict = await self.asyncHelper.multiGet(urls, desigs, soup=True)
+        return offsetDict
 
-        self.filtDf= pd.concat((self.filtDf,
-            self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
+
+
 
     def calculateObservability(self,desig):
         """
@@ -378,65 +385,65 @@ class TargetSelector:
         hourAngleWindow = generalUtils.getHourAngleLimits(objDec)
         siderealAngleWindow = (objRA,objRA)+hourAngleWindow
 
-    async def fetchUncertainties(self,graph=False,savePath = None):
-        """
-        Asynchronously get the uncertainties of the targets in the filtered dataframe
-        """
-        # this works like:
-        # filtDf -> designations -> ephemeris pages -> uncertainty links -> uncertainty values -> inserted into filtDf
-
-        post_params = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
-                       'W': 'j',
-                       'obj': 'P10POWX', 'Parallax': '1', 'obscode': self.obsCode, 'long': '',
-                       'lat': '', 'alt': '', 'int': self.mpc.int, 'start': None, 'raty': self.mpc.raty,
-                       'mot': self.mpc.mot,
-                       'dmot': self.mpc.dmot, 'out': self.mpc.out, 'sun': self.mpc.supress_output,
-                       'oalt': str(self.altitudeLimit)
-                       }
-        imageDict = {}  # for image maps, desig:mapURL
-        offsetRequestTasks = []  # will store our async tasks for retrieving offsets
-
-        # TODO: image maps
-        for desig in self.filtDf.Temp_Desig:
-            # make sure we're not starting in the past
-            start_at = 0
-            now_dt = utc.localize(datetime.utcnow())
-            if now_dt < self.startTime:
-                start_at = round((self.startTime - now_dt).total_seconds() / 3600.) + 1
-
-            post_params["start"] = start_at
-            post_params["obj"] = desig
-            try:
-                mpc_request = await self.offsetClient.post(self.mpc.mpc_post_url, data=post_params)
-            except (httpx.ConnectError, httpx.HTTPError) as err:
-                self.logger.error('Failed to connect/retrieve data from MPC. Stopping')
-                self.logger.error(err)
-                exit()  # this will have to be handled by a wrapper if one is written
-            if mpc_request.status_code == 200:
-                # extract 'pre' tags from reply
-                soup = BeautifulSoup(mpc_request.text, 'html.parser')
-                ephem = soup.find_all('pre')[0].contents
-                num_recs = len(ephem)
-
-                if num_recs == 1:
-                    self.logger.warning('Target is not observable')
-
-                else:
-                    errUrl = ephem[3].get('href')
-                    reqTask = asyncio.create_task(self.getObjectUncertainty(desig, errUrl))
-                    offsetRequestTasks.append(reqTask)
-                    # imageUrl = ephem[i + 2].get('href') #this doesnt work lol
-                    # imageDict[desig] = imageUrl
-
-        # now actually make all the requests
-        offsets = await asyncio.gather(*offsetRequestTasks)
-        # offsets is a list of tuples (desig,offset) which needs to be compiled to a dict
-        offsetDict = dict()
-        for des, off in offsets:
-            offsetDict.setdefault(des, []).append(off)
-
-        self.filtDf= pd.concat((self.filtDf,
-            self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
+    # async def fetchUncertainties(self,graph=False,savePath = None):
+    #     """
+    #     Asynchronously get the uncertainties of the targets in the filtered dataframe
+    #     """
+    #     # this works like:
+    #     # filtDf -> designations -> ephemeris pages -> uncertainty links -> uncertainty values -> inserted into filtDf
+    #
+    #     post_params = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
+    #                    'W': 'j',
+    #                    'obj': 'P10POWX', 'Parallax': '1', 'obscode': self.obsCode, 'long': '',
+    #                    'lat': '', 'alt': '', 'int': self.mpc.int, 'start': None, 'raty': self.mpc.raty,
+    #                    'mot': self.mpc.mot,
+    #                    'dmot': self.mpc.dmot, 'out': self.mpc.out, 'sun': self.mpc.supress_output,
+    #                    'oalt': str(self.altitudeLimit)
+    #                    }
+    #     imageDict = {}  # for image maps, desig:mapURL
+    #     offsetRequestTasks = []  # will store our async tasks for retrieving offsets
+    #
+    #     # TODO: image maps
+    #     for desig in self.filtDf.Temp_Desig:
+    #         # make sure we're not starting in the past
+    #         start_at = 0
+    #         now_dt = utc.localize(datetime.utcnow())
+    #         if now_dt < self.startTime:
+    #             start_at = round((self.startTime - now_dt).total_seconds() / 3600.) + 1
+    #
+    #         post_params["start"] = start_at
+    #         post_params["obj"] = desig
+    #         try:
+    #             mpc_request = await self.offsetClient.post(self.mpc.mpc_post_url, data=post_params)
+    #         except (httpx.ConnectError, httpx.HTTPError) as err:
+    #             self.logger.error('Failed to connect/retrieve data from MPC. Stopping')
+    #             self.logger.error(err)
+    #             exit()  # this will have to be handled by a wrapper if one is written
+    #         if mpc_request.status_code == 200:
+    #             # extract 'pre' tags from reply
+    #             soup = BeautifulSoup(mpc_request.text, 'html.parser')
+    #             ephem = soup.find_all('pre')[0].contents
+    #             num_recs = len(ephem)
+    #
+    #             if num_recs == 1:
+    #                 self.logger.warning('Target is not observable')
+    #
+    #             else:
+    #                 errUrl = ephem[3].get('href')
+    #                 reqTask = asyncio.create_task(self.getObjectUncertainty(desig, errUrl))
+    #                 offsetRequestTasks.append(reqTask)
+    #                 # imageUrl = ephem[i + 2].get('href') #this doesnt work lol
+    #                 # imageDict[desig] = imageUrl
+    #
+    #     # now actually make all the requests
+    #     offsets = await asyncio.gather(*offsetRequestTasks)
+    #     # offsets is a list of tuples (desig,offset) which needs to be compiled to a dict
+    #     offsetDict = dict()
+    #     for des, off in offsets:
+    #         offsetDict.setdefault(des, []).append(off)
+    #
+    #     self.filtDf= pd.concat((self.filtDf,
+    #         self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
 
     async def killClients(self):
         """
@@ -472,8 +479,8 @@ class TargetSelector:
         Return the ephemerides of only targets that passed filtering. Note: must be called after filtering has been done to return anything meaningful
         :return: a Dictionary of {designation: {startTimeDt: ephemLine}}
         """
-        # return await mpcUtils.asyncMultiEphem(list(self.filtDf.Temp_Desig), self.startTime, self.altitudeLimit, self.mpc, self.asyncHelper, self.logger,autoFormat=True)
-        return mpcUtils.pullEphems(self.mpc, self.filtDf.Temp_Desig, self.startTime, self.altitudeLimit)
+        return await mpcUtils.asyncMultiEphem(list(self.filtDf.Temp_Desig), self.startTime, self.altitudeLimit, self.mpc, self.asyncHelper, self.logger,autoFormat=True)
+        # return mpcUtils.pullEphems(self.mpc, self.filtDf.Temp_Desig, self.startTime, self.altitudeLimit)
 
     def fetchAllEphemerides(self):
         """
@@ -494,4 +501,3 @@ def saveEphemerides(ephems, saveDir):
         ephemLines = ephems[desig].values()
         with open(outFilename, "w") as f:
             f.write('\n'.join(ephemLines))
-            print("Saved ephem for",desig,"to",outFilename)
