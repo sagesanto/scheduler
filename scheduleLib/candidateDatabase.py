@@ -127,7 +127,7 @@ class CandidateDatabase(SQLDatabase):
 
 
     def table_query(self, table_name, columns, condition, values,returnAsCandidate=False):
-        """Get all rows in the database table.
+        """Query table based on condition. If no condition given, will return the whole table - if this isn't what you want, be careful!
 
         Parameters
         ----------
@@ -154,7 +154,7 @@ class CandidateDatabase(SQLDatabase):
             if returnAsCandidate:
                 result = [Candidate.fromDatabaseEntry(row) for row in result]
             return result
-
+        self.logger.warning("Couldn't fetch response to query "+condition)
         return None
 
 
@@ -200,6 +200,8 @@ class CandidateDatabase(SQLDatabase):
             self.logger.warning("Received empty query result for candidates added since "+when)
             return None
 
+    def getCandidateByID(self,ID):
+        return self.table_query("Candidates","*","ID = ?",[ID],returnAsCandidate=True)
     def editCandidateByID(self,ID,updateDict):
         updateDict = self.removeInvalidFields(updateDict)
         if len(updateDict):
@@ -207,6 +209,11 @@ class CandidateDatabase(SQLDatabase):
 
         self.table_update("Candidates",updateDict,"ID = "+str(ID))
 
+    def removeCandidateByID(self,ID:str,reason:str):
+        candidate = self.getCandidateByID(ID)
+        if candidate:
+            print()
+            updateDict = {"RemovedDt":self.timestamp(),""}
 
 
 
