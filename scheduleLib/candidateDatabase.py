@@ -18,9 +18,11 @@ def filter(record):
 
 def generateID(candidateName,candidateType,author):
     hashed = str(hash(candidateName+candidateType+author))
-
     return int(hashed)
 
+def logAndPrint(msg,loggerMethod):
+    loggerMethod(msg)  #logger method is a function like logger.info logger.error etc
+    print(msg)
 
 class Candidate:
     def __init__(self, CandidateName, CandidateType, **kwargs):
@@ -33,7 +35,7 @@ class Candidate:
                 raise ValueError("Bad argument: "+key+" is not a valid argument for candidate construction. Valid arguments are "+ str(validFields))
 
     def __str__(self):
-        return "str" + str(dict(self.__dict__))
+        return str(dict(self.__dict__))
     def __repr__(self):
         return self.CandidateName +" ("+self.CandidateType+")"
     def asDict(self):
@@ -181,7 +183,7 @@ class CandidateDatabase(SQLDatabase):
     def removeInvalidFields(self,dictionary):
         for key, value in dictionary.items():
             if key not in validFields or self.isFieldProtected(key):
-                self.logger.warning("Warning: Invalid field: can't edit field or add field \'"+dictionary.pop(key)+"\'")
+                logAndPrint("Warning: Invalid field: can't edit field or add field \'"+dictionary.pop(key)+"\'",self.logger.warning)
         return dictionary
 
     def candidatesAddedSince(self,when):
@@ -197,7 +199,7 @@ class CandidateDatabase(SQLDatabase):
         if queryResult:
             return queryResult
         else:
-            self.logger.warning("Received empty query result for candidates added since "+when)
+            logAndPrint("Received empty query result for candidates added since "+when,self.logger.warning)
             return None
 
     def getCandidateByID(self,ID):
@@ -212,8 +214,15 @@ class CandidateDatabase(SQLDatabase):
     def removeCandidateByID(self,ID:str,reason:str):
         candidate = self.getCandidateByID(ID)
         if candidate:
-            print()
-            updateDict = {"RemovedDt":self.timestamp(),""}
+            reason = self.__author+": "+reason
+            logAndPrint("Removing candidate "+candidate.CandidateName + " for reason "+reason, self.logger.info)
+            updateDict = {"RemovedDt":self.timestamp(),"RemovedReason":reason}
+            self.editCandidateByID(ID,updateDict)
+        else:
+            logAndPrint("Couldn't find target with ID " + ID +". Can't update.",self.logger.error)
+            return None
+        return ID
+
 
 
 

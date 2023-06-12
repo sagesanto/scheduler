@@ -319,12 +319,12 @@ class TargetSelector:
 
         post_params = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
                        'W': 'j',
-                       'obj': 'P10POWX', 'Parallax': '1', 'obscode': self.obsCode, 'long': '',
+                       'obj': 'P10POWX', 'Parallax': '1', 'obscode': "500", 'long': '',
                        'lat': '', 'alt': '', 'int': self.mpc.int, 'start': None, 'raty': self.mpc.raty,
                        'mot': self.mpc.mot,
                        'dmot': self.mpc.dmot, 'out': self.mpc.out, 'sun': self.mpc.supress_output,
                        'oalt': str(self.altitudeLimit)
-                       }
+                       }  # using 500 for obs code to ensure that we can always get an uncertainty, even if the target is below the horizon
         imageDict = {}  # for image maps, desig:mapURL
         offsetRequestTasks = []  # will store our async tasks for retrieving offsets
 

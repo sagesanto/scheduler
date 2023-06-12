@@ -39,3 +39,253 @@
 06/12/2023 10:16:59 WARNING: Target is not observable
 06/12/2023 10:16:59 WARNING: Target is not observable
 06/12/2023 10:17:07 INFO: Query: Retrieved 1 record(s) for candidates in response to query
+06/12/2023 14:23:03 INFO: Connected to candidate database
+06/12/2023 14:23:03 INFO: Connection confirmed
+06/12/2023 14:23:04 INFO: Connected to candidate database
+06/12/2023 14:23:04 INFO: Connection confirmed
+06/12/2023 14:23:05 WARNING: Target is not observable
+06/12/2023 14:23:05 WARNING: Target is not observable
+06/12/2023 14:23:05 WARNING: Target is not observable
+06/12/2023 14:23:05 WARNING: Target is not observable
+06/12/2023 14:23:06 WARNING: Target is not observable
+06/12/2023 14:23:06 WARNING: Target is not observable
+06/12/2023 14:23:06 WARNING: Target is not observable
+06/12/2023 14:23:06 WARNING: Target is not observable
+06/12/2023 14:23:06 WARNING: Target is not observable
+06/12/2023 14:23:06 WARNING: Target is not observable
+06/12/2023 14:23:16 WARNING: Uncertainty query for 3FB7L21 came back empty.
+06/12/2023 14:23:16 WARNING: Uncertainty query for C9C5GX2 came back empty.
+06/12/2023 14:23:16 WARNING: Uncertainty query for C9C57Z2 came back empty.
+06/12/2023 14:23:16 WARNING: Uncertainty query for ST23F05 came back empty.
+06/12/2023 14:23:17 WARNING: Uncertainty query for JHRc1If came back empty.
+06/12/2023 14:23:18 WARNING: Couldn't fetch response to query DateAdded > ?
+06/12/2023 14:23:18 WARNING: Received empty query result for candidates added since 2023-06-12 06:23:18
+06/12/2023 14:28:28 INFO: Connected to candidate database
+06/12/2023 14:28:28 INFO: Connection confirmed
+06/12/2023 14:28:30 WARNING: Target is not observable
+06/12/2023 14:28:30 WARNING: Target is not observable
+06/12/2023 14:28:30 WARNING: Target is not observable
+06/12/2023 14:28:30 WARNING: Target is not observable
+06/12/2023 14:28:31 WARNING: Target is not observable
+06/12/2023 14:28:38 WARNING: Uncertainty query for 3FB7L21 came back empty.
+06/12/2023 14:28:38 WARNING: Uncertainty query for C9C5GX2 came back empty.
+06/12/2023 14:28:38 WARNING: Uncertainty query for C9C57Z2 came back empty.
+06/12/2023 14:28:39 WARNING: Uncertainty query for ST23F05 came back empty.
+06/12/2023 14:28:39 WARNING: Uncertainty query for JHRc1If came back empty.
+06/12/2023 14:28:40 WARNING: Couldn't fetch response to query DateAdded > ?
+06/12/2023 14:28:40 WARNING: Received empty query result for candidates added since 2023-06-12 06:28:40
+06/12/2023 14:28:40 INFO: No candidates added in the last 8 hours. Adding all targets in list.
+06/12/2023 14:28:40 INFO: Inserted MPC NEO candidate 'P21FYod' from MPCLogger
+06/12/2023 14:28:40 INFO: Created new candidate with desig P21FYod and ID -6032149379069270477.
+06/12/2023 14:28:40 INFO: Inserted MPC NEO candidate '3FB7L21' from MPCLogger
+06/12/2023 14:28:40 INFO: Created new candidate with desig 3FB7L21 and ID 2372584182329795909.
+06/12/2023 14:28:40 INFO: Inserted MPC NEO candidate 'C9C5GX2' from MPCLogger
+06/12/2023 14:28:40 INFO: Created new candidate with desig C9C5GX2 and ID 5164924608545704000.
+06/12/2023 14:28:40 INFO: Inserted MPC NEO candidate 'C9C57Z2' from MPCLogger
+06/12/2023 14:28:40 INFO: Created new candidate with desig C9C57Z2 and ID 8247155579202739802.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'C9C5672' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig C9C5672 and ID -6967686819489468517.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'C9C2MX2' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig C9C2MX2 and ID -8328161298695608929.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'C440NCZ' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig C440NCZ and ID 1979679773204007387.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'ST23F05' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig ST23F05 and ID -2977279856133822960.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'X82099' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig X82099 and ID -9096038630106331951.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'HirtLK1' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig HirtLK1 and ID -5787099282680472008.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'C9AZCE2' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig C9AZCE2 and ID -795766836448412992.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'JHRc1If' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig JHRc1If and ID 6473151763337374905.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'P21FR9u' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig P21FR9u and ID -1378805075190812669.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'Mar3103' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig Mar3103 and ID -6275853671086374522.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'SWC0002' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig SWC0002 and ID -3914687078953493268.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'JKm001' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig JKm001 and ID 1484382907562629020.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'HirtKX2' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig HirtKX2 and ID 2903160005984105250.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'C94R802' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig C94R802 and ID 4746409959897478974.
+06/12/2023 14:28:41 INFO: Inserted MPC NEO candidate 'A10UeAm' from MPCLogger
+06/12/2023 14:28:41 INFO: Created new candidate with desig A10UeAm and ID -2494599131045406887.
+06/12/2023 14:29:29 INFO: Connected to candidate database
+06/12/2023 14:29:29 INFO: Connection confirmed
+06/12/2023 14:29:46 INFO: Connected to candidate database
+06/12/2023 14:29:46 INFO: Connection confirmed
+06/12/2023 14:29:47 WARNING: Target is not observable
+06/12/2023 14:29:47 WARNING: Target is not observable
+06/12/2023 14:29:47 WARNING: Target is not observable
+06/12/2023 14:29:48 WARNING: Target is not observable
+06/12/2023 14:29:48 WARNING: Target is not observable
+06/12/2023 14:29:55 WARNING: Uncertainty query for 3FB7L21 came back empty.
+06/12/2023 14:29:55 WARNING: Uncertainty query for C9C5GX2 came back empty.
+06/12/2023 14:29:55 WARNING: Uncertainty query for C9C57Z2 came back empty.
+06/12/2023 14:29:55 WARNING: Uncertainty query for ST23F05 came back empty.
+06/12/2023 14:29:55 WARNING: Uncertainty query for JHRc1If came back empty.
+06/12/2023 14:29:56 INFO: Query: Retrieved 19 record(s) for candidates in response to query
+06/12/2023 14:29:56 INFO: A candidate matching P21FYod was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate P21FYod did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching 3FB7L21 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate 3FB7L21 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching C9C5GX2 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate C9C5GX2 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching C9C57Z2 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate C9C57Z2 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching C9C5672 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate C9C5672 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching C9C2MX2 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate C9C2MX2 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching C440NCZ was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate C440NCZ did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching ST23F05 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate ST23F05 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching X82099 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate X82099 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching HirtLK1 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate HirtLK1 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching C9AZCE2 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate C9AZCE2 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching JHRc1If was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate JHRc1If did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching P21FR9u was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate P21FR9u did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching Mar3103 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate Mar3103 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching SWC0002 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate SWC0002 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching JKm001 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate JKm001 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching HirtKX2 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate HirtKX2 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching C94R802 was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate C94R802 did not need to be updated. Continuing.
+06/12/2023 14:29:56 INFO: A candidate matching A10UeAm was found in the database. Will check for updates.
+06/12/2023 14:29:56 INFO: Candidate A10UeAm did not need to be updated. Continuing.
+06/12/2023 14:37:50 INFO: Connected to candidate database
+06/12/2023 14:37:50 INFO: Connection confirmed
+06/12/2023 14:38:02 INFO: Query: Retrieved 19 record(s) for candidates in response to query
+06/12/2023 14:38:02 INFO: A candidate matching P21FYod was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate P21FYod did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching 3FB7L21 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate 3FB7L21 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching C9C5GX2 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate C9C5GX2 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching C9C57Z2 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate C9C57Z2 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching C9C5672 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate C9C5672 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching C9C2MX2 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate C9C2MX2 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching C440NCZ was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate C440NCZ did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching ST23F05 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate ST23F05 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching X82099 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate X82099 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching HirtLK1 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate HirtLK1 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching C9AZCE2 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate C9AZCE2 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching JHRc1If was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate JHRc1If did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching P21FR9u was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate P21FR9u did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching Mar3103 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate Mar3103 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching SWC0002 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate SWC0002 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching JKm001 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate JKm001 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching HirtKX2 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate HirtKX2 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching C94R802 was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate C94R802 did not need to be updated. Continuing.
+06/12/2023 14:38:02 INFO: A candidate matching A10UeAm was found in the database. Will check for updates.
+06/12/2023 14:38:02 INFO: Candidate A10UeAm did not need to be updated. Continuing.
+06/12/2023 14:43:08 INFO: Connected to candidate database
+06/12/2023 14:43:08 INFO: Connection confirmed
+06/12/2023 14:43:21 INFO: Query: Retrieved 19 record(s) for candidates in response to query
+06/12/2023 14:43:21 INFO: A candidate matching P21FYod was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate P21FYod did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching 3FB7L21 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate 3FB7L21 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching C9C5GX2 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate C9C5GX2 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching C9C57Z2 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate C9C57Z2 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching C9C5672 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate C9C5672 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching C9C2MX2 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate C9C2MX2 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching C440NCZ was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate C440NCZ did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching ST23F05 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate ST23F05 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching X82099 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate X82099 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching HirtLK1 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate HirtLK1 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching C9AZCE2 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate C9AZCE2 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching JHRc1If was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate JHRc1If did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching P21FR9u was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate P21FR9u did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching Mar3103 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate Mar3103 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching SWC0002 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate SWC0002 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching JKm001 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate JKm001 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching HirtKX2 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate HirtKX2 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching C94R802 was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate C94R802 did not need to be updated. Continuing.
+06/12/2023 14:43:21 INFO: A candidate matching A10UeAm was found in the database. Will check for updates.
+06/12/2023 14:43:21 INFO: Candidate A10UeAm did not need to be updated. Continuing.
+06/12/2023 14:44:21 INFO: Connected to candidate database
+06/12/2023 14:44:21 INFO: Connection confirmed
+06/12/2023 14:44:32 INFO: Query: Retrieved 19 record(s) for candidates in response to query
+06/12/2023 14:44:32 INFO: A candidate matching P21FYod was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate P21FYod did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching 3FB7L21 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate 3FB7L21 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching C9C5GX2 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate C9C5GX2 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching C9C57Z2 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate C9C57Z2 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching C9C5672 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate C9C5672 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching C9C2MX2 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate C9C2MX2 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching C440NCZ was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate C440NCZ did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching ST23F05 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate ST23F05 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching X82099 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate X82099 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching HirtLK1 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate HirtLK1 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching C9AZCE2 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate C9AZCE2 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching JHRc1If was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate JHRc1If did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching P21FR9u was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate P21FR9u did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching Mar3103 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate Mar3103 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching SWC0002 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate SWC0002 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching JKm001 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate JKm001 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching HirtKX2 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate HirtKX2 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching C94R802 was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate C94R802 did not need to be updated. Continuing.
+06/12/2023 14:44:32 INFO: A candidate matching A10UeAm was found in the database. Will check for updates.
+06/12/2023 14:44:32 INFO: Candidate A10UeAm did not need to be updated. Continuing.
