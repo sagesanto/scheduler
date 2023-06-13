@@ -51,3 +51,4 @@ class Test(unittest.TestCase):
         window1 = asyncio.run(selector.calculateObservability(["C9C2MX2","C440NCZ","P21FYod","C9C5672","C9AZCE2","C9C5GX2"]))
         print(window1)
         # objRA, objDec, dRA, dDec
+

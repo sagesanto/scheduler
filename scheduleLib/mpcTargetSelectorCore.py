@@ -406,6 +406,10 @@ class TargetSelector:
             obsStart = False
             start = None
             end = None
+            if desig not in ephems.keys():
+                generalUtils.logAndPrint("Unable to calculate observability window for "+desig+". Skipping.",self.logger.warning)
+                windows[desig] = None
+                continue
             for ephem in ephems[desig]:
                 ephem = mpcUtils.dictFromEphemLine(ephem)
                 obsTime = ephem["obsTime"]
@@ -418,9 +422,14 @@ class TargetSelector:
                     windows[desig] = (start,end)
                     break
                 end = obsTime
-                windows[desig] = (start, end)
+                if start is None or end is None:
+                    windows[desig] = None
+                else:
+                    windows[desig] = (start, end)
+
         for desig in windows.keys():
-            print("Target",desig,"is visible between",windows[desig][0].strftime("%Y-%m-%d %H:%M:%S"),"and",windows[desig][1].strftime("%Y-%m-%d %H:%M:%S"))
+            if windows[desig] is not None:
+                print("Target",desig,"is visible between",windows[desig][0].strftime("%Y-%m-%d %H:%M:%S"),"and",windows[desig][1].strftime("%Y-%m-%d %H:%M:%S"))
         return windows
 
 

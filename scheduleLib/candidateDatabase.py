@@ -6,7 +6,7 @@ import time
 from photometrics.sql_database import SQLDatabase
 from datetime import datetime
 
-validFields = ["Author","DateAdded","DateLastEdited", "RemovedDt", "RemovedReason", "ID",'Night', 'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
+validFields = ["ID","Author","DateAdded","DateLastEdited", "RemovedDt", "RemovedReason", "RejectedReason",'Night', 'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 def filter(record):
     info = sys.exc_info()
@@ -37,7 +37,7 @@ class Candidate:
     def __str__(self):
         return str(dict(self.__dict__))
     def __repr__(self):
-        return self.CandidateName +" ("+self.CandidateType+")"
+        return "Candidate "+self.CandidateName +" ("+self.CandidateType+")"
     def asDict(self):
         return self.__dict__
 
