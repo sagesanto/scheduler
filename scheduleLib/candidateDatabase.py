@@ -25,7 +25,7 @@ def logAndPrint(msg,loggerMethod):
     print(msg)
 
 class Candidate:
-    def __init__(self, CandidateName, CandidateType, **kwargs):
+    def __init__(self, CandidateName:str, CandidateType:str, **kwargs):
         self.CandidateName = CandidateName
         self.CandidateType = CandidateType
         for key, value in kwargs.items():
@@ -37,7 +37,7 @@ class Candidate:
     def __str__(self):
         return str(dict(self.__dict__))
     def __repr__(self):
-        return "Candidate "+self.CandidateName +" ("+self.CandidateType+")"
+        return "Candidate "+self.asDict()["CandidateName"] +" ("+self.CandidateType+")"  #can't print self.CandidateName directly for whatever reason
     def asDict(self):
         return self.__dict__
 

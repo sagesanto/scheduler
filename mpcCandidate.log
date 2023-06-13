@@ -1898,3 +1898,188 @@
 06/12/2023 20:47:27 INFO: Candidate C94R802 did not need to be updated. Continuing.
 06/12/2023 20:47:27 INFO: A candidate matching A10UeAm was found in the database. Will check for updates.
 06/12/2023 20:47:27 INFO: Candidate A10UeAm did not need to be updated. Continuing.
+06/12/2023 21:22:16 INFO: Connected to candidate database
+06/12/2023 21:22:16 INFO: Connection confirmed
+06/12/2023 21:22:17 INFO: Query: Retrieved 19 record(s) for candidates in response to query
+06/12/2023 21:22:21 WARNING: Target ST23F05 is not observable
+06/12/2023 21:22:21 WARNING: Unable to calculate observability window for ST23F05. Skipping.
+06/12/2023 21:23:21 INFO: Connected to candidate database
+06/12/2023 21:23:21 INFO: Connection confirmed
+06/12/2023 21:23:21 INFO: Query: Retrieved 19 record(s) for candidates in response to query
+06/12/2023 21:23:23 WARNING: Target ST23F05 is not observable
+06/12/2023 21:23:24 WARNING: Unable to calculate observability window for ST23F05. Skipping.
+06/12/2023 21:23:24 INFO: Couldn't get window for A10UeAm. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for JHRc1If. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for JKm001. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for 3FB7L21. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for ST23F05. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for HirtKX2. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for SWC0002. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for C94R802. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Couldn't get window for HirtLK1. Rejected for Observability.
+06/12/2023 21:23:24 INFO: Rejected JHRc1If for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected JKm001 for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected ST23F05 for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected P21FR9u for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected Mar3103 for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected HirtKX2 for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected X82099 for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected SWC0002 for magnitude limit.
+06/12/2023 21:23:24 INFO: Rejected HirtLK1 for magnitude limit.
+06/12/2023 21:23:24 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:23:24 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:23:24 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:23:24 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:23:24 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:24:41 INFO: Connected to candidate database
+06/12/2023 21:24:41 INFO: Connection confirmed
+06/12/2023 21:24:42 INFO: Query: Retrieved 18 record(s) for candidates in response to query
+06/12/2023 21:24:46 WARNING: Target ST23F05 is not observable
+06/12/2023 21:24:46 WARNING: Unable to calculate observability window for ST23F05. Skipping.
+06/12/2023 21:24:46 INFO: Couldn't get window for JHRc1If. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Couldn't get window for JKm001. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Couldn't get window for 3FB7L21. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Couldn't get window for ST23F05. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Couldn't get window for HirtKX2. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Couldn't get window for SWC0002. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Couldn't get window for C94R802. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Couldn't get window for HirtLK1. Rejected for Observability.
+06/12/2023 21:24:46 INFO: Rejected JHRc1If for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected JKm001 for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected ST23F05 for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected P21FR9u for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected Mar3103 for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected HirtKX2 for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected X82099 for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected SWC0002 for magnitude limit.
+06/12/2023 21:24:46 INFO: Rejected HirtLK1 for magnitude limit.
+06/12/2023 21:24:46 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:24:46 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:24:46 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:24:46 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:24:46 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:13 INFO: Connected to candidate database
+06/12/2023 21:29:13 INFO: Connection confirmed
+06/12/2023 21:29:14 INFO: Query: Retrieved 17 record(s) for candidates in response to query
+06/12/2023 21:29:27 INFO: Connected to candidate database
+06/12/2023 21:29:27 INFO: Connection confirmed
+06/12/2023 21:29:27 INFO: Query: Retrieved 17 record(s) for candidates in response to query
+06/12/2023 21:29:32 WARNING: Target ST23F05 is not observable
+06/12/2023 21:29:32 WARNING: Unable to calculate observability window for ST23F05. Skipping.
+06/12/2023 21:29:32 INFO: Couldn't get window for JKm001. Rejected for Observability.
+06/12/2023 21:29:32 INFO: Couldn't get window for 3FB7L21. Rejected for Observability.
+06/12/2023 21:29:32 INFO: Couldn't get window for ST23F05. Rejected for Observability.
+06/12/2023 21:29:32 INFO: Couldn't get window for HirtKX2. Rejected for Observability.
+06/12/2023 21:29:32 INFO: Couldn't get window for SWC0002. Rejected for Observability.
+06/12/2023 21:29:32 INFO: Couldn't get window for C94R802. Rejected for Observability.
+06/12/2023 21:29:32 INFO: Couldn't get window for HirtLK1. Rejected for Observability.
+06/12/2023 21:29:32 INFO: Rejected JKm001 for magnitude limit.
+06/12/2023 21:29:32 INFO: Rejected ST23F05 for magnitude limit.
+06/12/2023 21:29:32 INFO: Rejected P21FR9u for magnitude limit.
+06/12/2023 21:29:32 INFO: Rejected Mar3103 for magnitude limit.
+06/12/2023 21:29:32 INFO: Rejected HirtKX2 for magnitude limit.
+06/12/2023 21:29:32 INFO: Rejected X82099 for magnitude limit.
+06/12/2023 21:29:32 INFO: Rejected SWC0002 for magnitude limit.
+06/12/2023 21:29:32 INFO: Rejected HirtLK1 for magnitude limit.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated C9C2MX2.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated JKm001.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated 3FB7L21.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated ST23F05.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated C9C5672.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated P21FR9u.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated Mar3103.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated HirtKX2.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated C9C57Z2.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated C440NCZ.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated X82099.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated C9AZCE2.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated P21FYod.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated SWC0002.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:32 INFO: Updated C9C5GX2.
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:32 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:33 INFO: Updated C94R802.
+06/12/2023 21:29:33 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateName'
+06/12/2023 21:29:33 WARNING: Warning: Invalid field: can't edit field or add field 'CandidateType'
+06/12/2023 21:29:33 WARNING: Warning: Invalid field: can't edit field or add field 'ID'
+06/12/2023 21:29:33 WARNING: Warning: Invalid field: can't edit field or add field 'Author'
+06/12/2023 21:29:33 WARNING: Warning: Invalid field: can't edit field or add field 'DateAdded'
+06/12/2023 21:29:33 INFO: Updated HirtLK1.
