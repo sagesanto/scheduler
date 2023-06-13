@@ -22,6 +22,31 @@ def _findExposure(magnitude):
     if magnitude < 21.5:
         return "3.0|600.0"
 
+def dictFromEphemLine(ephem):
+    returner = {"RA": (raDecFromEphem(ephem))[0], "dec": (raDecFromEphem(ephem))[1],
+                "vMag": ephem[2],
+                "dRA": (velFromEphem(ephem))[0], "dDec": (velFromEphem(ephem))[1],
+                "obsTime": timeFromEphem(ephem)}
+
+    return returner
+
+def velFromEphem(ephem):
+    dRa = str(round(float(ephem[3]) * 60, 2))
+    dDec = str(round(float(ephem[4]) * 60, 2))
+    return dRa,dDec
+
+def raDecFromEphem(ephem):
+    coords = ephem[1]
+    coords = coords.to_string("decimal").split(" ")
+    return float(coords[0]),float(coords[1])
+def timeFromEphem(ephem):
+    ephem[0].format = "fits"
+    ephem[0].out_subfmt = "date_hms"
+    date = ephem[0].value
+    ephem[0].format = "iso"
+    ephem[0].out_subfmt = "date_hm"
+    inBetween = ephem[0].value
+    return datetime.strptime(inBetween, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
 def _formatEphem(ephems, desig):
     # Internal: take an object in the form returned from self.mpc.get_ephemeris() and convert each line to the scheduler format, before returning it in a dictionary of {startDt : line}
@@ -154,10 +179,13 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
                    'oalt': str(minAltitudeLimit)
                    }
     start_at = 0
-    now_dt = pytz.UTC.localize(datetime.utcnow())
+
+    now_dt = datetime.utcnow().replace(tzinfo=pytz.UTC)
+
     if when != "now":
         if isinstance(when,str):  # if we've been given a string, convert it to dt. Otherwise, assume we have a dt and carry on
             when = datetime.strptime(when, '%Y-%m-%dT%H:%M')
+        when = when.replace(tzinfo=pytz.UTC)
         if now_dt < when:
             start_at = round((when - now_dt).total_seconds() / 3600.) + 1
 

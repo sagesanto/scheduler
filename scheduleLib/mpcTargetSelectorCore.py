@@ -170,6 +170,8 @@ class TargetSelector:
             logger.debug("Couldn't find "+ name + " in offsetDict")
             return None
         soup = offsetDict[name][0]  # for whatever reason, the value is a list and i don't feel like fixing it
+        if soup is None:
+            return None, None
         for a in soup.findAll('a', href=True):
             a.extract()
         text = soup.findAll('pre')[0].get_text()
@@ -278,7 +280,6 @@ class TargetSelector:
         return
 
 
-
     def siderealToDate(self,siderealAngle:Angle):
         """
         Convert an angle representing a sidereal time to UTC by relating it to local sidereal time
@@ -293,6 +294,11 @@ class TargetSelector:
             hours=siderealFromStart.hour / 1.0027)  # one solar hour is 1.0027 sidereal hours
 
         return timeUTC
+
+    def dateToSidereal(self, dt:datetime):
+        timeDiff = dt - self.startTime
+        return self.siderealStart+Angle(str(timeDiff.total_seconds()/3600)+"h")
+
 
     async def getObjectUncertainty(self, desig, errURL):
         """
@@ -369,21 +375,55 @@ class TargetSelector:
         offsetDict = await self.asyncHelper.multiGet(urls, desigs, soup=True)
         return offsetDict
 
+    def isObservable(self,ephem):
+        if self.decMin < ephem["dec"] < self.decMax:
+            RA, dec = generalUtils.ensureAngle(ephem["RA"]), generalUtils.ensureAngle(ephem["dec"])
+            hourAngleWindow = generalUtils.getHourAngleLimits(dec)
+            # print("RA:",RA.degree)
+            # print("hour angle window:",hourAngleWindow)
+            raWindow = (self.dateToSidereal(ephem["obsTime"])+hourAngleWindow[0], self.dateToSidereal(ephem["obsTime"])+hourAngleWindow[1])
+            # print("RA window:",raWindow)
+            # print(raWindow[0].degree, raWindow[1].degree)
+            # print(type(raWindow[0]),type(raWindow[1]))
+            # print(raWindow[0].degree < RA.degree < raWindow[1].degree)
+            return (raWindow[0].degree < RA.degree < raWindow[1].degree)
+
+        return False
 
 
-
-    def calculateObservability(self,desig):
+    async def calculateObservability(self,desigs:list):
         """
         Calculate the start and end times of the observability window for an object by querying its ephemeris and clipping at sunrise/sunset
         :param desig: The designation of the object to be queried - must be a valid MPC temp identifier
+        :returns: Dictionary {desig:(startDt,endDt)} or None
         """
-        pass
+        ephems = await mpcUtils.asyncMultiEphem(desigs,datetime.utcnow(),self.altitudeLimit,self.mpc,self.asyncHelper,self.logger)
+        if not ephems:
+            generalUtils.logAndPrint("Couldn't get any ephems for observability windows!",self.logger.error)
+            return None
+        windows = {}  #{desig:(startDt,endDt)}
+        for desig in desigs:
+            obsStart = False
+            start = None
+            end = None
+            for ephem in ephems[desig]:
+                ephem = mpcUtils.dictFromEphemLine(ephem)
+                obsTime = ephem["obsTime"]
+                if self.isObservable(ephem):
+                    if not obsStart:  # window begins
+                        obsStart = True
+                        start = obsTime
+                elif obsStart:  # we've already started and we're no longer observable. window over
+                    end = obsTime
+                    windows[desig] = (start,end)
+                    break
+                end = obsTime
+                windows[desig] = (start, end)
+        for desig in windows.keys():
+            print("Target",desig,"is visible between",windows[desig][0].strftime("%Y-%m-%d %H:%M:%S"),"and",windows[desig][1].strftime("%Y-%m-%d %H:%M:%S"))
+        return windows
 
 
-
-        #we'll start with the naive window and shorten/lengthen it based on the object's speed
-        hourAngleWindow = generalUtils.getHourAngleLimits(objDec)
-        siderealAngleWindow = (objRA,objRA)+hourAngleWindow
 
     # async def fetchUncertainties(self,graph=False,savePath = None):
     #     """

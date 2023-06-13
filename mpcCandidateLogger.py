@@ -46,15 +46,13 @@ def listEntryToCandidate(entry,db,mpc):
     if dRA and dDec:
         constructDict["dRA"], constructDict["dDec"] = dRA, dDec
     else:
-        logAndPrint("Couldn't find velocities for "+CandidateName,logger.warning)
+        generalUtils.logAndPrint("Couldn't find velocities for "+CandidateName,logger.warning)
     return Candidate(CandidateName,CandidateType,**constructDict)
 
 def candidateIsRemoved(candidate):
     return "RemovedDt" in candidate.asDict().keys()
 
-def logAndPrint(msg,loggerMethod):
-    loggerMethod(msg)  #logger method is a function like logger.info logger.error etc
-    print(msg)
+
 
 def needsUpdate(listEntry, dbEntry, dbConnection:CandidateDatabase):
     return dbConnection.stringToTime(listEntry.Updated) > dbConnection.stringToTime(dbEntry.Updated)
@@ -71,14 +69,14 @@ async def main():
 
     while True:
         dbConnection = CandidateDatabase("./candidate database.db", "MPCLogger")
-        logAndPrint("--- Grabbing ---",logger.info)
+        generalUtils.logAndPrint("--- Grabbing ---",logger.info)
         currentCandidates = {}  # store desig:candidate for each candidate in the MPC's list of current candidates
         mpc.get_neo_list()  #prompt the mpc object to fetch the list
-
+        generalUtils.logAndPrint("Constructing Candidates from MPC List",logger.info)
         for entry in mpc.neo_confirm_list:  #access the list and create dict
             ent = listEntryToCandidate(entry,dbConnection,mpc)  #transform list entries to candidates
-            print(ent)
             currentCandidates[ent.CandidateName] = ent
+        generalUtils.logAndPrint("Construction complete.",logger.info)
 
         desigs = currentCandidates.keys()
         offsetDict = await targetSelector.fetchUncertainties(desigs)
@@ -87,7 +85,7 @@ async def main():
             if uncertainties is not None:
                 currentCandidates[desig].RMSE_RA, currentCandidates[desig].RMSE_Dec  = uncertainties
             else:
-                logAndPrint("Uncertainty query for "+desig+" came back empty.",logger.warning)
+                generalUtils.logAndPrint("Uncertainty query for "+desig+" came back empty.",logger.warning)
 
         print(list(currentCandidates.values())[0])
         print(currentCandidates)
@@ -101,16 +99,16 @@ async def main():
             for desig, candidate in currentCandidates.items():
                 if desig in dbCandidates.keys():
                     if candidateIsRemoved(dbCandidates[desig]):
-                        logAndPrint("That's odd. Candidate "+desig+" found in MPC table but marked as removed in database. Skipping and moving on.",logger.warning)
+                        generalUtils.logAndPrint("That's odd. Candidate "+desig+" found in MPC table but marked as removed in database. Skipping and moving on.",logger.warning)
                         continue
-                    logAndPrint("A candidate matching "+desig+" was found in the database. Will check for updates.",logger.info)
+                    generalUtils.logAndPrint("A candidate matching "+desig+" was found in the database. Will check for updates.",logger.info)
                     if needsUpdate(candidate,dbCandidates[desig],dbConnection):
-                        logAndPrint("Updating "+desig,logger.info)
+                        generalUtils.logAndPrint("Updating "+desig,logger.info)
                         updateCandidate(dbCandidates[desig],candidate,dbConnection)
                         updated.append(candidate)
                     else:
                         static.append(candidate)
-                        logAndPrint("Candidate "+desig+" did not need to be updated. Continuing.",logger.info)
+                        generalUtils.logAndPrint("Candidate "+desig+" did not need to be updated. Continuing.",logger.info)
                         continue
                 else:
                     new.append(candidate)
@@ -119,36 +117,29 @@ async def main():
             for candidate in dbCandidates.values():
                 if candidate.CandidateName not in currentCandidates.keys() and not candidateIsRemoved(
                         candidate):  # remove these candidates
-                    logAndPrint(
+                    generalUtils.logAndPrint(
                         "Candidate " + candidate.CandidateName + " is in the database but not in the MPC table. Marking as removed.",
                         logger.info)
                     ID = candidate.ID
                     dbConnection.removeCandidateByID(ID, "Target removed from MPC list")
                     removed.append(candidate)
         else:
-            logAndPrint("No candidates added in the last "+str(lookback)+" hours. Adding all targets in list.",logger.info)
+            generalUtils.logAndPrint("No candidates added in the last "+str(lookback)+" hours. Adding all targets in list.",logger.info)
             new = list(currentCandidates.values())
 
         for candidate in new:  # add these
             newID = dbConnection.insertCandidate(candidate)
-            logAndPrint("Created new candidate with desig "+candidate.CandidateName+" and ID "+str(newID)+".",logger.info)
+            generalUtils.logAndPrint("Created new candidate with desig "+candidate.CandidateName+" and ID "+str(newID)+".",logger.info)
 
         print("New ("+str(len(new))+"):",new)
         print("Static ("+str(len(static))+"):",static)
         print("Updated ("+str(len(updated))+"):",updated)
         print("Removed ("+str(len(removed))+"):",removed)
 
-        logAndPrint("Done. will run again at "+dbConnection.timeToString(dt.now()+timedelta(minutes=interval))+" PST.",logger.info)
+        generalUtils.logAndPrint("Done. will run again at "+dbConnection.timeToString(dt.now()+timedelta(minutes=interval))+" PST.",logger.info)
         print("\n")
-        del dbConnection  #close the connection to let others use it
+        del dbConnection  #close the connection to unlock db
         time.sleep(interval*60)
-
-
-    #fetch the list of targets, then
-        #determine which ones are new and add them
-        #determine which were in the last list but aren't in this one
-            #mark them as removed and give a reason
-        #determine which have been updated since the last list, and edit them
 
 
 asyncio.run(main())

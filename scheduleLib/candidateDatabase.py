@@ -6,7 +6,7 @@ import time
 from photometrics.sql_database import SQLDatabase
 from datetime import datetime
 
-validFields = ["Author","DateAdded","DateLastEdited","ID",'Night', 'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
+validFields = ["Author","DateAdded","DateLastEdited", "RemovedDt", "RemovedReason", "ID",'Night', 'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 def filter(record):
     info = sys.exc_info()
@@ -180,7 +180,7 @@ class CandidateDatabase(SQLDatabase):
         self.__existingIDs = [row["ID"] for row in self.table_query("Candidates", "ID", '', []) if row]
 
     def isFieldProtected(self,field):
-        return field in ["Author","DateAdded", "DateLastEdited", "ID"]
+        return field in ["Author","DateAdded", "ID"]
 
     def removeInvalidFields(self,dictionary):
         badKeys = []
@@ -215,15 +215,15 @@ class CandidateDatabase(SQLDatabase):
         if len(updateDict):
             updateDict["DateLastEdited"] = self.timestamp()
 
-        self.table_update("Candidates",updateDict,"ID = "+str(ID))
+            self.table_update("Candidates",updateDict,"ID = "+str(ID))
 
     def removeCandidateByID(self,ID:str,reason:str):
-        candidate = self.getCandidateByID(ID)
+        candidate = self.getCandidateByID(ID)[0]
         if candidate:
             reason = self.__author+": "+reason
-            logAndPrint("Removing candidate "+candidate.CandidateName + " for reason "+reason, self.logger.info)
-            updateDict = {"RemovedDt":self.timestamp(),"RemovedReason":reason}
-            self.editCandidateByID(ID,updateDict)
+            updateDict = {"RemovedDt": self.timestamp(), "RemovedReason": reason, "DateLastEdited": self.timestamp()}
+            self.table_update("Candidates", updateDict, "ID = " + str(ID))
+            logAndPrint("Removed candidate "+candidate.CandidateName + " for reason "+reason, self.logger.info)
         else:
             logAndPrint("Couldn't find target with ID " + ID +". Can't update.",self.logger.error)
             return None
@@ -241,7 +241,8 @@ if __name__ == '__main__':
     print(generateID("C440NCZ","MPC","MPClogger"))
 
     candidate = Candidate("Test","Test",Notes="test")
-    print(db.insertCandidate(candidate))
+    ID = db.insertCandidate(candidate)
+    db.removeCandidateByID(ID,"Because I want to !")
     #
     # db.fetchIDs()
     #

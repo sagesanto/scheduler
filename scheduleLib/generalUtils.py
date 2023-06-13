@@ -3,6 +3,10 @@
 from astropy.coordinates import Angle
 from astropy import units as u
 
+def logAndPrint(msg,loggerMethod):
+    loggerMethod(msg)  #logger method is a function like logger.info logger.error etc
+    print(msg)
+
 def toDecimal(angle: Angle):
     """
     Return the decimal representation of an astropy Angle, as a float
@@ -45,10 +49,10 @@ def ensureFloat(angle):
     """
     if not isinstance(angle, float):
         if isinstance(angle, Angle):
-            angle = toDecimal(angle)
+            return toDecimal(angle)
         else:
-            angle = float(angle)
-    return angle
+            return float(angle)
+    return None
 
 def getHourAngleLimits(dec):
     """
@@ -59,22 +63,22 @@ def getHourAngleLimits(dec):
     dec = ensureFloat(dec)
 
     horizonBox = {  # {range(decWindow):tuple(minAlt,maxAlt)}
-        range(-38, -36): (0, 0),
-        range(-36, -34): (-35, 42.6104),
-        range(-34, -32): (-35, 45.9539),
-        range(-32, -30): (-35, 48.9586),
-        range(-30, -28): (-35, 51.6945),
-        range(-28, -26): (-35, 54.2121),
-        range(-26, -24): (-35, 56.5487),
-        range(-24, -22): (-35, 58.7332),
-        range(-22, 0): (-35, 60),
-        range(0, 46): (-52.5, 60),
-        range(46, 56): (-37.5, 60),
-        range(56, 66): (-30, 60),
-        range(66, 74): (0, 0)
+        (-38, -36): (0, 0),
+        (-36, -34): (-35, 42.6104),
+        (-34, -32): (-35, 45.9539),
+        (-32, -30): (-35, 48.9586),
+        (-30, -28): (-35, 51.6945),
+        (-28, -26): (-35, 54.2121),
+        (-26, -24): (-35, 56.5487),
+        (-24, -22): (-35, 58.7332),
+        (-22, 0): (-35, 60),
+        (0, 46): (-52.5, 60),
+        (46, 56): (-37.5, 60),
+        (56, 66): (-30, 60),
+        (66, 74): (0, 0)
     }
     for decRange in horizonBox:
-        if dec in decRange:  # man this is miserable
+        if decRange[0] < dec < decRange[1]:  # man this is miserable
             finalDecRange = horizonBox[decRange]
             return tuple([Angle(finalDecRange[0], unit=u.deg), Angle(finalDecRange[1], unit=u.deg)])
     return None

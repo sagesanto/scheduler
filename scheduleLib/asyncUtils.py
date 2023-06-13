@@ -1,8 +1,13 @@
 # Sage Santomenna, 2023
+import logging
 
 import httpx
 import asyncio
 from bs4 import BeautifulSoup
+
+def logAndPrint(msg,loggerMethod):
+    loggerMethod(msg)  #logger method is a function like logger.info logger.error etc
+    print(msg)
 
 class AsyncHelper:
     """
@@ -10,6 +15,7 @@ class AsyncHelper:
     """
     def __init__(self,followRedirects:bool):
         self.client = httpx.AsyncClient(follow_redirects=followRedirects, timeout=60.0)
+        self.logger = logging.getLogger(__name__)
 
     def __del__(self):
         # Close connection when this object is destroyed
@@ -68,10 +74,11 @@ class AsyncHelper:
             else:
                 offsetReq = await self.client.get(url)
         except (httpx.ConnectError, httpx.HTTPError) as err:
-            print("Unable to make async request to",url)
+            self.logger.error("Async ")
+            logAndPrint("HTTP error. Unable to make async request to " + url,self.logger.exception)
             return desig, None
         if offsetReq.status_code != 200:
-            print("Unable to make async request to", url)
+            logAndPrint("Error: HTTP status code " +str(offsetReq.status_code) + ". Unable to make async request to", url + ". Reason given: "+offsetReq.reason_phrase,self.logger.error)
             return desig, None
         if soup:
             offsetReq = BeautifulSoup(offsetReq.content, 'html.parser')
