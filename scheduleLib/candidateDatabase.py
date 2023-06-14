@@ -2,6 +2,7 @@ import os, uuid
 import sqlite3, logging
 import sys
 import time
+from string import Template
 
 from photometrics.sql_database import SQLDatabase
 from datetime import datetime
@@ -39,8 +40,10 @@ class Candidate:
     def __repr__(self):
         return "Candidate "+self.asDict()["CandidateName"] +" ("+self.CandidateType+")"  #can't print self.CandidateName directly for whatever reason
     def asDict(self):
-        return self.__dict__
+        return self.__dict__.copy()
 
+    def hasField(self,field):
+        return field in self.__dict__.keys()
     @classmethod
     def fromDatabaseEntry(cls,entry:dict):
         """
@@ -186,7 +189,7 @@ class CandidateDatabase(SQLDatabase):
         badKeys = []
         for key, value in dictionary.items():
             if key not in validFields or self.isFieldProtected(key):
-                logAndPrint("Warning: Invalid field: can't edit field or add field \'"+key+"\'",self.logger.warning)
+                # logAndPrint("Warning: Invalid field: can't edit field or add field \'"+key+"\'",self.logger.warning)
                 badKeys.append(key)
         for key in badKeys:
             dictionary.pop(key)
@@ -216,6 +219,12 @@ class CandidateDatabase(SQLDatabase):
             updateDict["DateLastEdited"] = self.timestamp()
 
             self.table_update("Candidates",updateDict,"ID = "+str(ID))
+
+    def setFieldNullByID(self,ID,colName):
+        value =  None
+        sql_template = Template('UPDATE Candidates SET $column_name = ? WHERE \"ID\" = $id')
+        sql_statement = sql_template.substitute({'column_name': colName,'id': str(ID)})
+        self.db_cursor.execute(sql_statement,[value])
 
     def removeCandidateByID(self,ID:str,reason:str):
         candidate = self.getCandidateByID(ID)[0]

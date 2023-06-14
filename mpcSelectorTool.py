@@ -80,4 +80,4 @@ except RemoteProtocolError as e:
     raise e
 
 # --- clean up ---
-loop.run_until_complete(targetFinder.killClients())
+targetFinder.killClients()

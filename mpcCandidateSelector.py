@@ -10,44 +10,50 @@ from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 from scheduleLib import mpcUtils, generalUtils, asyncUtils
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
+
 def filter(record):
     info = sys.exc_info()
     if info[1]:
-        logging.exception('Exception!',exc_info=info)
-        print("---Exception!---",info)
+        logging.exception('Exception!', exc_info=info)
+        print("---Exception!---", info)
 
     return True
-
-logger = logging.getLogger(__name__)
-logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', filename='mpcCandidate.log', encoding='utf-8',
-                    datefmt='%m/%d/%Y %H:%M:%S', level=logging.INFO)
-logger.addFilter(filter)
 
 #pull MPC NEO candidates that are not removed and have been modified in the lookback time
 #check if they have an observability window or a removal reason. if they do, ignore them
 # if they don't, do the selection process. place the rejected reason in the CVal1 slot if rejected
-async def main():
+async def selectTargets(logger):
+    generalUtils.logAndPrint("--- Selecting ---",logger.info)
     lookback = 8
+    mpc = mpcObj()
 
     dbConnection = CandidateDatabase("./candidate database.db", "MPC Selector")
-    mpc = mpcObj()
     targetSelector = TargetSelector()
 
-    candidates = dbConnection.table_query("Candidates","*","RemovedReason IS NULL AND StartObservability IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",[dt.now()-timedelta(hours=lookback)],returnAsCandidate=True)
+    candidates = dbConnection.table_query("Candidates","*","RemovedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",[dt.now()-timedelta(hours=lookback)],returnAsCandidate=True)
     print(candidates)
+    if candidates is None:
+        generalUtils.logAndPrint("Candidate Selector: Didn't find any targets in need of updating. All set!",logger.info)
+        del(dbConnection)  #explicitly deleting these to make sure they close nicely
+        del(targetSelector)
+        del(mpc)
+        exit()
+    else:
+        generalUtils.logAndPrint("Finding observability and evaluating "+str(len(candidates))+" objects.",logger.info)
 
     designations = [candidate.CandidateName for candidate in candidates]
     candidateDict = dict(zip(designations,candidates))
     windows = await targetSelector.calculateObservability(designations)
+    candidatesWithWindows = []
     rejected = []
     for desig, window in windows.items():
         if window:
             candidateDict[desig].StartObservability, candidateDict[desig].EndObservability = dbConnection.timeToString(window[0]), dbConnection.timeToString(window[1])
             print(candidateDict[desig])
+            candidatesWithWindows.append(desig)
         else:
-            print("Couldn't get window for",desig)
             candidateDict[desig].RejectedReason = "Observability"
-            generalUtils.logAndPrint("Couldn't get window for "+desig+". Rejected for Observability.",logger.info)
+            generalUtils.logAndPrint("Got None window for "+desig+". Rejected for Observability.",logger.info)
 
 
     for desig, candidate in candidateDict.items():
@@ -76,14 +82,25 @@ async def main():
             continue
 
 
+    for desig in candidatesWithWindows:  #if the candidates were rejected but aren't rejected this time through, we assume something has changed and they are now viable, so we remove their rejected reason
+        candidate = candidateDict[desig]
+        if desig not in rejected and candidate.hasField("RejectedReason"):
+            delattr(candidate,"RejectedReason")
+            dbConnection.setFieldNullByID(candidate.ID,"RejectedReason")
+
     for desig, candidate in candidateDict.items():
         dbConnection.editCandidateByID(candidate.ID, candidate.asDict())
         generalUtils.logAndPrint("Updated "+desig+".",logger.info)
 
+    del dbConnection
 
 
+if __name__ == '__main__':
+    #set up the logger
+    logger = logging.getLogger(__name__)
+    logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', filename='mpcCandidate.log', encoding='utf-8',
+                        datefmt='%m/%d/%Y %H:%M:%S', level=logging.INFO)
+    logger.addFilter(filter)
 
-
-
-
-asyncio.run(main())
+    #run the program
+    asyncio.run(selectTargets(logger))

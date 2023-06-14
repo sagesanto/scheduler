@@ -146,10 +146,17 @@ class TargetSelector:
         self.uncertaintyStorage = {} #this will be {desig : (RAlist,Declist,list[color])}
 
         # init web client for retrieving offsets
-        self.offsetClient = httpx.AsyncClient(follow_redirects=True, timeout=60.0)
+        self.webClient = httpx.Client(follow_redirects=True, timeout=60.0)
 
         #init AsyncHelper
         self.asyncHelper = asyncUtils.AsyncHelper(followRedirects=True)
+
+    def __del__(self):
+        del(self.asyncHelper)
+        self.killClients()
+
+
+
 
     @staticmethod
     def _convertMPC(obj):
@@ -300,12 +307,12 @@ class TargetSelector:
         return self.siderealStart+Angle(str(timeDiff.total_seconds()/3600)+"h")
 
 
-    async def getObjectUncertainty(self, desig, errURL):
+    def getObjectUncertainty(self, desig, errURL):
         """
         Get the html of the uncertainty page for an object, given its temporary designation and the url of the page
         :return: A tuple, (designation, html)
         """
-        offsetReq = await self.offsetClient.get(errURL)
+        offsetReq = self.webClient.get(errURL)
         soup = BeautifulSoup(offsetReq.content, 'html.parser')
         return tuple([desig, soup])
 
@@ -348,7 +355,7 @@ class TargetSelector:
             post_params["obj"] = desig
             try:
                 #this clearly isn't asynchronous, i've just already initialized the client and have yet to get rid of it
-                mpc_request = await self.offsetClient.post(self.mpc.mpc_post_url, data=post_params)
+                mpc_request = self.webClient.post(self.mpc.mpc_post_url, data=post_params)
             except (httpx.ConnectError, httpx.HTTPError) as err:
                 self.logger.error('Failed to connect to/retrieve data from the MPC. Stopping')
                 self.logger.error(err)
@@ -407,7 +414,7 @@ class TargetSelector:
             start = None
             end = None
             if desig not in ephems.keys():
-                generalUtils.logAndPrint("Unable to calculate observability window for "+desig+". Skipping.",self.logger.warning)
+                generalUtils.logAndPrint("Couldn't get ephems and so can't calculate observability window for "+desig+". Skipping.",self.logger.warning)
                 windows[desig] = None
                 continue
             for ephem in ephems[desig]:
@@ -430,6 +437,9 @@ class TargetSelector:
         for desig in windows.keys():
             if windows[desig] is not None:
                 print("Target",desig,"is visible between",windows[desig][0].strftime("%Y-%m-%d %H:%M:%S"),"and",windows[desig][1].strftime("%Y-%m-%d %H:%M:%S"))
+            else:
+                generalUtils.logAndPrint("Nominal: No valid observability window for target " + desig + ".",
+                                         self.logger.info)
         return windows
 
 
@@ -463,7 +473,7 @@ class TargetSelector:
     #         post_params["start"] = start_at
     #         post_params["obj"] = desig
     #         try:
-    #             mpc_request = await self.offsetClient.post(self.mpc.mpc_post_url, data=post_params)
+    #             mpc_request = await self.webClient.post(self.mpc.mpc_post_url, data=post_params)
     #         except (httpx.ConnectError, httpx.HTTPError) as err:
     #             self.logger.error('Failed to connect/retrieve data from MPC. Stopping')
     #             self.logger.error(err)
@@ -494,11 +504,11 @@ class TargetSelector:
     #     self.filtDf= pd.concat((self.filtDf,
     #         self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
 
-    async def killClients(self):
+    def killClients(self):
         """
         Mandatory: close the internal clients
         """
-        await self.offsetClient.aclose()
+        self.webClient.close()
 
     def pruneByError(self):
         """

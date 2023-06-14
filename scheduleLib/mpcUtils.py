@@ -96,8 +96,13 @@ def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat = False):
     :param altitudeLimit: The lower altitude limit, below which ephemeris lines will not be generated
     :return: A Dictionary {startTimeDt: ephemLine}
     """
-    returner = mpcInst.get_ephemeris(desig, when=whenDt.strftime('%Y-%m-%dT%H:%M'),
-                                              altitude_limit=altitudeLimit, get_uncertainty=None)
+    if whenDt != 'now':
+        whenDt = whenDt.strftime('%Y-%m-%dT%H:%M')
+    try:
+        returner = mpcInst.get_ephemeris(desig, when=whenDt,
+                                                  altitude_limit=altitudeLimit, get_uncertainty=None)
+    except:
+        return None
     if schedulerFormat:
         returner = _formatEphem(returner, desig)
 
