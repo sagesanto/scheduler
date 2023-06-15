@@ -1,41 +1,53 @@
 import time, logging, sys, asyncio
+
+from colorlog import ColoredFormatter
+
 from mpcCandidateLogger import runLogging
 from mpcCandidateSelector import selectTargets
 from scheduleLib import generalUtils
 from datetime import datetime as dt, timedelta
 
-def filter(record):
-    info = sys.exc_info()
-    if info[1]:
-        logging.exception('Exception!',exc_info=info)
-        print("---Exception!---",info)
-    return True
 
 dateFormat = '%m/%d/%Y %H:%M:%S'
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', filename='mpcCandidate.log', encoding='utf-8',
-                    datefmt=dateFormat, level=logging.INFO)  #set to debug for more info
-logger.addFilter(filter)
+LOGFORMAT = " %(asctime)s %(log_color)s%(levelname)-2s%(reset)s | %(log_color)s%(message)s%(reset)s"
+colorFormatter = ColoredFormatter(LOGFORMAT, datefmt=dateFormat)
+fileFormatter = formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-2s | %(message)s', datefmt=dateFormat)
 
-interval = 15
+stream = logging.StreamHandler()
+stream.setFormatter(colorFormatter)
+stream.setLevel(logging.INFO)
+
+fileHandler = logging.FileHandler("mpcCandidate.log")
+fileHandler.setFormatter(fileFormatter)
+fileHandler.setLevel(logging.DEBUG)
+
+logger = logging.getLogger(__name__)
+
+logger.addHandler(fileHandler)
+logger.addHandler(stream)
+logger.setLevel(logging.DEBUG)
+
+logger.addFilter(generalUtils.filter)
+
+
+interval = 15  # minutes between runs
+lookback = 24  # edit targets that were added within [lookback] hours ago, add a duplicate for older
 
 while True:
+    logger.info("---Starting cycle at "+ dt.now().strftime(dateFormat) + " PST")
     try:
-        asyncio.run(runLogging(logger))
-        generalUtils.logAndPrint("Finished MPC logging without error at " + dt.now().strftime(dateFormat)+" PST",logger.info)
-    except Exception as e:
-        generalUtils.logAndPrint("Logging targets failed! Skipping.",logger.exception)
+        asyncio.run(runLogging(logger,lookback))
+        logger.info("---Finished MPC logging without error at " + dt.now().strftime(dateFormat) + " PST")
+    except Exception:
+        logger.exception("---Logging targets failed! Skipping.")
 
-    print("Sleeping for thirty seconds...")
-    time.sleep(30)
     try:
-        asyncio.run(selectTargets(logger))
-        generalUtils.logAndPrint("Finished MPC selection without error at " + dt.now().strftime(dateFormat)+" PST",logger.info)
-    except Exception as e:
-        generalUtils.logAndPrint("Selecting targets failed! Skipping.",logger.exception)
+        asyncio.run(selectTargets(logger,lookback))
+        logger.info("---Finished MPC selection without error at " + dt.now().strftime(dateFormat) + " PST")
+    except Exception:
+        logger.exception("Selecting targets failed! Skipping.")
 
-    generalUtils.logAndPrint("Done. will run again at "+ (dt.now()+timedelta(minutes=interval)).strftime(dateFormat)+" PST.",logger.info)
+    logger.info("---Done. will run again at " + (dt.now() + timedelta(minutes=interval)).strftime(dateFormat) + " PST.")
     print("\n")
-    time.sleep(interval*60)
-
+    time.sleep(interval * 60)

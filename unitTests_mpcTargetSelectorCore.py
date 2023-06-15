@@ -1,6 +1,10 @@
 #Sage Santomenna 2023
 import asyncio
 import unittest
+from datetime import datetime
+
+import pytz
+
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 from astropy.coordinates import Angle
 from astropy import units as u
@@ -42,13 +46,16 @@ class Test(unittest.TestCase):
         self.assertEquals(generalUtils.ensureFloat("-45"), -45)
 
     def test_getHourAngleLimits(self):
-        print(generalUtils.getHourAngleLimits(23))
+        print(generalUtils.getHourAngleLimits(23)[0].hms,generalUtils.getHourAngleLimits(23)[1].hms)
         print(type(generalUtils.getHourAngleLimits(23)))
         self.assertEqual(generalUtils.getHourAngleLimits(23),(Angle(-52.5,unit=u.deg),Angle(60,unit=u.deg)))
 
     def test_ObservabilityWindow(self):
         selector = TargetSelector()
-        window1 = asyncio.run(selector.calculateObservability(["C9C2MX2","C440NCZ","P21FYod","C9C5672","C9AZCE2","C9C5GX2"]))
-        print(window1)
+        print(selector.observationViable(datetime.utcnow().replace(tzinfo=pytz.UTC),selector.siderealStart,0.0))
+
+        # window1 = asyncio.run(selector.calculateObservability(["C9C2MX2","C440NCZ","P21FYod","C9C5672","C9AZCE2","C9C5GX2"]))
+        # print(window1)
         # objRA, objDec, dRA, dDec
+
 

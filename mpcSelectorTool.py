@@ -49,6 +49,7 @@ asyncio.set_event_loop(loop)
 # --- initialize selector ---
 targetFinder = targetCore.TargetSelector()
 targetFinder.logger.addHandler(stream)
+targetFinder.printSetupInfo()
 
 # --- perform selection ---
 targetFinder.makeMpcDataframe()

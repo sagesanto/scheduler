@@ -1,4 +1,4 @@
-#Sage Santomenna 2023
+# Sage Santomenna 2023
 
 # ---standard
 import json, pandas as pd, time, os, asyncio, sys, numpy as np, logging, pytz
@@ -19,18 +19,18 @@ from datetime import datetime, timezone, timedelta
 from astropy.coordinates import Angle
 from numpy import sqrt
 
-
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 from scheduleLib import mpcUtils, generalUtils, asyncUtils
 
 utc = pytz.UTC
 
-BLACK = [0,0,0]
-RED = [255,0,0]
-GREEN = [0,255,0]
-BLUE = [0,0,255]
+BLACK = [0, 0, 0]
+RED = [255, 0, 0]
+GREEN = [0, 255, 0]
+BLUE = [0, 0, 255]
 ORANGE = [255, 191, 0]
-PURPLE = [221,160,221]
+PURPLE = [221, 160, 221]
+
 
 def remove_tags(html):
     # parse html content
@@ -42,11 +42,14 @@ def remove_tags(html):
     # return data by retrieving the tag content
     return ' '.join(soup.stripped_strings)
 
+
 def rootMeanSquared(vals):
-    return sqrt(1/len(vals)*sum([i**2 for i in vals]))
+    return sqrt(1 / len(vals) * sum([i ** 2 for i in vals]))
+
 
 class TargetSelector:
-    def __init__(self, startTimeUTC="now", endTimeUTC="sunrise", raMaxRMSE=360, decMaxRMSE=360, nObsMax=1000, vMagMax=21.5,
+    def __init__(self, startTimeUTC="now", endTimeUTC="sunrise", raMaxRMSE=360, decMaxRMSE=360, nObsMax=1000,
+                 vMagMax=21.5,
                  scoreMin=0, decMax=65, decMin=-25, altitudeLimit=0, obsCode=654, obsName="TMO", region="CA, USA",
                  obsTimezone="UTC", obsLat=34.36, obsLon=-117.63):
         """
@@ -81,7 +84,6 @@ class TargetSelector:
         now_dt = utc.localize(now_dt)
 
         if self.sunriseUTC < now_dt:  # if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
-            print("Adjusting sunrise...")
             self.sunriseUTC = self.sunriseUTC + timedelta(days=1)
         self.sunsetUTC = sun.time_at_elevation(self.observatory.observer, -10)
 
@@ -112,16 +114,11 @@ class TargetSelector:
         self.siderealStart = Time(self.startTime, scale='utc').sidereal_time(kind="apparent",
                                                                              longitude=self.observatory.longitude)
 
-        print("Length of window:", self.endTime - self.startTime, "(h:m:s)")
         self.minHoursBeforeTransit = min(max(self.sunsetUTC - self.startTime, timedelta(hours=-2)),
                                          timedelta(hours=0)).total_seconds() / 3600
         self.maxHoursBeforeTransit = (self.endTime - self.startTime).total_seconds() / 3600
 
-        print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",
-              self.endTime.strftime("%Y-%m-%d %H:%M"), "UTC")
         # i open my wallet and it's full of blood
-        print("Allowing", self.minHoursBeforeTransit, "hours minimum before transit and", self.maxHoursBeforeTransit,
-              "hours after.")
         self.raMaxRMSE = raMaxRMSE
         self.decMaxRMSE = decMaxRMSE
         self.nObsMax = nObsMax
@@ -143,20 +140,30 @@ class TargetSelector:
                      ])
         self.mpcObjDict = {}
         self.filtDf = pd.DataFrame()
-        self.uncertaintyStorage = {} #this will be {desig : (RAlist,Declist,list[color])}
+        self.uncertaintyStorage = {}  # this will be {desig : (RAlist,Declist,list[color])}
 
         # init web client for retrieving offsets
         self.webClient = httpx.Client(follow_redirects=True, timeout=60.0)
 
-        #init AsyncHelper
+        # init AsyncHelper
         self.asyncHelper = asyncUtils.AsyncHelper(followRedirects=True)
 
     def __del__(self):
-        del(self.asyncHelper)
+        del self.asyncHelper
         self.killClients()
 
+    def printSetupInfo(self):
+        print("Length of window:", self.endTime - self.startTime, "(h:m:s)")
+        print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",self.endTime.strftime("%Y-%m-%d %H:%M"), "UTC")
+        print("Allowing", self.minHoursBeforeTransit, "hours minimum before transit and", self.maxHoursBeforeTransit,"hours after.")
 
-
+    def getLocalSiderealTime(self, dt: datetime):
+        """
+        Return the local sidereal time at time dt, as an angle
+        :param dt: A datetime object
+        :return: Sidereal time, as an astropy Angle
+        """
+        return Time(dt, scale='utc').sidereal_time(kind="apparent", longitude=self.observatory.longitude)
 
     @staticmethod
     def _convertMPC(obj):
@@ -167,15 +174,16 @@ class TargetSelector:
             if l[i] == "":
                 l[i] = None
         return l
+
     @staticmethod
-    def _extractUncertainty(name, offsetDict, logger,graph=False,savePath=None):
+    def extractUncertainty(name, offsetDict, logger, graph=False, savePath=None):
         """
         Internal: Take the name of an object and an offsetDict, as produced in fetchUncertainties, and extract + format + process the uncertainty values for the target
-        :return: The maximum absolute uncertainty of the object, to be compared with self.errorRange
+        :return: list: RMSE for ra, RMSE for dec, highest approach color (string)
         """
         if name not in offsetDict.keys():
-            logger.debug("Couldn't find "+ name + " in offsetDict")
-            return None
+            logger.debug("Couldn't find " + name + " in offsetDict")
+            return None, None
         soup = offsetDict[name][0]  # for whatever reason, the value is a list and i don't feel like fixing it
         if soup is None:
             return None, None
@@ -183,50 +191,61 @@ class TargetSelector:
             a.extract()
         text = soup.findAll('pre')[0].get_text()
 
+        colorPriorityDict = {1: "BLACK", 2: "RED", 3: "ORANGE", 4: "GREEN"}
+        colorPriorityList = []
         colorList = []
-        #find the color of the error points (indicated by the characters at the end of the line)
+        # find the color of the error points (indicated by the characters at the end of the line)
         textList = text.split("\n")[1:-1]
         for line in textList:
-            color = GREEN
+            color = GREEN  # green is default, change it if we find a relevant symbol at end
+            colorPriorityList.append(4)
             if "!!" in line:
                 color = RED
+                colorPriorityList.append(2)
             elif "!" in line:
                 color = ORANGE
+                colorPriorityList.append(3)
             elif "***" in line:
                 color = BLACK
+                colorPriorityList.append(1)
             colorList.append(color)
-        if BLACK in colorList:
-            print(name,"is a near-approach!")
-        textList= [a.replace("!", '').replace("+", '').replace("*",'') for a in textList]
+
+        # determine what the highest priority color is among all the different error points
+        highestPriority = min(colorPriorityList)  # use min because 1 is highest priority
+        highestColor = colorPriorityDict[highestPriority]
+
+        if highestColor == "BLACK":
+            logger.info(name + " is a near-approach!")
+
+        textList = [a.replace("!", '').replace("+", '').replace("*", '') for a in textList]
         splitList = [[x for x in a.split(" ") if x] for a in textList if a]  # lol
         splitList = [a[0:2] for a in splitList]  # sometimes it will have weird stuff (like "MBA soln") at the end,
         #                                        but in my experience the numbers always come first, so we can just slice them
         raList = [int(a[0]) for a in splitList]
         decList = [int(a[1]) for a in splitList]
         if not raList or not decList:
-            print("uh oh, missing RA or Dec errors for target", name)
-            print("list of text:", textList)
-            print("splitList:", splitList)
+            logger.warning("uh oh, missing RA or Dec errors for target " + name)
+            logger.warning("list of text: " + str(textList))
+            logger.warning("splitList: " + str(splitList))
 
-        #calculate RMSE
+        # calculate RMSE
         rmsRA = rootMeanSquared(raList)
         rmsDec = rootMeanSquared(decList)
-
 
         # recreate error plots
         if graph:
             fig, ax = plt.subplots()
             ax.invert_xaxis()
-            plt.title(name,fontsize=18)
-            plt.suptitle("RMS: "+str(round(rmsRA,3))+", "+str(round(rmsDec,3)))
-            ax.scatter(raList,decList, c=np.array(colorList) / 255.0)
-            plt.errorbar(np.mean(raList),np.mean(decList),xerr = rmsRA,yerr=rmsDec)
+            plt.title(name, fontsize=18)
+            plt.suptitle("RMS: " + str(round(rmsRA, 3)) + ", " + str(round(rmsDec, 3)))
+            ax.scatter(raList, decList, c=np.array(colorList) / 255.0)
+            plt.errorbar(np.mean(raList), np.mean(decList), xerr=rmsRA, yerr=rmsDec)
             plt.show()
             if savePath is not None:
-                plt.savefig(savePath+"/"+name+".png")
+                plt.savefig(savePath + "/" + name + ".png")
             plt.close()
 
-        return rmsRA,rmsDec
+        return rmsRA, rmsDec, highestColor
 
     def timeUntilTransit(self, ra: float):
         """
@@ -286,8 +305,7 @@ class TargetSelector:
         self.filtDf = self.filtDf.sort_values(by=["TransitDiff"], ascending=True)
         return
 
-
-    def siderealToDate(self,siderealAngle:Angle):
+    def siderealToDate(self, siderealAngle: Angle):
         """
         Convert an angle representing a sidereal time to UTC by relating it to local sidereal time
         :param siderealAngle: astropy Angle
@@ -302,10 +320,9 @@ class TargetSelector:
 
         return timeUTC
 
-    def dateToSidereal(self, dt:datetime):
+    def dateToSidereal(self, dt: datetime):
         timeDiff = dt - self.startTime
-        return self.siderealStart+Angle(str(timeDiff.total_seconds()/3600)+"h")
-
+        return self.siderealStart + Angle(str(timeDiff.total_seconds() / 3600) + "h")
 
     def getObjectUncertainty(self, desig, errURL):
         """
@@ -316,12 +333,14 @@ class TargetSelector:
         soup = BeautifulSoup(offsetReq.content, 'html.parser')
         return tuple([desig, soup])
 
-    async def getFilteredUncertainties(self,graph=False,savePath=None):
+    async def getFilteredUncertainties(self, graph=False, savePath=None):
         desigs = list(self.filtDf.Temp_Desig)
         offsetDict = await self.fetchUncertainties(desigs)
-        self.filtDf= pd.concat((self.filtDf,
-            self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
-
+        self.filtDf = pd.concat((self.filtDf,
+                                 self.filtDf.apply(lambda row: pd.Series(
+                                     list(TargetSelector.extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,
+                                                                       graph, savePath))[0:2], index=["rmsRA", "rmsDec"],
+                                     dtype=float), axis=1)), axis=1)
 
     async def fetchUncertainties(self, designations: list):
         """
@@ -354,7 +373,7 @@ class TargetSelector:
             post_params["start"] = start_at
             post_params["obj"] = desig
             try:
-                #this clearly isn't asynchronous, i've just already initialized the client and have yet to get rid of it
+                # this clearly isn't asynchronous, i've just already initialized the client and have yet to get rid of it
                 mpc_request = self.webClient.post(self.mpc.mpc_post_url, data=post_params)
             except (httpx.ConnectError, httpx.HTTPError) as err:
                 self.logger.error('Failed to connect to/retrieve data from the MPC. Stopping')
@@ -378,43 +397,55 @@ class TargetSelector:
                 raise ConnectionError
 
         # # now actually make all the requests
-        #thanks to our handy-dandy async helper !!!!!!!!!!
+        # thanks to our handy-dandy async helper !!!!!!!!!!
         offsetDict = await self.asyncHelper.multiGet(urls, desigs, soup=True)
         return offsetDict
 
-    def isObservable(self,ephem):
+    def observationViable(self, dt: datetime, ra: Angle, dec: Angle):
+        """
+        Can a target with RA ra and Dec dec be observed at time dt? Checks hour angle limits.
+        :return: bool
+        """
+        hourAngleWindow = generalUtils.getHourAngleLimits(dec)
+        raWindow = (self.dateToSidereal(dt) + hourAngleWindow[0],
+                    self.dateToSidereal(dt) + hourAngleWindow[1])
+        # print("dateToSidereal for now:",self.dateToSidereal(dt))
+        # print(ra.hms)
+        # print(raWindow[0].hms,raWindow[1].hms)
+        # print("Difference: before:",(raWindow[0]-ra).hms,"after:",(raWindow[1]-ra).hms)
+        return ra.is_within_bounds(raWindow[0], raWindow[1])
+
+    def isObservable(self, ephem):
+        """
+        Is observation described by ephemeris line (as dictionary) observable?
+        :param ephem: dict
+        :return: bool
+        """
         if self.decMin < ephem["dec"] < self.decMax:
             RA, dec = generalUtils.ensureAngle(ephem["RA"]), generalUtils.ensureAngle(ephem["dec"])
-            hourAngleWindow = generalUtils.getHourAngleLimits(dec)
-            # print("RA:",RA.degree)
-            # print("hour angle window:",hourAngleWindow)
-            raWindow = (self.dateToSidereal(ephem["obsTime"])+hourAngleWindow[0], self.dateToSidereal(ephem["obsTime"])+hourAngleWindow[1])
-            # print("RA window:",raWindow)
-            # print(raWindow[0].degree, raWindow[1].degree)
-            # print(type(raWindow[0]),type(raWindow[1]))
-            # print(raWindow[0].degree < RA.degree < raWindow[1].degree)
-            return (raWindow[0].degree < RA.degree < raWindow[1].degree)
-
+            return self.observationViable(ephem["obsTime"], RA, dec)
         return False
 
-
-    async def calculateObservability(self,desigs:list):
+    async def calculateObservability(self, desigs: list):
         """
         Calculate the start and end times of the observability window for an object by querying its ephemeris and clipping at sunrise/sunset
-        :param desig: The designation of the object to be queried - must be a valid MPC temp identifier
+        :param desigs: list of designations of objects to be queried - must be valid MPC temp identifiers
         :returns: Dictionary {desig:(startDt,endDt)} or None
         """
-        ephems = await mpcUtils.asyncMultiEphem(desigs,datetime.utcnow(),self.altitudeLimit,self.mpc,self.asyncHelper,self.logger)
+        ephems = await mpcUtils.asyncMultiEphem(desigs, datetime.utcnow(), self.altitudeLimit, self.mpc,
+                                                self.asyncHelper, self.logger,
+                                                obsCode=500)  # request for geocenter to get more output
         if not ephems:
-            generalUtils.logAndPrint("Couldn't get any ephems for observability windows!",self.logger.error)
+            self.logger.error("Couldn't get any ephems for any observability windows!")
             return None
-        windows = {}  #{desig:(startDt,endDt)}
+        windows = {}  # {desig:(startDt,endDt)}
         for desig in desigs:
             obsStart = False
             start = None
             end = None
             if desig not in ephems.keys():
-                generalUtils.logAndPrint("Couldn't get ephems and so can't calculate observability window for "+desig+". Skipping.",self.logger.warning)
+                self.logger.warning(
+                    "Couldn't get ephems and so can't calculate observability window for " + desig + ". Skipping.")
                 windows[desig] = None
                 continue
             for ephem in ephems[desig]:
@@ -426,83 +457,22 @@ class TargetSelector:
                         start = obsTime
                 elif obsStart:  # we've already started and we're no longer observable. window over
                     end = obsTime
-                    windows[desig] = (start,end)
+                    windows[desig] = (start, end)
                     break
                 end = obsTime
-                if start is None or end is None:
+                if start is None or end is None:  # we've run through all the ephemeris. End the window here, if one was started. otherwise, return None
                     windows[desig] = None
                 else:
                     windows[desig] = (start, end)
 
         for desig in windows.keys():
             if windows[desig] is not None:
-                print("Target",desig,"is visible between",windows[desig][0].strftime("%Y-%m-%d %H:%M:%S"),"and",windows[desig][1].strftime("%Y-%m-%d %H:%M:%S"))
+                self.logger.debug("Target" + desig + "is visible between" +
+                                  windows[desig][0].strftime("%Y-%m-%d %H:%M:%S") + "and" +
+                                  windows[desig][1].strftime("%Y-%m-%d %H:%M:%S"))
             else:
-                generalUtils.logAndPrint("Nominal: No valid observability window for target " + desig + ".",
-                                         self.logger.info)
+                self.logger.debug("Nominal: No valid observability window for target " + desig + ".")
         return windows
-
-
-
-    # async def fetchUncertainties(self,graph=False,savePath = None):
-    #     """
-    #     Asynchronously get the uncertainties of the targets in the filtered dataframe
-    #     """
-    #     # this works like:
-    #     # filtDf -> designations -> ephemeris pages -> uncertainty links -> uncertainty values -> inserted into filtDf
-    #
-    #     post_params = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
-    #                    'W': 'j',
-    #                    'obj': 'P10POWX', 'Parallax': '1', 'obscode': self.obsCode, 'long': '',
-    #                    'lat': '', 'alt': '', 'int': self.mpc.int, 'start': None, 'raty': self.mpc.raty,
-    #                    'mot': self.mpc.mot,
-    #                    'dmot': self.mpc.dmot, 'out': self.mpc.out, 'sun': self.mpc.supress_output,
-    #                    'oalt': str(self.altitudeLimit)
-    #                    }
-    #     imageDict = {}  # for image maps, desig:mapURL
-    #     offsetRequestTasks = []  # will store our async tasks for retrieving offsets
-    #
-    #     # TODO: image maps
-    #     for desig in self.filtDf.Temp_Desig:
-    #         # make sure we're not starting in the past
-    #         start_at = 0
-    #         now_dt = utc.localize(datetime.utcnow())
-    #         if now_dt < self.startTime:
-    #             start_at = round((self.startTime - now_dt).total_seconds() / 3600.) + 1
-    #
-    #         post_params["start"] = start_at
-    #         post_params["obj"] = desig
-    #         try:
-    #             mpc_request = await self.webClient.post(self.mpc.mpc_post_url, data=post_params)
-    #         except (httpx.ConnectError, httpx.HTTPError) as err:
-    #             self.logger.error('Failed to connect/retrieve data from MPC. Stopping')
-    #             self.logger.error(err)
-    #             exit()  # this will have to be handled by a wrapper if one is written
-    #         if mpc_request.status_code == 200:
-    #             # extract 'pre' tags from reply
-    #             soup = BeautifulSoup(mpc_request.text, 'html.parser')
-    #             ephem = soup.find_all('pre')[0].contents
-    #             num_recs = len(ephem)
-    #
-    #             if num_recs == 1:
-    #                 self.logger.warning('Target is not observable')
-    #
-    #             else:
-    #                 errUrl = ephem[3].get('href')
-    #                 reqTask = asyncio.create_task(self.getObjectUncertainty(desig, errUrl))
-    #                 offsetRequestTasks.append(reqTask)
-    #                 # imageUrl = ephem[i + 2].get('href') #this doesnt work lol
-    #                 # imageDict[desig] = imageUrl
-    #
-    #     # now actually make all the requests
-    #     offsets = await asyncio.gather(*offsetRequestTasks)
-    #     # offsets is a list of tuples (desig,offset) which needs to be compiled to a dict
-    #     offsetDict = dict()
-    #     for des, off in offsets:
-    #         offsetDict.setdefault(des, []).append(off)
-    #
-    #     self.filtDf= pd.concat((self.filtDf,
-    #         self.filtDf.apply(lambda row: pd.Series(TargetSelector._extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,graph,savePath), index=["rmsRA","rmsDec"],dtype=float),axis=1)), axis=1)
 
     def killClients(self):
         """
@@ -516,7 +486,6 @@ class TargetSelector:
         """
         self.filtDf = self.filtDf.loc[self.filtDf['rmsRA'] <= self.raMaxRMSE]
         self.filtDf = self.filtDf.loc[self.filtDf['rmsDec'] <= self.decMaxRMSE]
-
 
     def saveCSVs(self, path):
         """
@@ -538,8 +507,8 @@ class TargetSelector:
         Return the ephemerides of only targets that passed filtering. Note: must be called after filtering has been done to return anything meaningful
         :return: a Dictionary of {designation: {startTimeDt: ephemLine}}
         """
-        return await mpcUtils.asyncMultiEphem(list(self.filtDf.Temp_Desig), self.startTime, self.altitudeLimit, self.mpc, self.asyncHelper, self.logger,autoFormat=True)
-        # return mpcUtils.pullEphems(self.mpc, self.filtDf.Temp_Desig, self.startTime, self.altitudeLimit)
+        return await mpcUtils.asyncMultiEphem(list(self.filtDf.Temp_Desig), self.startTime, self.altitudeLimit,
+                                              self.mpc, self.asyncHelper, self.logger, autoFormat=True)
 
     def fetchAllEphemerides(self):
         """
@@ -556,7 +525,7 @@ def saveEphemerides(ephems, saveDir):
     :param saveDir: The directory to save to
     """
     for desig in ephems.keys():
-        outFilename = saveDir + "/"+ desig + "_ephems.txt"
+        outFilename = saveDir + "/" + desig + "_ephems.txt"
         ephemLines = ephems[desig].values()
         with open(outFilename, "w") as f:
             f.write('\n'.join(ephemLines))

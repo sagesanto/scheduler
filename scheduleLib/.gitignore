@@ -4,3 +4,4 @@ OffsetMaps**/**
 **/example/
 **/photometrics/
 **/testingOutputs/**
+*.log

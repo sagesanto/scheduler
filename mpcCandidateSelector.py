@@ -6,101 +6,96 @@ import time
 from datetime import datetime as dt, timedelta
 from scheduleLib import mpcTargetSelectorCore as targetCore
 from scheduleLib.candidateDatabase import CandidateDatabase, Candidate, generateID
-from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 from scheduleLib import mpcUtils, generalUtils, asyncUtils
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 
-def filter(record):
-    info = sys.exc_info()
-    if info[1]:
-        logging.exception('Exception!', exc_info=info)
-        print("---Exception!---", info)
+# pull MPC NEO candidates that are not removed and have been added in the last [lookback] hours
+# check if they have a removal reason. if they do, ignore them
+# if they don't, do the selection process, marking rejected reason if they're not observable by TMO
 
-    return True
-
-#pull MPC NEO candidates that are not removed and have been modified in the lookback time
-#check if they have an observability window or a removal reason. if they do, ignore them
-# if they don't, do the selection process. place the rejected reason in the CVal1 slot if rejected
-async def selectTargets(logger):
-    generalUtils.logAndPrint("--- Selecting ---",logger.info)
-    lookback = 8
-    mpc = mpcObj()
+async def selectTargets(logger, lookback):
+    logger.info("--- Selecting ---")
 
     dbConnection = CandidateDatabase("./candidate database.db", "MPC Selector")
     targetSelector = TargetSelector()
 
-    candidates = dbConnection.table_query("Candidates","*","RemovedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",[dt.now()-timedelta(hours=lookback)],returnAsCandidate=True)
-    print(candidates)
+    candidates = dbConnection.table_query("Candidates", "*",
+                                          "RemovedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",
+                                          [dt.utcnow() - timedelta(hours=lookback)], returnAsCandidates=True)
     if candidates is None:
-        generalUtils.logAndPrint("Candidate Selector: Didn't find any targets in need of updating. All set!",logger.info)
-        del(dbConnection)  #explicitly deleting these to make sure they close nicely
-        del(targetSelector)
-        del(mpc)
+        logger.info("Candidate Selector: Didn't find any targets in need of updating. All set!")
+        del dbConnection  # explicitly deleting these to make sure they close nicely
+        del targetSelector
         exit()
     else:
-        generalUtils.logAndPrint("Finding observability and evaluating "+str(len(candidates))+" objects.",logger.info)
+        logger.info("Finding observability and evaluating " + str(len(candidates)) + " objects.")
 
     designations = [candidate.CandidateName for candidate in candidates]
-    candidateDict = dict(zip(designations,candidates))
+    candidateDict = dict(zip(designations, candidates))
     windows = await targetSelector.calculateObservability(designations)
     candidatesWithWindows = []
-    rejected = []
+    rejected = []  # we're going to later wipe the rejected status of all candidates that are not marked rejected (in case they had been rejected in the past)
     for desig, window in windows.items():
+        candidate = candidateDict[desig]
         if window:
-            candidateDict[desig].StartObservability, candidateDict[desig].EndObservability = dbConnection.timeToString(window[0]), dbConnection.timeToString(window[1])
-            print(candidateDict[desig])
+            if not candidate.isAfterStart(dt.utcnow()):  # we don't want to change the start time of the window after it has started (we can't generate ephems for the past so we would artificially shorten the window each time we run -> bad for record-keeping)
+                candidateDict[desig].StartObservability = CandidateDatabase.timeToString(window[0])
+            if not candidate.isAfterEnd(dt.utcnow()):  # we don't want to change the end time after the window is over
+                candidateDict[desig].EndObservability = CandidateDatabase.timeToString(window[1])
             candidatesWithWindows.append(desig)
         else:
-            candidateDict[desig].RejectedReason = "Observability"
-            generalUtils.logAndPrint("Got None window for "+desig+". Rejected for Observability.",logger.info)
-
+            if not candidate.isAfterStart(dt.utcnow()):  # if the canidate has a window and it's already opened, don't mark it
+                candidateDict[desig].RejectedReason = "Observability"
+                logger.debug("Got None window for " + desig + ". Rejected for Observability.")
+            elif candidate.hasField("RejectedReason"):
+                rejected.append(candidate)  # we don't want to have the candidate's rejection status get wiped just because it's after the window has started
 
     for desig, candidate in candidateDict.items():
-        if candidate.RMSE_RA is None or candidate.RMSE_Dec is None:
-            generalUtils.logAndPrint("Retrying uncertainty on "+desig)
+        if not candidate.hasField("RMSE_RA") or not candidate.hasField("RMSE_Dec"):
+            logger.info("Retrying uncertainty on " + desig)
             offsetDict = await targetSelector.fetchUncertainties([desig])
-            uncertainties = TargetSelector._extractUncertainty(desig, offsetDict, logger, graph=False,
-                                                               savePath="testingOutputs/plots")  # why did i protect this? who knows
-            if uncertainties is not None:
-                candidateDict[desig].RMSE_RA, candidateDict[desig].RMSE_Dec = uncertainties
+            uncertainties = list(TargetSelector.extractUncertainty(desig, offsetDict, logger, graph=False,
+                                                                   savePath="testingOutputs/plots"))
+            if None not in uncertainties:
+                candidateDict[desig].RMSE_RA, candidateDict[desig].RMSE_Dec = uncertainties[0], uncertainties[1]
+                candidateDict[desig].ApproachColor = uncertainties[2]
             else:
-                generalUtils.logAndPrint("Uncertainty query for " + desig + " came back empty again.", logger.warning)
-                generalUtils.logAndPrint("Rejected " + desig + " for incomplete information.", logger.info)
+                logger.warning("Uncertainty query for " + desig + " came back empty again.")
+                logger.debug("Rejected " + desig + " for incomplete information.")
                 candidateDict[desig].RejectedReason = "Incomplete"
                 continue
 
         if float(candidate.Magnitude) > targetSelector.vMagMax:
             candidateDict[desig].RejectedReason = "vMag"
             rejected.append(desig)
-            generalUtils.logAndPrint("Rejected "+desig+" for magnitude limit.",logger.info)
+            logger.debug("Rejected " + desig + " for magnitude limit.")
             continue
         if float(candidate.RMSE_RA) > targetSelector.raMaxRMSE or float(candidate.RMSE_Dec) > targetSelector.decMaxRMSE:
             rejected.append(desig)
             candidateDict[desig].RejectedReason = "RMSE"
-            generalUtils.logAndPrint("Rejected "+desig+" for magnitude limit.",logger.info)
+            logger.debug("Rejected " + desig + " for error limit.")
             continue
 
-
-    for desig in candidatesWithWindows:  #if the candidates were rejected but aren't rejected this time through, we assume something has changed and they are now viable, so we remove their rejected reason
+    for desig in candidatesWithWindows:  # if the candidates were rejected but aren't rejected this time through, we assume something has changed and they are now viable, so we remove their rejected reason
         candidate = candidateDict[desig]
         if desig not in rejected and candidate.hasField("RejectedReason"):
-            delattr(candidate,"RejectedReason")
-            dbConnection.setFieldNullByID(candidate.ID,"RejectedReason")
+            delattr(candidate, "RejectedReason")
+            dbConnection.setFieldNullByID(candidate.ID, "RejectedReason")
 
     for desig, candidate in candidateDict.items():
         dbConnection.editCandidateByID(candidate.ID, candidate.asDict())
-        generalUtils.logAndPrint("Updated "+desig+".",logger.info)
+        logger.debug("Updated " + desig + ".")
 
     del dbConnection
 
 
 if __name__ == '__main__':
-    #set up the logger
+    # set up the logger
     logger = logging.getLogger(__name__)
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', filename='mpcCandidate.log', encoding='utf-8',
                         datefmt='%m/%d/%Y %H:%M:%S', level=logging.INFO)
-    logger.addFilter(filter)
+    logger.addFilter(generalUtils.filter)
 
-    #run the program
-    asyncio.run(selectTargets(logger))
+    # run the program
+    asyncio.run(selectTargets(logger, 24))

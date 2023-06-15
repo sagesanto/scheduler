@@ -5,15 +5,18 @@ import httpx
 import asyncio
 from bs4 import BeautifulSoup
 
-def logAndPrint(msg,loggerMethod):
-    loggerMethod(msg)  #logger method is a function like logger.info logger.error etc
+
+def logAndPrint(msg, loggerMethod):
+    loggerMethod(msg)  # logger method is a function like logger.info logger.error etc
     print(msg)
+
 
 class AsyncHelper:
     """
     A helper class to facilitate easier asynchronous requesting.
     """
-    def __init__(self,followRedirects:bool):
+
+    def __init__(self, followRedirects: bool):
         self.client = httpx.AsyncClient(follow_redirects=followRedirects, timeout=60.0)
         self.logger = logging.getLogger(__name__)
 
@@ -28,7 +31,7 @@ class AsyncHelper:
         except Exception:
             pass
 
-    async def multiGet(self, URLlist, designations=None, soup=False, postContent = None):
+    async def multiGet(self, URLlist, designations=None, soup=False, postContent=None):
         """
         Asynchronously make multiple url requests. Optionally, turn the result into soup with beautifulSoup. Requires internet connection
         :param URLlist: A list of URLs to query
@@ -46,18 +49,18 @@ class AsyncHelper:
         if designations is None:
             designations = URLlist
         if postContent is None:
-            postContent = [None]*len(URLlist)
+            postContent = [None] * len(URLlist)
         tasks = []
         for i, url in enumerate(URLlist):
-            tasks.append(asyncio.create_task(self.makeRequest(designations[i], url, soup=soup, postContent=postContent[i])))
+            tasks.append(
+                asyncio.create_task(self.makeRequest(designations[i], url, soup=soup, postContent=postContent[i])))
         result = await asyncio.gather(*tasks)
 
-        #gather tuples returned into dictionary, return
+        # gather tuples returned into dictionary, return
         returner = dict()
         for desig, item in result:
             returner.setdefault(desig, []).append(item)
         return returner
-
 
     async def makeRequest(self, desig, url, soup=False, postContent=None):
         """
@@ -73,12 +76,13 @@ class AsyncHelper:
                 offsetReq = await self.client.post(url, data=postContent)
             else:
                 offsetReq = await self.client.get(url)
-        except (httpx.ConnectError, httpx.HTTPError) as err:
+        except (httpx.ConnectError, httpx.HTTPError):
             self.logger.error("Async ")
-            logAndPrint("HTTP error. Unable to make async request to " + url,self.logger.exception)
+            self.logger.exception("HTTP error. Unable to make async request to " + url)
             return desig, None
         if offsetReq.status_code != 200:
-            logAndPrint("Error: HTTP status code " +str(offsetReq.status_code) + ". Unable to make async request to", url + ". Reason given: "+offsetReq.reason_phrase,self.logger.error)
+            logAndPrint("Error: HTTP status code " + str(offsetReq.status_code) + ". Unable to make async request to " +
+                        url + ". Reason given: " + offsetReq.reason_phrase, self.logger.error)
             return desig, None
         if soup:
             offsetReq = BeautifulSoup(offsetReq.content, 'html.parser')

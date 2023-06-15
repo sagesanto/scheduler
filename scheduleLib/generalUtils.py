@@ -1,7 +1,17 @@
 #Sage Santomenna 2023
+import sys, logging
 
 from astropy.coordinates import Angle
 from astropy import units as u
+
+def filter(record):
+    info = sys.exc_info()
+    if info[1]:
+        logging.exception('Exception!',exc_info=info)
+        print("---Exception!---",info)
+        raise
+    return True
+
 
 def logAndPrint(msg,loggerMethod):
     loggerMethod(msg)  #logger method is a function like logger.info logger.error etc
@@ -47,11 +57,12 @@ def ensureFloat(angle):
     :param angle: float or astropy Angle
     :return: decimal angle, as a float
     """
-    if not isinstance(angle, float):
-        if isinstance(angle, Angle):
-            return toDecimal(angle)
-        else:
-            return float(angle)
+    if isinstance(angle, float):
+        return angle
+    if isinstance(angle, Angle):
+        return toDecimal(angle)
+    else:
+        return float(angle)
     return None
 
 def getHourAngleLimits(dec):
@@ -62,7 +73,7 @@ def getHourAngleLimits(dec):
     """
     dec = ensureFloat(dec)
 
-    horizonBox = {  # {range(decWindow):tuple(minAlt,maxAlt)}
+    horizonBox = {  # {tuple(decWindow):tuple(minAlt,maxAlt)}
         (-38, -36): (0, 0),
         (-36, -34): (-35, 42.6104),
         (-34, -32): (-35, 45.9539),
@@ -78,7 +89,7 @@ def getHourAngleLimits(dec):
         (66, 74): (0, 0)
     }
     for decRange in horizonBox:
-        if decRange[0] < dec < decRange[1]:  # man this is miserable
+        if decRange[0] <= dec < decRange[1]:  # man this is miserable
             finalDecRange = horizonBox[decRange]
             return tuple([Angle(finalDecRange[0], unit=u.deg), Angle(finalDecRange[1], unit=u.deg)])
     return None

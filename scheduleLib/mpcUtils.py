@@ -1,4 +1,4 @@
-#Sage Santomenna 2023
+# Sage Santomenna 2023
 
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpc
 from datetime import datetime, timedelta
@@ -22,6 +22,7 @@ def _findExposure(magnitude):
     if magnitude < 21.5:
         return "3.0|600.0"
 
+
 def dictFromEphemLine(ephem):
     returner = {"RA": (raDecFromEphem(ephem))[0], "dec": (raDecFromEphem(ephem))[1],
                 "vMag": ephem[2],
@@ -30,15 +31,19 @@ def dictFromEphemLine(ephem):
 
     return returner
 
+
 def velFromEphem(ephem):
     dRa = str(round(float(ephem[3]) * 60, 2))
     dDec = str(round(float(ephem[4]) * 60, 2))
-    return dRa,dDec
+    return dRa, dDec
+
 
 def raDecFromEphem(ephem):
     coords = ephem[1]
     coords = coords.to_string("decimal").split(" ")
-    return float(coords[0]),float(coords[1])
+    return float(coords[0]), float(coords[1])
+
+
 def timeFromEphem(ephem):
     ephem[0].format = "fits"
     ephem[0].out_subfmt = "date_hms"
@@ -47,6 +52,7 @@ def timeFromEphem(ephem):
     ephem[0].out_subfmt = "date_hm"
     inBetween = ephem[0].value
     return datetime.strptime(inBetween, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
+
 
 def _formatEphem(ephems, desig):
     # Internal: take an object in the form returned from self.mpc.get_ephemeris() and convert each line to the scheduler format, before returning it in a dictionary of {startDt : line}
@@ -87,7 +93,7 @@ def _formatEphem(ephems, desig):
     return ephemDict
 
 
-def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat = False):
+def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat=False,obsCode=654):
     """
     Fetch the ephemeris of a target from the MPC NEO confirmation database, given a valid designation. Requires internet connection.
     :param mpcInst: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
@@ -100,7 +106,7 @@ def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat = False):
         whenDt = whenDt.strftime('%Y-%m-%dT%H:%M')
     try:
         returner = mpcInst.get_ephemeris(desig, when=whenDt,
-                                                  altitude_limit=altitudeLimit, get_uncertainty=None)
+                                         altitude_limit=altitudeLimit, get_uncertainty=None)
     except:
         return None
     if schedulerFormat:
@@ -109,7 +115,7 @@ def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat = False):
     return returner
 
 
-def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit, schedulerFormat = False):
+def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit, schedulerFormat=False):
     """
     Use pullEphem to pull ephemerides for multiple targets, given a list of their designations. Requires internet connection.
     :param mpcInst: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
@@ -120,12 +126,15 @@ def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit, 
     """
     ephemsDict = {}
     for desig in designations:
-        ephemsDict[desig] = pullEphem(mpcInst,desig, whenDt, minAltitudeLimit,schedulerFormat)
+        ephemsDict[desig] = pullEphem(mpcInst, desig, whenDt, minAltitudeLimit, schedulerFormat)
     return ephemsDict
 
-async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper, logger, autoFormat=False, mpcPostURL ='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi'):
 
-    ephemResults, ephemDict = await asyncMultiEphemRequest(designations,when,minAltitudeLimit,mpcInst,asyncHelper,mpcPostURL)
+async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper,
+                          logger, autoFormat=False,
+                          mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi',obsCode = 654):
+    ephemResults, ephemDict = await asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst, asyncHelper,
+                                                           mpcPostURL,obsCode)
     designations = ephemResults.keys()
 
     for designation in designations:
@@ -163,7 +172,9 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
     return ephemDict
 
 
-async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper, mpcPostURL ='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi'):
+async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: mpc,
+                                 asyncHelper: asyncUtils.AsyncHelper,
+                                 mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi', obsCode = 654):
     """
     Asynchronously retrieve ephemerides for multiple objects. Requires internet connection.
     :param designations: A list of designations (strings) of the targets to objects
@@ -173,22 +184,24 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
     :param asyncHelper: An instance of the asyncHelper class
     :return: Result of query in _____ form
     """
+    designations = list(set(designations))  # filter for only unique desigs
     urls = [mpcPostURL] * len(designations)
     postContents = {}
     defaultPostParams = {'mb': '-30', 'mf': '30', 'dl': '-90', 'du': '+90', 'nl': '0', 'nu': '100', 'sort': 'd',
-                   'W': 'j',
-                   'obj': 'None', 'Parallax': '1', 'obscode': 654, 'long': '',
-                   'lat': '', 'alt': '', 'int': mpcInst.int, 'start': None, 'raty': mpcInst.raty,
-                   'mot': mpcInst.mot,
-                   'dmot': mpcInst.dmot, 'out': mpcInst.out, 'sun': mpcInst.supress_output,
-                   'oalt': str(minAltitudeLimit)
-                   }
+                         'W': 'j',
+                         'obj': 'None', 'Parallax': '1', 'obscode': obsCode, 'long': '',
+                         'lat': '', 'alt': '', 'int': mpcInst.int, 'start': None, 'raty': mpcInst.raty,
+                         'mot': mpcInst.mot,
+                         'dmot': mpcInst.dmot, 'out': mpcInst.out, 'sun': mpcInst.supress_output,
+                         'oalt': str(minAltitudeLimit)
+                         }
     start_at = 0
 
     now_dt = datetime.utcnow().replace(tzinfo=pytz.UTC)
 
     if when != "now":
-        if isinstance(when,str):  # if we've been given a string, convert it to dt. Otherwise, assume we have a dt and carry on
+        if isinstance(when,
+                      str):  # if we've been given a string, convert it to dt. Otherwise, assume we have a dt and carry on
             when = datetime.strptime(when, '%Y-%m-%dT%H:%M')
         when = when.replace(tzinfo=pytz.UTC)
         if now_dt < when:
@@ -207,17 +220,18 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
 
     for designation in designations:
         if designation not in ephemResults.keys() or ephemResults[designation] is None:
-            print("Request for ephemeris for candidate",designation, "failed. Will retry.")
+            print("Request for ephemeris for candidate", designation, "failed. Will retry.")
             failedList.append(designation)
 
     if len(failedList):
         print("Retrying...")
         retryPost = [postContents[a] for a in failedList]
-        retryEphems = await asyncHelper.multiGet([mpcPostURL] * len(failedList), failedList, soup=True, postContent=retryPost)
+        retryEphems = await asyncHelper.multiGet([mpcPostURL] * len(failedList), failedList, soup=True,
+                                                 postContent=retryPost)
 
         for retryDesignation in failedList:
             if retryDesignation not in retryEphems.keys() or retryEphems[retryDesignation] is None:
-                print("Request for",retryDesignation, "failed on retry. Eliminating and moving on.")
+                print("Request for", retryDesignation, "failed on retry. Eliminating and moving on.")
                 ephemDict[retryDesignation] = None
             else:
                 ephemResults[retryDesignation] = retryEphems[retryDesignation]
@@ -225,7 +239,9 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
     return ephemResults, ephemDict
 
 
-strMonthDict = dict(zip(["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], range(1,13)))
+strMonthDict = dict(
+    zip(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], range(1, 13)))
+
 
 def updatedStringToDatetime(updated):
     if not updated:
@@ -236,5 +252,4 @@ def updatedStringToDatetime(updated):
     integerDay = dayAndTime[1]
     fractionalDay = dayAndTime[0]
     year = datetime.today().year
-    return datetime(year,month,int(integerDay)) + timedelta(days=fractionalDay)
-
+    return datetime(year, month, int(integerDay)) + timedelta(days=fractionalDay)

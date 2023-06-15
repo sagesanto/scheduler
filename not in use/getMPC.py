@@ -203,7 +203,7 @@ async def asyncOffsetProcessor(offsetDict): #offsetDict will come in {name:offse
 #by the time we call this function, we will have already retrieved the initial ephemeris. what we need to do now is navigate the epehemeris so we are later in a place to prune out the ones with the high uncertainty maps.
 async def navigateEphemerides(designations):
     n = len(designations)
-    dir = "OffsetMaps" + datetime.now().strftime("%m_%d_%Y-%H_%M_%S")
+    dir = "OffsetMaps" + datetime.utcnow().strftime("%m_%d_%Y-%H_%M_%S")
     os.mkdir(dir)
     offsetDict = {}
     mapDict = {}
@@ -293,7 +293,7 @@ targetDf["Uncertainty"] = targetDf.apply(lambda row: extractUncertainty(row['Tem
 
 #filter out the high uncertainty targets. should log somewhere along here! then can use log to detect new targets
 targetDf = targetDf.loc[targetDf['Uncertainty'] <= ERRORRANGE]
-outputFilename = "Targets " + datetime.now().strftime("%m_%d_%Y-%H_%M_%S")+".csv"
+outputFilename = "Targets " + datetime.utcnow().strftime("%m_%d_%Y-%H_%M_%S")+".csv"
 targetDf.to_csv(outputFilename,index=False)
 
 mapStatuses = loop.run_until_complete(saveMaps(mapDict))
