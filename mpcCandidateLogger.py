@@ -10,10 +10,8 @@ from colorlog import ColoredFormatter
 from scheduleLib import mpcTargetSelectorCore as targetCore
 from scheduleLib.candidateDatabase import CandidateDatabase, Candidate, generateID
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
-from scheduleLib import mpcUtils, generalUtils, asyncUtils
+from scheduleLib import mpcUtils, genUtils, asyncUtils
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
-
-# validFields = ["Author","DateAdded","DateLastEdited","ID",'Night', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA', 'RMSE_Dec', 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes', 'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 
 async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
@@ -30,13 +28,13 @@ async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
     return None, None
 
 
-async def listEntryToCandidate(entry, db, mpc, logger,targetSelector):
+async def listEntryToCandidate(entry, mpc, logger,targetSelector):
     constructDict = {}
     CandidateName = entry.designation
     CandidateType = "MPC NEO"
     constructDict["RA"], constructDict["Dec"] = entry.ra, entry.dec
     constructDict["Magnitude"] = entry.vmag
-    constructDict["Updated"] = db.timeToString(mpcUtils.updatedStringToDatetime(entry.updated))
+    constructDict["Updated"] = genUtils.timeToString(mpcUtils.updatedStringToDatetime(entry.updated))
     dRA, dDec = await getVelocities(CandidateName, mpc, logger,targetSelector)
     # currently, can't get nObs and Score from mpc_neo_confirm. not going to implement it myself - we'll go without
     if dRA and dDec:
@@ -51,7 +49,7 @@ def candidateIsRemoved(candidate):
 
 
 def needsUpdate(listEntry, dbEntry):
-    return CandidateDatabase.stringToTime(listEntry.Updated) > CandidateDatabase.stringToTime(dbEntry.Updated)
+    return genUtils.stringToTime(listEntry.Updated) > genUtils.stringToTime(dbEntry.Updated)
 
 
 def updateCandidate(dbCandidate: Candidate, listCandidate: Candidate, dbConnection: CandidateDatabase):
@@ -70,7 +68,7 @@ async def runLogging(logger, lookback):
     mpc.get_neo_list()  # prompt the mpc object to fetch the list
     logger.info("Constructing Candidates from MPC List")
     for entry in mpc.neo_confirm_list:  # access the list and create dict
-        ent = await listEntryToCandidate(entry, dbConnection, mpc, logger,targetSelector)  # transform list entries to candidates
+        ent = await listEntryToCandidate(entry, mpc, logger,targetSelector)  # transform list entries to candidates
         currentCandidates[ent.CandidateName] = ent
     logger.info("Construction complete.")
 
@@ -156,6 +154,6 @@ if __name__ == "__main__":
     logging.getLogger('').addHandler(stream)
     logging.basicConfig(filename='mpcCandidate.log', encoding='utf-8',
                         datefmt='%m/%d/%Y %H:%M:%S', level=logging.DEBUG)
-    logging.getLogger('').addFilter(generalUtils.filter)
+    logging.getLogger('').addFilter(genUtils.filter)
 
     asyncio.run(runLogging(logger,24))

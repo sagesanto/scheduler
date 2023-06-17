@@ -7,7 +7,7 @@ import pytz, math
 
 import httpx
 from bs4 import BeautifulSoup
-from scheduleLib import generalUtils
+from scheduleLib import genUtils
 
 
 # this isn't terribly elegant
@@ -39,12 +39,28 @@ def velFromEphem(ephem):
 
 
 def raDecFromEphem(ephem):
+    """
+    Extracts the right ascension and declination coordinates from a raw ephemeris line
+
+    :param ephem: list
+    :return: Tuple containing the right ascension and declination coordinates as floats.
+    :rtype: tuple[float, float]
+    """
     coords = ephem[1]
     coords = coords.to_string("decimal").split(" ")
     return float(coords[0]), float(coords[1])
 
 
 def timeFromEphem(ephem):
+    """
+    Converts the time associated with the ephem to a UTC datetime.
+
+    :param ephem: List containing an ephem object.
+    :type ephem: list
+
+    :return: The UTC datetime extracted from the ephem object.
+    :rtype: datetime.datetime
+    """
     ephem[0].format = "fits"
     ephem[0].out_subfmt = "date_hms"
     date = ephem[0].value
@@ -133,6 +149,30 @@ def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit, 
 async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper,
                           logger, autoFormat=False,
                           mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi',obsCode = 654):
+    """
+    Asynchronously retrieves and parses multiple ephemeris data for given designations.
+
+   :param designations: A list of object designations.
+   :type designations: List[str]
+   :param when: The datetime indicating the time of the ephemeris.
+   :type when: datetime.datetime
+   :param minAltitudeLimit: The minimum altitude limit for observability.
+   :type minAltitudeLimit: float
+   :param mpcInst: An instance of the `mpc` class.
+   :type mpcInst: mpc
+   :param asyncHelper: An instance of the `asyncUtils.AsyncHelper` class.
+   :type asyncHelper: asyncUtils.AsyncHelper
+   :param logger: The logger object for logging purposes.
+   :param autoFormat: (Optional) Indicates whether to automatically format the ephemeris data. Defaults to False.
+   :type autoFormat: bool
+   :param mpcPostURL: (Optional) The URL for the MPC ephemeris confirmation. Defaults to 'https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi'.
+   :type mpcPostURL: str
+   :param obsCode: (Optional) The observatory code. Defaults to 654.
+   :type obsCode: int
+
+   :return: A dictionary containing the parsed ephemeris data for each designation.
+   :rtype: Dict[str, List[Tuple[datetime.datetime, str, float, str, str, Any]]]
+    """
     ephemResults, ephemDict = await asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst, asyncHelper,
                                                            mpcPostURL,obsCode)
     designations = ephemResults.keys()
@@ -253,3 +293,13 @@ def updatedStringToDatetime(updated):
     fractionalDay = dayAndTime[0]
     year = datetime.today().year
     return datetime(year, month, int(integerDay)) + timedelta(days=fractionalDay)
+
+
+def candidatesForTimeRange(obsStart, obsEnd, duration, dbConnection):
+    candidates = dbConnection.table_query("Candidates", "*",
+                                          "RemovedReason IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",
+                                          [datetime.utcnow() - timedelta(hours=72)], returnAsCandidates=True)
+
+    res = [candidate for candidate in candidates if candidate.isObservableBetween(obsStart, obsEnd, duration)]
+    print(res)
+    return res

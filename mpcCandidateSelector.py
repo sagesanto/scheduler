@@ -6,7 +6,7 @@ import time
 from datetime import datetime as dt, timedelta
 from scheduleLib import mpcTargetSelectorCore as targetCore
 from scheduleLib.candidateDatabase import CandidateDatabase, Candidate, generateID
-from scheduleLib import mpcUtils, generalUtils, asyncUtils
+from scheduleLib import mpcUtils, genUtils, asyncUtils
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 
@@ -39,10 +39,10 @@ async def selectTargets(logger, lookback):
     for desig, window in windows.items():
         candidate = candidateDict[desig]
         if window:
-            if not candidate.isAfterStart(dt.utcnow()):  # we don't want to change the start time of the window after it has started (we can't generate ephems for the past so we would artificially shorten the window each time we run -> bad for record-keeping)
-                candidateDict[desig].StartObservability = CandidateDatabase.timeToString(window[0])
-            if not candidate.isAfterEnd(dt.utcnow()):  # we don't want to change the end time after the window is over
-                candidateDict[desig].EndObservability = CandidateDatabase.timeToString(window[1])
+            logger.debug("Found window for " + desig + "!")
+            if not candidate.isAfterStart(dt.utcnow()) or candidate.isAfterEnd(dt.utcnow()):  # we don't want to change the start time of the window after it has started, unless the whole window is over (we can't generate ephems for the past so we would artificially shorten the window each time we run)
+                candidateDict[desig].StartObservability = genUtils.timeToString(window[0])
+            candidateDict[desig].EndObservability = genUtils.timeToString(window[1])
             candidatesWithWindows.append(desig)
         else:
             if not candidate.isAfterStart(dt.utcnow()):  # if the canidate has a window and it's already opened, don't mark it
@@ -77,7 +77,7 @@ async def selectTargets(logger, lookback):
             logger.debug("Rejected " + desig + " for error limit.")
             continue
 
-    for desig in candidatesWithWindows:  # if the candidates were rejected but aren't rejected this time through, we assume something has changed and they are now viable, so we remove their rejected reason
+    for desig in candidatesWithWindows:  # if the candidates were rejected before but aren't rejected this time through, we assume something has changed and they are now viable, so we remove their rejected reason
         candidate = candidateDict[desig]
         if desig not in rejected and candidate.hasField("RejectedReason"):
             delattr(candidate, "RejectedReason")
@@ -95,7 +95,7 @@ if __name__ == '__main__':
     logger = logging.getLogger(__name__)
     logging.basicConfig(format='%(asctime)s %(levelname)s: %(message)s', filename='mpcCandidate.log', encoding='utf-8',
                         datefmt='%m/%d/%Y %H:%M:%S', level=logging.INFO)
-    logger.addFilter(generalUtils.filter)
+    logger.addFilter(genUtils.filter)
 
     # run the program
     asyncio.run(selectTargets(logger, 24))

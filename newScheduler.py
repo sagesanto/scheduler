@@ -2,7 +2,8 @@ from scheduleLib import sCoreCondensed as sc
 import astropy.units as u
 from astropy.coordinates import EarthLocation
 from pytz import timezone
-from astroplan import Observer, AltitudeConstraint, AirmassConstraint, AtNightConstraint, is_observable, is_always_observable, months_observable, FixedTarget, ObservingBlock
+from astroplan import Observer, AltitudeConstraint, AirmassConstraint, AtNightConstraint, is_observable, \
+    is_always_observable, months_observable, FixedTarget, ObservingBlock
 from astropy.table import Table
 from astropy.coordinates import SkyCoord
 import astropy.units as u
@@ -10,7 +11,7 @@ import numpy as np
 from astropy.time import Time
 from astroplan.utils import time_grid_from_range
 
-#and the flags are all dead at the tops of their poles
+# and the flags are all dead at the tops of their poles
 
 # class TmoAltitudeConstraint:
 #     def __init__(self, boolean_constraint=True):
@@ -54,9 +55,6 @@ from astroplan.utils import time_grid_from_range
 #             zenMax =
 
 
-
-
-
 location = EarthLocation.from_geodetic(-117.6815, 34.3819, 0)
 TMO = Observer(name='Table Mountain Observatory',
                location=location,
@@ -69,17 +67,16 @@ time_range = Time(["2023-06-01 20:00", "2023-06-02 04:45"])
 target_table = Table.read('targets.txt', format='ascii.basic')
 
 # Create astroplan.FixedTarget objects for each one in the table
-targets = [FixedTarget(coord=SkyCoord(ra=ra*u.deg, dec=dec*u.deg), name=name)
+targets = [FixedTarget(coord=SkyCoord(ra=ra * u.deg, dec=dec * u.deg), name=name)
            for name, ra, dec in target_table]
 
-constraints = [AltitudeConstraint(10*u.deg, 90*u.deg),
+constraints = [AltitudeConstraint(10 * u.deg, 90 * u.deg),
                AirmassConstraint(5), AtNightConstraint.twilight_civil()]
 
 ever_observable = is_observable(constraints, TMO, targets, time_range=time_range)
 
 # Are targets *always* observable in the time range?
 always_observable = is_always_observable(constraints, TMO, targets, time_range=time_range)
-
 
 observability_table = Table()
 
@@ -90,8 +87,9 @@ observability_table['ever_observable'] = ever_observable
 observability_table['always_observable'] = always_observable
 
 times = time_grid_from_range(time_range)
-altaz = TMO.altaz(times, targets,grid_times_targets=True) #the returned value here is a skycoord object containing many lists and things
-zenithAngle = altaz.zen #zenithAngle is an array that holds one array for each target. inside each target's array is a list of SkyCoord zenith angles, each corresponding to a time
+altaz = TMO.altaz(times, targets,
+                  grid_times_targets=True)  # the returned value here is a skycoord object containing many lists and things
+zenithAngle = altaz.zen  # zenithAngle is an array that holds one array for each target. inside each target's array is a list of SkyCoord zenith angles, each corresponding to a time
 print(altaz)
 print(len(altaz))
 print(type(altaz))

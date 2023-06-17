@@ -20,7 +20,7 @@ from astropy.coordinates import Angle
 from numpy import sqrt
 
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
-from scheduleLib import mpcUtils, generalUtils, asyncUtils
+from scheduleLib import mpcUtils, genUtils, asyncUtils
 
 utc = pytz.UTC
 
@@ -153,9 +153,11 @@ class TargetSelector:
         self.killClients()
 
     def printSetupInfo(self):
-        print("Length of window:", self.endTime - self.startTime, "(h:m:s)")
+        durationMinutes = round((self.endTime - self.startTime).total_seconds() / 60)
+        formattedDuration = "{:02d}:{:02d}".format(durationMinutes // 60, durationMinutes % 60)
+        print(f"Length of window: {formattedDuration} (h:m)")
         print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",self.endTime.strftime("%Y-%m-%d %H:%M"), "UTC")
-        print("Allowing", self.minHoursBeforeTransit, "hours minimum before transit and", self.maxHoursBeforeTransit,"hours after.")
+        print("Allowing", self.minHoursBeforeTransit, "hours before transit and", self.maxHoursBeforeTransit,"hours after.")
 
     def getLocalSiderealTime(self, dt: datetime):
         """
@@ -373,7 +375,6 @@ class TargetSelector:
             post_params["start"] = start_at
             post_params["obj"] = desig
             try:
-                # this clearly isn't asynchronous, i've just already initialized the client and have yet to get rid of it
                 mpc_request = self.webClient.post(self.mpc.mpc_post_url, data=post_params)
             except (httpx.ConnectError, httpx.HTTPError) as err:
                 self.logger.error('Failed to connect to/retrieve data from the MPC. Stopping')
@@ -406,13 +407,9 @@ class TargetSelector:
         Can a target with RA ra and Dec dec be observed at time dt? Checks hour angle limits.
         :return: bool
         """
-        hourAngleWindow = generalUtils.getHourAngleLimits(dec)
+        hourAngleWindow = genUtils.getHourAngleLimits(dec)
         raWindow = (self.dateToSidereal(dt) + hourAngleWindow[0],
                     self.dateToSidereal(dt) + hourAngleWindow[1])
-        # print("dateToSidereal for now:",self.dateToSidereal(dt))
-        # print(ra.hms)
-        # print(raWindow[0].hms,raWindow[1].hms)
-        # print("Difference: before:",(raWindow[0]-ra).hms,"after:",(raWindow[1]-ra).hms)
         return ra.is_within_bounds(raWindow[0], raWindow[1])
 
     def isObservable(self, ephem):
@@ -422,7 +419,7 @@ class TargetSelector:
         :return: bool
         """
         if self.decMin < ephem["dec"] < self.decMax:
-            RA, dec = generalUtils.ensureAngle(ephem["RA"]), generalUtils.ensureAngle(ephem["dec"])
+            RA, dec = genUtils.ensureAngle(ephem["RA"]), genUtils.ensureAngle(ephem["dec"])
             return self.observationViable(ephem["obsTime"], RA, dec)
         return False
 
@@ -468,8 +465,8 @@ class TargetSelector:
         for desig in windows.keys():
             if windows[desig] is not None:
                 self.logger.debug("Target" + desig + "is visible between" +
-                                  windows[desig][0].strftime("%Y-%m-%d %H:%M:%S") + "and" +
-                                  windows[desig][1].strftime("%Y-%m-%d %H:%M:%S"))
+                                  windows[desig][0].strftime("%Y-%m-%d %H:%M") + "and" +
+                                  windows[desig][1].strftime("%Y-%m-%d %H:%M"))
             else:
                 self.logger.debug("Nominal: No valid observability window for target " + desig + ".")
         return windows

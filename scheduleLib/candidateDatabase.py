@@ -1,4 +1,5 @@
-import os, uuid, pytz
+import os, uuid, pytz, pandas as pd
+from collections import OrderedDict
 import sqlite3, logging
 import sys
 import time
@@ -7,14 +8,16 @@ from string import Template
 from photometrics.sql_database import SQLDatabase
 from datetime import datetime, timedelta
 
-from scheduleLib import generalUtils
+from scheduleLib import genUtils
 
 validFields = ["ID", "Author", "DateAdded", "DateLastEdited", "RemovedDt", "RemovedReason", "RejectedReason", 'Night',
-               'Updated', 'StartObservability', 'EndObservability', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA',
+               'Updated', 'StartObservability', 'EndObservability', 'TransitTime', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA',
                'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes',
                'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 
+# MPC target's Name	Processed	Submitted	approx. transit time (@TMO)	RA	Dec	RA Vel ("/min)	Dec Vel ("/min)	Vmag	~Error (arcsec)	Error Color
+#CandidateName, Processed, Submitted, TransitTime, RA, Dec, dRA, dDec, Magnitude, RMSE
 def generateID(candidateName, candidateType, author):
     hashed = str(hash(candidateName + candidateType + author))
     return int(hashed)
@@ -63,6 +66,14 @@ class Candidate:
 
         return cls(CandidateName, CandidateType, **entry)  # splat
 
+    @staticmethod
+    def candidatesToDf(candidateList: list):
+        candidateDicts = [candidate.asDict() for candidate in candidateList]
+        keys = list(OrderedDict.fromkeys(key for dictionary in candidateDicts for key in dictionary.keys()))
+        seriesList = [pd.Series(d) for d in candidateDicts]
+        df = pd.concat(seriesList, axis=1, keys=keys, ignore_index=True).transpose()
+        return df
+
     def hasField(self, field):
         return field in self.__dict__.keys()
 
@@ -71,9 +82,9 @@ class Candidate:
         Is the provided time after the start time of this Candidate's observability window?
         :return: bool
         """
-        dt = CandidateDatabase.stringToTime(dt)  # ensure that we have a datetime object
+        dt = genUtils.stringToTime(dt)  # ensure that we have a datetime object
         if self.hasField("startObservability"):
-            if dt > CandidateDatabase.stringToTime(self.startObservability):
+            if dt > genUtils.stringToTime(self.startObservability):
                 return True
         return False
 
@@ -83,7 +94,7 @@ class Candidate:
         :return: bool
         """
         if self.hasField("endObservability"):
-            if dt > CandidateDatabase.stringToTime(self.endObservability):
+            if dt > genUtils.stringToTime(self.endObservability):
                 return True
         return False
 
@@ -95,26 +106,28 @@ class Candidate:
         :param duration: hours, float
         :return: bool
         """
-        start, end = CandidateDatabase.stringToTime(start).replace(tzinfo=pytz.UTC), CandidateDatabase.stringToTime(
+        start, end = genUtils.stringToTime(start).replace(tzinfo=pytz.UTC), genUtils.stringToTime(
             end).replace(tzinfo=pytz.UTC)  # ensure we have datetime object
 
-
-        print("start window:",start,"end window:",end)
         if self.hasField("StartObservability") and self.hasField("EndObservability"):
-            startObs, endObs = CandidateDatabase.stringToTime(self.StartObservability).replace(tzinfo=pytz.UTC), CandidateDatabase.stringToTime(
-                self.EndObservability).replace(tzinfo=pytz.UTC)
-            print("start observability:", startObs, "end observability:", endObs)
-
+            startObs = genUtils.stringToTime(self.StartObservability).replace(tzinfo=pytz.UTC)
+            endObs = genUtils.stringToTime(self.EndObservability).replace(tzinfo=pytz.UTC)
+            print(start,end)
+            print(startObs,endObs)
             if start < endObs <= end or start < startObs <= end:  # the windows do overlap
-                print("Within window")
-                print(end-startObs)
-                print(endObs-start)
-                if min(end - startObs, endObs - start) >= timedelta(hours=duration):  # the window is longer than duration
-                    return True
+                dur = min(end, endObs) - max(start, startObs)
+                print(dur)
+                if dur >= timedelta(hours=duration):  # the window is longer than min allowed duration
+                    return True, dur
         return False
 
 
 def _queryToDict(queryResults):
+    """
+    Convert SQLite query results to a list of dictionaries.
+    :param queryResults: List of SQLite query row objects.
+    :return: List of dictionaries representing query results.
+    """
     dictionary = [dict(row) for row in queryResults if row]
     return [{k: v for k, v in a.items() if v is not None} for a in dictionary if a]
 
@@ -139,32 +152,9 @@ class CandidateDatabase(SQLDatabase):
         self.close()
 
     @staticmethod
-    def timeToString(dt, logger=None):
-        try:
-            if isinstance(dt,
-                          str):  # if we get a string, check that it's valid by casting it to dt. If it isn't, we'll return None
-                dt = CandidateDatabase.stringToTime(dt)
-            return dt.strftime("%Y-%m-%d %H:%M:%S")
-        except:
-            if logger:
-                logger.error("Unable to coerce time from", dt)
-            return None
-
-    @staticmethod
-    def stringToTime(timeString, logger=None):
-        if isinstance(timeString, datetime):  # they gave us a datetime, return it back to them
-            return timeString
-        try:
-            return datetime.strptime(timeString, "%Y-%m-%d %H:%M:%S")
-        except:
-            if logger:
-                logger.error("Unable to coerce time from", timeString)
-            return None
-
-    @staticmethod
     def timestamp():
         # UTC time in YYYY-MM-DD HH:MM:SS format
-        return CandidateDatabase.timeToString(datetime.utcnow())
+        return genUtils.timeToString(datetime.utcnow())
 
     def open(self, db_file, timeout=5, check_same_thread=False):
         """
@@ -246,7 +236,6 @@ class CandidateDatabase(SQLDatabase):
         badKeys = []
         for key, value in dictionary.items():
             if key not in validFields or self.isFieldProtected(key):
-                # self.logger.warning("Warning: Invalid field: can't edit field or add field \'"+key+"\'")
                 badKeys.append(key)
         for key in badKeys:
             dictionary.pop(key)
@@ -258,7 +247,7 @@ class CandidateDatabase(SQLDatabase):
         :param when: datetime or string, PST
         :return: A list of Candidates, each constructed from a row in the dataframe, or None
         """
-        when = self.timeToString(when)
+        when = genUtils.timeToString(when)
         if when is None:
             return None
         queryResult = self.table_query("Candidates", "*", "DateAdded > ?", [when], returnAsCandidates=True)
@@ -306,7 +295,7 @@ if __name__ == '__main__':
                         encoding='utf-8', datefmt='%m/%d/%Y %H:%M:%S', level=logging.DEBUG)
     db = CandidateDatabase("../candidate database.db", "Sage")
 
-    db.logger.addFilter(generalUtils.filter)
+    db.logger.addFilter(genUtils.filter)
 
     candidate = Candidate("Test", "Test", Notes="test")
     ID = db.insertCandidate(candidate)

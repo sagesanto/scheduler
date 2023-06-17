@@ -4,7 +4,7 @@ from colorlog import ColoredFormatter
 
 from mpcCandidateLogger import runLogging
 from mpcCandidateSelector import selectTargets
-from scheduleLib import generalUtils
+from scheduleLib import genUtils
 from datetime import datetime as dt, timedelta
 
 
@@ -28,7 +28,7 @@ logger.addHandler(fileHandler)
 logger.addHandler(stream)
 logger.setLevel(logging.DEBUG)
 
-logger.addFilter(generalUtils.filter)
+logger.addFilter(genUtils.filter)
 
 
 interval = 15  # minutes between runs
