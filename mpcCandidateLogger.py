@@ -16,26 +16,27 @@ from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
     try:
-        ephems = await mpcUtils.asyncMultiEphem([desig], dt.utcnow(), 0, mpc, targetSelector.asyncHelper,logger,obsCode=500)
+        ephems = await mpcUtils.asyncMultiEphem([desig], dt.utcnow(), 0, mpc, targetSelector.asyncHelper, logger,
+                                                obsCode=500)
     except:
         logger.exception("Encountered exception while trying to get ephems for " + desig)
         return None, None
     if desig in ephems.keys():
         first = ephems[desig][0]
-        return first[3], first[4]
+        return first[3] * 60, first[4] * 60  # we want "/minute
     else:
-        logger.info("Can't get velocity for "+desig+": couldn't get ephemeris.")
+        logger.info("Can't get velocity for " + desig + ": couldn't get ephemeris.")
     return None, None
 
 
-async def listEntryToCandidate(entry, mpc, logger,targetSelector):
+async def listEntryToCandidate(entry, mpc, logger, targetSelector):
     constructDict = {}
     CandidateName = entry.designation
     CandidateType = "MPC NEO"
     constructDict["RA"], constructDict["Dec"] = entry.ra, entry.dec
     constructDict["Magnitude"] = entry.vmag
     constructDict["Updated"] = genUtils.timeToString(mpcUtils.updatedStringToDatetime(entry.updated))
-    dRA, dDec = await getVelocities(CandidateName, mpc, logger,targetSelector)
+    dRA, dDec = await getVelocities(CandidateName, mpc, logger, targetSelector)
     # currently, can't get nObs and Score from mpc_neo_confirm. not going to implement it myself - we'll go without
     if dRA and dDec:
         constructDict["dRA"], constructDict["dDec"] = dRA, dDec
@@ -68,7 +69,7 @@ async def runLogging(logger, lookback):
     mpc.get_neo_list()  # prompt the mpc object to fetch the list
     logger.info("Constructing Candidates from MPC List")
     for entry in mpc.neo_confirm_list:  # access the list and create dict
-        ent = await listEntryToCandidate(entry, mpc, logger,targetSelector)  # transform list entries to candidates
+        ent = await listEntryToCandidate(entry, mpc, logger, targetSelector)  # transform list entries to candidates
         currentCandidates[ent.CandidateName] = ent
     logger.info("Construction complete.")
 
@@ -76,7 +77,7 @@ async def runLogging(logger, lookback):
     offsetDict = await targetSelector.fetchUncertainties(desigs)
     for desig in desigs:  # loop over the candidates and find their uncertainties, adding them to the candidate object
         uncertainties = list(TargetSelector.extractUncertainty(desig, offsetDict, logger, graph=False,
-                                                          savePath="testingOutputs/plots"))  # why did i protect this? who knows
+                                                               savePath="testingOutputs/plots"))  # why did i protect this? who knows
         if uncertainties is not None:
             currentCandidates[desig].RMSE_RA, currentCandidates[desig].RMSE_Dec = uncertainties[0:2]
             currentCandidates[desig].ApproachColor = uncertainties[-1]
@@ -87,7 +88,8 @@ async def runLogging(logger, lookback):
     updated = []  # candidates that appear in both the list and the database and may need to be updated
     new = []  # candidates that appear in the list but not in the database
     removed = []  # candidates that appear in the database but not in the list
-    dbCandidates = dbConnection.candidatesAddedSince(dt.utcnow() - timedelta(hours=lookback))  # candidates added to the db in the last [lookback] hours
+    dbCandidates = dbConnection.candidatesAddedSince(
+        dt.utcnow() - timedelta(hours=lookback))  # candidates added to the db in the last [lookback] hours
 
     if dbCandidates:
         dbCandidates = {a.CandidateName: a for a in dbCandidates if a.CandidateType == "MPC NEO"}
@@ -138,7 +140,6 @@ async def runLogging(logger, lookback):
     logger.info("Removed (" + str(len(removed)) + ")")
     logger.debug(str(removed))
 
-
     # generalUtils.logAndPrint("Done. will run again at "+dbConnection.timeToString(dt.now()+timedelta(minutes=interval))+" PST.",logger.info)
     # print("\n")
     del dbConnection  # close the connection to unlock db
@@ -156,4 +157,4 @@ if __name__ == "__main__":
                         datefmt='%m/%d/%Y %H:%M:%S', level=logging.DEBUG)
     logging.getLogger('').addFilter(genUtils.filter)
 
-    asyncio.run(runLogging(logger,24))
+    asyncio.run(runLogging(logger, 24))

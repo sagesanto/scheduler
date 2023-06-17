@@ -12,16 +12,18 @@ from scheduleLib.genUtils import ScheduleError
 
 from astral import LocationInfo, zoneinfo, sun, SunDirection
 
-def visualizeObservability(candidates:list,sunset,sunrise):
+#most of this is proof-of-concept stuff for the newScheduler, just packaged to be semi-useful as a tool
+def visualizeObservability(candidates: list, sunset, sunrise):
     """
     Visualize the observability windows of candidates as a stacked timeline.
 
     :param candidates: list of Candidate objects
 
     """
-    print(sunset,sunrise)
+    print(sunset, sunrise)
     # Filter candidates with observability windows
-    observability_candidates = [c for c in candidates if c.hasField("StartObservability") and c.hasField("EndObservability")]
+    observability_candidates = [c for c in candidates if
+                                c.hasField("StartObservability") and c.hasField("EndObservability")]
 
     # Sort candidates by their start times (earliest to latest)
     observability_candidates.sort(key=lambda c: genUtils.stringToTime(c.StartObservability))
@@ -29,7 +31,7 @@ def visualizeObservability(candidates:list,sunset,sunrise):
     # Calculate start and end timestamps
 
     xMin, xMax = sunset.timestamp(), sunrise.timestamp()
-    windowDuration = xMax-xMin
+    windowDuration = xMax - xMin
     # Get the unique colors and calculate the number of bars per color
     num_candidates = len(observability_candidates)
     num_colors = len(plt.cm.tab20.colors)
@@ -46,8 +48,8 @@ def visualizeObservability(candidates:list,sunset,sunrise):
 
     # Iterate over observability candidates and plot their windows
     for i, candidate in enumerate(observability_candidates):
-        start_time = genUtils.stringToTime(candidate.StartObservability)-timedelta(hours=7)
-        end_time = genUtils.stringToTime(candidate.EndObservability)-timedelta(hours=7)
+        start_time = genUtils.stringToTime(candidate.StartObservability) - timedelta(hours=7)
+        end_time = genUtils.stringToTime(candidate.EndObservability) - timedelta(hours=7)
 
         # Convert start time and end time to Unix timestamps
         start_unix = start_time.timestamp()
@@ -61,10 +63,11 @@ def visualizeObservability(candidates:list,sunset,sunrise):
 
         # Place the label at the center of the bar
         # ax.text(start_unix + duration / 2, i, candidate.CandidateName, ha='center', va='center')
-        ax.text(max(start_unix + duration / 2,xMin+duration/2), i, candidate.CandidateName, ha='center', va='center',bbox={'facecolor':'white', 'alpha':0.75, 'pad':5})
+        ax.text(max(start_unix + duration / 2, xMin + duration / 2), i, candidate.CandidateName, ha='center',
+                va='center', bbox={'facecolor': 'white', 'alpha': 0.75, 'pad': 5})
 
     # Set the x-axis limits based on start and end timestamps
-    ax.set_xlim(xMin, xMax+windowDuration/10)
+    ax.set_xlim(xMin, xMax + windowDuration / 10)
 
     # Format x-axis labels as human-readable datetime
     def format_func(value, tick_number):
@@ -79,11 +82,12 @@ def visualizeObservability(candidates:list,sunset,sunrise):
     # Set the y-axis label
     ax.set_ylabel("Candidates")
 
-
     # Adjust spacing
     plt.subplots_adjust(left=0.1, right=0.95, bottom=0.1, top=0.9)
     plt.suptitle("Candidates for Tonight")
-    plt.title(datetime.fromtimestamp(xMin).strftime("%b %d, %Y, %H:%M")+" to " + datetime.fromtimestamp(xMax).strftime("%b %d, %Y, %H:%M"))
+    plt.title(
+        datetime.fromtimestamp(xMin).strftime("%b %d, %Y, %H:%M") + " to " + datetime.fromtimestamp(xMax).strftime(
+            "%b %d, %Y, %H:%M"))
     # Show the plot
     plt.show()
 
@@ -115,7 +119,7 @@ print("Sunrise:", sunriseUTC)
 
 dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
 
-candidates = candidatesForTimeRange(sunsetUTC,sunriseUTC,1,dbConnection)
+candidates = candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
 
 # candidates = dbConnection.candidatesAddedSince(datetime.utcnow() - timedelta(hours=24))
 
@@ -132,4 +136,4 @@ df["TransitTime"] = df.apply(
 df = genUtils.prettyFormat(df)
 df.to_csv("out.csv")
 print(df.to_string)
-visualizeObservability(candidates,sunsetUTC,sunriseUTC)
+visualizeObservability(candidates, sunsetUTC, sunriseUTC)

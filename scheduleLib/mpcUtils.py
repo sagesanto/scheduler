@@ -180,6 +180,10 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
     for designation in designations:
         # parse valid ephems
         ephem = ephemResults[designation][0]
+        if ephem is None:
+            ephemDict[designation] = None
+            continue
+
         ephem = ephem.find_all('pre')[0].contents
         numRecs = len(ephem)
 
@@ -298,7 +302,7 @@ def updatedStringToDatetime(updated):
 def candidatesForTimeRange(obsStart, obsEnd, duration, dbConnection):
     candidates = dbConnection.table_query("Candidates", "*",
                                           "RemovedReason IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",
-                                          [datetime.utcnow() - timedelta(hours=72)], returnAsCandidates=True)
+                                          [datetime.utcnow() - timedelta(hours=24)], returnAsCandidates=True)
 
     res = [candidate for candidate in candidates if candidate.isObservableBetween(obsStart, obsEnd, duration)]
     print(res)

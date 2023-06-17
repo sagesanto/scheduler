@@ -144,7 +144,7 @@ def prettyFormat(candidateDf):
     """
 
     columns = ["CandidateName", "Processed", "Submitted", "TransitTime", "RA", "Dec", "dRA", "dDec", "Magnitude",
-               "RMSE"]
+               "RMSE","ApproachColor"]
 
     formattedDf = candidateDf.copy()
 
@@ -154,7 +154,7 @@ def prettyFormat(candidateDf):
 
     formattedDf["RMSE"] = tuple(zip(formattedDf["RMSE_RA"], formattedDf["RMSE_Dec"]))
 
-    formattedDf = formattedDf[columns]
+    formattedDf = formattedDf[columns].sort_values(by="RA")
 
     return formattedDf
 
