@@ -379,7 +379,6 @@ class TargetSelector:
             except (httpx.ConnectError, httpx.HTTPError) as err:
                 self.logger.error('Failed to connect to/retrieve data from the MPC. Stopping')
                 self.logger.error(err)
-                print('Failed to connect to/retrieve data from the MPC. Stopping')
                 exit()  # this will have to be handled by a wrapper if one is written
             if mpc_request.status_code == 200:
                 # extract 'pre' tags from reply

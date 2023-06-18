@@ -42,6 +42,8 @@ async def listEntryToCandidate(entry, mpc, logger, targetSelector):
         constructDict["dRA"], constructDict["dDec"] = dRA, dDec
     else:
         logger.warning("Couldn't find velocities for " + CandidateName)
+
+    constructDict["TransitTime"] = genUtils.timeToString(genUtils.findTransitTime(genUtils.ensureAngle(str(constructDict["RA"])+"h"),targetSelector.observatory))
     return Candidate(CandidateName, CandidateType, **constructDict)
 
 
@@ -64,7 +66,7 @@ async def runLogging(logger, lookback):
     targetSelector = TargetSelector()
     dbConnection = CandidateDatabase("./candidate database.db", "MPCLogger")
 
-    logger.info("--- Grabbing ---")
+    logger.info("--- Acquiring Candidates ---")
     currentCandidates = {}  # store desig:candidate for each candidate in the MPC's list of current candidates
     mpc.get_neo_list()  # prompt the mpc object to fetch the list
     logger.info("Constructing Candidates from MPC List")

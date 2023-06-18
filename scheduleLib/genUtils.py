@@ -1,8 +1,11 @@
 # Sage Santomenna 2023
 import sys, logging
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, timezone
 
+import pytz
+from astral import sun
 import pandas as pd
+from astral import LocationInfo
 from astropy.coordinates import Angle, SkyCoord
 from astropy import units as u
 from astropy.time import Time
@@ -135,6 +138,26 @@ def findTransitTime(rightAscension: Angle, observatory):
     return roundedTransitTime
 
 
+def getSunriseSunset():
+    TMO = LocationInfo(name="TMO", region="CA, USA", timezone="UTC", latitude=34.36,
+                       longitude=-117.63)
+
+    s = sun.sun(TMO.observer, date=datetime.now(timezone.utc), tzinfo=timezone.utc)
+    sunriseUTC = s["sunrise"]
+    sunsetUTC = sun.time_at_elevation(TMO.observer, -10, direction=sun.SunDirection.SETTING)
+
+    nowDt = datetime.utcnow()
+    nowDt = pytz.UTC.localize(nowDt)
+
+    if sunriseUTC < nowDt:  # if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
+        sunriseUTC = sunriseUTC + timedelta(days=1)
+
+    if sunsetUTC > sunriseUTC:
+        sunsetUTC = sunsetUTC - timedelta(days=1)
+
+    return sunriseUTC, sunsetUTC
+
+
 def prettyFormat(candidateDf):
     """Format a candidate df to be more user friendly.
 
@@ -144,7 +167,7 @@ def prettyFormat(candidateDf):
     """
 
     columns = ["CandidateName", "Processed", "Submitted", "TransitTime", "RA", "Dec", "dRA", "dDec", "Magnitude",
-               "RMSE","ApproachColor"]
+               "RMSE", "ApproachColor"]
 
     formattedDf = candidateDf.copy()
 

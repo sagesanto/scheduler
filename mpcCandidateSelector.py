@@ -50,7 +50,7 @@ async def selectTargets(logger, lookback):
                 logger.debug("Got None window for " + desig + ". Rejected for Observability.")
             elif candidate.hasField("RejectedReason"):
                 rejected.append(candidate)  # we don't want to have the candidate's rejection status get wiped just because it's after the window has started
-
+    logger.info("Rejecting targets")
     for desig, candidate in candidateDict.items():
         if not candidate.hasField("RMSE_RA") or not candidate.hasField("RMSE_Dec"):
             logger.info("Retrying uncertainty on " + desig)
@@ -82,7 +82,7 @@ async def selectTargets(logger, lookback):
         if desig not in rejected and candidate.hasField("RejectedReason"):
             delattr(candidate, "RejectedReason")
             dbConnection.setFieldNullByID(candidate.ID, "RejectedReason")
-
+    logger.info("Updating database")
     for desig, candidate in candidateDict.items():
         dbConnection.editCandidateByID(candidate.ID, candidate.asDict())
         logger.debug("Updated " + desig + ".")

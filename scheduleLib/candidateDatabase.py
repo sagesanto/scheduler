@@ -23,11 +23,6 @@ def generateID(candidateName, candidateType, author):
     return int(hashed)
 
 
-def logAndPrint(msg, loggerMethod):
-    loggerMethod(msg)  # logger method is a function like logger.info logger.error etc
-    print(msg)
-
-
 # noinspection PyUnresolvedReferences
 class Candidate:
     def __init__(self, CandidateName: str, CandidateType: str, **kwargs):
@@ -112,11 +107,11 @@ class Candidate:
         if self.hasField("StartObservability") and self.hasField("EndObservability"):
             startObs = genUtils.stringToTime(self.StartObservability).replace(tzinfo=pytz.UTC)
             endObs = genUtils.stringToTime(self.EndObservability).replace(tzinfo=pytz.UTC)
-            print(start,end)
-            print(startObs,endObs)
+            # print(start,end)
+            # print(startObs,endObs)
             if start < endObs <= end or start < startObs <= end:  # the windows do overlap
                 dur = min(end, endObs) - max(start, startObs)
-                print(dur)
+                # print(dur)
                 if dur >= timedelta(hours=duration):  # the window is longer than min allowed duration
                     return True, dur
         return False

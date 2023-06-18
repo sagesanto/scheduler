@@ -1,99 +1,127 @@
-from scheduleLib import sCoreCondensed as sc
+import astropy as astropy
+import astropy.coordinates
+import pytz
+
+from scheduleLib import sCoreCondensed as sc, genUtils, mpcUtils
+from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
+from scheduleLib.mpcTargetSelectorCore import TargetSelector
+
 import astropy.units as u
 from astropy.coordinates import EarthLocation
 from pytz import timezone
-from astroplan import Observer, AltitudeConstraint, AirmassConstraint, AtNightConstraint, is_observable, \
-    is_always_observable, months_observable, FixedTarget, ObservingBlock
+from astroplan import Observer, AltitudeConstraint, AirmassConstraint, AtNightConstraint, TimeConstraint, is_observable, \
+    is_always_observable, months_observable, FixedTarget, ObservingBlock, Transitioner, PriorityScheduler
+from astroplan.scheduling import Schedule
 from astropy.table import Table
 from astropy.coordinates import SkyCoord
 import astropy.units as u
 import numpy as np
 from astropy.time import Time
-from astroplan.utils import time_grid_from_range
+import astroplan.utils
+from astral import LocationInfo, zoneinfo, sun, SunDirection
+from datetime import datetime, timedelta, timezone
+
+utc = pytz.UTC
+
 
 # and the flags are all dead at the tops of their poles
 
-# class TmoAltitudeConstraint:
-#     def __init__(self, boolean_constraint=True):
-#         self.boolean_constraint = boolean_constraint
-#
-#         # This defines the min and max allowable altitude based on the target's dec
-#
-#         # TODO: Get EVERYONE to check this - if we fuck this up, it's all over
-#         self.decToAltLimits = {  # {decWindow:range(minAlt,maxAlt)}
-#             range(-38, -36): range(0, 0),
-#             range(-36, -34): range(-35, 42.6104),
-#             range(-34, -32): range(-35, 45.9539),
-#             range(-32, -30): range(-35, 48.9586),
-#             range(-30, -28): range(-35, 51.6945),
-#             range(-28, -26): range(-35, 54.2121),
-#             range(-26, -24): range(-35, 56.5487),
-#             range(-24, -22): range(-35, 58.7332),
-#             range(-22, 0): range(-35, 60),
-#             range(0, 46): range(-52.5, 60),
-#             range(56, 66): range(-30, 60),
-#             range(66, 74): range(0, 0)
-#         }
-#
-#     #this is gonna be so slow
-#     def calculateLimits(self, times, observer, targets):
-#         altitudeLimitDict = {}
-#         for target in targets:
-#             for decRange in self.decToAltLimits:
-#                 if float(target.dec.to_string(decimal=True)) in decRange: #man this is miserable
-#                     altitudeLimitDict[target] = self.decToAltLimits[decRange]
-#                     break
-#         return altitudeLimitDict
-#
-#     def compute_constraint(self, times, observer, targets):
-#         altitudeLimitDict = self.calculateLimits(times,observer,targets)
-#
-#         for target in targets:
-#             altaz = observer.altaz(times, target)
-#             zenithAngle = altaz.zen #the return type of this is unclear atm - i think this is a list of zenith angles, one for each time
-#             #now something clever needs to be done here that compares the zenith angle at each time and returns a boolean mask
-#             zenMax =
+class ObservabilityWindowConstraint(astroplan.Constraint):
+    def __init__(self, candidateDict, boolean_constraint=True):
+        self.booleanConstraint = boolean_constraint
+        self.candidateDict = candidateDict
+
+    def retrieveCandidateFromTarget(self, coord: astropy.coordinates.SkyCoord):
+        coordTuple = (genUtils.ensureFloat(coord.ra), genUtils.ensureFloat(coord.dec))
+        return self.candidateDict[coordTuple]
+
+    def compute_constraint(self, times, observer, targets):
+        print(targets)
+        masks = []
+        for target in targets:
+            print(target)
+            targetCandidate = self.retrieveCandidateFromTarget(target)
+            expTime = timedelta(seconds=mpcUtils._findExposure(targetCandidate.Magnitude, str=False))
+            obsMask = np.array([targetCandidate.isObservableBetween(time, time + expTime, expTime.days * 24) for time in
+                                times.datetime])
+            masks.append(obsMask)
+        return np.array(masks)
+
+        # this needs to return something that looks like this:
+
+
+#             try:
+#                 mask = np.array([min_time <= t.time() <= max_time for t in times.datetime])
+#             except BaseException:                # use np.bool so shape queries don't cause problems
+#                 mask = np.bool_(min_time <= times.datetime.time() <= max_time)
 
 
 location = EarthLocation.from_geodetic(-117.6815, 34.3819, 0)
 TMO = Observer(name='Table Mountain Observatory',
                location=location,
-               timezone=timezone('US/Pacific'),
-               )
+               timezone=utc,
+               )  # timezone=pytz.timezone('US/Pacific')
 
-time_range = Time(["2023-06-01 20:00", "2023-06-02 04:45"])
+sunriseUTC, sunsetUTC = genUtils.getSunriseSunset()
 
-# Read in the table of targets
-target_table = Table.read('targets.txt', format='ascii.basic')
+timeRange = Time([sunsetUTC, sunriseUTC])
+#
+# # Read in the table of targets
+# target_table = Table.read('targets.txt', format='ascii.basic')
 
-# Create astroplan.FixedTarget objects for each one in the table
-targets = [FixedTarget(coord=SkyCoord(ra=ra * u.deg, dec=dec * u.deg), name=name)
-           for name, ra, dec in target_table]
+dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
 
-constraints = [AltitudeConstraint(10 * u.deg, 90 * u.deg),
-               AirmassConstraint(5), AtNightConstraint.twilight_civil()]
+candidates = mpcUtils.candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
 
-ever_observable = is_observable(constraints, TMO, targets, time_range=time_range)
+# candidateDict = {}
+for c in candidates:
+    c.RA = genUtils.ensureAngle(str(c.RA) + "h")
+    c.Dec = genUtils.ensureAngle(float(c.Dec))
+    # candidateDict[(c.RA, c.Dec)] = c
+
+# create astroplan.FixedTarget objects for each one
+# targets = [
+#     FixedTarget(coord=SkyCoord(ra=genUtils.ensureAngle(c.RA), dec=genUtils.ensureAngle(c.Dec)), name=c.CandidateName)
+#     for c in candidates]
+
+# constraints = [ObservabilityWindowConstraint(candidateDict)]
+
+# this is disgusting
+timeConstraintDict = {c.CandidateName: TimeConstraint(Time(genUtils.stringToTime(c.StartObservability)),
+                                                      Time(genUtils.stringToTime(c.EndObservability))) for c in
+                      candidates}
+print(timeConstraintDict)
+# everObservable = astroplan.constraints.is_observable(constraints, TMO, targets, time_range=timeRange)
 
 # Are targets *always* observable in the time range?
-always_observable = is_always_observable(constraints, TMO, targets, time_range=time_range)
+# alwaysObservable = is_always_observable(constraints, TMO, targets, time_range=timeRange)
+blocks = []
+for c in candidates:
+    expTime = mpcUtils._findExposure(c.Magnitude, str=False) * u.second
+    name = c.CandidateName
+    target = FixedTarget(coord=SkyCoord(ra=c.RA, dec=c.Dec), name=name)
+    print(name,target.coord)
+    b = ObservingBlock(target, expTime, 0, configuration={"object": c.CandidateName},
+                       constraints=[timeConstraintDict[name]])
+    blocks.append(b)
 
-observability_table = Table()
+slewRate = .8 * u.deg / u.second  # this is inaccurate and completely irrelevant. ignore it, we want a fixed min time between targets
 
-observability_table['targets'] = [target.name for target in targets]
+transitioner = Transitioner(slewRate, {'object': {'default': 180 * u.second}})
+priorityScheduler = PriorityScheduler(constraints=[], observer=TMO, transitioner=transitioner,time_resolution=5*u.minute)
+schedule = Schedule(Time(sunsetUTC), Time(sunriseUTC))
 
-observability_table['ever_observable'] = ever_observable
+print(blocks)
+priorityScheduler(blocks, schedule)
+print(schedule)
+schedule.to_table(show_unused=False,show_transitions=False).pprint(max_width=2000)
 
-observability_table['always_observable'] = always_observable
+# observabilityTable = Table()
+#
+# observabilityTable['candidate'] = [target.name for target in targets]
+#
+# # observabilityTable['everObservable'] = everObservable
+# #
+# # observabilityTable['alwaysObservable'] = alwaysObservable
 
-times = time_grid_from_range(time_range)
-altaz = TMO.altaz(times, targets,
-                  grid_times_targets=True)  # the returned value here is a skycoord object containing many lists and things
-zenithAngle = altaz.zen  # zenithAngle is an array that holds one array for each target. inside each target's array is a list of SkyCoord zenith angles, each corresponding to a time
-print(altaz)
-print(len(altaz))
-print(type(altaz))
-print(zenithAngle)
-print(len(zenithAngle))
-print(type(zenithAngle))
-print(observability_table)
+# print(observabilityTable)

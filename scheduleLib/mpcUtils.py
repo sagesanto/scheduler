@@ -11,16 +11,27 @@ from scheduleLib import genUtils
 
 
 # this isn't terribly elegant
-def _findExposure(magnitude):
+def _findExposure(magnitude,str=True):
     # Internal: match magnitude to exposure description for TMO
-    if magnitude < 19.5:
-        return "1.0|300.0"
-    if magnitude < 20.5:
-        return "1.0|600.0"
-    if magnitude < 21.0:
-        return "2.0|600.0"
-    if magnitude < 21.5:
-        return "3.0|600.0"
+    magnitude = float(magnitude)
+    if str:
+        if magnitude <= 19.5:
+            return "1.0|300.0"
+        if magnitude <= 20.5:
+            return "1.0|600.0"
+        if magnitude <= 21.0:
+            return "2.0|600.0"
+        if magnitude <= 21.5:
+            return "3.0|600.0"
+    else:
+        if magnitude <= 19.5:
+            return 300
+        if magnitude <= 20.5:
+            return 600
+        if magnitude <= 21.0:
+            return 1200
+        if magnitude <= 21.5:
+            return 1800
 
 
 def dictFromEphemLine(ephem):
@@ -174,7 +185,7 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
    :rtype: Dict[str, List[Tuple[datetime.datetime, str, float, str, str, Any]]]
     """
     ephemResults, ephemDict = await asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst, asyncHelper,
-                                                           mpcPostURL,obsCode)
+                                                           logger, mpcPostURL,obsCode)
     designations = ephemResults.keys()
 
     for designation in designations:
@@ -190,7 +201,6 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
         # get object coordinates
         if numRecs == 1:
             logger.warning('Target ' + designation + ' is not observable')
-            obsList = None
         else:
             obsList = []
             ephem_entry_num = -1
@@ -217,7 +227,7 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
 
 
 async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: mpc,
-                                 asyncHelper: asyncUtils.AsyncHelper,
+                                 asyncHelper: asyncUtils.AsyncHelper, logger,
                                  mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi', obsCode = 654):
     """
     Asynchronously retrieve ephemerides for multiple objects. Requires internet connection.
@@ -264,18 +274,18 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
 
     for designation in designations:
         if designation not in ephemResults.keys() or ephemResults[designation] is None:
-            print("Request for ephemeris for candidate", designation, "failed. Will retry.")
+            logger.debug("Request for ephemeris for candidate " + designation + " failed. Will retry.")
             failedList.append(designation)
 
     if len(failedList):
-        print("Retrying...")
+        logger.debug("Retrying...")
         retryPost = [postContents[a] for a in failedList]
         retryEphems = await asyncHelper.multiGet([mpcPostURL] * len(failedList), failedList, soup=True,
                                                  postContent=retryPost)
 
         for retryDesignation in failedList:
             if retryDesignation not in retryEphems.keys() or retryEphems[retryDesignation] is None:
-                print("Request for", retryDesignation, "failed on retry. Eliminating and moving on.")
+                logger.debug("Request for", retryDesignation, "failed on retry. Eliminating and moving on.")
                 ephemDict[retryDesignation] = None
             else:
                 ephemResults[retryDesignation] = retryEphems[retryDesignation]
@@ -288,13 +298,16 @@ strMonthDict = dict(
 
 
 def updatedStringToDatetime(updated):
+    """
+    Convert the string from the "Updated" field of the MPC list to a datetime object
+    :param updated: string
+    :return: datetime
+    """
     if not updated:
         return None
     updated = updated.split()[1:3]
     month = strMonthDict[updated[0][:3]]
-    dayAndTime = math.modf(float(updated[1]))
-    integerDay = dayAndTime[1]
-    fractionalDay = dayAndTime[0]
+    fractionalDay, integerDay = math.modf(float(updated[1]))
     year = datetime.today().year
     return datetime(year, month, int(integerDay)) + timedelta(days=fractionalDay)
 
@@ -305,5 +318,4 @@ def candidatesForTimeRange(obsStart, obsEnd, duration, dbConnection):
                                           [datetime.utcnow() - timedelta(hours=24)], returnAsCandidates=True)
 
     res = [candidate for candidate in candidates if candidate.isObservableBetween(obsStart, obsEnd, duration)]
-    print(res)
     return res

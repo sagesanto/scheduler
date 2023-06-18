@@ -6,11 +6,6 @@ import asyncio
 from bs4 import BeautifulSoup
 
 
-def logAndPrint(msg, loggerMethod):
-    loggerMethod(msg)  # logger method is a function like logger.info logger.error etc
-    print(msg)
-
-
 class AsyncHelper:
     """
     A helper class to facilitate easier asynchronous requesting.
@@ -77,12 +72,11 @@ class AsyncHelper:
             else:
                 offsetReq = await self.client.get(url)
         except (httpx.ConnectError, httpx.HTTPError):
-            self.logger.error("Async ")
             self.logger.exception("HTTP error. Unable to make async request to " + url)
             return desig, None
         if offsetReq.status_code != 200:
-            logAndPrint("Error: HTTP status code " + str(offsetReq.status_code) + ". Unable to make async request to " +
-                        url + ". Reason given: " + offsetReq.reason_phrase, self.logger.error)
+            self.logger.error("Error: HTTP status code " + str(offsetReq.status_code) + ". Unable to make async request to " +
+                        url + ". Reason given: " + offsetReq.reason_phrase)
             return desig, None
         if soup:
             offsetReq = BeautifulSoup(offsetReq.content, 'html.parser')
