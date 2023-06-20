@@ -145,7 +145,7 @@ candidates = candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
 
 # candidates = dbConnection.candidatesAddedSince(datetime.utcnow() - timedelta(hours=24))
 
-print(genUtils.findTransitTime(Angle("18h39m00s"), TMO).strftime("%H:%M"))
+# print(genUtils.findTransitTime(Angle("18h39m00s"), TMO).strftime("%H:%M"))
 
 if not len(candidates):
     del dbConnection
@@ -153,7 +153,6 @@ if not len(candidates):
 
 print("Candidates for tonight(%s):" % len(candidates), candidates)
 df = Candidate.candidatesToDf(candidates)
-print(df.columns)
 # df["TransitTime"] = df.apply(
 #     lambda row: genUtils.findTransitTime(genUtils.ensureAngle(str(row["RA"]) + "h"), TMO).strftime("%H:%M"), axis=1)
 df = genUtils.prettyFormat(df)

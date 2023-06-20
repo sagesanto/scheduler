@@ -119,6 +119,11 @@ def ensureFloat(angle):
     return None
 
 
+def roundToTenMinutes(dt):
+    dt += timedelta(minutes=5)
+    return dt - timedelta(minutes=dt.minute % 10, seconds=dt.second, microseconds=dt.microsecond)
+
+
 def findTransitTime(rightAscension: Angle, observatory):
     """Calculate the transit time of an object at the given observatory.
 
@@ -136,13 +141,13 @@ def findTransitTime(rightAscension: Angle, observatory):
     haTime = ha.to(u.hourangle)
     haHours, haMinutes, haSeconds = haTime.hms
     transitTime = currentTime + timedelta(hours=haHours, minutes=haMinutes, seconds=0)
-    roundedTransitTime = transitTime + timedelta(minutes=5)
-    roundedTransitTime -= timedelta(minutes=roundedTransitTime.minute % 10)
-
-    return roundedTransitTime
-
+    return roundToTenMinutes(transitTime)
 
 def getSunriseSunset():
+    """
+    get sunrise and sunset for tmo, as datetimes
+    :return:
+    """
     TMO = LocationInfo(name="TMO", region="CA, USA", timezone="UTC", latitude=34.36,
                        longitude=-117.63)
 
@@ -166,8 +171,10 @@ def getSunriseSunset():
 def f(x):
     return round(float(x), 2)
 
+
 def tS(time):
     return stringToTime(time).strftime("%H:%M") + " - "
+
 
 def tE(time):
     return stringToTime(time).strftime("%H:%M")
@@ -192,7 +199,8 @@ def prettyFormat(candidateDf):
     formattedDf["Dec"] = formattedDf["Dec"].apply(lambda x: Angle(x, unit=u.degree).to_string(unit=u.deg, sep=" "))
 
     formattedDf["RMSE"] = tuple(zip(formattedDf["RMSE_RA"].apply(f), formattedDf["RMSE_Dec"].apply(f)))
-    formattedDf["Observability"] = formattedDf["StartObservability"].apply(tS) + formattedDf["EndObservability"].apply(tE)
+    formattedDf["Observability"] = formattedDf["StartObservability"].apply(tS) + formattedDf["EndObservability"].apply(
+        tE)
 
     formattedDf = formattedDf[columns].sort_values(by="RA")
 
