@@ -156,8 +156,10 @@ class TargetSelector:
         durationMinutes = round((self.endTime - self.startTime).total_seconds() / 60)
         formattedDuration = "{:02d}:{:02d}".format(durationMinutes // 60, durationMinutes % 60)
         print(f"Length of window: {formattedDuration} (h:m)")
-        print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",self.endTime.strftime("%Y-%m-%d %H:%M"), "UTC")
-        print("Allowing", self.minHoursBeforeTransit, "hours before transit and", self.maxHoursBeforeTransit,"hours after.")
+        print("Starting at", self.startTime.strftime("%Y-%m-%d %H:%M"), "and ending at",
+              self.endTime.strftime("%Y-%m-%d %H:%M"), "UTC")
+        print("Allowing", self.minHoursBeforeTransit, "hours before transit and", self.maxHoursBeforeTransit,
+              "hours after.")
 
     def getLocalSiderealTime(self, dt: datetime):
         """
@@ -247,7 +249,7 @@ class TargetSelector:
                 plt.savefig(savePath + "/" + name + ".png")
             plt.close()
 
-        return rmsRA, rmsDec, highestColor
+        return round(rmsRA, 2), round(rmsDec, 2), highestColor
 
     def timeUntilTransit(self, ra: float):
         """
@@ -341,7 +343,8 @@ class TargetSelector:
         self.filtDf = pd.concat((self.filtDf,
                                  self.filtDf.apply(lambda row: pd.Series(
                                      list(TargetSelector.extractUncertainty(row['Temp_Desig'], offsetDict, self.logger,
-                                                                       graph, savePath))[0:2], index=["rmsRA", "rmsDec"],
+                                                                            graph, savePath))[0:2],
+                                     index=["rmsRA", "rmsDec"],
                                      dtype=float), axis=1)), axis=1)
 
     async def fetchUncertainties(self, designations: list):

@@ -195,7 +195,12 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
             ephemDict[designation] = None
             continue
 
-        ephem = ephem.find_all('pre')[0].contents
+        ephem = ephem.find_all('pre')
+        if len(ephem) == 0:
+            ephemDict[designation] = None
+            continue
+
+        ephem = ephem[0].contents
         numRecs = len(ephem)
 
         # get object coordinates

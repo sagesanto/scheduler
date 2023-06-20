@@ -5,15 +5,15 @@ import pytz
 from astropy.coordinates import Angle
 from astropy import units as u
 from matplotlib import pyplot as plt
-
+from astropy.table import Table
 from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
 from scheduleLib.mpcUtils import candidatesForTimeRange
 from scheduleLib import genUtils
 from scheduleLib.genUtils import ScheduleError
-
+import pandas as pd
 from astral import LocationInfo, zoneinfo, sun, SunDirection
 
-#most of this is proof-of-concept stuff for the newScheduler, just packaged to be semi-useful as a tool before i implement it
+# most of this is proof-of-concept stuff for the newScheduler, just packaged to be semi-useful as a tool before i implement it
 
 BLACK = [0, 0, 0]
 RED = [255, 0, 0]
@@ -22,14 +22,19 @@ BLUE = [0, 0, 255]
 ORANGE = [255, 191, 0]
 PURPLE = [221, 160, 221]
 
-def visualizeObservability(candidates: list, sunset, sunrise):
+
+def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
     """
     Visualize the observability windows of candidates as a stacked timeline.
 
     :param candidates: list of Candidate objects
+    :param beginDt: time of beginning of observability window, datetime
+    :param endDt: time of edning of observability windows, datetime
+    :param schedule: WIP: astropy Table output by a scheduler. if passed, will be overlaid over the graphics.
+    :type schedule: Table
 
     """
-    print(sunset, sunrise)
+    print(beginDt, endDt)
     # Filter candidates with observability windows
     observabilityCandidates = [c for c in candidates if
                                c.hasField("StartObservability") and c.hasField("EndObservability")]
@@ -38,7 +43,7 @@ def visualizeObservability(candidates: list, sunset, sunrise):
     observabilityCandidates.sort(key=lambda c: genUtils.stringToTime(c.StartObservability))
 
     # Calculate start and end timestamps
-    xMin, xMax = sunset.timestamp(), sunrise.timestamp()
+    xMin, xMax = beginDt.timestamp(), endDt.timestamp()
     windowDuration = xMax - xMin
 
     # Get the unique colors and calculate the number of bars per color
@@ -56,9 +61,15 @@ def visualizeObservability(candidates: list, sunset, sunrise):
     fig, ax = plt.subplots(figsize=(10, 7))
     colorDict = {"GREEN": GREEN, "ORANGE": ORANGE, "RED": RED, "BLACK": BLACK}
 
+    # if schedule is not None:
+    #     df = schedule.to_pandas()
+    #     print(df)
+
     # Iterate over observability candidates and plot their windows
     for i, candidate in enumerate(observabilityCandidates):
-        startTime = genUtils.stringToTime(candidate.StartObservability) - timedelta(hours=7)
+        # TODO: take the time to actually figure out why the UTC stuff doesn't work instead of just applying this hardcoded offset:
+        startTime = genUtils.stringToTime(candidate.StartObservability) - timedelta(
+            hours=7)  # UTC conversion. this sucks
         endTime = genUtils.stringToTime(candidate.EndObservability) - timedelta(hours=7)
 
         # Convert start time and end time to Unix timestamps
@@ -69,7 +80,7 @@ def visualizeObservability(candidates: list, sunset, sunrise):
         duration = endUnix - startUnix
 
         # Plot a rectangle representing the observability window
-        ax.barh(i, duration, left=startUnix, height=0.6, color=np.array(colorDict[candidate.ApproachColor])/255)
+        ax.barh(i, duration, left=startUnix, height=0.6, color=np.array(colorDict[candidate.ApproachColor]) / 255)
 
         # Place the label at the center of the bar
         ax.text(max(startUnix + duration / 2, xMin + duration / 2), i, candidate.CandidateName, ha='center',
@@ -95,7 +106,8 @@ def visualizeObservability(candidates: list, sunset, sunrise):
     plt.subplots_adjust(left=0.1, right=0.95, bottom=0.1, top=0.9)
     plt.suptitle("Candidates for Tonight")
     plt.title(
-        datetime.utcfromtimestamp(xMin).strftime("%b %d, %Y, %H:%M") + " to " + datetime.utcfromtimestamp(xMax).strftime(
+        datetime.utcfromtimestamp(xMin).strftime("%b %d, %Y, %H:%M") + " to " + datetime.utcfromtimestamp(
+            xMax).strftime(
             "%b %d, %Y, %H:%M"))
 
     # Show the plot
@@ -141,9 +153,10 @@ if not len(candidates):
 
 print("Candidates for tonight(%s):" % len(candidates), candidates)
 df = Candidate.candidatesToDf(candidates)
-df["TransitTime"] = df.apply(
-    lambda row: genUtils.findTransitTime(genUtils.ensureAngle(str(row["RA"]) + "h"), TMO).strftime("%H:%M"), axis=1)
+print(df.columns)
+# df["TransitTime"] = df.apply(
+#     lambda row: genUtils.findTransitTime(genUtils.ensureAngle(str(row["RA"]) + "h"), TMO).strftime("%H:%M"), axis=1)
 df = genUtils.prettyFormat(df)
-df.to_csv("out.csv")
+df.to_csv("out.csv",index=False)
 print(df.to_string)
-visualizeObservability(candidates, sunsetUTC, sunriseUTC-timedelta(hours=1))
+visualizeObservability(candidates, sunsetUTC, sunriseUTC - timedelta(hours=1))

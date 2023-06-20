@@ -40,9 +40,13 @@ def stringToTime(timeString, logger=None):
     try:
         return datetime.strptime(timeString, "%Y-%m-%d %H:%M:%S")
     except:
-        if logger:
-            logger.error("Unable to coerce time from", timeString)
-        return None
+        try:
+            return datetime.strptime(timeString, "%Y-%m-%d %H:%M:%S.%f")
+        except Exception as e:
+            print(repr(e))
+            if logger:
+                logger.error("Unable to coerce time from", timeString)
+    return None
 
 
 def filter(record):
@@ -61,10 +65,10 @@ def logAndPrint(msg, loggerMethod):
 
 def toDecimal(angle: Angle):
     """
-    Return the decimal representation of an astropy Angle, as a float
-    :return: Decimal representation, float
+    Return the decimal degree representation of an astropy Angle, as a float
+    :return: Decimal degree representation, float
     """
-    return float(angle.to_string(decimal=True))  # ew
+    return round(float(angle.degree), 6)  # ew
 
 
 def toSexagesimal(angle: Angle):
@@ -149,6 +153,7 @@ def getSunriseSunset():
     nowDt = datetime.utcnow()
     nowDt = pytz.UTC.localize(nowDt)
 
+    # TODO: make this less questionable - it probably doesn't do exactly what i want it to when run at certain times of the day:
     if sunriseUTC < nowDt:  # if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
         sunriseUTC = sunriseUTC + timedelta(days=1)
 
@@ -156,6 +161,16 @@ def getSunriseSunset():
         sunsetUTC = sunsetUTC - timedelta(days=1)
 
     return sunriseUTC, sunsetUTC
+
+
+def f(x):
+    return round(float(x), 2)
+
+def tS(time):
+    return stringToTime(time).strftime("%H:%M") + " - "
+
+def tE(time):
+    return stringToTime(time).strftime("%H:%M")
 
 
 def prettyFormat(candidateDf):
@@ -166,7 +181,8 @@ def prettyFormat(candidateDf):
     :returns: pandas.DataFrame
     """
 
-    columns = ["CandidateName", "Processed", "Submitted", "TransitTime", "RA", "Dec", "dRA", "dDec", "Magnitude",
+    columns = ["CandidateName", "Processed", "Submitted", "Observability", "TransitTime", "RA",
+               "Dec", "dRA", "dDec", "Magnitude",
                "RMSE", "ApproachColor"]
 
     formattedDf = candidateDf.copy()
@@ -175,7 +191,8 @@ def prettyFormat(candidateDf):
         lambda x: (Angle(x, unit=u.degree) * 15).to_string(unit=u.hourangle, sep=" "))
     formattedDf["Dec"] = formattedDf["Dec"].apply(lambda x: Angle(x, unit=u.degree).to_string(unit=u.deg, sep=" "))
 
-    formattedDf["RMSE"] = tuple(zip(formattedDf["RMSE_RA"], formattedDf["RMSE_Dec"]))
+    formattedDf["RMSE"] = tuple(zip(formattedDf["RMSE_RA"].apply(f), formattedDf["RMSE_Dec"].apply(f)))
+    formattedDf["Observability"] = formattedDf["StartObservability"].apply(tS) + formattedDf["EndObservability"].apply(tE)
 
     formattedDf = formattedDf[columns].sort_values(by="RA")
 

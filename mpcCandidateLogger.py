@@ -23,7 +23,7 @@ async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
         return None, None
     if desig in ephems.keys():
         first = ephems[desig][0]
-        return first[3] * 60, first[4] * 60  # we want "/minute
+        return round(float(first[3]) * 60, 2), round(float(first[4]) * 60, 2)  # we want "/minute
     else:
         logger.info("Can't get velocity for " + desig + ": couldn't get ephemeris.")
     return None, None

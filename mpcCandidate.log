@@ -18453,3 +18453,2923 @@
 06/17/2023 21:23:53 DEBUG | Updated P21G9k7.
 06/17/2023 21:23:53 INFO | ---Finished MPC selection without error at 06/17/2023 21:23:53 PST
 06/17/2023 21:23:53 INFO | ---Done. will run again at 06/17/2023 21:38:53 PST.
+06/19/2023 15:25:44 INFO | ---Starting cycle at 06/19/2023 15:25:44 PST
+06/19/2023 15:25:45 INFO | --- Acquiring Candidates ---
+06/19/2023 15:25:45 INFO | Constructing Candidates from MPC List
+06/19/2023 15:25:52 INFO | Construction complete.
+06/19/2023 15:26:35 INFO | No candidates added in the last 24 hours. Adding all targets in list.
+06/19/2023 15:26:35 DEBUG | Created xkos329 with ID -6559054827649996388.
+06/19/2023 15:26:35 DEBUG | Created P21GoW7 with ID 2543825949418482416.
+06/19/2023 15:26:35 DEBUG | Created P21GoVu with ID 1235433953527009921.
+06/19/2023 15:26:35 DEBUG | Created P11GoEK with ID 5129138388991639754.
+06/19/2023 15:26:35 DEBUG | Created P11GoAA with ID -1294151269639599458.
+06/19/2023 15:26:35 DEBUG | Created P11GoAB with ID -8855542911311060209.
+06/19/2023 15:26:35 DEBUG | Created P11GnKU with ID 326238246933429632.
+06/19/2023 15:26:35 DEBUG | Created P11GnKX with ID 745840329065408794.
+06/19/2023 15:26:35 DEBUG | Created P11GnKW with ID -6019563135018643592.
+06/19/2023 15:26:35 DEBUG | Created P11Gnxd with ID 4463631939637939143.
+06/19/2023 15:26:35 DEBUG | Created P11Gnx7 with ID 7610532875930839105.
+06/19/2023 15:26:35 DEBUG | Created P11Gnx8 with ID -2389011498649027937.
+06/19/2023 15:26:35 DEBUG | Created P11Gnt6 with ID 6646390761472101917.
+06/19/2023 15:26:35 DEBUG | Created P21GlSB with ID 4194100914004618984.
+06/19/2023 15:26:35 DEBUG | Created C3R7LQ1 with ID -2773766230634237927.
+06/19/2023 15:26:35 DEBUG | Created P21Gjjb with ID -4144100729441891110.
+06/19/2023 15:26:35 DEBUG | Created P11Gjit with ID -4095100285028006240.
+06/19/2023 15:26:35 DEBUG | Created P11Gjiq with ID -6855096093381224400.
+06/19/2023 15:26:35 DEBUG | Created P21GiNx with ID -5630538704235629049.
+06/19/2023 15:26:35 DEBUG | Created P21GiNw with ID 6726519234090266268.
+06/19/2023 15:26:35 DEBUG | Created P11Giqa with ID -3538730842566283852.
+06/19/2023 15:26:35 DEBUG | Created P11GiqU with ID 267600946917626286.
+06/19/2023 15:26:35 DEBUG | Created ZTs0119 with ID -3804704369116139226.
+06/19/2023 15:26:35 DEBUG | Created P21Ghbg with ID -4974584957543012829.
+06/19/2023 15:26:35 DEBUG | Created P11GgKz with ID 2892911049838883428.
+06/19/2023 15:26:35 DEBUG | Created P11GgBa with ID 7493112812294037288.
+06/19/2023 15:26:35 DEBUG | Created C9CXVK2 with ID 5277064601686719860.
+06/19/2023 15:26:35 DEBUG | Created C9CXUT2 with ID 9025042620662078333.
+06/19/2023 15:26:35 DEBUG | Created C9CXT02 with ID -8046878336225654866.
+06/19/2023 15:26:35 DEBUG | Created JCMH490 with ID -2679744383478897585.
+06/19/2023 15:26:35 DEBUG | Created P11Geck with ID -2732243116679584301.
+06/19/2023 15:26:35 DEBUG | Created P11Gech with ID -1832490848170790691.
+06/19/2023 15:26:35 DEBUG | Created P11Gebp with ID 8466615146599291933.
+06/19/2023 15:26:35 DEBUG | Created P21Ge7Z with ID 8539946484287170476.
+06/19/2023 15:26:35 DEBUG | Created P21Ge54 with ID 887060846628251446.
+06/19/2023 15:26:35 DEBUG | Created P11Ge6s with ID 630367389405926480.
+06/19/2023 15:26:35 DEBUG | Created P11Ge6q with ID 4729338828378794245.
+06/19/2023 15:26:35 DEBUG | Created P11Ge6p with ID 2602375866228696617.
+06/19/2023 15:26:35 DEBUG | Created P11Ge5y with ID -4886904023879711405.
+06/19/2023 15:26:35 DEBUG | Created Mar3769 with ID 3557096663118060755.
+06/19/2023 15:26:35 DEBUG | Created P21Gd2q with ID -9041072663746764400.
+06/19/2023 15:26:35 DEBUG | Created P21GcUR with ID 4619204662717321018.
+06/19/2023 15:26:35 DEBUG | Created P21GbQa with ID -6487802666883251144.
+06/19/2023 15:26:35 DEBUG | Created P21GbNr with ID -5149299612790028958.
+06/19/2023 15:26:35 DEBUG | Created P21GbMG with ID -2976046371617353691.
+06/19/2023 15:26:35 DEBUG | Created HirtMR2 with ID -8035499060088959690.
+06/19/2023 15:26:35 DEBUG | Created P21G9o6 with ID 3813278917036145829.
+06/19/2023 15:26:35 DEBUG | Created P21G9k7 with ID 6471774729824295572.
+06/19/2023 15:26:35 DEBUG | Created P11G9jS with ID 713980734664503925.
+06/19/2023 15:26:35 DEBUG | Created P21G8zr with ID -5380370403166770130.
+06/19/2023 15:26:35 DEBUG | Created P21G8y1 with ID -1431700673249402338.
+06/19/2023 15:26:35 DEBUG | Created P11G8vW with ID 1133773993785965682.
+06/19/2023 15:26:35 DEBUG | Created C47JTDZ with ID 8110491637496021448.
+06/19/2023 15:26:35 DEBUG | Created P21G0G2 with ID 7111778581771076605.
+06/19/2023 15:26:35 DEBUG | Created P21G0FQ with ID -8042746769527095972.
+06/19/2023 15:26:35 DEBUG | Created C9CWMP2 with ID -3433234713977097279.
+06/19/2023 15:26:35 DEBUG | Created P21FR9u with ID 3733635528867851421.
+06/19/2023 15:26:35 DEBUG | Created JKm001 with ID -5243753845270297107.
+06/19/2023 15:26:35 DEBUG | Created A10UeAm with ID -1566219822595455644.
+06/19/2023 15:26:35 INFO | -Assessed Candidates
+06/19/2023 15:26:35 INFO | New (59)
+06/19/2023 15:26:35 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate C47JTDZ (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 15:26:35 INFO | Static (0)
+06/19/2023 15:26:35 DEBUG | []
+06/19/2023 15:26:35 INFO | Updated (0)
+06/19/2023 15:26:35 DEBUG | []
+06/19/2023 15:26:35 INFO | Removed (0)
+06/19/2023 15:26:35 DEBUG | []
+06/19/2023 15:26:35 INFO | ---Finished MPC logging without error at 06/19/2023 15:26:35 PST
+06/19/2023 15:26:35 INFO | --- Selecting ---
+06/19/2023 15:26:35 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 15:26:40 DEBUG | Found window for P21Gd2q!
+06/19/2023 15:26:40 DEBUG | Found window for P11GoAB!
+06/19/2023 15:26:40 DEBUG | Found window for C9CXT02!
+06/19/2023 15:26:40 DEBUG | Got None window for P21G0FQ. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11Gjiq!
+06/19/2023 15:26:40 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11GnKW!
+06/19/2023 15:26:40 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P21G8zr!
+06/19/2023 15:26:40 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P21Ghbg!
+06/19/2023 15:26:40 DEBUG | Got None window for P11Ge5y. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11Gjit!
+06/19/2023 15:26:40 DEBUG | Found window for ZTs0119!
+06/19/2023 15:26:40 DEBUG | Found window for P11Giqa!
+06/19/2023 15:26:40 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for C3R7LQ1!
+06/19/2023 15:26:40 DEBUG | Got None window for P11Geck. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11Gnx8!
+06/19/2023 15:26:40 DEBUG | Got None window for P11Gech. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P21G8y1!
+06/19/2023 15:26:40 DEBUG | Found window for P11GoAA!
+06/19/2023 15:26:40 DEBUG | Found window for P11GiqU!
+06/19/2023 15:26:40 DEBUG | Found window for P11GnKU!
+06/19/2023 15:26:40 DEBUG | Got None window for P11Ge6s. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11GnKX!
+06/19/2023 15:26:40 DEBUG | Got None window for P21Ge54. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11G8vW!
+06/19/2023 15:26:40 DEBUG | Found window for P21GoVu!
+06/19/2023 15:26:40 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P11Ge6p. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11GgKz!
+06/19/2023 15:26:40 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P21FR9u. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P21G9o6!
+06/19/2023 15:26:40 DEBUG | Found window for P21GlSB!
+06/19/2023 15:26:40 DEBUG | Found window for P11Gnxd!
+06/19/2023 15:26:40 DEBUG | Found window for P21GcUR!
+06/19/2023 15:26:40 DEBUG | Got None window for P11Ge6q. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11GoEK!
+06/19/2023 15:26:40 DEBUG | Found window for C9CXVK2!
+06/19/2023 15:26:40 DEBUG | Got None window for P21G9k7. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11Gnt6!
+06/19/2023 15:26:40 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P21G0G2. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Found window for P11GgBa!
+06/19/2023 15:26:40 DEBUG | Found window for P11Gnx7!
+06/19/2023 15:26:40 DEBUG | Found window for C47JTDZ!
+06/19/2023 15:26:40 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 15:26:40 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 15:26:40 INFO | Rejecting targets
+06/19/2023 15:26:40 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 15:26:40 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P11Gnt6 for error limit.
+06/19/2023 15:26:40 DEBUG | Rejected C47JTDZ for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 15:26:40 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 15:26:40 INFO | Updating database
+06/19/2023 15:26:40 DEBUG | Updated P21Gd2q.
+06/19/2023 15:26:40 DEBUG | Updated P11GoAB.
+06/19/2023 15:26:40 DEBUG | Updated C9CXT02.
+06/19/2023 15:26:40 DEBUG | Updated P21G0FQ.
+06/19/2023 15:26:40 DEBUG | Updated HirtMR2.
+06/19/2023 15:26:40 DEBUG | Updated P11Gjiq.
+06/19/2023 15:26:40 DEBUG | Updated xkos329.
+06/19/2023 15:26:40 DEBUG | Updated P21GbQa.
+06/19/2023 15:26:40 DEBUG | Updated P11GnKW.
+06/19/2023 15:26:40 DEBUG | Updated P21GiNx.
+06/19/2023 15:26:40 DEBUG | Updated P21G8zr.
+06/19/2023 15:26:40 DEBUG | Updated JKm001.
+06/19/2023 15:26:40 DEBUG | Updated P21GbNr.
+06/19/2023 15:26:40 DEBUG | Updated P21Ghbg.
+06/19/2023 15:26:41 DEBUG | Updated P11Ge5y.
+06/19/2023 15:26:41 DEBUG | Updated P21Gjjb.
+06/19/2023 15:26:41 DEBUG | Updated P11Gjit.
+06/19/2023 15:26:41 DEBUG | Updated ZTs0119.
+06/19/2023 15:26:41 DEBUG | Updated P11Giqa.
+06/19/2023 15:26:41 DEBUG | Updated C9CWMP2.
+06/19/2023 15:26:41 DEBUG | Updated P21GbMG.
+06/19/2023 15:26:41 DEBUG | Updated C3R7LQ1.
+06/19/2023 15:26:41 DEBUG | Updated P11Geck.
+06/19/2023 15:26:41 DEBUG | Updated JCMH490.
+06/19/2023 15:26:41 DEBUG | Updated P11Gnx8.
+06/19/2023 15:26:41 DEBUG | Updated P11Gech.
+06/19/2023 15:26:41 DEBUG | Updated A10UeAm.
+06/19/2023 15:26:41 DEBUG | Updated P21G8y1.
+06/19/2023 15:26:41 DEBUG | Updated P11GoAA.
+06/19/2023 15:26:41 DEBUG | Updated P11GiqU.
+06/19/2023 15:26:41 DEBUG | Updated P11GnKU.
+06/19/2023 15:26:41 DEBUG | Updated P11Ge6s.
+06/19/2023 15:26:41 DEBUG | Updated P11G9jS.
+06/19/2023 15:26:41 DEBUG | Updated P11GnKX.
+06/19/2023 15:26:41 DEBUG | Updated P21Ge54.
+06/19/2023 15:26:41 DEBUG | Updated P11G8vW.
+06/19/2023 15:26:41 DEBUG | Updated P21GoVu.
+06/19/2023 15:26:41 DEBUG | Updated P21GoW7.
+06/19/2023 15:26:41 DEBUG | Updated P11Ge6p.
+06/19/2023 15:26:41 DEBUG | Updated P11GgKz.
+06/19/2023 15:26:41 DEBUG | Updated Mar3769.
+06/19/2023 15:26:41 DEBUG | Updated P21FR9u.
+06/19/2023 15:26:41 DEBUG | Updated P21G9o6.
+06/19/2023 15:26:41 DEBUG | Updated P21GlSB.
+06/19/2023 15:26:41 DEBUG | Updated P11Gnxd.
+06/19/2023 15:26:41 DEBUG | Updated P21GcUR.
+06/19/2023 15:26:41 DEBUG | Updated P11Ge6q.
+06/19/2023 15:26:41 DEBUG | Updated P11GoEK.
+06/19/2023 15:26:41 DEBUG | Updated C9CXVK2.
+06/19/2023 15:26:41 DEBUG | Updated P21G9k7.
+06/19/2023 15:26:41 DEBUG | Updated P11Gnt6.
+06/19/2023 15:26:41 DEBUG | Updated P21GiNw.
+06/19/2023 15:26:41 DEBUG | Updated P21G0G2.
+06/19/2023 15:26:41 DEBUG | Updated P11GgBa.
+06/19/2023 15:26:41 DEBUG | Updated P11Gnx7.
+06/19/2023 15:26:41 DEBUG | Updated C47JTDZ.
+06/19/2023 15:26:41 DEBUG | Updated P11Gebp.
+06/19/2023 15:26:41 DEBUG | Updated P21Ge7Z.
+06/19/2023 15:26:41 DEBUG | Updated C9CXUT2.
+06/19/2023 15:26:41 INFO | ---Finished MPC selection without error at 06/19/2023 15:26:41 PST
+06/19/2023 15:26:41 INFO | ---Done. will run again at 06/19/2023 15:41:41 PST.
+06/19/2023 15:28:49 INFO | ---Starting cycle at 06/19/2023 15:28:49 PST
+06/19/2023 15:28:49 INFO | --- Acquiring Candidates ---
+06/19/2023 15:28:49 INFO | Constructing Candidates from MPC List
+06/19/2023 18:18:01 INFO | ---Starting cycle at 06/19/2023 18:18:01 PST
+06/19/2023 18:18:02 INFO | --- Acquiring Candidates ---
+06/19/2023 18:18:02 INFO | Constructing Candidates from MPC List
+06/19/2023 18:18:06 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 18:18:10 INFO | Construction complete.
+06/19/2023 18:19:00 DEBUG | Checking for updates toxkos329
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GoW7
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GoVu
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GoEK
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GoAA
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GoAB
+06/19/2023 18:19:00 INFO | Updating P11GoAB
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GnKU
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GnKX
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GnKW
+06/19/2023 18:19:00 INFO | Updating P11GnKW
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 18:19:00 INFO | Updating P11Gnt6
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GlSB
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 18:19:00 INFO | Updating C3R7LQ1
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gjit
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GiNx
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GiNw
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Giqa
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GiqU
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toZTs0119
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GgKz
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11GgBa
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 18:19:00 INFO | Updating C9CXVK2
+06/19/2023 18:19:00 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toC9CXT02
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toJCMH490
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Geck
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gech
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Gebp
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21Ge54
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toMar3769
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GcUR
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GbQa
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GbNr
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21GbMG
+06/19/2023 18:19:00 INFO | Updating P21GbMG
+06/19/2023 18:19:00 DEBUG | Checking for updates toHirtMR2
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21G9o6
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21G9k7
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11G9jS
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21G8zr
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21G8y1
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP11G8vW
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toC47JTDZ
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21G0G2
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toP21FR9u
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toJKm001
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 DEBUG | Checking for updates toA10UeAm
+06/19/2023 18:19:00 DEBUG | None found
+06/19/2023 18:19:00 INFO | -Assessed Candidates
+06/19/2023 18:19:00 INFO | New (0)
+06/19/2023 18:19:00 DEBUG | []
+06/19/2023 18:19:00 INFO | Static (53)
+06/19/2023 18:19:00 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate C47JTDZ (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 18:19:00 INFO | Updated (6)
+06/19/2023 18:19:00 DEBUG | [Candidate P11GoAB (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate P21GbMG (MPC NEO)]
+06/19/2023 18:19:00 INFO | Removed (0)
+06/19/2023 18:19:00 DEBUG | []
+06/19/2023 18:19:00 INFO | ---Finished MPC logging without error at 06/19/2023 18:19:00 PST
+06/19/2023 18:19:00 INFO | --- Selecting ---
+06/19/2023 18:19:00 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 18:19:05 DEBUG | Found window for P21Gd2q!
+06/19/2023 18:19:05 DEBUG | Found window for P11GoAB!
+06/19/2023 18:19:05 DEBUG | Found window for C9CXT02!
+06/19/2023 18:19:05 DEBUG | Found window for P21G0FQ!
+06/19/2023 18:19:05 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P11Gjiq!
+06/19/2023 18:19:05 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P11GnKW!
+06/19/2023 18:19:05 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P21G8zr!
+06/19/2023 18:19:05 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P21Ghbg!
+06/19/2023 18:19:05 DEBUG | Found window for P11Ge5y!
+06/19/2023 18:19:05 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P11Gjit!
+06/19/2023 18:19:05 DEBUG | Found window for ZTs0119!
+06/19/2023 18:19:05 DEBUG | Found window for P11Giqa!
+06/19/2023 18:19:05 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for C3R7LQ1!
+06/19/2023 18:19:05 DEBUG | Found window for P11Geck!
+06/19/2023 18:19:05 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P11Gnx8!
+06/19/2023 18:19:05 DEBUG | Found window for P11Gech!
+06/19/2023 18:19:05 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P21G8y1!
+06/19/2023 18:19:05 DEBUG | Found window for P11GoAA!
+06/19/2023 18:19:05 DEBUG | Found window for P11GiqU!
+06/19/2023 18:19:05 DEBUG | Found window for P11GnKU!
+06/19/2023 18:19:05 DEBUG | Found window for P11Ge6s!
+06/19/2023 18:19:05 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P11GnKX!
+06/19/2023 18:19:05 DEBUG | Found window for P21Ge54!
+06/19/2023 18:19:05 DEBUG | Found window for P11G8vW!
+06/19/2023 18:19:05 DEBUG | Found window for P21GoVu!
+06/19/2023 18:19:05 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P11Ge6p!
+06/19/2023 18:19:05 DEBUG | Found window for P11GgKz!
+06/19/2023 18:19:05 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P21FR9u!
+06/19/2023 18:19:05 DEBUG | Found window for P21G9o6!
+06/19/2023 18:19:05 DEBUG | Found window for P21GlSB!
+06/19/2023 18:19:05 DEBUG | Found window for P11Gnxd!
+06/19/2023 18:19:05 DEBUG | Found window for P21GcUR!
+06/19/2023 18:19:05 DEBUG | Found window for P11Ge6q!
+06/19/2023 18:19:05 DEBUG | Found window for P11GoEK!
+06/19/2023 18:19:05 DEBUG | Found window for C9CXVK2!
+06/19/2023 18:19:05 DEBUG | Found window for P21G9k7!
+06/19/2023 18:19:05 DEBUG | Found window for P11Gnt6!
+06/19/2023 18:19:05 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Found window for P21G0G2!
+06/19/2023 18:19:05 DEBUG | Found window for P11GgBa!
+06/19/2023 18:19:05 DEBUG | Found window for P11Gnx7!
+06/19/2023 18:19:05 DEBUG | Found window for C47JTDZ!
+06/19/2023 18:19:05 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 18:19:05 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 18:19:05 INFO | Rejecting targets
+06/19/2023 18:19:05 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 18:19:05 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected C47JTDZ for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 18:19:05 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 18:19:05 INFO | Updating database
+06/19/2023 18:19:05 DEBUG | Updated P21Gd2q.
+06/19/2023 18:19:05 DEBUG | Updated P11GoAB.
+06/19/2023 18:19:05 DEBUG | Updated C9CXT02.
+06/19/2023 18:19:05 DEBUG | Updated P21G0FQ.
+06/19/2023 18:19:05 DEBUG | Updated HirtMR2.
+06/19/2023 18:19:05 DEBUG | Updated P11Gjiq.
+06/19/2023 18:19:05 DEBUG | Updated xkos329.
+06/19/2023 18:19:05 DEBUG | Updated P21GbQa.
+06/19/2023 18:19:05 DEBUG | Updated P11GnKW.
+06/19/2023 18:19:05 DEBUG | Updated P21GiNx.
+06/19/2023 18:19:05 DEBUG | Updated P21G8zr.
+06/19/2023 18:19:05 DEBUG | Updated JKm001.
+06/19/2023 18:19:05 DEBUG | Updated P21GbNr.
+06/19/2023 18:19:05 DEBUG | Updated P21Ghbg.
+06/19/2023 18:19:05 DEBUG | Updated P11Ge5y.
+06/19/2023 18:19:05 DEBUG | Updated P21Gjjb.
+06/19/2023 18:19:05 DEBUG | Updated P11Gjit.
+06/19/2023 18:19:05 DEBUG | Updated ZTs0119.
+06/19/2023 18:19:05 DEBUG | Updated P11Giqa.
+06/19/2023 18:19:05 DEBUG | Updated C9CWMP2.
+06/19/2023 18:19:05 DEBUG | Updated P21GbMG.
+06/19/2023 18:19:05 DEBUG | Updated C3R7LQ1.
+06/19/2023 18:19:05 DEBUG | Updated P11Geck.
+06/19/2023 18:19:05 DEBUG | Updated JCMH490.
+06/19/2023 18:19:05 DEBUG | Updated P11Gnx8.
+06/19/2023 18:19:05 DEBUG | Updated P11Gech.
+06/19/2023 18:19:05 DEBUG | Updated A10UeAm.
+06/19/2023 18:19:05 DEBUG | Updated P21G8y1.
+06/19/2023 18:19:05 DEBUG | Updated P11GoAA.
+06/19/2023 18:19:05 DEBUG | Updated P11GiqU.
+06/19/2023 18:19:05 DEBUG | Updated P11GnKU.
+06/19/2023 18:19:05 DEBUG | Updated P11Ge6s.
+06/19/2023 18:19:05 DEBUG | Updated P11G9jS.
+06/19/2023 18:19:05 DEBUG | Updated P11GnKX.
+06/19/2023 18:19:05 DEBUG | Updated P21Ge54.
+06/19/2023 18:19:05 DEBUG | Updated P11G8vW.
+06/19/2023 18:19:05 DEBUG | Updated P21GoVu.
+06/19/2023 18:19:05 DEBUG | Updated P21GoW7.
+06/19/2023 18:19:05 DEBUG | Updated P11Ge6p.
+06/19/2023 18:19:05 DEBUG | Updated P11GgKz.
+06/19/2023 18:19:05 DEBUG | Updated Mar3769.
+06/19/2023 18:19:05 DEBUG | Updated P21FR9u.
+06/19/2023 18:19:05 DEBUG | Updated P21G9o6.
+06/19/2023 18:19:05 DEBUG | Updated P21GlSB.
+06/19/2023 18:19:05 DEBUG | Updated P11Gnxd.
+06/19/2023 18:19:05 DEBUG | Updated P21GcUR.
+06/19/2023 18:19:05 DEBUG | Updated P11Ge6q.
+06/19/2023 18:19:05 DEBUG | Updated P11GoEK.
+06/19/2023 18:19:05 DEBUG | Updated C9CXVK2.
+06/19/2023 18:19:05 DEBUG | Updated P21G9k7.
+06/19/2023 18:19:05 DEBUG | Updated P11Gnt6.
+06/19/2023 18:19:05 DEBUG | Updated P21GiNw.
+06/19/2023 18:19:05 DEBUG | Updated P21G0G2.
+06/19/2023 18:19:05 DEBUG | Updated P11GgBa.
+06/19/2023 18:19:05 DEBUG | Updated P11Gnx7.
+06/19/2023 18:19:05 DEBUG | Updated C47JTDZ.
+06/19/2023 18:19:05 DEBUG | Updated P11Gebp.
+06/19/2023 18:19:05 DEBUG | Updated P21Ge7Z.
+06/19/2023 18:19:05 DEBUG | Updated C9CXUT2.
+06/19/2023 18:19:05 INFO | ---Finished MPC selection without error at 06/19/2023 18:19:05 PST
+06/19/2023 18:19:05 INFO | ---Done. will run again at 06/19/2023 18:34:05 PST.
+06/19/2023 18:24:48 INFO | ---Starting cycle at 06/19/2023 18:24:48 PST
+06/19/2023 18:24:49 INFO | --- Acquiring Candidates ---
+06/19/2023 18:24:49 INFO | Constructing Candidates from MPC List
+06/19/2023 18:24:53 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 18:24:56 INFO | Construction complete.
+06/19/2023 18:25:34 DEBUG | Checking for updates toxkos329
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GoW7
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GoVu
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GoEK
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GoAA
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GoAB
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GnKU
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GnKX
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GnKW
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 18:25:34 INFO | Updating P11Gnt6
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GlSB
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gjit
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GiNx
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GiNw
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Giqa
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GiqU
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toZTs0119
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GgKz
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11GgBa
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toC9CXT02
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toJCMH490
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Geck
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gech
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Gebp
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21Ge54
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toMar3769
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GcUR
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GbQa
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GbNr
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21GbMG
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toHirtMR2
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21G9o6
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21G9k7
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11G9jS
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21G8zr
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21G8y1
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP11G8vW
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toC47JTDZ
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21G0G2
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toP21FR9u
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toJKm001
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 DEBUG | Checking for updates toA10UeAm
+06/19/2023 18:25:34 DEBUG | None found
+06/19/2023 18:25:34 INFO | -Assessed Candidates
+06/19/2023 18:25:34 INFO | New (0)
+06/19/2023 18:25:34 DEBUG | []
+06/19/2023 18:25:34 INFO | Static (58)
+06/19/2023 18:25:34 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate C47JTDZ (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 18:25:34 INFO | Updated (1)
+06/19/2023 18:25:34 DEBUG | [Candidate P11Gnt6 (MPC NEO)]
+06/19/2023 18:25:34 INFO | Removed (0)
+06/19/2023 18:25:34 DEBUG | []
+06/19/2023 18:25:34 INFO | ---Finished MPC logging without error at 06/19/2023 18:25:34 PST
+06/19/2023 18:25:34 INFO | --- Selecting ---
+06/19/2023 18:25:34 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 18:25:39 DEBUG | Found window for P21Gd2q!
+06/19/2023 18:25:39 DEBUG | Found window for P11GoAB!
+06/19/2023 18:25:39 DEBUG | Found window for C9CXT02!
+06/19/2023 18:25:39 DEBUG | Found window for P21G0FQ!
+06/19/2023 18:25:39 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P11Gjiq!
+06/19/2023 18:25:39 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P11GnKW!
+06/19/2023 18:25:39 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P21G8zr!
+06/19/2023 18:25:39 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P21Ghbg!
+06/19/2023 18:25:39 DEBUG | Found window for P11Ge5y!
+06/19/2023 18:25:39 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P11Gjit!
+06/19/2023 18:25:39 DEBUG | Found window for ZTs0119!
+06/19/2023 18:25:39 DEBUG | Found window for P11Giqa!
+06/19/2023 18:25:39 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for C3R7LQ1!
+06/19/2023 18:25:39 DEBUG | Found window for P11Geck!
+06/19/2023 18:25:39 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P11Gnx8!
+06/19/2023 18:25:39 DEBUG | Found window for P11Gech!
+06/19/2023 18:25:39 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P21G8y1!
+06/19/2023 18:25:39 DEBUG | Found window for P11GoAA!
+06/19/2023 18:25:39 DEBUG | Found window for P11GiqU!
+06/19/2023 18:25:39 DEBUG | Found window for P11GnKU!
+06/19/2023 18:25:39 DEBUG | Found window for P11Ge6s!
+06/19/2023 18:25:39 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P11GnKX!
+06/19/2023 18:25:39 DEBUG | Found window for P21Ge54!
+06/19/2023 18:25:39 DEBUG | Found window for P11G8vW!
+06/19/2023 18:25:39 DEBUG | Found window for P21GoVu!
+06/19/2023 18:25:39 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P11Ge6p!
+06/19/2023 18:25:39 DEBUG | Found window for P11GgKz!
+06/19/2023 18:25:39 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P21FR9u!
+06/19/2023 18:25:39 DEBUG | Found window for P21G9o6!
+06/19/2023 18:25:39 DEBUG | Found window for P21GlSB!
+06/19/2023 18:25:39 DEBUG | Found window for P11Gnxd!
+06/19/2023 18:25:39 DEBUG | Found window for P21GcUR!
+06/19/2023 18:25:39 DEBUG | Found window for P11Ge6q!
+06/19/2023 18:25:39 DEBUG | Found window for P11GoEK!
+06/19/2023 18:25:39 DEBUG | Found window for C9CXVK2!
+06/19/2023 18:25:39 DEBUG | Found window for P21G9k7!
+06/19/2023 18:25:39 DEBUG | Found window for P11Gnt6!
+06/19/2023 18:25:39 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Found window for P21G0G2!
+06/19/2023 18:25:39 DEBUG | Found window for P11GgBa!
+06/19/2023 18:25:39 DEBUG | Found window for P11Gnx7!
+06/19/2023 18:25:39 DEBUG | Found window for C47JTDZ!
+06/19/2023 18:25:39 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 18:25:39 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 18:25:39 INFO | Rejecting targets
+06/19/2023 18:25:39 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 18:25:39 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected C47JTDZ for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 18:25:39 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 18:25:39 INFO | Updating database
+06/19/2023 18:25:39 DEBUG | Updated P21Gd2q.
+06/19/2023 18:25:39 DEBUG | Updated P11GoAB.
+06/19/2023 18:25:39 DEBUG | Updated C9CXT02.
+06/19/2023 18:25:39 DEBUG | Updated P21G0FQ.
+06/19/2023 18:25:39 DEBUG | Updated HirtMR2.
+06/19/2023 18:25:39 DEBUG | Updated P11Gjiq.
+06/19/2023 18:25:39 DEBUG | Updated xkos329.
+06/19/2023 18:25:39 DEBUG | Updated P21GbQa.
+06/19/2023 18:25:39 DEBUG | Updated P11GnKW.
+06/19/2023 18:25:39 DEBUG | Updated P21GiNx.
+06/19/2023 18:25:39 DEBUG | Updated P21G8zr.
+06/19/2023 18:25:39 DEBUG | Updated JKm001.
+06/19/2023 18:25:39 DEBUG | Updated P21GbNr.
+06/19/2023 18:25:39 DEBUG | Updated P21Ghbg.
+06/19/2023 18:25:39 DEBUG | Updated P11Ge5y.
+06/19/2023 18:25:39 DEBUG | Updated P21Gjjb.
+06/19/2023 18:25:39 DEBUG | Updated P11Gjit.
+06/19/2023 18:25:39 DEBUG | Updated ZTs0119.
+06/19/2023 18:25:39 DEBUG | Updated P11Giqa.
+06/19/2023 18:25:39 DEBUG | Updated C9CWMP2.
+06/19/2023 18:25:39 DEBUG | Updated P21GbMG.
+06/19/2023 18:25:39 DEBUG | Updated C3R7LQ1.
+06/19/2023 18:25:39 DEBUG | Updated P11Geck.
+06/19/2023 18:25:39 DEBUG | Updated JCMH490.
+06/19/2023 18:25:40 DEBUG | Updated P11Gnx8.
+06/19/2023 18:25:40 DEBUG | Updated P11Gech.
+06/19/2023 18:25:40 DEBUG | Updated A10UeAm.
+06/19/2023 18:25:40 DEBUG | Updated P21G8y1.
+06/19/2023 18:25:40 DEBUG | Updated P11GoAA.
+06/19/2023 18:25:40 DEBUG | Updated P11GiqU.
+06/19/2023 18:25:40 DEBUG | Updated P11GnKU.
+06/19/2023 18:25:40 DEBUG | Updated P11Ge6s.
+06/19/2023 18:25:40 DEBUG | Updated P11G9jS.
+06/19/2023 18:25:40 DEBUG | Updated P11GnKX.
+06/19/2023 18:25:40 DEBUG | Updated P21Ge54.
+06/19/2023 18:25:40 DEBUG | Updated P11G8vW.
+06/19/2023 18:25:40 DEBUG | Updated P21GoVu.
+06/19/2023 18:25:40 DEBUG | Updated P21GoW7.
+06/19/2023 18:25:40 DEBUG | Updated P11Ge6p.
+06/19/2023 18:25:40 DEBUG | Updated P11GgKz.
+06/19/2023 18:25:40 DEBUG | Updated Mar3769.
+06/19/2023 18:25:40 DEBUG | Updated P21FR9u.
+06/19/2023 18:25:40 DEBUG | Updated P21G9o6.
+06/19/2023 18:25:40 DEBUG | Updated P21GlSB.
+06/19/2023 18:25:40 DEBUG | Updated P11Gnxd.
+06/19/2023 18:25:40 DEBUG | Updated P21GcUR.
+06/19/2023 18:25:40 DEBUG | Updated P11Ge6q.
+06/19/2023 18:25:40 DEBUG | Updated P11GoEK.
+06/19/2023 18:25:40 DEBUG | Updated C9CXVK2.
+06/19/2023 18:25:40 DEBUG | Updated P21G9k7.
+06/19/2023 18:25:40 DEBUG | Updated P11Gnt6.
+06/19/2023 18:25:40 DEBUG | Updated P21GiNw.
+06/19/2023 18:25:40 DEBUG | Updated P21G0G2.
+06/19/2023 18:25:40 DEBUG | Updated P11GgBa.
+06/19/2023 18:25:40 DEBUG | Updated P11Gnx7.
+06/19/2023 18:25:40 DEBUG | Updated C47JTDZ.
+06/19/2023 18:25:40 DEBUG | Updated P11Gebp.
+06/19/2023 18:25:40 DEBUG | Updated P21Ge7Z.
+06/19/2023 18:25:40 DEBUG | Updated C9CXUT2.
+06/19/2023 18:25:40 INFO | ---Finished MPC selection without error at 06/19/2023 18:25:40 PST
+06/19/2023 18:25:40 INFO | ---Done. will run again at 06/19/2023 18:40:40 PST.
+06/19/2023 18:26:23 INFO | ---Starting cycle at 06/19/2023 18:26:23 PST
+06/19/2023 18:26:23 INFO | --- Acquiring Candidates ---
+06/19/2023 18:26:24 INFO | Constructing Candidates from MPC List
+06/19/2023 18:26:28 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 18:26:31 INFO | Construction complete.
+06/19/2023 18:27:08 DEBUG | Checking for updates toxkos329
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GoW7
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GoVu
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GoEK
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GoAA
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GoAB
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GnKU
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GnKX
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GnKW
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GlSB
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gjit
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GiNx
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GiNw
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Giqa
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GiqU
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toZTs0119
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GgKz
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11GgBa
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toC9CXT02
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toJCMH490
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Geck
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gech
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Gebp
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21Ge54
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toMar3769
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GcUR
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GbQa
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GbNr
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21GbMG
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toHirtMR2
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21G9o6
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21G9k7
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11G9jS
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21G8zr
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21G8y1
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP11G8vW
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toC47JTDZ
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21G0G2
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toP21FR9u
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toJKm001
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 DEBUG | Checking for updates toA10UeAm
+06/19/2023 18:27:08 DEBUG | None found
+06/19/2023 18:27:08 INFO | -Assessed Candidates
+06/19/2023 18:27:08 INFO | New (0)
+06/19/2023 18:27:08 DEBUG | []
+06/19/2023 18:27:08 INFO | Static (59)
+06/19/2023 18:27:08 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate C47JTDZ (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 18:27:08 INFO | Updated (0)
+06/19/2023 18:27:08 DEBUG | []
+06/19/2023 18:27:08 INFO | Removed (0)
+06/19/2023 18:27:08 DEBUG | []
+06/19/2023 18:27:08 INFO | ---Finished MPC logging without error at 06/19/2023 18:27:08 PST
+06/19/2023 18:27:08 INFO | --- Selecting ---
+06/19/2023 18:27:08 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 18:27:13 DEBUG | Found window for P21Gd2q!
+06/19/2023 18:27:13 DEBUG | Found window for P11GoAB!
+06/19/2023 18:27:13 DEBUG | Found window for C9CXT02!
+06/19/2023 18:27:13 DEBUG | Found window for P21G0FQ!
+06/19/2023 18:27:13 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P11Gjiq!
+06/19/2023 18:27:13 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P11GnKW!
+06/19/2023 18:27:13 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P21G8zr!
+06/19/2023 18:27:13 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P21Ghbg!
+06/19/2023 18:27:13 DEBUG | Found window for P11Ge5y!
+06/19/2023 18:27:13 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P11Gjit!
+06/19/2023 18:27:13 DEBUG | Found window for ZTs0119!
+06/19/2023 18:27:13 DEBUG | Found window for P11Giqa!
+06/19/2023 18:27:13 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for C3R7LQ1!
+06/19/2023 18:27:13 DEBUG | Found window for P11Geck!
+06/19/2023 18:27:13 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P11Gnx8!
+06/19/2023 18:27:13 DEBUG | Found window for P11Gech!
+06/19/2023 18:27:13 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P21G8y1!
+06/19/2023 18:27:13 DEBUG | Found window for P11GoAA!
+06/19/2023 18:27:13 DEBUG | Found window for P11GiqU!
+06/19/2023 18:27:13 DEBUG | Found window for P11GnKU!
+06/19/2023 18:27:13 DEBUG | Found window for P11Ge6s!
+06/19/2023 18:27:13 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P11GnKX!
+06/19/2023 18:27:13 DEBUG | Found window for P21Ge54!
+06/19/2023 18:27:13 DEBUG | Found window for P11G8vW!
+06/19/2023 18:27:13 DEBUG | Found window for P21GoVu!
+06/19/2023 18:27:13 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P11Ge6p!
+06/19/2023 18:27:13 DEBUG | Found window for P11GgKz!
+06/19/2023 18:27:13 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P21FR9u!
+06/19/2023 18:27:13 DEBUG | Found window for P21G9o6!
+06/19/2023 18:27:13 DEBUG | Found window for P21GlSB!
+06/19/2023 18:27:13 DEBUG | Found window for P11Gnxd!
+06/19/2023 18:27:13 DEBUG | Found window for P21GcUR!
+06/19/2023 18:27:13 DEBUG | Found window for P11Ge6q!
+06/19/2023 18:27:13 DEBUG | Found window for P11GoEK!
+06/19/2023 18:27:13 DEBUG | Found window for C9CXVK2!
+06/19/2023 18:27:13 DEBUG | Found window for P21G9k7!
+06/19/2023 18:27:13 DEBUG | Found window for P11Gnt6!
+06/19/2023 18:27:13 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Found window for P21G0G2!
+06/19/2023 18:27:13 DEBUG | Found window for P11GgBa!
+06/19/2023 18:27:13 DEBUG | Found window for P11Gnx7!
+06/19/2023 18:27:13 DEBUG | Found window for C47JTDZ!
+06/19/2023 18:27:13 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 18:27:13 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 18:27:13 INFO | Rejecting targets
+06/19/2023 18:27:13 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 18:27:13 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected C47JTDZ for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 18:27:13 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 18:27:13 INFO | Updating database
+06/19/2023 18:27:15 DEBUG | Updated P21Gd2q.
+06/19/2023 18:27:17 DEBUG | Updated P11GoAB.
+06/19/2023 18:27:19 DEBUG | Updated C9CXT02.
+06/19/2023 18:28:13 INFO | ---Starting cycle at 06/19/2023 18:28:13 PST
+06/19/2023 18:28:14 INFO | --- Acquiring Candidates ---
+06/19/2023 18:28:14 INFO | Constructing Candidates from MPC List
+06/19/2023 18:28:18 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 18:28:21 INFO | Construction complete.
+06/19/2023 18:28:58 INFO | No candidates added in the last 24 hours. Adding all targets in list.
+06/19/2023 18:28:58 DEBUG | Created xkos329 with ID 8317573509710880703.
+06/19/2023 18:28:58 DEBUG | Created P21GoW7 with ID -561260495046999262.
+06/19/2023 18:28:58 DEBUG | Created P21GoVu with ID 7271198169844856126.
+06/19/2023 18:28:58 DEBUG | Created P11GoEK with ID 2006812756628806837.
+06/19/2023 18:28:58 DEBUG | Created P11GoAA with ID -8564907937791944878.
+06/19/2023 18:28:58 DEBUG | Created P11GoAB with ID 5216381767746692817.
+06/19/2023 18:28:58 DEBUG | Created P11GnKU with ID 1229485337869457266.
+06/19/2023 18:28:58 DEBUG | Created P11GnKX with ID 5887884057068005080.
+06/19/2023 18:28:58 DEBUG | Created P11GnKW with ID -7731982984172773502.
+06/19/2023 18:28:58 DEBUG | Created P11Gnxd with ID 6838467309914225959.
+06/19/2023 18:28:58 DEBUG | Created P11Gnx7 with ID -6201516228797893482.
+06/19/2023 18:28:58 DEBUG | Created P11Gnx8 with ID -1285561739052685301.
+06/19/2023 18:28:58 DEBUG | Created P11Gnt6 with ID -8415318107769656315.
+06/19/2023 18:28:58 DEBUG | Created P21GlSB with ID -5485219431576589314.
+06/19/2023 18:28:58 DEBUG | Created C3R7LQ1 with ID 577450770409363303.
+06/19/2023 18:28:58 DEBUG | Created P21Gjjb with ID -3297454287416783877.
+06/19/2023 18:28:58 DEBUG | Created P11Gjit with ID -4800520463611385181.
+06/19/2023 18:28:58 DEBUG | Created P11Gjiq with ID 7376310656665152077.
+06/19/2023 18:28:58 DEBUG | Created P21GiNx with ID 2536099778751080641.
+06/19/2023 18:28:58 DEBUG | Created P21GiNw with ID 594652202075998997.
+06/19/2023 18:28:58 DEBUG | Created P11Giqa with ID -7443024848615336096.
+06/19/2023 18:28:58 DEBUG | Created P11GiqU with ID -5605744581510666812.
+06/19/2023 18:28:58 DEBUG | Created ZTs0119 with ID 1360447432213560349.
+06/19/2023 18:28:58 DEBUG | Created P21Ghbg with ID -9192295197591644129.
+06/19/2023 18:28:58 DEBUG | Created P11GgKz with ID -2454131500689577358.
+06/19/2023 18:28:58 DEBUG | Created P11GgBa with ID 4271993348139914810.
+06/19/2023 18:28:58 DEBUG | Created C9CXVK2 with ID -604078194486163983.
+06/19/2023 18:28:58 DEBUG | Created C9CXUT2 with ID 3939279033312753295.
+06/19/2023 18:28:58 DEBUG | Created C9CXT02 with ID 6341655962594754344.
+06/19/2023 18:28:58 DEBUG | Created JCMH490 with ID -2568913177546094632.
+06/19/2023 18:28:58 DEBUG | Created P11Geck with ID -3637692436634424453.
+06/19/2023 18:28:58 DEBUG | Created P11Gech with ID 953627812185077670.
+06/19/2023 18:28:58 DEBUG | Created P11Gebp with ID 6454120648979454654.
+06/19/2023 18:28:58 DEBUG | Created P21Ge7Z with ID 7963296609894380937.
+06/19/2023 18:28:58 DEBUG | Created P21Ge54 with ID 8632511019440464437.
+06/19/2023 18:28:58 DEBUG | Created P11Ge6s with ID 1877534625632510581.
+06/19/2023 18:28:58 DEBUG | Created P11Ge6q with ID -8815232701104270732.
+06/19/2023 18:28:58 DEBUG | Created P11Ge6p with ID -2445491346677942478.
+06/19/2023 18:28:58 DEBUG | Created P11Ge5y with ID -8311703235778175001.
+06/19/2023 18:28:58 DEBUG | Created Mar3769 with ID -1577574646078145554.
+06/19/2023 18:28:58 DEBUG | Created P21Gd2q with ID -6099975637925979360.
+06/19/2023 18:28:58 DEBUG | Created P21GcUR with ID -211122722624155496.
+06/19/2023 18:28:58 DEBUG | Created P21GbQa with ID -1926064318877055722.
+06/19/2023 18:28:58 DEBUG | Created P21GbNr with ID -927519339423213656.
+06/19/2023 18:28:58 DEBUG | Created P21GbMG with ID -9056473307929300875.
+06/19/2023 18:28:58 DEBUG | Created HirtMR2 with ID -8793195650863212273.
+06/19/2023 18:28:58 DEBUG | Created P21G9o6 with ID 3859608749167174328.
+06/19/2023 18:28:58 DEBUG | Created P21G9k7 with ID 6939548680821729557.
+06/19/2023 18:28:58 DEBUG | Created P11G9jS with ID 4488937171118839503.
+06/19/2023 18:28:58 DEBUG | Created P21G8zr with ID -5232711425631170513.
+06/19/2023 18:28:58 DEBUG | Created P21G8y1 with ID -7348315580701395027.
+06/19/2023 18:28:58 DEBUG | Created P11G8vW with ID 474815911550270507.
+06/19/2023 18:28:58 DEBUG | Created C47JTDZ with ID 6762200805642857141.
+06/19/2023 18:28:58 DEBUG | Created P21G0G2 with ID -5621838484648071006.
+06/19/2023 18:28:58 DEBUG | Created P21G0FQ with ID -7792900185572310610.
+06/19/2023 18:28:58 DEBUG | Created C9CWMP2 with ID -8136531732269385087.
+06/19/2023 18:28:58 DEBUG | Created P21FR9u with ID -8074005153370734373.
+06/19/2023 18:28:58 DEBUG | Created JKm001 with ID 3530360266753530951.
+06/19/2023 18:28:58 DEBUG | Created A10UeAm with ID -6741089540181189203.
+06/19/2023 18:28:58 INFO | -Assessed Candidates
+06/19/2023 18:28:58 INFO | New (59)
+06/19/2023 18:28:58 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate C47JTDZ (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 18:28:58 INFO | Static (0)
+06/19/2023 18:28:58 DEBUG | []
+06/19/2023 18:28:58 INFO | Updated (0)
+06/19/2023 18:28:58 DEBUG | []
+06/19/2023 18:28:58 INFO | Removed (0)
+06/19/2023 18:28:58 DEBUG | []
+06/19/2023 18:28:58 INFO | ---Finished MPC logging without error at 06/19/2023 18:28:58 PST
+06/19/2023 18:28:58 INFO | --- Selecting ---
+06/19/2023 18:28:58 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 18:29:03 DEBUG | Found window for P21Ghbg!
+06/19/2023 18:29:03 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11Ge6q!
+06/19/2023 18:29:03 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11GoAA!
+06/19/2023 18:29:03 DEBUG | Found window for P11Gnt6!
+06/19/2023 18:29:03 DEBUG | Found window for P11Ge5y!
+06/19/2023 18:29:03 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P21FR9u!
+06/19/2023 18:29:03 DEBUG | Found window for P21G0FQ!
+06/19/2023 18:29:03 DEBUG | Found window for P11GnKW!
+06/19/2023 18:29:03 DEBUG | Found window for P11Giqa!
+06/19/2023 18:29:03 DEBUG | Found window for P21G8y1!
+06/19/2023 18:29:03 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11Gnx7!
+06/19/2023 18:29:03 DEBUG | Found window for P21Gd2q!
+06/19/2023 18:29:03 DEBUG | Found window for P21G0G2!
+06/19/2023 18:29:03 DEBUG | Found window for P11GiqU!
+06/19/2023 18:29:03 DEBUG | Found window for P21GlSB!
+06/19/2023 18:29:03 DEBUG | Found window for P21G8zr!
+06/19/2023 18:29:03 DEBUG | Found window for P11Gjit!
+06/19/2023 18:29:03 DEBUG | Found window for P11Geck!
+06/19/2023 18:29:03 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11GgKz!
+06/19/2023 18:29:03 DEBUG | Found window for P11Ge6p!
+06/19/2023 18:29:03 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11Gnx8!
+06/19/2023 18:29:03 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for C9CXVK2!
+06/19/2023 18:29:03 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P21GcUR!
+06/19/2023 18:29:03 DEBUG | Found window for P11G8vW!
+06/19/2023 18:29:03 DEBUG | Found window for C3R7LQ1!
+06/19/2023 18:29:03 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11Gech!
+06/19/2023 18:29:03 DEBUG | Found window for P11GnKU!
+06/19/2023 18:29:03 DEBUG | Found window for ZTs0119!
+06/19/2023 18:29:03 DEBUG | Found window for P11Ge6s!
+06/19/2023 18:29:03 DEBUG | Found window for P11GoEK!
+06/19/2023 18:29:03 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P21G9o6!
+06/19/2023 18:29:03 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11GgBa!
+06/19/2023 18:29:03 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P11GoAB!
+06/19/2023 18:29:03 DEBUG | Found window for P11GnKX!
+06/19/2023 18:29:03 DEBUG | Found window for C9CXT02!
+06/19/2023 18:29:03 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for C47JTDZ!
+06/19/2023 18:29:03 DEBUG | Found window for P11Gnxd!
+06/19/2023 18:29:03 DEBUG | Found window for P21G9k7!
+06/19/2023 18:29:03 DEBUG | Found window for P21GoVu!
+06/19/2023 18:29:03 DEBUG | Found window for P11Gjiq!
+06/19/2023 18:29:03 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 18:29:03 DEBUG | Found window for P21Ge54!
+06/19/2023 18:29:03 INFO | Rejecting targets
+06/19/2023 18:29:03 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11GoAA for error limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Gebp for error limit.
+06/19/2023 18:29:03 DEBUG | Rejected C47JTDZ for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 18:29:03 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 18:29:03 INFO | Updating database
+06/19/2023 18:29:03 DEBUG | Updated P21Ghbg.
+06/19/2023 18:29:03 DEBUG | Updated P21GbMG.
+06/19/2023 18:29:03 DEBUG | Updated P11Ge6q.
+06/19/2023 18:29:03 DEBUG | Updated HirtMR2.
+06/19/2023 18:29:03 DEBUG | Updated P11GoAA.
+06/19/2023 18:29:03 DEBUG | Updated P11Gnt6.
+06/19/2023 18:29:03 DEBUG | Updated P11Ge5y.
+06/19/2023 18:29:03 DEBUG | Updated C9CWMP2.
+06/19/2023 18:29:03 DEBUG | Updated P21FR9u.
+06/19/2023 18:29:03 DEBUG | Updated P21G0FQ.
+06/19/2023 18:29:03 DEBUG | Updated P11GnKW.
+06/19/2023 18:29:03 DEBUG | Updated P11Giqa.
+06/19/2023 18:29:03 DEBUG | Updated P21G8y1.
+06/19/2023 18:29:03 DEBUG | Updated A10UeAm.
+06/19/2023 18:29:03 DEBUG | Updated P11Gnx7.
+06/19/2023 18:29:03 DEBUG | Updated P21Gd2q.
+06/19/2023 18:29:03 DEBUG | Updated P21G0G2.
+06/19/2023 18:29:03 DEBUG | Updated P11GiqU.
+06/19/2023 18:29:03 DEBUG | Updated P21GlSB.
+06/19/2023 18:29:03 DEBUG | Updated P21G8zr.
+06/19/2023 18:29:03 DEBUG | Updated P11Gjit.
+06/19/2023 18:29:03 DEBUG | Updated P11Geck.
+06/19/2023 18:29:03 DEBUG | Updated P21Gjjb.
+06/19/2023 18:29:03 DEBUG | Updated JCMH490.
+06/19/2023 18:29:03 DEBUG | Updated P11GgKz.
+06/19/2023 18:29:03 DEBUG | Updated P11Ge6p.
+06/19/2023 18:29:03 DEBUG | Updated P21GbQa.
+06/19/2023 18:29:03 DEBUG | Updated Mar3769.
+06/19/2023 18:29:03 DEBUG | Updated P11Gnx8.
+06/19/2023 18:29:03 DEBUG | Updated P21GbNr.
+06/19/2023 18:29:03 DEBUG | Updated C9CXVK2.
+06/19/2023 18:29:03 DEBUG | Updated P21GoW7.
+06/19/2023 18:29:03 DEBUG | Updated P21GcUR.
+06/19/2023 18:29:03 DEBUG | Updated P11G8vW.
+06/19/2023 18:29:03 DEBUG | Updated C3R7LQ1.
+06/19/2023 18:29:03 DEBUG | Updated P21GiNw.
+06/19/2023 18:29:04 DEBUG | Updated P11Gech.
+06/19/2023 18:29:04 DEBUG | Updated P11GnKU.
+06/19/2023 18:29:04 DEBUG | Updated ZTs0119.
+06/19/2023 18:29:04 DEBUG | Updated P11Ge6s.
+06/19/2023 18:29:04 DEBUG | Updated P11GoEK.
+06/19/2023 18:29:04 DEBUG | Updated P21GiNx.
+06/19/2023 18:29:04 DEBUG | Updated JKm001.
+06/19/2023 18:29:04 DEBUG | Updated P21G9o6.
+06/19/2023 18:29:04 DEBUG | Updated C9CXUT2.
+06/19/2023 18:29:04 DEBUG | Updated P11GgBa.
+06/19/2023 18:29:04 DEBUG | Updated P11G9jS.
+06/19/2023 18:29:04 DEBUG | Updated P11GoAB.
+06/19/2023 18:29:04 DEBUG | Updated P11GnKX.
+06/19/2023 18:29:04 DEBUG | Updated C9CXT02.
+06/19/2023 18:29:04 DEBUG | Updated P11Gebp.
+06/19/2023 18:29:04 DEBUG | Updated C47JTDZ.
+06/19/2023 18:29:04 DEBUG | Updated P11Gnxd.
+06/19/2023 18:29:04 DEBUG | Updated P21G9k7.
+06/19/2023 18:29:04 DEBUG | Updated P21GoVu.
+06/19/2023 18:29:04 DEBUG | Updated P11Gjiq.
+06/19/2023 18:29:04 DEBUG | Updated P21Ge7Z.
+06/19/2023 18:29:04 DEBUG | Updated xkos329.
+06/19/2023 18:29:04 DEBUG | Updated P21Ge54.
+06/19/2023 18:29:04 INFO | ---Finished MPC selection without error at 06/19/2023 18:29:04 PST
+06/19/2023 18:29:04 INFO | ---Done. will run again at 06/19/2023 18:44:04 PST.
+06/19/2023 18:46:43 INFO | ---Starting cycle at 06/19/2023 18:46:43 PST
+06/19/2023 18:46:44 INFO | --- Acquiring Candidates ---
+06/19/2023 18:46:44 INFO | Constructing Candidates from MPC List
+06/19/2023 18:46:49 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 18:46:52 INFO | Construction complete.
+06/19/2023 18:47:16 INFO | ---Starting cycle at 06/19/2023 18:47:16 PST
+06/19/2023 18:47:16 INFO | --- Acquiring Candidates ---
+06/19/2023 18:47:17 INFO | Constructing Candidates from MPC List
+06/19/2023 18:47:22 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 18:47:25 INFO | Construction complete.
+06/19/2023 18:48:01 DEBUG | Checking for updates toxkos329
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GoW7
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GoVu
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GoEK
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GoAA
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GoAB
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GnKU
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GnKX
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GnKW
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GlSB
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gjit
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GiNx
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GiNw
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Giqa
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GiqU
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toZTs0119
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GgKz
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11GgBa
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toC9CXT02
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toJCMH490
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Geck
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gech
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Gebp
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21Ge54
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toMar3769
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GcUR
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GbQa
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GbNr
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21GbMG
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toHirtMR2
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21G9o6
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21G9k7
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11G9jS
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21G8zr
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21G8y1
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP11G8vW
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toC47JTDZ
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21G0G2
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toP21FR9u
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toJKm001
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 DEBUG | Checking for updates toA10UeAm
+06/19/2023 18:48:01 DEBUG | None found
+06/19/2023 18:48:01 INFO | -Assessed Candidates
+06/19/2023 18:48:01 INFO | New (0)
+06/19/2023 18:48:01 DEBUG | []
+06/19/2023 18:48:01 INFO | Static (59)
+06/19/2023 18:48:01 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate C47JTDZ (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 18:48:01 INFO | Updated (0)
+06/19/2023 18:48:01 DEBUG | []
+06/19/2023 18:48:01 INFO | Removed (0)
+06/19/2023 18:48:01 DEBUG | []
+06/19/2023 18:48:01 INFO | ---Finished MPC logging without error at 06/19/2023 18:48:01 PST
+06/19/2023 18:48:01 INFO | --- Selecting ---
+06/19/2023 18:48:01 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 18:48:06 DEBUG | Found window for P21Ghbg!
+06/19/2023 18:48:06 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11Ge6q!
+06/19/2023 18:48:06 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11GoAA!
+06/19/2023 18:48:06 DEBUG | Found window for P11Gnt6!
+06/19/2023 18:48:06 DEBUG | Found window for P11Ge5y!
+06/19/2023 18:48:06 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P21FR9u!
+06/19/2023 18:48:06 DEBUG | Found window for P21G0FQ!
+06/19/2023 18:48:06 DEBUG | Found window for P11GnKW!
+06/19/2023 18:48:06 DEBUG | Found window for P11Giqa!
+06/19/2023 18:48:06 DEBUG | Found window for P21G8y1!
+06/19/2023 18:48:06 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11Gnx7!
+06/19/2023 18:48:06 DEBUG | Found window for P21Gd2q!
+06/19/2023 18:48:06 DEBUG | Found window for P21G0G2!
+06/19/2023 18:48:06 DEBUG | Found window for P11GiqU!
+06/19/2023 18:48:06 DEBUG | Found window for P21GlSB!
+06/19/2023 18:48:06 DEBUG | Found window for P21G8zr!
+06/19/2023 18:48:06 DEBUG | Found window for P11Gjit!
+06/19/2023 18:48:06 DEBUG | Found window for P11Geck!
+06/19/2023 18:48:06 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11GgKz!
+06/19/2023 18:48:06 DEBUG | Found window for P11Ge6p!
+06/19/2023 18:48:06 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11Gnx8!
+06/19/2023 18:48:06 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for C9CXVK2!
+06/19/2023 18:48:06 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P21GcUR!
+06/19/2023 18:48:06 DEBUG | Found window for P11G8vW!
+06/19/2023 18:48:06 DEBUG | Found window for C3R7LQ1!
+06/19/2023 18:48:06 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11Gech!
+06/19/2023 18:48:06 DEBUG | Found window for P11GnKU!
+06/19/2023 18:48:06 DEBUG | Found window for ZTs0119!
+06/19/2023 18:48:06 DEBUG | Found window for P11Ge6s!
+06/19/2023 18:48:06 DEBUG | Found window for P11GoEK!
+06/19/2023 18:48:06 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P21G9o6!
+06/19/2023 18:48:06 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11GgBa!
+06/19/2023 18:48:06 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P11GoAB!
+06/19/2023 18:48:06 DEBUG | Found window for P11GnKX!
+06/19/2023 18:48:06 DEBUG | Found window for C9CXT02!
+06/19/2023 18:48:06 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for C47JTDZ!
+06/19/2023 18:48:06 DEBUG | Found window for P11Gnxd!
+06/19/2023 18:48:06 DEBUG | Found window for P21G9k7!
+06/19/2023 18:48:06 DEBUG | Found window for P21GoVu!
+06/19/2023 18:48:06 DEBUG | Found window for P11Gjiq!
+06/19/2023 18:48:06 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 18:48:06 DEBUG | Found window for P21Ge54!
+06/19/2023 18:48:06 INFO | Rejecting targets
+06/19/2023 18:48:06 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11GoAA for error limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Gebp for error limit.
+06/19/2023 18:48:06 DEBUG | Rejected C47JTDZ for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 18:48:06 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 18:48:06 INFO | Updating database
+06/19/2023 18:48:08 DEBUG | Updated P21Ghbg.
+06/19/2023 18:48:11 DEBUG | Updated P21GbMG.
+06/19/2023 18:48:13 DEBUG | Updated P11Ge6q.
+06/19/2023 18:48:15 DEBUG | Updated HirtMR2.
+06/19/2023 18:48:18 DEBUG | Updated P11GoAA.
+06/19/2023 18:48:20 DEBUG | Updated P11Gnt6.
+06/19/2023 18:48:22 DEBUG | Updated P11Ge5y.
+06/19/2023 18:48:24 DEBUG | Updated C9CWMP2.
+06/19/2023 18:48:27 DEBUG | Updated P21FR9u.
+06/19/2023 18:48:29 DEBUG | Updated P21G0FQ.
+06/19/2023 18:48:31 DEBUG | Updated P11GnKW.
+06/19/2023 18:48:33 DEBUG | Updated P11Giqa.
+06/19/2023 18:48:36 DEBUG | Updated P21G8y1.
+06/19/2023 18:48:38 DEBUG | Updated A10UeAm.
+06/19/2023 18:48:40 DEBUG | Updated P11Gnx7.
+06/19/2023 18:48:42 DEBUG | Updated P21Gd2q.
+06/19/2023 18:48:45 DEBUG | Updated P21G0G2.
+06/19/2023 18:48:47 DEBUG | Updated P11GiqU.
+06/19/2023 18:48:49 DEBUG | Updated P21GlSB.
+06/19/2023 18:48:52 DEBUG | Updated P21G8zr.
+06/19/2023 18:48:54 DEBUG | Updated P11Gjit.
+06/19/2023 18:48:56 DEBUG | Updated P11Geck.
+06/19/2023 18:48:58 DEBUG | Updated P21Gjjb.
+06/19/2023 18:49:01 DEBUG | Updated JCMH490.
+06/19/2023 18:49:03 DEBUG | Updated P11GgKz.
+06/19/2023 18:49:05 DEBUG | Updated P11Ge6p.
+06/19/2023 18:49:07 DEBUG | Updated P21GbQa.
+06/19/2023 18:49:10 DEBUG | Updated Mar3769.
+06/19/2023 18:49:12 DEBUG | Updated P11Gnx8.
+06/19/2023 18:49:14 DEBUG | Updated P21GbNr.
+06/19/2023 18:49:16 DEBUG | Updated C9CXVK2.
+06/19/2023 18:49:19 DEBUG | Updated P21GoW7.
+06/19/2023 18:49:21 DEBUG | Updated P21GcUR.
+06/19/2023 18:49:23 DEBUG | Updated P11G8vW.
+06/19/2023 18:49:26 DEBUG | Updated C3R7LQ1.
+06/19/2023 18:49:28 DEBUG | Updated P21GiNw.
+06/19/2023 18:49:30 DEBUG | Updated P11Gech.
+06/19/2023 18:49:32 DEBUG | Updated P11GnKU.
+06/19/2023 18:49:35 DEBUG | Updated ZTs0119.
+06/19/2023 18:49:37 DEBUG | Updated P11Ge6s.
+06/19/2023 18:49:39 DEBUG | Updated P11GoEK.
+06/19/2023 18:49:41 DEBUG | Updated P21GiNx.
+06/19/2023 18:49:44 DEBUG | Updated JKm001.
+06/19/2023 18:49:46 DEBUG | Updated P21G9o6.
+06/19/2023 18:49:48 DEBUG | Updated C9CXUT2.
+06/19/2023 18:49:50 DEBUG | Updated P11GgBa.
+06/19/2023 18:49:53 DEBUG | Updated P11G9jS.
+06/19/2023 18:49:55 DEBUG | Updated P11GoAB.
+06/19/2023 18:49:57 DEBUG | Updated P11GnKX.
+06/19/2023 18:50:00 DEBUG | Updated C9CXT02.
+06/19/2023 18:50:02 DEBUG | Updated P11Gebp.
+06/19/2023 18:50:04 DEBUG | Updated C47JTDZ.
+06/19/2023 18:50:06 DEBUG | Updated P11Gnxd.
+06/19/2023 18:50:09 DEBUG | Updated P21G9k7.
+06/19/2023 18:50:11 DEBUG | Updated P21GoVu.
+06/19/2023 18:50:13 DEBUG | Updated P11Gjiq.
+06/19/2023 18:50:15 DEBUG | Updated P21Ge7Z.
+06/19/2023 18:50:18 DEBUG | Updated xkos329.
+06/19/2023 18:50:20 DEBUG | Updated P21Ge54.
+06/19/2023 18:50:20 INFO | ---Finished MPC selection without error at 06/19/2023 18:50:20 PST
+06/19/2023 18:50:20 INFO | ---Done. will run again at 06/19/2023 19:05:20 PST.
+06/19/2023 19:05:20 INFO | ---Starting cycle at 06/19/2023 19:05:20 PST
+06/19/2023 19:05:20 INFO | --- Acquiring Candidates ---
+06/19/2023 19:05:20 INFO | Constructing Candidates from MPC List
+06/19/2023 19:05:24 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 19:05:27 INFO | Construction complete.
+06/19/2023 19:06:05 DEBUG | Checking for updates toxkos329
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GoW7
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GoVu
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GoEK
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GoAA
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GoAB
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GnKU
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GnKX
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GnKW
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GlSB
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gjit
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GiNx
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GiNw
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Giqa
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GiqU
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toZTs0119
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GgKz
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11GgBa
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toC9CXT02
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toJCMH490
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Geck
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gech
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Gebp
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21Ge54
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toMar3769
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GcUR
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GbQa
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GbNr
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21GbMG
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toHirtMR2
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21G9o6
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21G9k7
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11G9jS
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21G8zr
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21G8y1
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP11G8vW
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toC47JTDZ
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21G0G2
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toP21FR9u
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toJKm001
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 DEBUG | Checking for updates toA10UeAm
+06/19/2023 19:06:05 DEBUG | None found
+06/19/2023 19:06:05 INFO | -Assessed Candidates
+06/19/2023 19:06:05 INFO | New (0)
+06/19/2023 19:06:05 DEBUG | []
+06/19/2023 19:06:05 INFO | Static (59)
+06/19/2023 19:06:05 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate C47JTDZ (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 19:06:05 INFO | Updated (0)
+06/19/2023 19:06:05 DEBUG | []
+06/19/2023 19:06:05 INFO | Removed (0)
+06/19/2023 19:06:05 DEBUG | []
+06/19/2023 19:06:05 INFO | ---Finished MPC logging without error at 06/19/2023 19:06:05 PST
+06/19/2023 19:06:05 INFO | --- Selecting ---
+06/19/2023 19:06:05 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 19:06:10 DEBUG | Found window for P21Ghbg!
+06/19/2023 19:06:10 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11Ge6q!
+06/19/2023 19:06:10 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11GoAA!
+06/19/2023 19:06:10 DEBUG | Found window for P11Gnt6!
+06/19/2023 19:06:10 DEBUG | Found window for P11Ge5y!
+06/19/2023 19:06:10 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P21FR9u!
+06/19/2023 19:06:10 DEBUG | Found window for P21G0FQ!
+06/19/2023 19:06:10 DEBUG | Found window for P11GnKW!
+06/19/2023 19:06:10 DEBUG | Found window for P11Giqa!
+06/19/2023 19:06:10 DEBUG | Found window for P21G8y1!
+06/19/2023 19:06:10 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11Gnx7!
+06/19/2023 19:06:10 DEBUG | Found window for P21Gd2q!
+06/19/2023 19:06:10 DEBUG | Found window for P21G0G2!
+06/19/2023 19:06:10 DEBUG | Found window for P11GiqU!
+06/19/2023 19:06:10 DEBUG | Found window for P21GlSB!
+06/19/2023 19:06:10 DEBUG | Found window for P21G8zr!
+06/19/2023 19:06:10 DEBUG | Found window for P11Gjit!
+06/19/2023 19:06:10 DEBUG | Found window for P11Geck!
+06/19/2023 19:06:10 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11GgKz!
+06/19/2023 19:06:10 DEBUG | Found window for P11Ge6p!
+06/19/2023 19:06:10 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11Gnx8!
+06/19/2023 19:06:10 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for C9CXVK2!
+06/19/2023 19:06:10 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P21GcUR!
+06/19/2023 19:06:10 DEBUG | Found window for P11G8vW!
+06/19/2023 19:06:10 DEBUG | Found window for C3R7LQ1!
+06/19/2023 19:06:10 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11Gech!
+06/19/2023 19:06:10 DEBUG | Found window for P11GnKU!
+06/19/2023 19:06:10 DEBUG | Found window for ZTs0119!
+06/19/2023 19:06:10 DEBUG | Found window for P11Ge6s!
+06/19/2023 19:06:10 DEBUG | Found window for P11GoEK!
+06/19/2023 19:06:10 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P21G9o6!
+06/19/2023 19:06:10 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11GgBa!
+06/19/2023 19:06:10 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P11GoAB!
+06/19/2023 19:06:10 DEBUG | Found window for P11GnKX!
+06/19/2023 19:06:10 DEBUG | Found window for C9CXT02!
+06/19/2023 19:06:10 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for C47JTDZ!
+06/19/2023 19:06:10 DEBUG | Found window for P11Gnxd!
+06/19/2023 19:06:10 DEBUG | Found window for P21G9k7!
+06/19/2023 19:06:10 DEBUG | Found window for P21GoVu!
+06/19/2023 19:06:10 DEBUG | Found window for P11Gjiq!
+06/19/2023 19:06:10 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 19:06:10 DEBUG | Found window for P21Ge54!
+06/19/2023 19:06:10 INFO | Rejecting targets
+06/19/2023 19:06:10 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11GoAA for error limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Gebp for error limit.
+06/19/2023 19:06:10 DEBUG | Rejected C47JTDZ for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 19:06:10 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 19:06:10 INFO | Updating database
+06/19/2023 19:06:12 DEBUG | Updated P21Ghbg.
+06/19/2023 19:06:15 DEBUG | Updated P21GbMG.
+06/19/2023 19:06:17 DEBUG | Updated P11Ge6q.
+06/19/2023 19:06:19 DEBUG | Updated HirtMR2.
+06/19/2023 19:06:22 DEBUG | Updated P11GoAA.
+06/19/2023 19:06:24 DEBUG | Updated P11Gnt6.
+06/19/2023 19:06:26 DEBUG | Updated P11Ge5y.
+06/19/2023 19:06:28 DEBUG | Updated C9CWMP2.
+06/19/2023 19:06:31 DEBUG | Updated P21FR9u.
+06/19/2023 19:06:33 DEBUG | Updated P21G0FQ.
+06/19/2023 19:06:35 DEBUG | Updated P11GnKW.
+06/19/2023 19:06:37 DEBUG | Updated P11Giqa.
+06/19/2023 19:06:40 DEBUG | Updated P21G8y1.
+06/19/2023 19:06:42 DEBUG | Updated A10UeAm.
+06/19/2023 19:06:44 DEBUG | Updated P11Gnx7.
+06/19/2023 19:06:47 DEBUG | Updated P21Gd2q.
+06/19/2023 19:06:49 DEBUG | Updated P21G0G2.
+06/19/2023 19:06:51 DEBUG | Updated P11GiqU.
+06/19/2023 19:06:53 DEBUG | Updated P21GlSB.
+06/19/2023 19:06:56 DEBUG | Updated P21G8zr.
+06/19/2023 19:06:58 DEBUG | Updated P11Gjit.
+06/19/2023 19:07:00 DEBUG | Updated P11Geck.
+06/19/2023 19:07:02 DEBUG | Updated P21Gjjb.
+06/19/2023 19:07:05 DEBUG | Updated JCMH490.
+06/19/2023 19:07:07 DEBUG | Updated P11GgKz.
+06/19/2023 19:07:09 DEBUG | Updated P11Ge6p.
+06/19/2023 19:07:11 DEBUG | Updated P21GbQa.
+06/19/2023 19:07:14 DEBUG | Updated Mar3769.
+06/19/2023 19:07:16 DEBUG | Updated P11Gnx8.
+06/19/2023 19:07:18 DEBUG | Updated P21GbNr.
+06/19/2023 19:07:21 DEBUG | Updated C9CXVK2.
+06/19/2023 19:07:23 DEBUG | Updated P21GoW7.
+06/19/2023 19:07:25 DEBUG | Updated P21GcUR.
+06/19/2023 19:07:27 DEBUG | Updated P11G8vW.
+06/19/2023 19:07:30 DEBUG | Updated C3R7LQ1.
+06/19/2023 19:07:32 DEBUG | Updated P21GiNw.
+06/19/2023 19:07:34 DEBUG | Updated P11Gech.
+06/19/2023 19:07:36 DEBUG | Updated P11GnKU.
+06/19/2023 19:07:39 DEBUG | Updated ZTs0119.
+06/19/2023 19:07:41 DEBUG | Updated P11Ge6s.
+06/19/2023 19:07:43 DEBUG | Updated P11GoEK.
+06/19/2023 19:07:45 DEBUG | Updated P21GiNx.
+06/19/2023 19:07:48 DEBUG | Updated JKm001.
+06/19/2023 19:07:50 DEBUG | Updated P21G9o6.
+06/19/2023 19:07:52 DEBUG | Updated C9CXUT2.
+06/19/2023 19:07:55 DEBUG | Updated P11GgBa.
+06/19/2023 19:07:57 DEBUG | Updated P11G9jS.
+06/19/2023 19:07:59 DEBUG | Updated P11GoAB.
+06/19/2023 19:08:01 DEBUG | Updated P11GnKX.
+06/19/2023 19:08:04 DEBUG | Updated C9CXT02.
+06/19/2023 19:08:06 DEBUG | Updated P11Gebp.
+06/19/2023 19:08:08 DEBUG | Updated C47JTDZ.
+06/19/2023 19:08:10 DEBUG | Updated P11Gnxd.
+06/19/2023 19:08:13 DEBUG | Updated P21G9k7.
+06/19/2023 19:08:15 DEBUG | Updated P21GoVu.
+06/19/2023 19:08:17 DEBUG | Updated P11Gjiq.
+06/19/2023 19:08:20 DEBUG | Updated P21Ge7Z.
+06/19/2023 19:08:22 DEBUG | Updated xkos329.
+06/19/2023 19:08:24 DEBUG | Updated P21Ge54.
+06/19/2023 19:08:24 INFO | ---Finished MPC selection without error at 06/19/2023 19:08:24 PST
+06/19/2023 19:08:24 INFO | ---Done. will run again at 06/19/2023 19:23:24 PST.
+06/19/2023 19:23:24 INFO | ---Starting cycle at 06/19/2023 19:23:24 PST
+06/19/2023 19:23:24 INFO | --- Acquiring Candidates ---
+06/19/2023 19:23:24 INFO | Constructing Candidates from MPC List
+06/19/2023 19:23:29 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 19:23:33 INFO | Construction complete.
+06/19/2023 19:24:15 DEBUG | Checking for updates toxkos329
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP21GoW7
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP21GoVu
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GoEK
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GoAA
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GoAB
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GnKU
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GnKX
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GnKW
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP21GlSB
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11Gjit
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP21GiNx
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP21GiNw
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11Giqa
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GiqU
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toZTs0119
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GgKz
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toP11GgBa
+06/19/2023 19:24:15 DEBUG | None found
+06/19/2023 19:24:15 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 19:24:15 INFO | Updating C9CXVK2
+06/19/2023 19:24:17 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toC9CXT02
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toJCMH490
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11Geck
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11Gech
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11Gebp
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21Ge54
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toMar3769
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21GcUR
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21GbQa
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21GbNr
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21GbMG
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toHirtMR2
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21G9o6
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21G9k7
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11G9jS
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21G8zr
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21G8y1
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP11G8vW
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21G0G2
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toP21FR9u
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toJKm001
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 DEBUG | Checking for updates toA10UeAm
+06/19/2023 19:24:17 DEBUG | None found
+06/19/2023 19:24:17 INFO | Candidate C47JTDZ is in the database but not in the MPC table. Marking as removed.
+06/19/2023 19:24:17 INFO | -Assessed Candidates
+06/19/2023 19:24:17 INFO | New (0)
+06/19/2023 19:24:17 DEBUG | []
+06/19/2023 19:24:17 INFO | Static (57)
+06/19/2023 19:24:17 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 19:24:17 INFO | Updated (1)
+06/19/2023 19:24:17 DEBUG | [Candidate C9CXVK2 (MPC NEO)]
+06/19/2023 19:24:17 INFO | Removed (1)
+06/19/2023 19:24:17 DEBUG | [Candidate C47JTDZ (MPC NEO)]
+06/19/2023 19:24:17 INFO | ---Finished MPC logging without error at 06/19/2023 19:24:17 PST
+06/19/2023 19:24:17 INFO | --- Selecting ---
+06/19/2023 19:24:17 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 19:27:28 INFO | ---Starting cycle at 06/19/2023 19:27:28 PST
+06/19/2023 19:27:28 INFO | --- Acquiring Candidates ---
+06/19/2023 19:27:28 INFO | Constructing Candidates from MPC List
+06/19/2023 19:27:33 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 19:27:35 INFO | Construction complete.
+06/19/2023 19:28:15 DEBUG | Checking for updates toxkos329
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP21GoW7
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP21GoVu
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GoEK
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GoAA
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GoAB
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GnKU
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GnKX
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GnKW
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP21GlSB
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11Gjit
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP21GiNx
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP21GiNw
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11Giqa
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GiqU
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toZTs0119
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GgKz
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toP11GgBa
+06/19/2023 19:28:15 DEBUG | None found
+06/19/2023 19:28:15 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 19:28:15 INFO | Updating C9CXVK2
+06/19/2023 19:28:17 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toC9CXT02
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toJCMH490
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11Geck
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11Gech
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11Gebp
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21Ge54
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toMar3769
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21GcUR
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21GbQa
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21GbNr
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21GbMG
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toHirtMR2
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21G9o6
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21G9k7
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11G9jS
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21G8zr
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21G8y1
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP11G8vW
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21G0G2
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toP21FR9u
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toJKm001
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 DEBUG | Checking for updates toA10UeAm
+06/19/2023 19:28:17 DEBUG | None found
+06/19/2023 19:28:17 INFO | Candidate C47JTDZ is in the database but not in the MPC table. Marking as removed.
+06/19/2023 19:28:17 INFO | -Assessed Candidates
+06/19/2023 19:28:17 INFO | New (0)
+06/19/2023 19:28:17 DEBUG | []
+06/19/2023 19:28:17 INFO | Static (57)
+06/19/2023 19:28:17 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 19:28:17 INFO | Updated (1)
+06/19/2023 19:28:17 DEBUG | [Candidate C9CXVK2 (MPC NEO)]
+06/19/2023 19:28:17 INFO | Removed (1)
+06/19/2023 19:28:17 DEBUG | [Candidate C47JTDZ (MPC NEO)]
+06/19/2023 19:28:17 INFO | ---Finished MPC logging without error at 06/19/2023 19:28:17 PST
+06/19/2023 19:28:17 INFO | --- Selecting ---
+06/19/2023 19:28:17 INFO | Finding observability and evaluating 59 objects.
+06/19/2023 19:28:34 INFO | ---Starting cycle at 06/19/2023 19:28:34 PST
+06/19/2023 19:28:35 INFO | --- Acquiring Candidates ---
+06/19/2023 19:28:35 INFO | Constructing Candidates from MPC List
+06/19/2023 19:28:39 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 19:28:42 INFO | Construction complete.
+06/19/2023 19:29:22 DEBUG | Checking for updates toxkos329
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GoW7
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GoVu
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GoEK
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GoAA
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GoAB
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GnKU
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GnKX
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GnKW
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GlSB
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gjit
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GiNx
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GiNw
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Giqa
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GiqU
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toZTs0119
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GgKz
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11GgBa
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 19:29:22 INFO | Updating C9CXVK2
+06/19/2023 19:29:22 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toC9CXT02
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toJCMH490
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Geck
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gech
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Gebp
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21Ge54
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toMar3769
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GcUR
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GbQa
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GbNr
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21GbMG
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toHirtMR2
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21G9o6
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21G9k7
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11G9jS
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21G8zr
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21G8y1
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP11G8vW
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21G0G2
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toP21FR9u
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toJKm001
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 DEBUG | Checking for updates toA10UeAm
+06/19/2023 19:29:22 DEBUG | None found
+06/19/2023 19:29:22 INFO | Candidate C47JTDZ is in the database but not in the MPC table. Marking as removed.
+06/19/2023 19:29:22 INFO | -Assessed Candidates
+06/19/2023 19:29:22 INFO | New (0)
+06/19/2023 19:29:22 DEBUG | []
+06/19/2023 19:29:22 INFO | Static (57)
+06/19/2023 19:29:22 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 19:29:22 INFO | Updated (1)
+06/19/2023 19:29:22 DEBUG | [Candidate C9CXVK2 (MPC NEO)]
+06/19/2023 19:29:22 INFO | Removed (1)
+06/19/2023 19:29:22 DEBUG | [Candidate C47JTDZ (MPC NEO)]
+06/19/2023 19:29:22 INFO | ---Finished MPC logging without error at 06/19/2023 19:29:22 PST
+06/19/2023 19:29:22 INFO | --- Selecting ---
+06/19/2023 19:29:22 INFO | Finding observability and evaluating 58 objects.
+06/19/2023 19:29:26 DEBUG | Found window for P21Ghbg!
+06/19/2023 19:29:26 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11Ge6q!
+06/19/2023 19:29:26 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11GoAA!
+06/19/2023 19:29:26 DEBUG | Found window for P11Gnt6!
+06/19/2023 19:29:26 DEBUG | Found window for P11Ge5y!
+06/19/2023 19:29:26 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P21FR9u!
+06/19/2023 19:29:26 DEBUG | Found window for P21G0FQ!
+06/19/2023 19:29:26 DEBUG | Found window for P11GnKW!
+06/19/2023 19:29:26 DEBUG | Found window for P11Giqa!
+06/19/2023 19:29:26 DEBUG | Found window for P21G8y1!
+06/19/2023 19:29:26 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11Gnx7!
+06/19/2023 19:29:26 DEBUG | Found window for P21Gd2q!
+06/19/2023 19:29:26 DEBUG | Found window for P21G0G2!
+06/19/2023 19:29:26 DEBUG | Found window for P11GiqU!
+06/19/2023 19:29:26 DEBUG | Found window for P21GlSB!
+06/19/2023 19:29:26 DEBUG | Found window for P21G8zr!
+06/19/2023 19:29:26 DEBUG | Found window for P11Gjit!
+06/19/2023 19:29:26 DEBUG | Found window for P11Geck!
+06/19/2023 19:29:26 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11GgKz!
+06/19/2023 19:29:26 DEBUG | Found window for P11Ge6p!
+06/19/2023 19:29:26 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11Gnx8!
+06/19/2023 19:29:26 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for C9CXVK2!
+06/19/2023 19:29:26 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P21GcUR!
+06/19/2023 19:29:26 DEBUG | Found window for P11G8vW!
+06/19/2023 19:29:26 DEBUG | Found window for C3R7LQ1!
+06/19/2023 19:29:26 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11Gech!
+06/19/2023 19:29:26 DEBUG | Found window for P11GnKU!
+06/19/2023 19:29:26 DEBUG | Found window for ZTs0119!
+06/19/2023 19:29:26 DEBUG | Found window for P11Ge6s!
+06/19/2023 19:29:26 DEBUG | Found window for P11GoEK!
+06/19/2023 19:29:26 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P21G9o6!
+06/19/2023 19:29:26 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11GgBa!
+06/19/2023 19:29:26 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11GoAB!
+06/19/2023 19:29:26 DEBUG | Found window for P11GnKX!
+06/19/2023 19:29:26 DEBUG | Found window for C9CXT02!
+06/19/2023 19:29:26 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P11Gnxd!
+06/19/2023 19:29:26 DEBUG | Found window for P21G9k7!
+06/19/2023 19:29:26 DEBUG | Found window for P21GoVu!
+06/19/2023 19:29:26 DEBUG | Found window for P11Gjiq!
+06/19/2023 19:29:26 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 19:29:26 DEBUG | Found window for P21Ge54!
+06/19/2023 19:29:26 INFO | Rejecting targets
+06/19/2023 19:29:26 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11GoAA for error limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Gebp for error limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 19:29:26 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 19:29:26 INFO | Updating database
+06/19/2023 19:29:26 DEBUG | Updated P21Ghbg.
+06/19/2023 19:29:26 DEBUG | Updated P21GbMG.
+06/19/2023 19:29:26 DEBUG | Updated P11Ge6q.
+06/19/2023 19:29:26 DEBUG | Updated HirtMR2.
+06/19/2023 19:29:27 DEBUG | Updated P11GoAA.
+06/19/2023 19:29:27 DEBUG | Updated P11Gnt6.
+06/19/2023 19:29:27 DEBUG | Updated P11Ge5y.
+06/19/2023 19:29:27 DEBUG | Updated C9CWMP2.
+06/19/2023 19:29:27 DEBUG | Updated P21FR9u.
+06/19/2023 19:29:27 DEBUG | Updated P21G0FQ.
+06/19/2023 19:29:27 DEBUG | Updated P11GnKW.
+06/19/2023 19:29:27 DEBUG | Updated P11Giqa.
+06/19/2023 19:29:27 DEBUG | Updated P21G8y1.
+06/19/2023 19:29:27 DEBUG | Updated A10UeAm.
+06/19/2023 19:29:27 DEBUG | Updated P11Gnx7.
+06/19/2023 19:29:27 DEBUG | Updated P21Gd2q.
+06/19/2023 19:29:27 DEBUG | Updated P21G0G2.
+06/19/2023 19:29:27 DEBUG | Updated P11GiqU.
+06/19/2023 19:29:27 DEBUG | Updated P21GlSB.
+06/19/2023 19:29:27 DEBUG | Updated P21G8zr.
+06/19/2023 19:29:27 DEBUG | Updated P11Gjit.
+06/19/2023 19:29:27 DEBUG | Updated P11Geck.
+06/19/2023 19:29:27 DEBUG | Updated P21Gjjb.
+06/19/2023 19:29:27 DEBUG | Updated JCMH490.
+06/19/2023 19:29:27 DEBUG | Updated P11GgKz.
+06/19/2023 19:29:27 DEBUG | Updated P11Ge6p.
+06/19/2023 19:29:27 DEBUG | Updated P21GbQa.
+06/19/2023 19:29:27 DEBUG | Updated Mar3769.
+06/19/2023 19:29:27 DEBUG | Updated P11Gnx8.
+06/19/2023 19:29:27 DEBUG | Updated P21GbNr.
+06/19/2023 19:29:27 DEBUG | Updated C9CXVK2.
+06/19/2023 19:29:27 DEBUG | Updated P21GoW7.
+06/19/2023 19:29:27 DEBUG | Updated P21GcUR.
+06/19/2023 19:29:27 DEBUG | Updated P11G8vW.
+06/19/2023 19:29:27 DEBUG | Updated C3R7LQ1.
+06/19/2023 19:29:27 DEBUG | Updated P21GiNw.
+06/19/2023 19:29:27 DEBUG | Updated P11Gech.
+06/19/2023 19:29:27 DEBUG | Updated P11GnKU.
+06/19/2023 19:29:27 DEBUG | Updated ZTs0119.
+06/19/2023 19:29:27 DEBUG | Updated P11Ge6s.
+06/19/2023 19:29:27 DEBUG | Updated P11GoEK.
+06/19/2023 19:29:27 DEBUG | Updated P21GiNx.
+06/19/2023 19:29:27 DEBUG | Updated JKm001.
+06/19/2023 19:29:27 DEBUG | Updated P21G9o6.
+06/19/2023 19:29:27 DEBUG | Updated C9CXUT2.
+06/19/2023 19:29:27 DEBUG | Updated P11GgBa.
+06/19/2023 19:29:27 DEBUG | Updated P11G9jS.
+06/19/2023 19:29:27 DEBUG | Updated P11GoAB.
+06/19/2023 19:29:27 DEBUG | Updated P11GnKX.
+06/19/2023 19:29:27 DEBUG | Updated C9CXT02.
+06/19/2023 19:29:27 DEBUG | Updated P11Gebp.
+06/19/2023 19:29:27 DEBUG | Updated P11Gnxd.
+06/19/2023 19:29:27 DEBUG | Updated P21G9k7.
+06/19/2023 19:29:27 DEBUG | Updated P21GoVu.
+06/19/2023 19:29:27 DEBUG | Updated P11Gjiq.
+06/19/2023 19:29:27 DEBUG | Updated P21Ge7Z.
+06/19/2023 19:29:27 DEBUG | Updated xkos329.
+06/19/2023 19:29:27 DEBUG | Updated P21Ge54.
+06/19/2023 19:29:27 INFO | ---Finished MPC selection without error at 06/19/2023 19:29:27 PST
+06/19/2023 19:29:27 INFO | ---Done. will run again at 06/19/2023 19:44:27 PST.
+06/19/2023 19:44:27 INFO | ---Starting cycle at 06/19/2023 19:44:27 PST
+06/19/2023 19:44:27 INFO | --- Acquiring Candidates ---
+06/19/2023 19:44:28 INFO | Constructing Candidates from MPC List
+06/19/2023 19:44:32 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 19:44:35 INFO | Construction complete.
+06/19/2023 19:45:40 DEBUG | Checking for updates toxkos329
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GoW7
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GoVu
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GoEK
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GoAA
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GoAB
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GnKU
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GnKX
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GnKW
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GlSB
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gjit
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GiNx
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GiNw
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Giqa
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GiqU
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toZTs0119
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GgKz
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11GgBa
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toC9CXT02
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toJCMH490
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Geck
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gech
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Gebp
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21Ge54
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toMar3769
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GcUR
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GbQa
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GbNr
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21GbMG
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toHirtMR2
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21G9o6
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21G9k7
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11G9jS
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21G8zr
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21G8y1
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP11G8vW
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21G0G2
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toP21FR9u
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toJKm001
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 DEBUG | Checking for updates toA10UeAm
+06/19/2023 19:45:40 DEBUG | None found
+06/19/2023 19:45:40 INFO | -Assessed Candidates
+06/19/2023 19:45:40 INFO | New (0)
+06/19/2023 19:45:40 DEBUG | []
+06/19/2023 19:45:40 INFO | Static (58)
+06/19/2023 19:45:40 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 19:45:40 INFO | Updated (0)
+06/19/2023 19:45:40 DEBUG | []
+06/19/2023 19:45:40 INFO | Removed (0)
+06/19/2023 19:45:40 DEBUG | []
+06/19/2023 19:45:40 INFO | ---Finished MPC logging without error at 06/19/2023 19:45:40 PST
+06/19/2023 19:45:40 INFO | --- Selecting ---
+06/19/2023 19:45:40 INFO | Finding observability and evaluating 58 objects.
+06/19/2023 19:45:47 DEBUG | Found window for P21Ghbg!
+06/19/2023 19:45:47 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11Ge6q!
+06/19/2023 19:45:47 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11GoAA!
+06/19/2023 19:45:47 DEBUG | Found window for P11Gnt6!
+06/19/2023 19:45:47 DEBUG | Found window for P11Ge5y!
+06/19/2023 19:45:47 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P21FR9u!
+06/19/2023 19:45:47 DEBUG | Found window for P21G0FQ!
+06/19/2023 19:45:47 DEBUG | Found window for P11GnKW!
+06/19/2023 19:45:47 DEBUG | Found window for P11Giqa!
+06/19/2023 19:45:47 DEBUG | Found window for P21G8y1!
+06/19/2023 19:45:47 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11Gnx7!
+06/19/2023 19:45:47 DEBUG | Found window for P21Gd2q!
+06/19/2023 19:45:47 DEBUG | Found window for P21G0G2!
+06/19/2023 19:45:47 DEBUG | Found window for P11GiqU!
+06/19/2023 19:45:47 DEBUG | Found window for P21GlSB!
+06/19/2023 19:45:47 DEBUG | Found window for P21G8zr!
+06/19/2023 19:45:47 DEBUG | Found window for P11Gjit!
+06/19/2023 19:45:47 DEBUG | Found window for P11Geck!
+06/19/2023 19:45:47 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11GgKz!
+06/19/2023 19:45:47 DEBUG | Found window for P11Ge6p!
+06/19/2023 19:45:47 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11Gnx8!
+06/19/2023 19:45:47 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for C9CXVK2!
+06/19/2023 19:45:47 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P21GcUR!
+06/19/2023 19:45:47 DEBUG | Found window for P11G8vW!
+06/19/2023 19:45:47 DEBUG | Found window for C3R7LQ1!
+06/19/2023 19:45:47 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11Gech!
+06/19/2023 19:45:47 DEBUG | Found window for P11GnKU!
+06/19/2023 19:45:47 DEBUG | Found window for ZTs0119!
+06/19/2023 19:45:47 DEBUG | Found window for P11Ge6s!
+06/19/2023 19:45:47 DEBUG | Found window for P11GoEK!
+06/19/2023 19:45:47 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P21G9o6!
+06/19/2023 19:45:47 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11GgBa!
+06/19/2023 19:45:47 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11GoAB!
+06/19/2023 19:45:47 DEBUG | Found window for P11GnKX!
+06/19/2023 19:45:47 DEBUG | Found window for C9CXT02!
+06/19/2023 19:45:47 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P11Gnxd!
+06/19/2023 19:45:47 DEBUG | Found window for P21G9k7!
+06/19/2023 19:45:47 DEBUG | Found window for P21GoVu!
+06/19/2023 19:45:47 DEBUG | Found window for P11Gjiq!
+06/19/2023 19:45:47 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 19:45:47 DEBUG | Found window for P21Ge54!
+06/19/2023 19:45:47 INFO | Rejecting targets
+06/19/2023 19:45:47 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11GoAA for error limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Gebp for error limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 19:45:47 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 19:45:47 INFO | Updating database
+06/19/2023 19:45:47 DEBUG | Updated P21Ghbg.
+06/19/2023 19:45:47 DEBUG | Updated P21GbMG.
+06/19/2023 19:45:47 DEBUG | Updated P11Ge6q.
+06/19/2023 19:45:47 DEBUG | Updated HirtMR2.
+06/19/2023 19:45:47 DEBUG | Updated P11GoAA.
+06/19/2023 19:45:47 DEBUG | Updated P11Gnt6.
+06/19/2023 19:45:47 DEBUG | Updated P11Ge5y.
+06/19/2023 19:45:47 DEBUG | Updated C9CWMP2.
+06/19/2023 19:45:47 DEBUG | Updated P21FR9u.
+06/19/2023 19:45:47 DEBUG | Updated P21G0FQ.
+06/19/2023 19:45:48 DEBUG | Updated P11GnKW.
+06/19/2023 19:45:48 DEBUG | Updated P11Giqa.
+06/19/2023 19:45:48 DEBUG | Updated P21G8y1.
+06/19/2023 19:45:48 DEBUG | Updated A10UeAm.
+06/19/2023 19:45:48 DEBUG | Updated P11Gnx7.
+06/19/2023 19:45:48 DEBUG | Updated P21Gd2q.
+06/19/2023 19:45:48 DEBUG | Updated P21G0G2.
+06/19/2023 19:45:48 DEBUG | Updated P11GiqU.
+06/19/2023 19:45:48 DEBUG | Updated P21GlSB.
+06/19/2023 19:45:48 DEBUG | Updated P21G8zr.
+06/19/2023 19:45:48 DEBUG | Updated P11Gjit.
+06/19/2023 19:45:48 DEBUG | Updated P11Geck.
+06/19/2023 19:45:48 DEBUG | Updated P21Gjjb.
+06/19/2023 19:45:48 DEBUG | Updated JCMH490.
+06/19/2023 19:45:48 DEBUG | Updated P11GgKz.
+06/19/2023 19:45:48 DEBUG | Updated P11Ge6p.
+06/19/2023 19:45:48 DEBUG | Updated P21GbQa.
+06/19/2023 19:45:48 DEBUG | Updated Mar3769.
+06/19/2023 19:45:48 DEBUG | Updated P11Gnx8.
+06/19/2023 19:45:48 DEBUG | Updated P21GbNr.
+06/19/2023 19:45:48 DEBUG | Updated C9CXVK2.
+06/19/2023 19:45:48 DEBUG | Updated P21GoW7.
+06/19/2023 19:45:48 DEBUG | Updated P21GcUR.
+06/19/2023 19:45:48 DEBUG | Updated P11G8vW.
+06/19/2023 19:45:48 DEBUG | Updated C3R7LQ1.
+06/19/2023 19:45:48 DEBUG | Updated P21GiNw.
+06/19/2023 19:45:48 DEBUG | Updated P11Gech.
+06/19/2023 19:45:48 DEBUG | Updated P11GnKU.
+06/19/2023 19:45:48 DEBUG | Updated ZTs0119.
+06/19/2023 19:45:48 DEBUG | Updated P11Ge6s.
+06/19/2023 19:45:48 DEBUG | Updated P11GoEK.
+06/19/2023 19:45:48 DEBUG | Updated P21GiNx.
+06/19/2023 19:45:48 DEBUG | Updated JKm001.
+06/19/2023 19:45:48 DEBUG | Updated P21G9o6.
+06/19/2023 19:45:48 DEBUG | Updated C9CXUT2.
+06/19/2023 19:45:48 DEBUG | Updated P11GgBa.
+06/19/2023 19:45:48 DEBUG | Updated P11G9jS.
+06/19/2023 19:45:48 DEBUG | Updated P11GoAB.
+06/19/2023 19:45:48 DEBUG | Updated P11GnKX.
+06/19/2023 19:45:48 DEBUG | Updated C9CXT02.
+06/19/2023 19:45:48 DEBUG | Updated P11Gebp.
+06/19/2023 19:45:48 DEBUG | Updated P11Gnxd.
+06/19/2023 19:45:48 DEBUG | Updated P21G9k7.
+06/19/2023 19:45:48 DEBUG | Updated P21GoVu.
+06/19/2023 19:45:48 DEBUG | Updated P11Gjiq.
+06/19/2023 19:45:48 DEBUG | Updated P21Ge7Z.
+06/19/2023 19:45:48 DEBUG | Updated xkos329.
+06/19/2023 19:45:48 DEBUG | Updated P21Ge54.
+06/19/2023 19:45:48 INFO | ---Finished MPC selection without error at 06/19/2023 19:45:48 PST
+06/19/2023 19:45:48 INFO | ---Done. will run again at 06/19/2023 20:00:48 PST.
+06/19/2023 20:00:48 INFO | ---Starting cycle at 06/19/2023 20:00:48 PST
+06/19/2023 20:00:49 INFO | --- Acquiring Candidates ---
+06/19/2023 20:00:50 INFO | Constructing Candidates from MPC List
+06/19/2023 20:00:55 WARNING | Couldn't find velocities for P11Gebp
+06/19/2023 20:00:58 INFO | Construction complete.
+06/19/2023 20:01:53 DEBUG | Checking for updates toxkos329
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GoW7
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GoVu
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GoEK
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GoAA
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GoAB
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GnKU
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GnKX
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GnKW
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gnxd
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gnx7
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gnx8
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gnt6
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GlSB
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toC3R7LQ1
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21Gjjb
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gjit
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gjiq
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GiNx
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GiNw
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Giqa
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GiqU
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toZTs0119
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21Ghbg
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GgKz
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11GgBa
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toC9CXVK2
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toC9CXUT2
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toC9CXT02
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toJCMH490
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Geck
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gech
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Gebp
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21Ge7Z
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21Ge54
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Ge6s
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Ge6q
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Ge6p
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11Ge5y
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toMar3769
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21Gd2q
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GcUR
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GbQa
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GbNr
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21GbMG
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toHirtMR2
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21G9o6
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21G9k7
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11G9jS
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21G8zr
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21G8y1
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP11G8vW
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21G0G2
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21G0FQ
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toC9CWMP2
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toP21FR9u
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toJKm001
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 DEBUG | Checking for updates toA10UeAm
+06/19/2023 20:01:53 DEBUG | None found
+06/19/2023 20:01:53 INFO | -Assessed Candidates
+06/19/2023 20:01:53 INFO | New (0)
+06/19/2023 20:01:53 DEBUG | []
+06/19/2023 20:01:53 INFO | Static (58)
+06/19/2023 20:01:53 DEBUG | [Candidate xkos329 (MPC NEO), Candidate P21GoW7 (MPC NEO), Candidate P21GoVu (MPC NEO), Candidate P11GoEK (MPC NEO), Candidate P11GoAA (MPC NEO), Candidate P11GoAB (MPC NEO), Candidate P11GnKU (MPC NEO), Candidate P11GnKX (MPC NEO), Candidate P11GnKW (MPC NEO), Candidate P11Gnxd (MPC NEO), Candidate P11Gnx7 (MPC NEO), Candidate P11Gnx8 (MPC NEO), Candidate P11Gnt6 (MPC NEO), Candidate P21GlSB (MPC NEO), Candidate C3R7LQ1 (MPC NEO), Candidate P21Gjjb (MPC NEO), Candidate P11Gjit (MPC NEO), Candidate P11Gjiq (MPC NEO), Candidate P21GiNx (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Giqa (MPC NEO), Candidate P11GiqU (MPC NEO), Candidate ZTs0119 (MPC NEO), Candidate P21Ghbg (MPC NEO), Candidate P11GgKz (MPC NEO), Candidate P11GgBa (MPC NEO), Candidate C9CXVK2 (MPC NEO), Candidate C9CXUT2 (MPC NEO), Candidate C9CXT02 (MPC NEO), Candidate JCMH490 (MPC NEO), Candidate P11Geck (MPC NEO), Candidate P11Gech (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Ge54 (MPC NEO), Candidate P11Ge6s (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P11Ge5y (MPC NEO), Candidate Mar3769 (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21GcUR (MPC NEO), Candidate P21GbQa (MPC NEO), Candidate P21GbNr (MPC NEO), Candidate P21GbMG (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G9o6 (MPC NEO), Candidate P21G9k7 (MPC NEO), Candidate P11G9jS (MPC NEO), Candidate P21G8zr (MPC NEO), Candidate P21G8y1 (MPC NEO), Candidate P11G8vW (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate P21G0FQ (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate P21FR9u (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/19/2023 20:01:53 INFO | Updated (0)
+06/19/2023 20:01:53 DEBUG | []
+06/19/2023 20:01:53 INFO | Removed (0)
+06/19/2023 20:01:53 DEBUG | []
+06/19/2023 20:01:53 INFO | ---Finished MPC logging without error at 06/19/2023 20:01:53 PST
+06/19/2023 20:01:53 INFO | --- Selecting ---
+06/19/2023 20:01:53 INFO | Finding observability and evaluating 58 objects.
+06/19/2023 20:01:59 DEBUG | Found window for P21Ghbg!
+06/19/2023 20:01:59 DEBUG | Got None window for P21GbMG. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11Ge6q!
+06/19/2023 20:01:59 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11GoAA!
+06/19/2023 20:01:59 DEBUG | Found window for P11Gnt6!
+06/19/2023 20:01:59 DEBUG | Found window for P11Ge5y!
+06/19/2023 20:01:59 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P21FR9u!
+06/19/2023 20:01:59 DEBUG | Found window for P21G0FQ!
+06/19/2023 20:01:59 DEBUG | Found window for P11GnKW!
+06/19/2023 20:01:59 DEBUG | Found window for P11Giqa!
+06/19/2023 20:01:59 DEBUG | Found window for P21G8y1!
+06/19/2023 20:01:59 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11Gnx7!
+06/19/2023 20:01:59 DEBUG | Found window for P21Gd2q!
+06/19/2023 20:01:59 DEBUG | Found window for P21G0G2!
+06/19/2023 20:01:59 DEBUG | Found window for P11GiqU!
+06/19/2023 20:01:59 DEBUG | Found window for P21GlSB!
+06/19/2023 20:01:59 DEBUG | Found window for P21G8zr!
+06/19/2023 20:01:59 DEBUG | Found window for P11Gjit!
+06/19/2023 20:01:59 DEBUG | Found window for P11Geck!
+06/19/2023 20:01:59 DEBUG | Got None window for P21Gjjb. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Got None window for JCMH490. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11GgKz!
+06/19/2023 20:01:59 DEBUG | Found window for P11Ge6p!
+06/19/2023 20:01:59 DEBUG | Got None window for P21GbQa. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Got None window for Mar3769. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11Gnx8!
+06/19/2023 20:01:59 DEBUG | Got None window for P21GbNr. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for C9CXVK2!
+06/19/2023 20:01:59 DEBUG | Got None window for P21GoW7. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P21GcUR!
+06/19/2023 20:01:59 DEBUG | Found window for P11G8vW!
+06/19/2023 20:01:59 DEBUG | Found window for C3R7LQ1!
+06/19/2023 20:01:59 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11Gech!
+06/19/2023 20:01:59 DEBUG | Found window for P11GnKU!
+06/19/2023 20:01:59 DEBUG | Found window for ZTs0119!
+06/19/2023 20:01:59 DEBUG | Found window for P11Ge6s!
+06/19/2023 20:01:59 DEBUG | Found window for P11GoEK!
+06/19/2023 20:01:59 DEBUG | Got None window for P21GiNx. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P21G9o6!
+06/19/2023 20:01:59 DEBUG | Got None window for C9CXUT2. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11GgBa!
+06/19/2023 20:01:59 DEBUG | Got None window for P11G9jS. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11GoAB!
+06/19/2023 20:01:59 DEBUG | Found window for P11GnKX!
+06/19/2023 20:01:59 DEBUG | Found window for C9CXT02!
+06/19/2023 20:01:59 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P11Gnxd!
+06/19/2023 20:01:59 DEBUG | Found window for P21G9k7!
+06/19/2023 20:01:59 DEBUG | Found window for P21GoVu!
+06/19/2023 20:01:59 DEBUG | Found window for P11Gjiq!
+06/19/2023 20:01:59 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Got None window for xkos329. Rejected for Observability.
+06/19/2023 20:01:59 DEBUG | Found window for P21Ge54!
+06/19/2023 20:01:59 INFO | Rejecting targets
+06/19/2023 20:01:59 DEBUG | Rejected P21Ghbg for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected HirtMR2 for error limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11GoAA for error limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Ge5y for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P21FR9u for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P21G8y1 for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11GiqU for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P21GlSB for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Gjit for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Geck for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11GgKz for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P21GbQa for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected ZTs0119 for error limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11GoEK for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected JKm001 for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P21G9o6 for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected C9CXUT2 for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11GnKX for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Gebp for error limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Gnxd for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P11Gjiq for magnitude limit.
+06/19/2023 20:01:59 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/19/2023 20:01:59 INFO | Updating database
+06/19/2023 20:01:59 DEBUG | Updated P21Ghbg.
+06/19/2023 20:01:59 DEBUG | Updated P21GbMG.
+06/19/2023 20:01:59 DEBUG | Updated P11Ge6q.
+06/19/2023 20:01:59 DEBUG | Updated HirtMR2.
+06/19/2023 20:01:59 DEBUG | Updated P11GoAA.
+06/19/2023 20:01:59 DEBUG | Updated P11Gnt6.
+06/19/2023 20:01:59 DEBUG | Updated P11Ge5y.
+06/19/2023 20:01:59 DEBUG | Updated C9CWMP2.
+06/19/2023 20:01:59 DEBUG | Updated P21FR9u.
+06/19/2023 20:01:59 DEBUG | Updated P21G0FQ.
+06/19/2023 20:01:59 DEBUG | Updated P11GnKW.
+06/19/2023 20:01:59 DEBUG | Updated P11Giqa.
+06/19/2023 20:01:59 DEBUG | Updated P21G8y1.
+06/19/2023 20:01:59 DEBUG | Updated A10UeAm.
+06/19/2023 20:01:59 DEBUG | Updated P11Gnx7.
+06/19/2023 20:01:59 DEBUG | Updated P21Gd2q.
+06/19/2023 20:01:59 DEBUG | Updated P21G0G2.
+06/19/2023 20:01:59 DEBUG | Updated P11GiqU.
+06/19/2023 20:01:59 DEBUG | Updated P21GlSB.
+06/19/2023 20:01:59 DEBUG | Updated P21G8zr.
+06/19/2023 20:01:59 DEBUG | Updated P11Gjit.
+06/19/2023 20:01:59 DEBUG | Updated P11Geck.
+06/19/2023 20:01:59 DEBUG | Updated P21Gjjb.
+06/19/2023 20:01:59 DEBUG | Updated JCMH490.
+06/19/2023 20:01:59 DEBUG | Updated P11GgKz.
+06/19/2023 20:01:59 DEBUG | Updated P11Ge6p.
+06/19/2023 20:01:59 DEBUG | Updated P21GbQa.
+06/19/2023 20:01:59 DEBUG | Updated Mar3769.
+06/19/2023 20:01:59 DEBUG | Updated P11Gnx8.
+06/19/2023 20:01:59 DEBUG | Updated P21GbNr.
+06/19/2023 20:01:59 DEBUG | Updated C9CXVK2.
+06/19/2023 20:01:59 DEBUG | Updated P21GoW7.
+06/19/2023 20:01:59 DEBUG | Updated P21GcUR.
+06/19/2023 20:02:00 DEBUG | Updated P11G8vW.
+06/19/2023 20:02:00 DEBUG | Updated C3R7LQ1.
+06/19/2023 20:02:00 DEBUG | Updated P21GiNw.
+06/19/2023 20:02:00 DEBUG | Updated P11Gech.
+06/19/2023 20:02:00 DEBUG | Updated P11GnKU.
+06/19/2023 20:02:00 DEBUG | Updated ZTs0119.
+06/19/2023 20:02:00 DEBUG | Updated P11Ge6s.
+06/19/2023 20:02:00 DEBUG | Updated P11GoEK.
+06/19/2023 20:02:00 DEBUG | Updated P21GiNx.
+06/19/2023 20:02:00 DEBUG | Updated JKm001.
+06/19/2023 20:02:00 DEBUG | Updated P21G9o6.
+06/19/2023 20:02:00 DEBUG | Updated C9CXUT2.
+06/19/2023 20:02:00 DEBUG | Updated P11GgBa.
+06/19/2023 20:02:00 DEBUG | Updated P11G9jS.
+06/19/2023 20:02:00 DEBUG | Updated P11GoAB.
+06/19/2023 20:02:00 DEBUG | Updated P11GnKX.
+06/19/2023 20:02:00 DEBUG | Updated C9CXT02.
+06/19/2023 20:02:00 DEBUG | Updated P11Gebp.
+06/19/2023 20:02:00 DEBUG | Updated P11Gnxd.
+06/19/2023 20:02:00 DEBUG | Updated P21G9k7.
+06/19/2023 20:02:00 DEBUG | Updated P21GoVu.
+06/19/2023 20:02:00 DEBUG | Updated P11Gjiq.
+06/19/2023 20:02:00 DEBUG | Updated P21Ge7Z.
+06/19/2023 20:02:00 DEBUG | Updated xkos329.
+06/19/2023 20:02:00 DEBUG | Updated P21Ge54.
+06/19/2023 20:02:00 INFO | ---Finished MPC selection without error at 06/19/2023 20:02:00 PST
+06/19/2023 20:02:00 INFO | ---Done. will run again at 06/19/2023 20:17:00 PST.
