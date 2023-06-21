@@ -11,13 +11,15 @@ from datetime import datetime, timedelta
 from scheduleLib import genUtils
 
 validFields = ["ID", "Author", "DateAdded", "DateLastEdited", "RemovedDt", "RemovedReason", "RejectedReason", 'Night',
-               'Updated', 'StartObservability', 'EndObservability', 'TransitTime', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA',
-               'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'NumExposures', 'ExposureTime','Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes',
+               'Updated', 'StartObservability', 'EndObservability', 'TransitTime', 'RA', 'Dec', 'dRA', 'dDec',
+               'Magnitude', 'RMSE_RA',
+               'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'NumExposures', 'ExposureTime', 'Scheduled', 'Observed',
+               'Processed', 'Submitted', 'Notes',
                'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 
 # MPC target's Name	Processed	Submitted	approx. transit time (@TMO)	RA	Dec	RA Vel ("/min)	Dec Vel ("/min)	Vmag	~Error (arcsec)	Error Color
-#CandidateName, Processed, Submitted, TransitTime, RA, Dec, dRA, dDec, Magnitude, RMSE
+# CandidateName, Processed, Submitted, TransitTime, RA, Dec, dRA, dDec, Magnitude, RMSE
 def generateID(candidateName, candidateType, author):
     hashed = str(hash(candidateName + candidateType + author))
     return int(hashed)
@@ -107,14 +109,22 @@ class Candidate:
         if self.hasField("StartObservability") and self.hasField("EndObservability"):
             startObs = genUtils.stringToTime(self.StartObservability).replace(tzinfo=pytz.UTC)
             endObs = genUtils.stringToTime(self.EndObservability).replace(tzinfo=pytz.UTC)
-            print(start,end)
-            print(startObs,endObs)
-            if start < endObs <= end or start < startObs <= end or (start < startObs and endObs >= end):  # the windows do overlap
+            # print(start, end)
+            # print(startObs, endObs)
+            if start < endObs <= end or start < startObs <= end:  # the windows do overlap
+                # print("Max (start):", max(start, startObs))
+                # print("Min (end):", min(end, endObs))
                 dur = min(end, endObs) - max(start, startObs)
-                print(dur)
+                # print("difference", dur)
                 if dur >= timedelta(hours=duration):  # the window is longer than min allowed duration
                     return True, dur
-        return False
+            elif start < startObs and endObs >= end:
+                # print("spanning case")
+                dur = end-start
+                # print("difference", dur)
+                if dur >= timedelta(hours=duration):  # the window is longer than min allowed duration
+                    return True, dur
+            return False
 
 
 def _queryToDict(queryResults):

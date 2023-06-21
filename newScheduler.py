@@ -55,8 +55,8 @@ class ScorerSwitchboard(astroplan.Scorer):
         scoreArray = numpy.zeros(shape=(len(self.blocks), len(times))) # default is zero
 
         for candType in self.configDict.keys():  # process groups of blocks with the same type
-            indices = np.where(np.array([block.configuration["CandidateType"] == candType for block in self.blocks]))
-            blocksOfType = self.blocks[indices]
+            indices = np.where(np.array([block.configuration["type"] == candType for block in self.blocks]))
+            blocksOfType = np.array(self.blocks)[indices]
             if blocksOfType.size == 0:
                 continue
             try:
@@ -168,7 +168,7 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                 start_idx = int((testTime - startTime) / self.time_resolution)
                 duration_idx = int(block.duration / self.time_resolution)
                 # if any score during the block's duration would be 0, reject it
-                if any(scoreArray[j][start_idx:start_idx + duration_idx] == 0):
+                if any(scoreArray[j][start_idx:start_idx + duration_idx] == 0) or testTime+block.duration > self.schedule.end_time:
                     i += 1
                 # if all of the scores are >0, accept and schedule it
                 else:
@@ -301,7 +301,7 @@ def createSchedule(candidates, startTime, endTime):
 
     blocks = []
     for c in candidates:
-        exposureDuration = c.NumExposures*c.ExposureTime
+        exposureDuration = float(c.NumExposures)*float(c.ExposureTime)
         name = c.CandidateName
         specConstraints = typeSpecificConstraints[c.CandidateType]
         aggConstraints = [timeConstraintDict[name]]
@@ -315,13 +315,13 @@ def createSchedule(candidates, startTime, endTime):
     slewRate = .8 * u.deg / u.second  # this is inaccurate and completely irrelevant. ignore it, we want a fixed min time between targets
     objTransitionDict = {'default': 180 * u.second}
     for conf in configs.values():  # accumulate dictionary of tuples (CandidateName1,CandidateName2)that specifies how long a transition between object1 and object2 should be
-        for objNames, val in conf.objTransitionDict.items():
+        for objNames, val in conf.transitionDict.items():
             objTransitionDict[objNames] = val
 
     transitioner = Transitioner(slewRate, {'object': objTransitionDict})
     # priorityScheduler = PriorityScheduler(constraints=[], observer=TMO, transitioner=transitioner,
     #                                       time_resolution=5 * u.minute)
-    tmoScheduler = TMOScheduler(candidateDict, constraints=[], observer=TMO, transitioner=transitioner,
+    tmoScheduler = TMOScheduler(candidateDict, configs, constraints=[], observer=TMO, transitioner=transitioner,
                                 time_resolution=1 * u.minute)
 
     schedule = Schedule(Time(startTime), Time(endTime))

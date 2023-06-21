@@ -43,7 +43,7 @@ def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
     observabilityCandidates.sort(key=lambda c: genUtils.stringToTime(c.StartObservability))
 
     # Calculate start and end timestamps
-    xMin, xMax = beginDt.timestamp(), endDt.timestamp()
+    xMin, xMax = (beginDt+timedelta(hours=7)).timestamp(), (endDt+timedelta(hours=7)).timestamp()
     windowDuration = xMax - xMin
 
     # Get the unique colors and calculate the number of bars per color
@@ -68,9 +68,8 @@ def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
     # Iterate over observability candidates and plot their windows
     for i, candidate in enumerate(observabilityCandidates):
         # TODO: take the time to actually figure out why the UTC stuff doesn't work instead of just applying this hardcoded offset:
-        startTime = genUtils.stringToTime(candidate.StartObservability) - timedelta(
-            hours=7)  # UTC conversion. this sucks
-        endTime = genUtils.stringToTime(candidate.EndObservability) - timedelta(hours=7)
+        startTime = genUtils.stringToTime(candidate.StartObservability)  # UTC conversion. this sucks
+        endTime = genUtils.stringToTime(candidate.EndObservability)
 
         # Convert start time and end time to Unix timestamps
         startUnix = startTime.timestamp()
@@ -91,7 +90,7 @@ def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
 
     # Format x-axis labels as human-readable datetime
     def formatFunc(value, tickNumber):
-        dt = datetime.utcfromtimestamp(value)
+        dt = datetime.fromtimestamp(value)
         return dt.strftime("%H:%M\n%d-%b")
 
     ax.xaxis.set_major_formatter(plt.FuncFormatter(formatFunc))
@@ -106,8 +105,7 @@ def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
     plt.subplots_adjust(left=0.1, right=0.95, bottom=0.1, top=0.9)
     plt.suptitle("Candidates for Tonight")
     plt.title(
-        datetime.utcfromtimestamp(xMin).strftime("%b %d, %Y, %H:%M") + " to " + datetime.utcfromtimestamp(
-            xMax).strftime(
+        beginDt.strftime("%b %d, %Y, %H:%M") + " to " + endDt.strftime(
             "%b %d, %Y, %H:%M"))
 
     # Show the plot
@@ -132,12 +130,15 @@ nowDt = utc.localize(nowDt)
 
 if sunriseUTC < nowDt:  # if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
     sunriseUTC = sunriseUTC + timedelta(days=1)
+sunriseUTC -= timedelta(hours=1)
 
 if sunsetUTC > sunriseUTC:
     sunsetUTC = sunsetUTC - timedelta(days=1)
 
 # sunsetUTC += timedelta(hours=2) # this is temporary
 sunriseUTC = sunsetUTC + timedelta(hours=2)
+
+
 
 print("Sunset:", sunsetUTC)
 print("Sunrise:", sunriseUTC)
@@ -146,7 +147,6 @@ dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
 
 candidates = candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
 
-# candidates = dbConnection.candidatesAddedSince(datetime.utcnow() - timedelta(hours=24))
 
 # print(genUtils.findTransitTime(Angle("18h39m00s"), TMO).strftime("%H:%M"))
 print("Candidates:",candidates)
