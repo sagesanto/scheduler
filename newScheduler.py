@@ -48,11 +48,11 @@ class ScorerSwitchboard(astroplan.Scorer):
         self.configDict = configDict  # candidate type : config for that type
         super(ScorerSwitchboard, self).__init__(*args, **kwargs)
 
-    def create_score_array(self, time_resolution=1*u.minute):
+    def create_score_array(self, time_resolution=1 * u.minute):
         start = self.schedule.start_time
         end = self.schedule.end_time
         times = astroplan.time_grid_from_range((start, end), time_resolution)
-        scoreArray = numpy.zeros(shape=(len(self.blocks), len(times))) # default is zero
+        scoreArray = numpy.zeros(shape=(len(self.blocks), len(times)))  # default is zero
 
         for candType in self.configDict.keys():  # process groups of blocks with the same type
             indices = np.where(np.array([block.configuration["type"] == candType for block in self.blocks]))
@@ -60,16 +60,18 @@ class ScorerSwitchboard(astroplan.Scorer):
             if blocksOfType.size == 0:
                 continue
             try:
-                scorer = self.configDict[candType].scorer(self.candidateDict, blocksOfType, self.observer, self.schedule,
-                           global_constraints=self.global_constraints)
+                scorer = self.configDict[candType].scorer(self.candidateDict, blocksOfType, self.observer,
+                                                          self.schedule,
+                                                          global_constraints=self.global_constraints)
                 modifiedRows = scorer.create_score_array(time_resolution)
                 scoreArray[indices] = modifiedRows
             except Exception as e:
-                print("score error:",e)
+                print("score error:", e)
                 scoreArray[indices] = self.genericScoreArray(blocksOfType, time_resolution)
         return scoreArray
 
-    def genericScoreArray(self,blocks, time_resolution): # generate a generic array of scores for targets that we couldn't get custom scores for
+    def genericScoreArray(self, blocks,
+                          time_resolution):  # generate a generic array of scores for targets that we couldn't get custom scores for
         start = self.schedule.start_time
         end = self.schedule.end_time
         times = astroplan.time_grid_from_range((start, end), time_resolution)
@@ -78,21 +80,22 @@ class ScorerSwitchboard(astroplan.Scorer):
             if block.constraints:
                 for constraint in block.constraints:
                     appliedScore = constraint(self.observer, block.target,
-                                               times=times)
+                                              times=times)
                     scoreArray[i] *= appliedScore
         for constraint in self.global_constraints:
             scoreArray *= constraint(self.observer, get_skycoord([block.target for block in blocks]), times,
-                                      grid_times_targets=True)
+                                     grid_times_targets=True)
         return scoreArray
 
 
-
-
-def getLastFocusTime(currentTime,schedule):  # this will need to be written to determine when the last focus was so the schedule knows when its first one needs to be
+def getLastFocusTime(currentTime,
+                     schedule):  # this will need to be written to determine when the last focus was so the schedule knows when its first one needs to be
     return currentTime
+
 
 def makeFocusBlock(currentTime):
     pass
+
 
 class TMOScheduler(astroplan.scheduling.Scheduler):
     def __init__(self, candidateDict, configDict, *args, **kwargs):
@@ -110,27 +113,29 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                 b._all_constraints = self.constraints + b.constraints
             b.observer = self.observer  # set the observer (initialized by parent constructor)
         scorer = ScorerSwitchboard(self.candidateDict, self.configDict, blocks, self.observer, self.schedule,
-                           global_constraints=self.constraints)
-        scoreArray = scorer.create_score_array(self.time_resolution)  # this has dimensions (number of blocks, schedule length/time_resolution)
+                                   global_constraints=self.constraints)
+        scoreArray = scorer.create_score_array(
+            self.time_resolution)  # this has dimensions (number of blocks, schedule length/time_resolution)
         print("\n")
         print(scoreArray.shape)
         print(np.max(scoreArray))
         startTime = self.schedule.start_time
-        lastFocusTime = getLastFocusTime(startTime,None) # this is a placedholder right now, need to know how long before the beginning of our scheduling period the last SUCCESSFUL focus loop happened
+        lastFocusTime = getLastFocusTime(startTime,
+                                         None)  # this is a placedholder right now, need to know how long before the beginning of our scheduling period the last SUCCESSFUL focus loop happened
         currentTime = startTime
 
         while currentTime < self.schedule.end_time:
             scheduled = False  # have we found a block for this slot? initially: no
             currentIdx = int((currentTime - startTime) / self.time_resolution)  # index corresponding to the currentTime, which advances each time we fill a slot
             # find the column for the current time, then find the index representing the block in that column with the highest score:
-            sortedIdxs = np.flip(np.argsort(scoreArray[:,currentIdx]))
+            sortedIdxs = np.flip(np.argsort(scoreArray[:, currentIdx]))
             # ^ un-reversed, this array would contain the indices that sort scoreArray from *least* to *greatest*
             vals = scoreArray[sortedIdxs, currentIdx]
             sortedIdxs = sortedIdxs[vals != 0]  # omit the indices that correspond to a zero value
-            i = 0 # loop index
-            print("In outer loop at time",currentTime)
+            i = 0  # loop index
+            # print("In outer loop at time", currentTime)
             while i < len(sortedIdxs) and scheduled is False:
-                print("entered inner loop")
+                # print("entered inner loop")
                 # allValidBlocks = blocks[sortedIdxs]
                 # for b in allValidBlocks:  # this is too slow.
                 #     transition = self.transitioner(self.schedule.observing_blocks[-1],
@@ -144,7 +149,6 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                 j = sortedIdxs[i]  # this is the index of the block that we're trying. we try in order of score
                 block = blocks[j]
 
-
                 # the schedule starts with only 1 slot
                 if len(self.schedule.slots) == 1:
                     testTime = currentTime
@@ -153,6 +157,9 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                     # a test transition between the last scheduled block and this one
                     transition = self.transitioner(self.schedule.observing_blocks[-1],
                                                    block, currentTime, self.observer)
+                    if transition is None:
+                        i +=1
+                        continue
                     testTime = currentTime + transition.duration
 
                 # if testTime - lastFocusTime > timedelta(minutes=block.configuration.): # the shortest an observation can be is 8 minutes - if it's been more than 52 minutes since the last
@@ -168,7 +175,8 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                 start_idx = int((testTime - startTime) / self.time_resolution)
                 duration_idx = int(block.duration / self.time_resolution)
                 # if any score during the block's duration would be 0, reject it
-                if any(scoreArray[j][start_idx:start_idx + duration_idx] == 0) or testTime+block.duration > self.schedule.end_time:
+                if any(scoreArray[j][
+                       start_idx:start_idx + duration_idx] == 0) or testTime + block.duration > self.schedule.end_time:
                     i += 1
                 # if all of the scores are >0, accept and schedule it
                 else:
@@ -178,20 +186,18 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                     # advance the time and remove the block from the list
                     currentTime = testTime + block.duration
                     scheduled = True
-                    print("Scheduled",block.target.name,"at",testTime)
+                    print("Scheduled", block.target.name, "at", testTime)
                     blocks.remove(block)
                     scoreArray = np.delete(scoreArray, j, 0)
             # if every block failed, progress the time
             if i == len(sortedIdxs):
-                print("finding block for time",currentTime,"failed D:")
+                print("finding block for time", currentTime, "failed D:")
                 currentTime += self.gap_time
         print("All done!")
         return self.schedule
 
 
 def visualizeSchedule(scheduleTable: Table, startDt=None, endDt=None):
-    designations = [candidate.CandidateName for candidate in candidates]
-    candidateDict = dict(zip(designations, candidates))
     schedule = scheduleTable.to_pandas()
     schedule = schedule.loc[(schedule["target"] != "TransitionBlock")]
     if startDt is None:
@@ -199,7 +205,7 @@ def visualizeSchedule(scheduleTable: Table, startDt=None, endDt=None):
     if endDt is None:
         endDt = stringToTime(schedule.iloc[len(schedule.index) - 1]["end time (UTC)"])
 
-    xMin, xMax = (startDt+timedelta(hours=7)).timestamp(), (endDt+timedelta(hours=7)).timestamp()
+    xMin, xMax = (startDt + timedelta(hours=7)).timestamp(), (endDt + timedelta(hours=7)).timestamp()
 
     targetNames = schedule.loc[(schedule["target"] != "Unused Time") & (schedule["target"] != "TransitionBlock")][
         "target"].tolist()
@@ -265,50 +271,50 @@ def visualizeSchedule(scheduleTable: Table, startDt=None, endDt=None):
     schedule.to_csv("schedule.csv")
 
 
-def createSchedule(candidates, startTime, endTime):
+def createSchedule(startTime, endTime):
     # candidates = candidates.copy()  # don't want to mess with the candidates passed in
-
     configs = {}
-    # import configurations from python files placed in the schedulerConfigs folder
 
+    # import configurations from python files placed in the schedulerConfigs folder
     files = os.listdir("schedulerConfigs")
-    print(files)
-    files = ["schedulerConfigs."+f[:-3] for f in os.listdir("./schedulerConfigs") if f[-3:] == ".py" and "init" not in f]
-    print(files)
+    files = ["schedulerConfigs." + f[:-3] for f in os.listdir("./schedulerConfigs") if
+             f[-3:] == ".py" and "init" not in f]
+    # maybe wrap this in a try?:
     for file in files:
-        module = import_module(file,"schedulerConfigs")
-        print(module)
-        print(dir(module))
-        print(getmembers(module), isfunction)
-        typeName, conf = module.getConfig(startTime,endTime)
+        module = import_module(file, "schedulerConfigs")
+        typeName, conf = module.getConfig(startTime, endTime)
         configs[typeName] = conf
 
-    candidates = [candidate for candidateList in [c.selectedCandidates for c in configs.values()] for candidate in candidateList]  # turn the lists of candidates into one list
+    candidates = [candidate for candidateList in [c.selectedCandidates for c in configs.values()] for candidate in
+                  candidateList]  # turn the lists of candidates into one list
 
     for c in candidates:
         c.RA = genUtils.ensureAngle(str(c.RA) + "h")
         c.Dec = genUtils.ensureAngle(float(c.Dec))
+
     designations = [candidate.CandidateName for candidate in candidates]
     candidateDict = dict(zip(designations, candidates))
+
     # this is disgusting
     timeConstraintDict = {c.CandidateName: TimeConstraint(Time(stringToTime(c.StartObservability)),
                                                           Time(stringToTime(c.EndObservability))) for c in candidates}
-
-    typeSpecificConstraints = {}
+    typeSpecificConstraints = {}  # make a dict of constraints to put on all targets of a given type (specified by specs (config) py file)
     for typeName, conf in configs.items():
-        typeSpecificConstraints[typeName] = conf.typeConstraints # dictionary of {type of target: list of astroplan constraints, initialized}
-
+        typeSpecificConstraints[
+            typeName] = conf.typeConstraints  # dictionary of {type of target: list of astroplan constraints, initialized}
 
     blocks = []
     for c in candidates:
-        exposureDuration = float(c.NumExposures)*float(c.ExposureTime)
+        exposureDuration = float(c.NumExposures) * float(c.ExposureTime)
         name = c.CandidateName
         specConstraints = typeSpecificConstraints[c.CandidateType]
         aggConstraints = [timeConstraintDict[name]]
         if specConstraints is not None:
             aggConstraints += specConstraints
         target = FixedTarget(coord=SkyCoord(ra=c.RA, dec=c.Dec), name=name)
-        b = ObservingBlock(target, exposureDuration * u.second, 0, configuration={"object": c.CandidateName,"type":c.CandidateType, "duration":exposureDuration,"candidate":c},
+        b = ObservingBlock(target, exposureDuration * u.second, 0,
+                           configuration={"object": c.CandidateName, "type": c.CandidateType,
+                                          "duration": exposureDuration, "candidate": c},
                            constraints=aggConstraints)
         blocks.append(b)
 
@@ -344,12 +350,12 @@ if __name__ == "__main__":
     sunriseUTC, sunsetUTC = roundToTenMinutes(sunriseUTC), roundToTenMinutes(sunsetUTC)
     sunriseUTC -= timedelta(hours=1)  # to account for us closing the dome one hour before sunrise
 
-    dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
+    # dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
+    #
+    # candidates = mpcUtils.candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
 
-    candidates = mpcUtils.candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
-
-    scheduleTable, _, _ = createSchedule(candidates, sunsetUTC, sunriseUTC)
+    scheduleTable, _, _ = createSchedule(sunsetUTC, sunriseUTC)
     scheduleTable.pprint(max_width=2000)
     visualizeSchedule(scheduleTable, sunsetUTC, sunriseUTC)
 
-    del dbConnection
+    # del dbConnection

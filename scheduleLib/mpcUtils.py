@@ -9,7 +9,7 @@ from astroplan.scheduling import ObservingBlock
 import numpy as np
 import httpx
 from bs4 import BeautifulSoup
-from scheduleLib import genUtils
+from scheduleLib import genUtils, mpcUtils
 
 
 # this isn't terribly elegant
@@ -47,9 +47,9 @@ def isBlockCentered(block: ObservingBlock, candidate: Candidate, times: np.array
     expTime = timedelta(seconds=block.configuration["duration"])
     # this will fail if obs.duration is not 300, 600, 1200, or 1800 seconds:
     maxOffset = timedelta(seconds=obsTimeOffsets[expTime.seconds])
-    mask = np.array([genUtils.checkOffsetFromCenter(t, expTime, maxOffset) for t in times])
-    print(mask.shape)
-    return mask
+    bools = np.array([mpcUtils.checkOffsetFromCenter(t, expTime, maxOffset) for t in times])
+    # print(bools.shape)
+    return bools
 
 def checkOffsetFromCenter(startTime, duration, maxOffset):
     """
