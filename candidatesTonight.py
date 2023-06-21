@@ -136,6 +136,9 @@ if sunriseUTC < nowDt:  # if the sunrise we found is earlier than the current ti
 if sunsetUTC > sunriseUTC:
     sunsetUTC = sunsetUTC - timedelta(days=1)
 
+# sunsetUTC += timedelta(hours=2) # this is temporary
+sunriseUTC = sunsetUTC + timedelta(hours=2)
+
 print("Sunset:", sunsetUTC)
 print("Sunrise:", sunriseUTC)
 
@@ -146,7 +149,7 @@ candidates = candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
 # candidates = dbConnection.candidatesAddedSince(datetime.utcnow() - timedelta(hours=24))
 
 # print(genUtils.findTransitTime(Angle("18h39m00s"), TMO).strftime("%H:%M"))
-
+print("Candidates:",candidates)
 if not len(candidates):
     del dbConnection
     raise ScheduleError()

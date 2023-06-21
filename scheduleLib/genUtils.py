@@ -2,6 +2,7 @@
 import sys, logging
 from datetime import timedelta, datetime, timezone
 
+import astroplan
 import pytz
 from astral import sun
 import pandas as pd
@@ -22,6 +23,13 @@ class ScheduleError(Exception):
         super().__init__(self.message)
 
 
+class TypeConfiguration:
+    def __init__(self,selectedCandidates,scorer: type[astroplan.Scorer],transitionDict,maxMinutesWithoutFocus=60,typeConstraints=None):
+        self.selectedCandidates = selectedCandidates  # list of candidate objects that it has selected to be scheduled
+        self.scorer = scorer  # *uninitialized* subclass of astroplan.Scorer
+        self.transitionDict = transitionDict  # dictionary to define behavior of transitions for your type of object - see astroplan # dict(str,dict(tuple,u.Quantity))
+        self.maxMinutesWithoutFocus = maxMinutesWithoutFocus  # max time, in minutes, that this object can be scheduled after the most recent focus loop
+        self.typeConstraints = typeConstraints
 def timeToString(dt, logger=None):
     try:
         if isinstance(dt,

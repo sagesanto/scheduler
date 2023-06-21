@@ -3,8 +3,10 @@
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpc
 from datetime import datetime, timedelta
 from scheduleLib import asyncUtils
-import pytz, math
-
+import pytz, math, astropy
+from scheduleLib.candidateDatabase import Candidate
+from astroplan.scheduling import ObservingBlock
+import numpy as np
 import httpx
 from bs4 import BeautifulSoup
 from scheduleLib import genUtils
@@ -25,14 +27,42 @@ def _findExposure(magnitude,str=True):
             return "3.0|600.0"
     else:
         if magnitude <= 19.5:
-            return 300
+            return 1, 300
         if magnitude <= 20.5:
-            return 600
+            return 1, 600
         if magnitude <= 21.0:
-            return 1200
+            return 2, 600
         if magnitude <= 21.5:
-            return 1800
+            return 3, 600
+    return -1, -1
 
+def isBlockCentered(block: ObservingBlock, candidate: Candidate, times: np.array(astropy.time.Time)):
+    """
+    return an array of bools indicating whether or not the block is centered around each of the times provided
+    :return: array of bools
+    """
+    obsTimeOffsets = {300: 30, 600: 180, 1200: 300,
+                      1800: 600}  # seconds of exposure: seconds that the observation can be offcenter
+
+    expTime = timedelta(seconds=block.configuration["duration"])
+    # this will fail if obs.duration is not 300, 600, 1200, or 1800 seconds:
+    maxOffset = timedelta(seconds=obsTimeOffsets[expTime.seconds])
+    mask = np.array([genUtils.checkOffsetFromCenter(t, expTime, maxOffset) for t in times])
+    print(mask.shape)
+    return mask
+
+def checkOffsetFromCenter(startTime, duration, maxOffset):
+    """
+    is the observation that starts at startTime less that maxOffset away from the nearest ten minute interval?
+    :param startTime:
+    :param duration:
+    :param maxOffset:
+    :return:
+    """
+    center = startTime.datetime + (duration / 2)
+    roundCenter = genUtils.roundToTenMinutes(center)
+    return abs(roundCenter - center) < maxOffset
+    # abs(nearestTenMinutesToCenter-(start + (expTime/2))) must be less than maxOffset
 
 def dictFromEphemLine(ephem):
     returner = {"RA": (raDecFromEphem(ephem))[0], "dec": (raDecFromEphem(ephem))[1],
@@ -320,7 +350,7 @@ def updatedStringToDatetime(updated):
 def candidatesForTimeRange(obsStart, obsEnd, duration, dbConnection):
     candidates = dbConnection.table_query("Candidates", "*",
                                           "RemovedReason IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",
-                                          [datetime.utcnow() - timedelta(hours=24)], returnAsCandidates=True)
+                                          [datetime.utcnow() - timedelta(hours=48)], returnAsCandidates=True)
 
     res = [candidate for candidate in candidates if candidate.isObservableBetween(obsStart, obsEnd, duration)]
     return res

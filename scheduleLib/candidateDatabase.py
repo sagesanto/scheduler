@@ -12,7 +12,7 @@ from scheduleLib import genUtils
 
 validFields = ["ID", "Author", "DateAdded", "DateLastEdited", "RemovedDt", "RemovedReason", "RejectedReason", 'Night',
                'Updated', 'StartObservability', 'EndObservability', 'TransitTime', 'RA', 'Dec', 'dRA', 'dDec', 'Magnitude', 'RMSE_RA',
-               'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes',
+               'RMSE_Dec', "Score", "nObs", 'ApproachColor', 'NumExposures', 'ExposureTime','Scheduled', 'Observed', 'Processed', 'Submitted', 'Notes',
                'CVal1', 'CVal2', 'CVal3', 'CVal4', 'CVal5', 'CVal6', 'CVal7', 'CVal8', 'CVal9', 'CVal10']
 
 
@@ -107,11 +107,11 @@ class Candidate:
         if self.hasField("StartObservability") and self.hasField("EndObservability"):
             startObs = genUtils.stringToTime(self.StartObservability).replace(tzinfo=pytz.UTC)
             endObs = genUtils.stringToTime(self.EndObservability).replace(tzinfo=pytz.UTC)
-            # print(start,end)
-            # print(startObs,endObs)
-            if start < endObs <= end or start < startObs <= end:  # the windows do overlap
+            print(start,end)
+            print(startObs,endObs)
+            if start < endObs <= end or start < startObs <= end or (start < startObs and endObs >= end):  # the windows do overlap
                 dur = min(end, endObs) - max(start, startObs)
-                # print(dur)
+                print(dur)
                 if dur >= timedelta(hours=duration):  # the window is longer than min allowed duration
                     return True, dur
         return False
