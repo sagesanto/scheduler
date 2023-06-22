@@ -3,6 +3,7 @@ import sys, logging
 from datetime import timedelta, datetime, timezone
 
 import astroplan
+import astropy.time
 import pytz
 from astral import sun
 import pandas as pd
@@ -24,12 +25,17 @@ class ScheduleError(Exception):
 
 
 class TypeConfiguration:
-    def __init__(self,selectedCandidates,scorer: type[astroplan.Scorer],transitionDict,maxMinutesWithoutFocus=60,typeConstraints=None):
+    def __init__(self, selectedCandidates, scorer: type[astroplan.Scorer], transitionDict, maxMinutesWithoutFocus=60,
+                 numObs=1, typeConstraints=None, minMinutesBetweenObs=None):
         self.selectedCandidates = selectedCandidates  # list of candidate objects that it has selected to be scheduled
         self.scorer = scorer  # *uninitialized* subclass of astroplan.Scorer
         self.transitionDict = transitionDict  # dictionary to define behavior of transitions for your type of object - see astroplan # dict(str,dict(tuple,u.Quantity))
         self.maxMinutesWithoutFocus = maxMinutesWithoutFocus  # max time, in minutes, that this object can be scheduled after the most recent focus loop
         self.typeConstraints = typeConstraints
+        self.minMinutesBetweenObs = minMinutesBetweenObs  # minimum time, in minutes, between the start times of multiple observations of the same object
+        self.numObs = numObs
+
+
 def timeToString(dt, logger=None):
     try:
         if isinstance(dt,
@@ -40,6 +46,52 @@ def timeToString(dt, logger=None):
         if logger:
             logger.error("Unable to coerce time from", dt)
         return None
+
+
+class AutoFocus:
+    def __init__(self, desiredStartTime):
+        self.startTime = ensureDatetime(desiredStartTime)
+        self.endTime = self.startTime + timedelta(minutes=5)
+
+    def genLine(self):
+        return timeToString(self.startTime) + "|1|Focus|0|0|0|0|0|CLEAR|'Refocusing'"
+
+    @classmethod
+    def fromLine(cls, line):
+        time = line.split('|')[0]
+        time = stringToTime(time)
+        return cls(time)
+
+def findCenterTime(startTime:datetime,duration:timedelta):
+    """
+    Find the nearest ten minute interval to the center of the time window {start, start+duration}
+    :param startTime: datetime object representing the start of the window
+    :param duration: timedelta representing the length of the window
+    :return: datetime representing the center of the window, rounded to the nearest ten minutes
+    """
+    center = startTime + (duration / 2)
+    return roundToTenMinutes(center)
+
+def lineConverter(row:pd.Series,configDict,candidateDict,runningList):
+    # targetName = row["target"]
+    print(row)
+    for rownum, (indx, values) in enumerate(row.iteritems()):
+        print('row number: ', rownum, 'index: ', indx, 'value: ', values, 'type:',type(values))
+    # if targetName == "Focus":
+    #     pass
+        # runningList.append(AutoFocus(row[""]).genLine())
+
+def ensureDatetime(time, logger=None):
+    if isinstance(time, datetime):
+        return time
+    if isinstance(time, str):
+        try:
+            stringToTime(time)
+        except:
+            if logger is not None:
+                logger.error("Couldn't make datetime from string", time)
+    if isinstance(time, astropy.time.Time):
+        return time.to_datetime()
 
 
 def stringToTime(timeString, logger=None):
@@ -151,6 +203,7 @@ def findTransitTime(rightAscension: Angle, observatory):
     transitTime = currentTime + timedelta(hours=haHours, minutes=haMinutes, seconds=0)
     return roundToTenMinutes(transitTime)
 
+
 def getSunriseSunset():
     """
     get sunrise and sunset for tmo, as datetimes
@@ -224,8 +277,7 @@ def getHourAngleLimits(dec):
     dec = ensureFloat(dec)
 
     horizonBox = {  # {tuple(decWindow):tuple(minAlt,maxAlt)}
-        (-38, -36): (0, 0),
-        (-36, -34): (-35, 42.6104),
+        (-35, -34): (-35, 42.6104),
         (-34, -32): (-35, 45.9539),
         (-32, -30): (-35, 48.9586),
         (-30, -28): (-35, 51.6945),
@@ -235,11 +287,10 @@ def getHourAngleLimits(dec):
         (-22, 0): (-35, 60),
         (0, 46): (-52.5, 60),
         (46, 56): (-37.5, 60),
-        (56, 66): (-30, 60),
-        (66, 74): (0, 0)
+        (56, 65): (-30, 60)
     }
     for decRange in horizonBox:
-        if decRange[0] <= dec < decRange[1]:  # man this is miserable
+        if decRange[0] < dec <= decRange[1]:  # man this is miserable
             finalDecRange = horizonBox[decRange]
             return tuple([Angle(finalDecRange[0], unit=u.deg), Angle(finalDecRange[1], unit=u.deg)])
     return None

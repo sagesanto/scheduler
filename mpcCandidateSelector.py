@@ -58,6 +58,7 @@ async def selectTargets(logger, lookback):
             uncertainties = list(TargetSelector.extractUncertainty(desig, offsetDict, logger, graph=False,
                                                                    savePath="testingOutputs/plots"))
             if None not in uncertainties:
+                logger.info("Retry successful")
                 candidateDict[desig].RMSE_RA, candidateDict[desig].RMSE_Dec = uncertainties[0], uncertainties[1]
                 candidateDict[desig].ApproachColor = uncertainties[2]
             else:
@@ -65,12 +66,13 @@ async def selectTargets(logger, lookback):
                 logger.debug("Rejected " + desig + " for incomplete information.")
                 candidateDict[desig].RejectedReason = "Incomplete"
                 continue
-
+        logger.info("Rejecting high magnitudes...")
         if float(candidate.Magnitude) > targetSelector.vMagMax:
             candidateDict[desig].RejectedReason = "vMag"
             rejected.append(desig)
             logger.debug("Rejected " + desig + " for magnitude limit.")
             continue
+        logger.info("Rejecting high uncertainties...")
         if float(candidate.RMSE_RA) > targetSelector.raMaxRMSE or float(candidate.RMSE_Dec) > targetSelector.decMaxRMSE:
             rejected.append(desig)
             candidateDict[desig].RejectedReason = "RMSE"
@@ -86,7 +88,6 @@ async def selectTargets(logger, lookback):
     for desig, candidate in candidateDict.items():
         dbConnection.editCandidateByID(candidate.ID, candidate.asDict())
         logger.debug("Updated " + desig + ".")
-
     del dbConnection
 
 

@@ -43,7 +43,7 @@ def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
     observabilityCandidates.sort(key=lambda c: genUtils.stringToTime(c.StartObservability))
 
     # Calculate start and end timestamps
-    xMin, xMax = (beginDt+timedelta(hours=7)).timestamp(), (endDt+timedelta(hours=7)).timestamp()
+    xMin, xMax = (beginDt + timedelta(hours=7)).timestamp(), (endDt + timedelta(hours=7)).timestamp()
     windowDuration = xMax - xMin
 
     # Get the unique colors and calculate the number of bars per color
@@ -112,53 +112,51 @@ def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
     plt.show()
 
 
-utc = pytz.UTC
+if __name__ == "__main__":
+    utc = pytz.UTC
 
-region = "CA, USA"
-obsTimezone = "UTC"
-obsLat = 34.36
-obsLon = -117.63
-TMO = LocationInfo(name="TMO", region="CA, USA", timezone="UTC", latitude=34.36,
-                   longitude=-117.63)
+    region = "CA, USA"
+    obsTimezone = "UTC"
+    obsLat = 34.36
+    obsLon = -117.63
+    TMO = LocationInfo(name="TMO", region="CA, USA", timezone="UTC", latitude=34.36,
+                       longitude=-117.63)
 
-s = sun.sun(TMO.observer, date=datetime.now(timezone.utc), tzinfo=timezone.utc)
-sunriseUTC = s["sunrise"]
-sunsetUTC = sun.time_at_elevation(TMO.observer, -10, direction=SunDirection.SETTING)
+    s = sun.sun(TMO.observer, date=datetime.now(timezone.utc), tzinfo=timezone.utc)
+    sunriseUTC = s["sunrise"]
+    sunsetUTC = sun.time_at_elevation(TMO.observer, -10, direction=SunDirection.SETTING)
 
-nowDt = datetime.utcnow()
-nowDt = utc.localize(nowDt)
+    nowDt = datetime.utcnow()
+    nowDt = utc.localize(nowDt)
 
-if sunriseUTC < nowDt:  # if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
-    sunriseUTC = sunriseUTC + timedelta(days=1)
-sunriseUTC -= timedelta(hours=1)
+    if sunriseUTC < nowDt:  # if the sunrise we found is earlier than the current time, add one day to it (approximation ofc)
+        sunriseUTC = sunriseUTC + timedelta(days=1)
+    sunriseUTC -= timedelta(hours=1)
 
-if sunsetUTC > sunriseUTC:
-    sunsetUTC = sunsetUTC - timedelta(days=1)
+    if sunsetUTC > sunriseUTC:
+        sunsetUTC = sunsetUTC - timedelta(days=1)
 
-# sunsetUTC += timedelta(hours=2) # this is temporary
-sunriseUTC = sunsetUTC + timedelta(hours=2)
+    # sunsetUTC += timedelta(hours=2) # this is temporary
+    sunriseUTC = sunsetUTC + timedelta(hours=2)
 
+    print("Sunset:", sunsetUTC)
+    print("Sunrise:", sunriseUTC)
 
+    dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
 
-print("Sunset:", sunsetUTC)
-print("Sunrise:", sunriseUTC)
+    candidates = candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
 
-dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
+    # print(genUtils.findTransitTime(Angle("18h39m00s"), TMO).strftime("%H:%M"))
+    print("Candidates:", candidates)
+    if not len(candidates):
+        del dbConnection
+        raise ScheduleError()
 
-candidates = candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
-
-
-# print(genUtils.findTransitTime(Angle("18h39m00s"), TMO).strftime("%H:%M"))
-print("Candidates:",candidates)
-if not len(candidates):
-    del dbConnection
-    raise ScheduleError()
-
-print("Candidates for tonight(%s):" % len(candidates), candidates)
-df = Candidate.candidatesToDf(candidates)
-# df["TransitTime"] = df.apply(
-#     lambda row: genUtils.findTransitTime(genUtils.ensureAngle(str(row["RA"]) + "h"), TMO).strftime("%H:%M"), axis=1)
-df = genUtils.prettyFormat(df)
-df.to_csv("out.csv",index=False)
-print(df.to_string)
-visualizeObservability(candidates, sunsetUTC, sunriseUTC - timedelta(hours=1))
+    print("Candidates for tonight(%s):" % len(candidates), candidates)
+    df = Candidate.candidatesToDf(candidates)
+    # df["TransitTime"] = df.apply(
+    #     lambda row: genUtils.findTransitTime(genUtils.ensureAngle(str(row["RA"]) + "h"), TMO).strftime("%H:%M"), axis=1)
+    df = genUtils.prettyFormat(df)
+    df.to_csv("out.csv", index=False)
+    print(df.to_string)
+    visualizeObservability(candidates, sunsetUTC, sunriseUTC - timedelta(hours=1))

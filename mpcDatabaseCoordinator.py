@@ -32,7 +32,7 @@ logger.addFilter(genUtils.filter)
 
 
 interval = 15  # minutes between runs
-lookback = 24  # edit targets that were added within [lookback] hours ago, add a duplicate for older
+lookback = 48  # edit targets that were added within [lookback] hours ago, add a duplicate for older
 
 while True:
     logger.info("---Starting cycle at "+ dt.now().strftime(dateFormat) + " PST")

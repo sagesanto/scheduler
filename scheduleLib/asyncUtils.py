@@ -12,7 +12,7 @@ class AsyncHelper:
     """
 
     def __init__(self, followRedirects: bool):
-        self.client = httpx.AsyncClient(follow_redirects=followRedirects, timeout=60.0)
+        self.client = httpx.AsyncClient(follow_redirects=followRedirects, timeout=120.0)
         self.logger = logging.getLogger(__name__)
 
     def __del__(self):

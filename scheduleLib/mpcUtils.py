@@ -13,7 +13,7 @@ from scheduleLib import genUtils, mpcUtils
 
 
 # this isn't terribly elegant
-def _findExposure(magnitude,str=True):
+def _findExposure(magnitude, str=True):
     # Internal: match magnitude to exposure description for TMO
     magnitude = float(magnitude)
     if str:
@@ -36,6 +36,7 @@ def _findExposure(magnitude,str=True):
             return 3, 600
     return -1, -1
 
+
 def isBlockCentered(block: ObservingBlock, candidate: Candidate, times: np.array(astropy.time.Time)):
     """
     return an array of bools indicating whether or not the block is centered around each of the times provided
@@ -51,6 +52,7 @@ def isBlockCentered(block: ObservingBlock, candidate: Candidate, times: np.array
     # print(bools.shape)
     return bools
 
+
 def checkOffsetFromCenter(startTime, duration, maxOffset):
     """
     is the observation that starts at startTime less that maxOffset away from the nearest ten minute interval?
@@ -63,6 +65,7 @@ def checkOffsetFromCenter(startTime, duration, maxOffset):
     roundCenter = genUtils.roundToTenMinutes(center)
     return abs(roundCenter - center) < maxOffset
     # abs(nearestTenMinutesToCenter-(start + (expTime/2))) must be less than maxOffset
+
 
 def dictFromEphemLine(ephem):
     returner = {"RA": (raDecFromEphem(ephem))[0], "dec": (raDecFromEphem(ephem))[1],
@@ -150,7 +153,7 @@ def _formatEphem(ephems, desig):
     return ephemDict
 
 
-def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat=False,obsCode=654):
+def pullEphem(mpcInst, desig, whenDt, altitudeLimit, schedulerFormat=False, obsCode=654):
     """
     Fetch the ephemeris of a target from the MPC NEO confirmation database, given a valid designation. Requires internet connection.
     :param mpcInst: An instance of the MPCNeoConfirm class from the (privileged) photometrics.mpc_neo_confirm module
@@ -189,7 +192,7 @@ def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit, 
 
 async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper,
                           logger, autoFormat=False,
-                          mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi',obsCode = 654):
+                          mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi', obsCode=654):
     """
     Asynchronously retrieves and parses multiple ephemeris data for given designations.
 
@@ -215,7 +218,7 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
    :rtype: Dict[str, List[Tuple[datetime.datetime, str, float, str, str, Any]]]
     """
     ephemResults, ephemDict = await asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst, asyncHelper,
-                                                           logger, mpcPostURL,obsCode)
+                                                           logger, mpcPostURL, obsCode)
     designations = ephemResults.keys()
 
     for designation in designations:
@@ -263,7 +266,7 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
 
 async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: mpc,
                                  asyncHelper: asyncUtils.AsyncHelper, logger,
-                                 mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi', obsCode = 654):
+                                 mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi', obsCode=654):
     """
     Asynchronously retrieve ephemerides for multiple objects. Requires internet connection.
     :param designations: A list of designations (strings) of the targets to objects
@@ -350,7 +353,16 @@ def updatedStringToDatetime(updated):
 def candidatesForTimeRange(obsStart, obsEnd, duration, dbConnection):
     candidates = dbConnection.table_query("Candidates", "*",
                                           "RemovedReason IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",
-                                          [datetime.utcnow() - timedelta(hours=48)], returnAsCandidates=True)
+                                          [datetime.utcnow() - timedelta(hours=36)], returnAsCandidates=True)
 
     res = [candidate for candidate in candidates if candidate.isObservableBetween(obsStart, obsEnd, duration)]
+    candidateDict = {}
+    for c in res:
+        if c.CandidateName not in candidateDict.keys():
+            candidateDict[c.CandidateName] = c
+        else:
+            duplicate = candidateDict[c.CandidateName]
+            if genUtils.stringToTime(duplicate.Updated) < genUtils.stringToTime(c.Updated):
+                candidateDict[c.CandidateName] = c
+    res = list(candidateDict.values())
     return res

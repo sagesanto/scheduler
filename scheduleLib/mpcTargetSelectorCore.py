@@ -18,7 +18,7 @@ from astral import sun
 from datetime import datetime, timezone, timedelta
 from astropy.coordinates import Angle
 from numpy import sqrt
-
+from scheduleLib.genUtils import AutoFocus
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 from scheduleLib import mpcUtils, genUtils, asyncUtils
 
@@ -271,6 +271,7 @@ class TargetSelector:
             newRow = dict(zip(self.objDf.columns, targetList))
             self.objDf.loc[len(self.objDf)] = newRow
 
+
     def pruneMpcDf(self):
         """
         Filter self.objDf (populated by makeMpcDataframe) by magnitude, score, hour angle, declination, and number of observations
@@ -431,10 +432,11 @@ class TargetSelector:
         :param desigs: list of designations of objects to be queried - must be valid MPC temp identifiers
         :returns: Dictionary {desig:(startDt,endDt)} or None
         """
+        self.logger.info("Waiting on web requests...")
         ephems = await mpcUtils.asyncMultiEphem(desigs, datetime.utcnow(), self.altitudeLimit, self.mpc,
                                                 self.asyncHelper, self.logger,
                                                 obsCode=500)  # request for geocenter to get more output
-        if not ephems:
+        if ephems is None or len(ephems)==0:
             self.logger.error("Couldn't get any ephems for any observability windows!")
             return None
         windows = {}  # {desig:(startDt,endDt)}
@@ -447,6 +449,9 @@ class TargetSelector:
                     "Couldn't get ephems and so can't calculate observability window for " + desig + ". Skipping.")
                 windows[desig] = None
                 continue
+            if ephems[desig] is None:
+                windows[desig] = None
+                break
             for ephem in ephems[desig]:
                 ephem = mpcUtils.dictFromEphemLine(ephem)
                 obsTime = ephem["obsTime"]

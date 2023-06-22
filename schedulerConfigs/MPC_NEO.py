@@ -31,8 +31,9 @@ class MPCScorer(astroplan.Scorer):
                 window = (stringToTime(candidate.EndObservability) - stringToTime(
                     candidate.StartObservability)).total_seconds()
 
-                scoreArray[i] *= (round(block.duration.to_value(u.second) / window,
-                                        4))  # favor targets with short windows so that they get observed
+                # scoreArray[i] *= (round(block.duration.to_value(u.second) / window,
+                #                         4))  # favor targets with short windows so that they get observed
+                scoreArray[i] *= (round(window / block.duration.to_value(u.second), 4)) # favor targets with long windows so it's more likely they get 2 obs in
                 scoreArray[i] *= mpcUtils.isBlockCentered(block, candidate,
                                                           times)  # only allow observations at times where the blocks would be centered around a ten-minute interval
         for constraint in self.global_constraints:  # constraints applied to all targets
@@ -41,16 +42,15 @@ class MPCScorer(astroplan.Scorer):
 
 
 def getConfig(startTimeUTC: datetime, endTimeUTC: datetime):
-    # returns
+    # returns a TypeConfiguration object for targets of type "MPC NEO"
     dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
     candidates = mpcUtils.candidatesForTimeRange(startTimeUTC, endTimeUTC, 1, dbConnection)
     designations = [c.CandidateName for c in candidates]
 
     objTransitionDict = {'default': 180 * u.second}
     for d in designations:
-        objTransitionDict[(d, "FocusLoop")] = 0 * u.second
-        objTransitionDict[("FocusLoop", d)] = 0 * u.second  # i don't know if this one is necessary
+        objTransitionDict[("FocusLoop", d)] = 0 * u.second
 
-    configuration = TypeConfiguration(candidates, MPCScorer, objTransitionDict, maxMinutesWithoutFocus=60)
+    configuration = TypeConfiguration(candidates, MPCScorer, objTransitionDict, numObs=2, maxMinutesWithoutFocus=65, minMinutesBetweenObs=35)
     return "MPC NEO", configuration
     # this config will only apply to candidates with CandidateType "MPC NEO"
