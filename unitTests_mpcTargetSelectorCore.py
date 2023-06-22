@@ -43,6 +43,10 @@ class Test(unittest.TestCase):
     def test_getHourAngleLimits(self):
         print(genUtils.getHourAngleLimits(23)[0].hms, genUtils.getHourAngleLimits(23)[1].hms)
         print(type(genUtils.getHourAngleLimits(23)))
+        eastLimit, westLimit = genUtils.getHourAngleLimits(-39)
+        print("HA limits for -39 dec are:")
+        print(eastLimit)
+        print(westLimit)
         self.assertEqual(genUtils.getHourAngleLimits(23), (Angle(-52.5, unit=u.deg), Angle(60, unit=u.deg)))
 
     def test_ObservabilityWindow(self):
@@ -72,4 +76,17 @@ class Test(unittest.TestCase):
         # in this case with the local sidereal time as the RA of the object:
         transitTime = genUtils.findTransitTime(Angle(lst), TMO)
         # ^ this will return a datetime object rounded to the nearest (?) ten minutes
-        print(transitTime)
+        print("Current transit time =", transitTime)
+
+    def test_timeToString(self):
+        exampleString = "1993-12-30 11:10:00.00"
+        # badExampleString = "shit"
+        string = genUtils.stringToTime(exampleString)
+        # badString = genUtils.stringToTime(badExampleString)
+        print(string)
+
+    def test_RiseSet(self):
+        sunrise, sunset = genUtils.getSunriseSunset()
+        sunriseString = genUtils.timeToString(sunrise)
+        sunsetString = genUtils.timeToString(sunset)
+        print("the sunrise and sunset are respectively:",  sunriseString, sunsetString)

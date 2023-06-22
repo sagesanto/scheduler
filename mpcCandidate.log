@@ -21373,3 +21373,13 @@
 06/19/2023 20:02:00 DEBUG | Updated P21Ge54.
 06/19/2023 20:02:00 INFO | ---Finished MPC selection without error at 06/19/2023 20:02:00 PST
 06/19/2023 20:02:00 INFO | ---Done. will run again at 06/19/2023 20:17:00 PST.
+06/20/2023 21:33:59 INFO | ---Starting cycle at 06/20/2023 21:33:59 PST
+06/22/2023 15:12:22 INFO | ---Starting cycle at 06/22/2023 15:12:22 PST
+06/22/2023 16:12:44 INFO | ---Starting cycle at 06/22/2023 16:12:44 PST
+06/22/2023 16:12:45 INFO | --- Acquiring Candidates ---
+06/22/2023 16:12:46 INFO | Constructing Candidates from MPC List
+06/22/2023 16:12:52 WARNING | Couldn't find velocities for P21Gsxg
+06/22/2023 16:12:52 WARNING | Couldn't find velocities for P21Gsxa
+06/22/2023 16:12:53 WARNING | Couldn't find velocities for C9CXUT2
+06/22/2023 16:12:53 WARNING | Couldn't find velocities for P11Gebp
+06/22/2023 16:12:55 INFO | Construction complete.

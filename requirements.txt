@@ -1,0 +1,17 @@
+astral==3.2
+astroplan==0.8
+astropy==5.3
+astroquery==0.4.6
+beautifulsoup4==4.12.2
+colorlog==6.7.0
+flet==0.7.4
+httpx==0.24.1
+matplotlib==3.7.1
+numpy==1.25.0
+pandas==2.0.2
+Pillow==9.5.0
+Pillow==9.5.0
+PyQt5==5.15.9
+python_dateutil==2.8.2
+pytz==2023.3
+selenium==4.10.0
