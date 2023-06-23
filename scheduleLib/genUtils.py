@@ -12,6 +12,8 @@ from astropy.coordinates import Angle, SkyCoord
 from astropy import units as u
 from astropy.time import Time
 
+import scheduleLib
+
 
 class ScheduleError(Exception):
     """Exception raised for user-facing errors in scheduling
@@ -25,7 +27,7 @@ class ScheduleError(Exception):
 
 
 class TypeConfiguration:
-    def __init__(self, selectedCandidates, scorer: type[astroplan.Scorer], transitionDict, maxMinutesWithoutFocus=60,
+    def __init__(self, selectedCandidates, scorer: type[astroplan.Scorer], transitionDict, lineGenerator, maxMinutesWithoutFocus=60,
                  numObs=1, typeConstraints=None, minMinutesBetweenObs=None):
         self.selectedCandidates = selectedCandidates  # list of candidate objects that it has selected to be scheduled
         self.scorer = scorer  # *uninitialized* subclass of astroplan.Scorer
@@ -34,6 +36,7 @@ class TypeConfiguration:
         self.typeConstraints = typeConstraints
         self.minMinutesBetweenObs = minMinutesBetweenObs  # minimum time, in minutes, between the start times of multiple observations of the same object
         self.numObs = numObs
+        self.generateLine = lineGenerator
 
 
 def timeToString(dt, logger=None):
@@ -54,7 +57,7 @@ class AutoFocus:
         self.endTime = self.startTime + timedelta(minutes=5)
 
     def genLine(self):
-        return timeToString(self.startTime) + "|1|Focus|0|0|0|0|0|CLEAR|'Refocusing'"
+        return scheduleLib.sCoreCondensed.timeToString(self.startTime) + "|1|Focus|0|0|0|0|0|CLEAR|'Refocusing'"
 
     @classmethod
     def fromLine(cls, line):
@@ -72,14 +75,7 @@ def findCenterTime(startTime:datetime,duration:timedelta):
     center = startTime + (duration / 2)
     return roundToTenMinutes(center)
 
-def lineConverter(row:pd.Series,configDict,candidateDict,runningList):
-    # targetName = row["target"]
-    print(row)
-    for rownum, (indx, values) in enumerate(row.iteritems()):
-        print('row number: ', rownum, 'index: ', indx, 'value: ', values, 'type:',type(values))
-    # if targetName == "Focus":
-    #     pass
-        # runningList.append(AutoFocus(row[""]).genLine())
+
 
 def ensureDatetime(time, logger=None):
     if isinstance(time, datetime):

@@ -7,9 +7,10 @@ import pytz, math, astropy
 from scheduleLib.candidateDatabase import Candidate
 from astroplan.scheduling import ObservingBlock
 import numpy as np
+from astropy.coordinates import SkyCoord
 import httpx
 from bs4 import BeautifulSoup
-from scheduleLib import genUtils, mpcUtils
+from scheduleLib import genUtils
 
 
 # this isn't terribly elegant
@@ -48,7 +49,7 @@ def isBlockCentered(block: ObservingBlock, candidate: Candidate, times: np.array
     expTime = timedelta(seconds=block.configuration["duration"])
     # this will fail if obs.duration is not 300, 600, 1200, or 1800 seconds:
     maxOffset = timedelta(seconds=obsTimeOffsets[expTime.seconds])
-    bools = np.array([mpcUtils.checkOffsetFromCenter(t, expTime, maxOffset) for t in times])
+    bools = np.array([checkOffsetFromCenter(t, expTime, maxOffset) for t in times])
     # print(bools.shape)
     return bools
 
@@ -113,6 +114,35 @@ def timeFromEphem(ephem):
     inBetween = ephem[0].value
     return datetime.strptime(inBetween, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
+def candidateToScheduleLine(candidate:Candidate,startDt, centerDt):
+    c = candidate
+    RA = genUtils.ensureAngle(c.RA)
+    Dec = genUtils.ensureAngle(c.Dec)
+    return mpcScheduleLine(c.CandidateName,startDt,centerDt,SkyCoord(ra=RA, dec=Dec),dRA=float(c.dRA),dDec=float(c.dDec),vMag=c.Magnitude)
+
+def mpcScheduleLine(desig, startDt,centerDt, skycoord, dRA:float, dDec:float, vMag):
+    # the dateTime in the ephems list is a Time object, need to convert it to string
+    # name
+    startDate = startDt.strftime('%Y-%m-%dT%H:%M:%S')
+    # convert the skycoords object to decimal
+    coords = skycoord.to_string("decimal").replace(" ", "|")
+
+    # get the correct exposure string based on the vMag
+    exposure = str(_findExposure(float(vMag)))
+
+    # dRA and dDec come in arcsec/sec, we need /minute
+    dRa = str(round(dRA, 2))
+    dDec = str(round(dDec, 2))
+
+    # for the description, we need RA and Dec in sexagesimal
+    sexagesimal = skycoord.to_string("hmsdms").split(" ")
+    # the end of the scheduler line must have a description that looks like this
+    description = "\'MPC Asteroid " + desig + ", UT: " + datetime.strftime(centerDt, "%H%M") + " RA: " + \
+                  sexagesimal[0] + " DEC: " + sexagesimal[1] + " dRA: " + dRa + " dDEC: " + dDec + "\'"
+
+    lineList = [startDate, "1", desig, "1", coords, exposure, "CLEAR", description]
+    expLine = "|".join(lineList)
+    return expLine
 
 def _formatEphem(ephems, desig):
     # Internal: take an object in the form returned from self.mpc.get_ephemeris() and convert each line to the scheduler format, before returning it in a dictionary of {startDt : line}
@@ -225,11 +255,13 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
         # parse valid ephems
         ephem = ephemResults[designation][0]
         if ephem is None:
+            print("No ephem for",designation)
             ephemDict[designation] = None
             continue
 
         ephem = ephem.find_all('pre')
         if len(ephem) == 0:
+            print("No pre tags for ephem",designation)
             ephemDict[designation] = None
             continue
 
@@ -292,8 +324,8 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
     now_dt = datetime.utcnow().replace(tzinfo=pytz.UTC)
 
     if when != "now":
-        if isinstance(when,
-                      str):  # if we've been given a string, convert it to dt. Otherwise, assume we have a dt and carry on
+        # if we've been given a string, convert it to dt. Otherwise, assume we have a dt and carry on
+        if isinstance(when, str):
             when = datetime.strptime(when, '%Y-%m-%dT%H:%M')
         when = when.replace(tzinfo=pytz.UTC)
         if now_dt < when:

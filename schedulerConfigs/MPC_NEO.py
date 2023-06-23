@@ -1,6 +1,6 @@
 from datetime import datetime as datetime
 import astroplan, numpy
-from scheduleLib import mpcUtils
+from scheduleLib import mpcUtils, genUtils
 from scheduleLib.genUtils import stringToTime, TypeConfiguration
 import astropy.units as u
 from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
@@ -33,7 +33,9 @@ class MPCScorer(astroplan.Scorer):
 
                 # scoreArray[i] *= (round(block.duration.to_value(u.second) / window,
                 #                         4))  # favor targets with short windows so that they get observed
-                scoreArray[i] *= (round(window / block.duration.to_value(u.second), 4)) # favor targets with long windows so it's more likely they get 2 obs in
+                # scoreArray[i] *= (round(1 / block.duration.to_value(u.second),
+                #                         4))  # favor targets with long windows so it's more likely they get 2 obs in
+                # scoreArray[i] *= 1/(float(candidate.Magnitude))
                 scoreArray[i] *= mpcUtils.isBlockCentered(block, candidate,
                                                           times)  # only allow observations at times where the blocks would be centered around a ten-minute interval
         for constraint in self.global_constraints:  # constraints applied to all targets
@@ -41,16 +43,25 @@ class MPCScorer(astroplan.Scorer):
         return scoreArray
 
 
+def generateSchedulerLine(row, targetName, candidateDict):
+    targetName = targetName[:-2]
+    c = candidateDict[targetName]
+    startDt = stringToTime(row["start time (UTC)"])
+    return mpcUtils.candidateToScheduleLine(c, startDt, genUtils.roundToTenMinutes(startDt))
+
+
 def getConfig(startTimeUTC: datetime, endTimeUTC: datetime):
     # returns a TypeConfiguration object for targets of type "MPC NEO"
     dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
-    candidates = mpcUtils.candidatesForTimeRange(startTimeUTC, endTimeUTC, 1, dbConnection)
+    candidates = [c for c in mpcUtils.candidatesForTimeRange(startTimeUTC, endTimeUTC, 1, dbConnection) if
+                  c.CandidateName not in ["P21GxRx", "C9CY6M2", "P21G0G2", "C9CZK12"]]
     designations = [c.CandidateName for c in candidates]
 
-    objTransitionDict = {'default': 180 * u.second}
+    objTransitionDict = {'default': 240 * u.second}
     for d in designations:
         objTransitionDict[("FocusLoop", d)] = 0 * u.second
 
-    configuration = TypeConfiguration(candidates, MPCScorer, objTransitionDict, numObs=2, maxMinutesWithoutFocus=65, minMinutesBetweenObs=35)
+    configuration = TypeConfiguration(candidates, MPCScorer, objTransitionDict, generateSchedulerLine, numObs=2,
+                                      maxMinutesWithoutFocus=65, minMinutesBetweenObs=35)
     return "MPC NEO", configuration
     # this config will only apply to candidates with CandidateType "MPC NEO"

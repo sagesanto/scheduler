@@ -66,13 +66,11 @@ async def selectTargets(logger, lookback):
                 logger.debug("Rejected " + desig + " for incomplete information.")
                 candidateDict[desig].RejectedReason = "Incomplete"
                 continue
-        logger.info("Rejecting high magnitudes...")
         if float(candidate.Magnitude) > targetSelector.vMagMax:
             candidateDict[desig].RejectedReason = "vMag"
             rejected.append(desig)
             logger.debug("Rejected " + desig + " for magnitude limit.")
             continue
-        logger.info("Rejecting high uncertainties...")
         if float(candidate.RMSE_RA) > targetSelector.raMaxRMSE or float(candidate.RMSE_Dec) > targetSelector.decMaxRMSE:
             rejected.append(desig)
             candidateDict[desig].RejectedReason = "RMSE"

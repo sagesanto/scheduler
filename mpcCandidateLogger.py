@@ -15,6 +15,17 @@ from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 
 async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
+    ephems = await mpcUtils.asyncMultiEphem([desig], dt.utcnow(), 0, mpc, targetSelector.asyncHelper, logger,
+                                            obsCode=500)
+    if desig in ephems.keys():
+        first = ephems[desig][0]
+        return round(float(first[3]) * 60, 2), round(float(first[4]) * 60, 2)  # we want "/minute
+    else:
+        logger.info("Can't get velocity for " + desig + ": couldn't get ephemeris.")
+    return None, None
+
+
+async def oldGetVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
     try:
         ephems = await mpcUtils.asyncMultiEphem([desig], dt.utcnow(), 0, mpc, targetSelector.asyncHelper, logger,
                                                 obsCode=500)
@@ -35,7 +46,7 @@ async def listEntryToCandidate(entry, mpc, logger, targetSelector):
     CandidateType = "MPC NEO"
     constructDict["RA"], constructDict["Dec"] = entry.ra, entry.dec
     constructDict["Magnitude"] = float(entry.vmag)
-    expPair = mpcUtils._findExposure(constructDict["Magnitude"],str=False)
+    expPair = mpcUtils._findExposure(constructDict["Magnitude"], str=False)
     constructDict["NumExposures"] = float(expPair[0])
     constructDict["ExposureTime"] = float(expPair[1])  # duration of observation, in seconds
     constructDict["Updated"] = genUtils.timeToString(mpcUtils.updatedStringToDatetime(entry.updated))
@@ -46,7 +57,8 @@ async def listEntryToCandidate(entry, mpc, logger, targetSelector):
     else:
         logger.warning("Couldn't find velocities for " + CandidateName)
 
-    constructDict["TransitTime"] = genUtils.timeToString(genUtils.findTransitTime(genUtils.ensureAngle(str(constructDict["RA"])+"h"),targetSelector.observatory))
+    constructDict["TransitTime"] = genUtils.timeToString(
+        genUtils.findTransitTime(genUtils.ensureAngle(str(constructDict["RA"]) + "h"), targetSelector.observatory))
     return Candidate(CandidateName, CandidateType, **constructDict)
 
 
@@ -77,7 +89,7 @@ async def runLogging(logger, lookback):
         ent = await listEntryToCandidate(entry, mpc, logger, targetSelector)  # transform list entries to candidates
         currentCandidates[ent.CandidateName] = ent
     logger.info("Construction complete.")
-
+    logger.info("Querying the MPC for uncertainties...")
     desigs = currentCandidates.keys()
     offsetDict = await targetSelector.fetchUncertainties(desigs)
     for desig in desigs:  # loop over the candidates and find their uncertainties, adding them to the candidate object
@@ -88,7 +100,7 @@ async def runLogging(logger, lookback):
             currentCandidates[desig].ApproachColor = uncertainties[-1]
         else:
             logger.warning("Uncertainty query for " + desig + " came back empty.")
-
+    logger.info("Queried.")
     static = []
     updated = []  # candidates that appear in both the list and the database and may need to be updated
     new = []  # candidates that appear in the list but not in the database
