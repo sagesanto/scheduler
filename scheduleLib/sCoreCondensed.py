@@ -33,7 +33,7 @@ class Observation:
             filter = split[8]
             description = split[9]
             descSplit = description.split(" ")
-            ephemTime, dRA, dDec = descSplit[4][:-1], descSplit[10], descSplit[12][
+            ephemTime, dRA, dDec = descSplit[4], descSplit[10], descSplit[12][
                                                                      :-1]  # ephemTime is the time the observation should be centered around
             return cls(startTime, targetName, RA, Dec, exposureTime, numExposures, duration, filter, ephemTime, dRA,
                        dDec, description)
@@ -261,7 +261,7 @@ from astropy.utils import iers
 from astropy.utils.exceptions import AstropyWarning
 
 warnings.simplefilter('ignore', category=AstropyWarning)
-debug = True  # won't be accurate when this is True, change before using!
+debug = False  # won't be accurate when this is True, change before using!
 
 # dict of observation durations (seconds) to acceptable offsets (seconds)
 obsTimeOffsets = {300: 30, 600: 180, 1200: 300, 1800: 600}
@@ -366,7 +366,7 @@ def autoFocusTiming(schedule):
     # now check to make sure that the remaining schedule is less that one hour
     print(prevTime - schedule.tasks[-1].startTime)
 
-    if abs(prevTime - schedule.tasks[-1].startTime) > timedelta(hours=1):
+    if abs(prevTime - schedule.tasks[-1].startTime) > timedelta(minutes=65):
         return 1, autoFocusErrorMaker(schedule.lineNumber(schedule.tasks[-1]))
     return 0, noError()
 
@@ -495,7 +495,7 @@ from astropy import time, units as u
 from astropy.coordinates import AltAz, EarthLocation, SkyCoord
 from astropy.time import Time
 
-schedule = readSchedule("scheduleLib/libFiles/exampleGoodSchedule.txt")
+# schedule = readSchedule("scheduleLib/libFiles/exampleGoodSchedule.txt")
 
 
 def calculateDowntime(schedule):

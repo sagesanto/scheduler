@@ -1,4 +1,4 @@
-from datetime import datetime as datetime
+from datetime import datetime as datetime, timedelta
 import astroplan, numpy
 from scheduleLib import mpcUtils, genUtils
 from scheduleLib.genUtils import stringToTime, TypeConfiguration
@@ -47,7 +47,7 @@ def generateSchedulerLine(row, targetName, candidateDict):
     targetName = targetName[:-2]
     c = candidateDict[targetName]
     startDt = stringToTime(row["start time (UTC)"])
-    return mpcUtils.candidateToScheduleLine(c, startDt, genUtils.roundToTenMinutes(startDt))
+    return mpcUtils.candidateToScheduleLine(c, startDt, genUtils.roundToTenMinutes(startDt+timedelta(minutes=5)))
 
 
 def getConfig(startTimeUTC: datetime, endTimeUTC: datetime):

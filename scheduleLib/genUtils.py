@@ -39,12 +39,11 @@ class TypeConfiguration:
         self.generateLine = lineGenerator
 
 
-def timeToString(dt, logger=None):
+def timeToString(dt, logger=None, scheduler=False):
     try:
-        if isinstance(dt,
-                      str):  # if we get a string, check that it's valid by casting it to dt. If it isn't, we'll return None
+        if isinstance(dt, str):  # if we get a string, check that it's valid by casting it to dt. If it isn't, we'll return None
             dt = stringToTime(dt)
-        return dt.strftime("%Y-%m-%d %H:%M:%S")
+        return dt.strftime("%Y-%m-%d %H:%M:%S") if not scheduler else dt.strftime("%Y-%m-%dT%H:%M:%S.000")
     except:
         if logger:
             logger.error("Unable to coerce time from", dt)
@@ -57,7 +56,7 @@ class AutoFocus:
         self.endTime = self.startTime + timedelta(minutes=5)
 
     def genLine(self):
-        return scheduleLib.sCoreCondensed.timeToString(self.startTime) + "|1|Focus|0|0|0|0|0|CLEAR|'Refocusing'"
+        return "\n" + timeToString(self.startTime,scheduler=True) + "|1|Focus|0|0|0|0|0|CLEAR|'Refocusing'\n"
 
     @classmethod
     def fromLine(cls, line):
@@ -90,7 +89,7 @@ def ensureDatetime(time, logger=None):
         return time.to_datetime()
 
 
-def stringToTime(timeString, logger=None):
+def stringToTime(timeString, logger=None, scheduler=False):
     if isinstance(timeString, datetime):  # they gave us a datetime, return it back to them
         return timeString
     try:

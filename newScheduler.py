@@ -70,18 +70,18 @@ class ScorerSwitchboard(astroplan.Scorer):
             blocksOfType = np.array(self.blocks)[indices]
             if blocksOfType.size == 0:
                 continue
-            # try:
-            #     scorer = self.configDict[candType].scorer(self.candidateDict, blocksOfType, self.observer,
-            #                                               self.schedule,
-            #                                               global_constraints=self.global_constraints)
-            #     modifiedRows = scorer.create_score_array(time_resolution) * round(
-            #         random.uniform(1 - self.temperature, 1 + self.temperature), 3)
-            #     scoreArray[indices] = modifiedRows
-            # except Exception as e:
-            #     raise e
-            #     print("score error:", e)
-            scoreArray[indices] = self.genericScoreArray(blocksOfType, time_resolution) * round(
-                random.uniform(1 - self.temperature, 1 + self.temperature), 3)
+            try:
+                scorer = self.configDict[candType].scorer(self.candidateDict, blocksOfType, self.observer,
+                                                          self.schedule,
+                                                          global_constraints=self.global_constraints)
+                modifiedRows = scorer.create_score_array(time_resolution) * round(
+                    random.uniform(1 - self.temperature, 1 + self.temperature), 3)
+                scoreArray[indices] = modifiedRows
+            except Exception as e:
+                raise e
+                print("score error:", e)
+                scoreArray[indices] = self.genericScoreArray(blocksOfType, time_resolution) * round(
+                    random.uniform(1 - self.temperature, 1 + self.temperature), 3)
         return scoreArray
 
     def genericScoreArray(self, blocks,
@@ -400,7 +400,7 @@ def createSchedule(startTime, endTime):
     #     for i in range(20):
     tmoScheduler = TMOScheduler(candidateDict, configDict, temperature, constraints=[], observer=TMO,
                                 transitioner=transitioner,
-                                time_resolution=1 * u.minute, gap_time=1 * u.minute)
+                                time_resolution=20 * u.second, gap_time=1 * u.minute)
     schedule = copy.deepcopy(Schedule(Time(startTime), Time(endTime)))
     tmoScheduler(copy.deepcopy(blocks), schedule)  # do the scheduling (modifies schedule inplace)
     print(schedule)
@@ -419,27 +419,25 @@ def createSchedule(startTime, endTime):
     # logDf.loc[len(logDf)] = newRow
     visualizeSchedule(scheduleDf, startTime, endTime, fullness, temp=temperature)
     # temperature += 10
-    scheduleToTextFile(scheduleDf, configDict, candidateDict)
+    schedLines = scheduleToTextFile(scheduleDf, configDict, candidateDict)
+    with open("schedule.txt", "w") as f:
+        f.writelines(schedLines)
+
     # logDf.to_csv("TempVsFullness.csv")
     return scheduleDf, blocks, schedule  # maybe don't need to return all of this
 
 
 def lineConverter(row: pd.Series, configDict, candidateDict, runningList:list):
-    dictionary = {"target":row[0],"start":stringToTime(row[1]),"end":stringToTime(row[2]),"duration":timedelta(minutes=float(row[3]))}
-    print(dictionary)
     targetName = row[0]
-    #
-    # duration = timedelta(minutes=float(row[3]))
-    #
-    print("ROW:", row)
-    # for rownum, (indx, values) in enumerate(row.iteritems()):
-    #     pass
+
+    if targetName in ["Unused Time", "TransitionBlock"]:
+        return
+    runningList.append("\n")
     if targetName == "Focus":
         targetStart = stringToTime(row[1])
         runningList.append(scheduleLib.genUtils.AutoFocus(targetStart).genLine())
         return
-    if targetName in ["Unused Time", "TransitionBlock"]:
-        return
+
     try:
         runningList.append(configDict[row["configuration"]["type"]].generateLine(row, targetName, candidateDict))
     except Exception as e:
@@ -449,9 +447,10 @@ def lineConverter(row: pd.Series, configDict, candidateDict, runningList:list):
 def scheduleToTextFile(scheduleDf, configDict, candidateDict, prevSched=None):
     # each target type will need to have the machinery to turn an entry from the scheduleDf + the candidateDict into a
     # scheduler line - maybe we'll make a default version later
-    linesList = []
+    linesList = ["DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"]
     scheduleDf.apply(lambda row: lineConverter(row, configDict, candidateDict, runningList=linesList), axis=1)
     print(linesList)
+    return linesList
 
 if __name__ == "__main__":
     location = EarthLocation.from_geodetic(-117.6815, 34.3819, 0)

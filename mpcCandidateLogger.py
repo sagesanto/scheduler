@@ -14,7 +14,7 @@ from scheduleLib import mpcUtils, genUtils, asyncUtils
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 
-async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
+async def testGetVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
     ephems = await mpcUtils.asyncMultiEphem([desig], dt.utcnow(), 0, mpc, targetSelector.asyncHelper, logger,
                                             obsCode=500)
     if desig in ephems.keys():
@@ -25,7 +25,7 @@ async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
     return None, None
 
 
-async def oldGetVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
+async def getVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec
     try:
         ephems = await mpcUtils.asyncMultiEphem([desig], dt.utcnow(), 0, mpc, targetSelector.asyncHelper, logger,
                                                 obsCode=500)
@@ -52,7 +52,7 @@ async def listEntryToCandidate(entry, mpc, logger, targetSelector):
     constructDict["Updated"] = genUtils.timeToString(mpcUtils.updatedStringToDatetime(entry.updated))
     dRA, dDec = await getVelocities(CandidateName, mpc, logger, targetSelector)
     # currently, can't get nObs and Score from mpc_neo_confirm. not going to implement it myself - we'll go without
-    if dRA and dDec:
+    if dRA is not None and dDec is not None:
         constructDict["dRA"], constructDict["dDec"] = dRA, dDec
     else:
         logger.warning("Couldn't find velocities for " + CandidateName)
@@ -115,16 +115,17 @@ async def runLogging(logger, lookback):
                 if candidateIsRemoved(dbCandidates[desig]):
                     logger.warning(
                         "That's odd. Candidate " + desig + " found in MPC table but marked as removed in database. Skipping and moving on.")
-                    continue
-                logger.debug("Checking for updates to" + desig)
-                if needsUpdate(candidate, dbCandidates[desig]):
-                    logger.info("Updating " + desig)
-                    updateCandidate(dbCandidates[desig], candidate, dbConnection)
-                    updated.append(candidate)
-                else:
                     static.append(candidate)
-                    logger.debug("None found")
                     continue
+                # logger.debug("Checking for updates to" + desig)
+                # if needsUpdate(candidate, dbCandidates[desig]):
+                logger.info("Updating " + desig)
+                updateCandidate(dbCandidates[desig], candidate, dbConnection)
+                updated.append(candidate)
+                # else:
+                #     static.append(candidate)
+                #     logger.debug("None found")
+                #     continue
             else:
                 new.append(candidate)
                 continue
@@ -173,5 +174,5 @@ if __name__ == "__main__":
     logging.basicConfig(filename='mpcCandidate.log', encoding='utf-8',
                         datefmt='%m/%d/%Y %H:%M:%S', level=logging.DEBUG)
     logging.getLogger('').addFilter(genUtils.filter)
-
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(runLogging(logger, 24))

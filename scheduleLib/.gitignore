@@ -5,3 +5,4 @@ OffsetMaps**/**
 **/photometrics/
 **/testingOutputs/**
 *.log
+*.cpython*

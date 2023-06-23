@@ -123,7 +123,7 @@ def candidateToScheduleLine(candidate:Candidate,startDt, centerDt):
 def mpcScheduleLine(desig, startDt,centerDt, skycoord, dRA:float, dDec:float, vMag):
     # the dateTime in the ephems list is a Time object, need to convert it to string
     # name
-    startDate = startDt.strftime('%Y-%m-%dT%H:%M:%S')
+    startDate = startDt.strftime('%Y-%m-%dT%H:%M:%S.000')
     # convert the skycoords object to decimal
     coords = skycoord.to_string("decimal").replace(" ", "|")
 
