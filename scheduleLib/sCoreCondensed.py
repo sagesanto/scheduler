@@ -1,10 +1,5 @@
-import os, sys, fileinput, pytz
-from datetime import datetime, time
+import pytz
 from dateutil.relativedelta import relativedelta
-import astropy
-from astropy.coordinates import EarthLocation
-from astropy.time import Time
-from astropy import units as u
 
 
 class Observation:
@@ -252,19 +247,15 @@ def checkSchedule(schedule, tests, verbose=True):
 
 
 import sys, warnings
-from astral.sun import sun
-from astral import LocationInfo, zoneinfo
-from datetime import datetime, timezone, timedelta, time
-import astropy.units as u
+from datetime import time
 from astropy.coordinates import Angle
-from astropy.utils import iers
 from astropy.utils.exceptions import AstropyWarning
 
 warnings.simplefilter('ignore', category=AstropyWarning)
 debug = False  # won't be accurate when this is True, change before using!
 
 # dict of observation durations (seconds) to acceptable offsets (seconds)
-obsTimeOffsets = {300: 30, 600: 180, 1200: 300, 1800: 600}
+obsTimeOffsets = {300: 30, 600: 120, 1200: 300, 1800: 600}
 
 
 ## ----------Error Makers ----------
@@ -489,7 +480,7 @@ if __name__ == "__main__":
 
 
 from astral.sun import sun
-from astral import LocationInfo, zoneinfo
+from astral import LocationInfo
 from datetime import datetime, timezone, timedelta
 from astropy import time, units as u
 from astropy.coordinates import AltAz, EarthLocation, SkyCoord

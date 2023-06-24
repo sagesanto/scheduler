@@ -1,18 +1,16 @@
 # Sage Santomenna 2023
-import sys, logging
+import logging
+import sys
 from datetime import timedelta, datetime, timezone
 
 import astroplan
 import astropy.time
 import pytz
-from astral import sun
-import pandas as pd
 from astral import LocationInfo
-from astropy.coordinates import Angle, SkyCoord
+from astral import sun
 from astropy import units as u
+from astropy.coordinates import Angle
 from astropy.time import Time
-
-import scheduleLib
 
 
 class ScheduleError(Exception):

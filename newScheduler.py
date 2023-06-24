@@ -1,41 +1,29 @@
+import copy
 import os
 import queue
-import copy
-from inspect import getmembers, isfunction
-import astropy as astropy
-import astropy.coordinates
+import random
+from datetime import datetime, timedelta
+from importlib import import_module
+
+import astroplan.utils
+import astropy.units as u
 import numpy
-import pandas
+import numpy as np
 import pandas as pd
 import pytz
+import seaborn as sns
+from astroplan import Observer, TimeConstraint, FixedTarget, ObservingBlock, Transitioner
+from astroplan.scheduling import Schedule
 from astroplan.target import get_skycoord
-from importlib import import_module
-import random
+from astropy.coordinates import EarthLocation
+from astropy.coordinates import SkyCoord
+from astropy.time import Time
+from matplotlib import pyplot as plt
 from matplotlib.colors import ListedColormap
 
-import scheduleLib.sCoreCondensed
-from scheduleLib.genUtils import stringToTime, timeToString, roundToTenMinutes
-from scheduleLib import sCoreCondensed as sc, genUtils, mpcUtils
-from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
-from scheduleLib.mpcTargetSelectorCore import TargetSelector
-from candidatesTonight import visualizeObservability
-import astropy.units as u
-import seaborn as sns
-from astropy.coordinates import EarthLocation
-from pytz import timezone
-from matplotlib import pyplot as plt
-from astroplan import Observer, AltitudeConstraint, AirmassConstraint, AtNightConstraint, TimeConstraint, is_observable, \
-    is_always_observable, months_observable, FixedTarget, ObservingBlock, Transitioner, PriorityScheduler
-from astroplan.scheduling import Schedule
-from astropy.table import Table
-from astropy.coordinates import SkyCoord
-import astropy.units as u
-import numpy as np
-from astropy.time import Time
-from importlib.util import find_spec
-import astroplan.utils
-from astral import LocationInfo, zoneinfo, sun, SunDirection
-from datetime import datetime, timedelta, timezone
+from scheduleLib import genUtils
+from scheduleLib import sCoreCondensed
+from scheduleLib.genUtils import stringToTime, roundToTenMinutes
 
 utc = pytz.UTC
 
@@ -102,8 +90,7 @@ class ScorerSwitchboard(astroplan.Scorer):
         return scoreArray
 
 
-def getLastFocusTime(currentTime,
-                     schedule):  # this will need to be written to determine when the last focus was so the schedule knows when its first one needs to be
+def getLastFocusTime(currentTime, schedule):  # this will need to be written to determine when the last focus was so the schedule knows when its first one needs to be
     return currentTime
 
 
@@ -136,7 +123,17 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                                    self.schedule,
                                    global_constraints=self.constraints)  # initialize our scorer object, which will calculate a score for each object at each time slot in the schedule
         scoreArray = scorer.create_score_array(
-            self.time_resolution)  # this calculates the scores for the blocks at each time, returning a numpy array with dimensions (rows: number of blocks, columns: schedule length/time_resolution (time slots) )
+            self.time_resolution)
+        bNames = [b.target.name for b in blocks]
+        start = self.schedule.start_time
+        end = self.schedule.end_time
+        times =  [sCoreCondensed.friendlyString(t.datetime) for t in astroplan.time_grid_from_range((start, end), self.time_resolution)]
+        arrayDf = pd.DataFrame(scoreArray,columns=times,index=bNames)
+        print(arrayDf)
+        arrayDf.to_csv("arrayDf.csv")
+
+
+        # this calculates the scores for the blocks at each time, returning a numpy array with dimensions (rows: number of blocks, columns: schedule length/time_resolution (time slots) )
         # if an element in the array is zero, it means the row's corresponding object does not meet all the constraints at the column's corresponding time
 
         for b in blocks:
@@ -171,7 +168,11 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                     if T1 is not None:  # transition needed
                         schedQueue.put(T1)
                         runningTime = T1.end_time
-                if runningTime - lastFocusTime > timedelta(minutes=config.maxMinutesWithoutFocus):  # focus loop needed
+                # print("run time,",runningTime,"+ block duration,",block.duration, " - lastFocusTime,", lastFocusTime, "=",(runningTime + block.duration) - lastFocusTime)
+                # print("This","is" if (runningTime + block.duration) - lastFocusTime >= timedelta(minutes=config.maxMinutesWithoutFocus) else "is not","greater than",timedelta(minutes=config.maxMinutesWithoutFocus))
+                # print((runningTime + block.duration) - lastFocusTime)
+                if (runningTime + block.duration) - lastFocusTime >= timedelta(minutes=config.maxMinutesWithoutFocus):  # focus loop needed
+                    # print("I want to focus")
                     focusBlock = makeFocusBlock()
                     if T1 is not None:
                         _ = schedQueue.get()  # get rid of the transition, we need a focus loop instead
@@ -222,6 +223,7 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
             for i in range(bestQueue.qsize()):
                 b = bestQueue.get()
                 if isinstance(b, ObservingBlock) and b.target.name == "Focus":
+                    # print("Focusing at",currentTime)
                     lastFocusTime = currentTime
                 self.schedule.insert_slot(currentTime, b)
                 currentTime += b.duration
@@ -382,7 +384,8 @@ def createSchedule(startTime, endTime):
         blocks.append(b)
 
     slewRate = .8 * u.deg / u.second  # this is inaccurate and completely irrelevant. ignore it, we want a fixed min time between targets
-    objTransitionDict = {'default': 180 * u.second}
+    # objTransitionDict = {'default': 180 * u.second}
+    objTransitionDict = {}
     for conf in configDict.values():  # accumulate dictionary of tuples (CandidateName1,CandidateName2)that specifies how long a transition between object1 and object2 should be
         for objNames, val in conf.transitionDict.items():
             objTransitionDict[objNames] = val
@@ -400,7 +403,7 @@ def createSchedule(startTime, endTime):
     #     for i in range(20):
     tmoScheduler = TMOScheduler(candidateDict, configDict, temperature, constraints=[], observer=TMO,
                                 transitioner=transitioner,
-                                time_resolution=20 * u.second, gap_time=1 * u.minute)
+                                time_resolution=60 * u.second, gap_time=1 * u.minute)
     schedule = copy.deepcopy(Schedule(Time(startTime), Time(endTime)))
     tmoScheduler(copy.deepcopy(blocks), schedule)  # do the scheduling (modifies schedule inplace)
     print(schedule)
@@ -435,7 +438,7 @@ def lineConverter(row: pd.Series, configDict, candidateDict, runningList:list):
     runningList.append("\n")
     if targetName == "Focus":
         targetStart = stringToTime(row[1])
-        runningList.append(scheduleLib.genUtils.AutoFocus(targetStart).genLine())
+        runningList.append(genUtils.AutoFocus(targetStart).genLine())
         return
 
     try:
@@ -462,7 +465,7 @@ if __name__ == "__main__":
     sunriseUTC, sunsetUTC = genUtils.getSunriseSunset()
     sunriseUTC, sunsetUTC = roundToTenMinutes(sunriseUTC), roundToTenMinutes(sunsetUTC)
     sunriseUTC -= timedelta(hours=1)  # to account for us closing the dome one hour before sunrise
-    sunsetUTC += timedelta(minutes=40) # temp
+    # sunsetUTC = datetime.now()
     # dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
     #
     # candidates = mpcUtils.candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)

@@ -1,10 +1,15 @@
 #Sage Santomenna 2023
 
-import asyncio, logging, sys, os, argparse, shutil
-from datetime import datetime
+import argparse
+import asyncio
+import logging
+import os
+import shutil
+
 from colorlog import ColoredFormatter
-from scheduleLib import mpcTargetSelectorCore as targetCore
 from httpx import RemoteProtocolError
+
+from scheduleLib import mpcTargetSelectorCore as targetCore
 
 #Sage Santomenna 2023
 

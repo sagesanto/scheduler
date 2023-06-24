@@ -1,10 +1,8 @@
-import os, sys, fileinput, pytz
 from datetime import datetime, time
+
+import pytz
 from dateutil.relativedelta import relativedelta
-import astropy
-from astropy.coordinates import EarthLocation
-from astropy.time import Time
-from astropy import units as u
+
 
 class Observation:
     # hell on earth, preferred method is fromLine

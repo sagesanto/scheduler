@@ -1,25 +1,24 @@
 # Sage Santomenna 2023
 
-# ---standard
-import json, pandas as pd, time, os, asyncio, sys, numpy as np, logging, pytz
-import matplotlib.colors as mcolors, matplotlib.pyplot as plt
-from colorlog import ColoredFormatter
+from datetime import datetime, timezone, timedelta
 
 # ---webtools
 import httpx
-from io import BytesIO  # to support in saving images
-from PIL import Image  # to save uncertainty map images
-from bs4 import BeautifulSoup  # to parse html files
-
+# ---standard
+import logging
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import pytz
+from astral import LocationInfo
+from astral import sun
+from astropy.coordinates import Angle
 # --- astronomy stuff
 from astropy.time import Time
-from astral import LocationInfo, zoneinfo
-from astral import sun
-from datetime import datetime, timezone, timedelta
-from astropy.coordinates import Angle
+from bs4 import BeautifulSoup  # to parse html files
 from numpy import sqrt
-from scheduleLib.genUtils import AutoFocus
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
+
 from scheduleLib import mpcUtils, genUtils, asyncUtils
 
 utc = pytz.UTC
@@ -411,9 +410,14 @@ class TargetSelector:
         :return: bool
         """
         hourAngleWindow = genUtils.getHourAngleLimits(dec)
-        raWindow = (self.dateToSidereal(dt) + hourAngleWindow[0],
-                    self.dateToSidereal(dt) + hourAngleWindow[1])
-        return ra.is_within_bounds(raWindow[0], raWindow[1])
+        raWindow = (self.dateToSidereal(dt) - hourAngleWindow[0],
+                    self.dateToSidereal(dt) - hourAngleWindow[1])
+        print("Datetime:",dt)
+        print("Hour angle window:",hourAngleWindow)
+        print("RA window:", raWindow)
+        print("RA, dec:",ra,dec)
+        print("Is within bounds:",ra.is_within_bounds(raWindow[1], raWindow[0]))
+        return ra.is_within_bounds(raWindow[1], raWindow[0])
 
     def isObservable(self, ephem):
         """
@@ -436,9 +440,17 @@ class TargetSelector:
         ephems = await mpcUtils.asyncMultiEphem(desigs, datetime.utcnow(), self.altitudeLimit, self.mpc,
                                                 self.asyncHelper, self.logger,
                                                 obsCode=500)  # request for geocenter to get more output
+
+
         if ephems is None or len(ephems)==0:
             self.logger.error("Couldn't get any ephems for any observability windows!")
             return None
+        endTime = mpcUtils.timeFromEphem(list(ephems.values())[-1][-1])
+
+        secondEphems = await mpcUtils.asyncMultiEphem(desigs, endTime, self.altitudeLimit, self.mpc,
+                                                self.asyncHelper, self.logger,
+                                                obsCode=500)
+
         windows = {}  # {desig:(startDt,endDt)}
         for desig in desigs:
             obsStart = False
@@ -452,6 +464,12 @@ class TargetSelector:
             if ephems[desig] is None:
                 windows[desig] = None
                 break
+
+            if desig in secondEphems.keys() and secondEphems[desig] is not None:
+                print("Have",len(ephems[desig]),"ephems. Concatenating...")
+                ephems[desig] = ephems[desig] + secondEphems[desig]  # if we got ephems for now and the window following, append them together before continuing
+                print("New len",len(ephems[desig]))
+                print(desig,"can read all the way to",mpcUtils.timeFromEphem(list(ephems.values())[-1][0]))
             for ephem in ephems[desig]:
                 ephem = mpcUtils.dictFromEphemLine(ephem)
                 obsTime = ephem["obsTime"]

@@ -1,12 +1,9 @@
 import asyncio
 import logging
-import sys
-import time
-
 from datetime import datetime as dt, timedelta
-from scheduleLib import mpcTargetSelectorCore as targetCore
-from scheduleLib.candidateDatabase import CandidateDatabase, Candidate, generateID
-from scheduleLib import mpcUtils, genUtils, asyncUtils
+
+from scheduleLib import genUtils
+from scheduleLib.candidateDatabase import CandidateDatabase
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 

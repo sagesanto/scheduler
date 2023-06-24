@@ -1,19 +1,20 @@
 #In this part of the code, I will be defining a class variable for NEO targets and MPC targets separately for future convenience. Also I will be defining a function that decides whether an object is observable at a given time from a given location with given constraints.
 
-#Below are all the packages imported that are required to query the ephemerides for both MPC and NEO targets.
-import os 
-import weakref
-import math
-import numpy as np
 import argparse
-from astropy import units as u
-from astropy.time import Time
-from astropy.coordinates import Angle
-from astroquery.jplhorizons import Horizons
+import math
+# Below are all the packages imported that are required to query the ephemerides for both MPC and NEO targets.
+import os
+import weakref
 
-#And here are all the packages for the airmass calculation of the MPC targets.
+import numpy as np
+from astropy import units as u
+from astropy.coordinates import Angle
+from astropy.time import Time
+# And here are all the packages for the airmass calculation of the MPC targets.
 from astropy.utils import iers
 from astropy.utils.data import clear_download_cache
+from astroquery.jplhorizons import Horizons
+
 iers.IERS_A_URL = 'ftp://ftp.iers.org/products/eop/rapid/standard/finals2000A.all'
 iers.IERS_A_URL_MIRROR = 'https://datacenter.iers.org/data/latestVersion/9_FINALS.ALL_IAU2000_V2013_019.txt'
 iers.conf.iers_auto_url = 'ftp://ftp.iers.org/products/eop/rapid/standard/finals2000A.all'

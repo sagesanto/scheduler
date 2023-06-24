@@ -1,8 +1,8 @@
 # Sage Santomenna, 2023
+import asyncio
 import logging
 
 import httpx
-import asyncio
 from bs4 import BeautifulSoup
 
 
@@ -11,8 +11,9 @@ class AsyncHelper:
     A helper class to facilitate easier asynchronous requesting.
     """
 
-    def __init__(self, followRedirects: bool):
-        self.client = httpx.AsyncClient(follow_redirects=followRedirects, timeout=120.0)
+    def __init__(self, followRedirects: bool,timeout=120):
+        self.timeout = timeout
+        self.client = httpx.AsyncClient(follow_redirects=followRedirects, timeout=self.timeout)
         self.logger = logging.getLogger(__name__)
 
     def __del__(self):
@@ -74,6 +75,8 @@ class AsyncHelper:
         except (httpx.ConnectError, httpx.HTTPError):
             self.logger.exception("HTTP error. Unable to make async request to " + url)
             return desig, None
+        except httpx.TimeoutException:
+            self.logger.exception("Async request timed out. Timeout is set to "+str(self.timeout)+" seconds.")
         if offsetReq.status_code != 200:
             self.logger.error("Error: HTTP status code " + str(offsetReq.status_code) + ". Unable to make async request to " +
                         url + ". Reason given: " + offsetReq.reason_phrase)

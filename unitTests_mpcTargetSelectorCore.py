@@ -1,16 +1,15 @@
 # Sage Santomenna 2023
-import asyncio
-import unittest
-from datetime import datetime
 import random
+import unittest
+from datetime import datetime, timedelta
 
 import pytz
-
-from scheduleLib.mpcTargetSelectorCore import TargetSelector
-from astropy.coordinates import Angle, SkyCoord
 from astropy import units as u
+from astropy.coordinates import Angle, SkyCoord
 from astropy.time import Time
-from scheduleLib import genUtils, mpcUtils
+
+from scheduleLib import genUtils, mpcUtils, sCoreCondensed
+from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 
 class Test(unittest.TestCase):
@@ -22,6 +21,13 @@ class Test(unittest.TestCase):
             result = genUtils.toDecimal(testAngle)
             self.assertIsNotNone(result)  # assert statement, this should be true
             self.assertEquals(result, round(randomDecimal, 6))  # assert statement, this should be true
+
+    def test_timeRounding(self):
+        t = datetime(year=2023, month=6, day=23, hour=0, minute=50)
+        for i in range(20):
+            roundT = genUtils.roundToTenMinutes(t)
+            t+= timedelta(minutes=1)
+            print(sCoreCondensed.friendlyString(t),"rounds to",sCoreCondensed.friendlyString(roundT))
 
     def test_ensureAngle(self):
         testAngle = Angle(284, unit=u.deg)
@@ -52,6 +58,11 @@ class Test(unittest.TestCase):
         # window1 = asyncio.run(selector.calculateObservability(["C9C2MX2","C440NCZ","P21FYod","C9C5672","C9AZCE2","C9C5GX2"]))
         # print(window1)
         # objRA, objDec, dRA, dDec
+
+    # def test_ObsWindow2(self):
+    #     selector = TargetSelector()
+    #     window1 = asyncio.run(selector.calculateObservability(["P21Gsxa"]))
+    #     print(window1)
 
     def test_VelocityExtraction(self):
         # (obsDatetime, coords, vMag, vRa, vDec, deltaErr)

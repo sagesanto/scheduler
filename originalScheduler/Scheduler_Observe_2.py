@@ -1,25 +1,20 @@
 #Here are all the packages to observe the schedule table.
-import os
-import sys
-import time
-from datetime import datetime
-import numpy as np
 import argparse
-# sys.path.insert(0,'~/Software/repos/worktree/scheduler/tmocass')
-
-from astropy.time import Time
-from astropy import units as u
-from astropy.io import ascii
-
-import photometrics
-from photometrics.logger import get_logger
-from photometrics.pomona import Controller
-from photometrics.filterwheel import FilterWheel
-from photometrics.syntrack_client import SynTrackClient
-from photometrics.camera_control import grid_and_capture, focus_and_capture, capture_single, recenter_and_capture
-
 ###2022: Import logging to log timestamps of lines. Set the logger output file with timestamps for logger lines.
 import logging
+import os
+import time
+from datetime import datetime
+
+import photometrics
+from astropy import units as u
+from astropy.io import ascii
+from astropy.time import Time
+from photometrics.camera_control import recenter_and_capture
+from photometrics.pomona import Controller
+from photometrics.syntrack_client import SynTrackClient
+
+# sys.path.insert(0,'~/Software/repos/worktree/scheduler/tmocass')
 logger = logging.getLogger(__name__)
 logging.basicConfig(filename=os.fspath('obs.log'), filemode='a', format='%(asctime)s %(levelname)-8s %(message)s', level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S')
 
@@ -166,7 +161,5 @@ for row in Scheduler:
 
 #---------------------Sanity Checks---------------------------
 
-from photometrics.camera_control import __get_sky_background
-from photometrics.sqm import SQM
 #from photometrics.utils import get_sidereal_time
 #from tcs.telemetry import RoofStatus, Weather, Seeing, SkyBrightness

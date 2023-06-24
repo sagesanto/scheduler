@@ -1,13 +1,15 @@
-import sys, warnings
-from scheduleChecker import *
+import sys
+import warnings
+from datetime import datetime, timezone, timedelta, time
+
+import astropy.units as u
+from astral import LocationInfo
 # from sCore import *
 from astral.sun import sun
-from astral import LocationInfo, zoneinfo
-from datetime import datetime, timezone,timedelta, time
-import astropy.units as u
 from astropy.coordinates import Angle
-from astropy.utils import iers
 from astropy.utils.exceptions import AstropyWarning
+
+from scheduleChecker import *
 
 warnings.simplefilter('ignore', category=AstropyWarning)
 debug = True #won't be accurate when this is True, change before using!

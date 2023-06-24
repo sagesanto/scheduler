@@ -1,12 +1,13 @@
-import time, logging, sys, asyncio
+import asyncio
+import logging
+import time
+from datetime import datetime as dt, timedelta
 
 from colorlog import ColoredFormatter
 
 from mpcCandidateLogger import runLogging
 from mpcCandidateSelector import selectTargets
 from scheduleLib import genUtils
-from datetime import datetime as dt, timedelta
-
 
 dateFormat = '%m/%d/%Y %H:%M:%S'
 

@@ -1,16 +1,20 @@
 # Sage Santomenna 2023
 
-from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpc
 from datetime import datetime, timedelta
-from scheduleLib import asyncUtils
-import pytz, math, astropy
-from scheduleLib.candidateDatabase import Candidate
-from astroplan.scheduling import ObservingBlock
+
+import astropy
+import math
 import numpy as np
-from astropy.coordinates import SkyCoord
-import httpx
-from bs4 import BeautifulSoup
+import pytz
+from astroplan.scheduling import ObservingBlock
+from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpc
+
+from scheduleLib import asyncUtils
 from scheduleLib import genUtils
+from scheduleLib.candidateDatabase import Candidate
+
+mpcInst = mpc()
+mpcInst.int=3
 
 
 # this isn't terribly elegant
@@ -43,7 +47,7 @@ def isBlockCentered(block: ObservingBlock, candidate: Candidate, times: np.array
     return an array of bools indicating whether or not the block is centered around each of the times provided
     :return: array of bools
     """
-    obsTimeOffsets = {300: 30, 600: 180, 1200: 300,
+    obsTimeOffsets = {300: 30, 600: 120, 1200: 300,
                       1800: 600}  # seconds of exposure: seconds that the observation can be offcenter
 
     expTime = timedelta(seconds=block.configuration["duration"])
@@ -114,13 +118,22 @@ def timeFromEphem(ephem):
     inBetween = ephem[0].value
     return datetime.strptime(inBetween, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
-def candidateToScheduleLine(candidate:Candidate,startDt, centerDt):
-    c = candidate
-    RA = genUtils.ensureAngle(c.RA)
-    Dec = genUtils.ensureAngle(c.Dec)
-    return mpcScheduleLine(c.CandidateName,startDt,centerDt,SkyCoord(ra=RA, dec=Dec),dRA=float(c.dRA),dDec=float(c.dDec),vMag=c.Magnitude)
 
-def mpcScheduleLine(desig, startDt,centerDt, skycoord, dRA:float, dDec:float, vMag):
+def candidateToScheduleLine(candidate: Candidate, startDt, centerDt:datetime):
+    c = candidate
+    truncated = centerDt - timedelta(minutes=centerDt.minute)
+    ephems = pullEphem(mpcInst, c.CandidateName,truncated,
+                       0, True)
+    lineAtObs = ephems[centerDt].split("|")
+    lineAtObs[0] = startDt.strftime('%Y-%m-%dT%H:%M:%S.000')
+    return "|".join(lineAtObs)
+    # RA = Angle(float(ephemAtTransit["RA"]), unit=u.degree) * 15
+    # Dec = genUtils.ensureAngle(ephemAtTransit["dec"])
+    # return mpcScheduleLine(c.CandidateName, startDt, centerDt, SkyCoord(ra=RA, dec=Dec), dRA=float(ephemAtTransit["dRA"]),
+    #                        dDec=float(ephemAtTransit["dDec"]), vMag=ephemAtTransit["vMag"])
+
+
+def mpcScheduleLine(desig, startDt, centerDt, skycoord, dRA: float, dDec: float, vMag):
     # the dateTime in the ephems list is a Time object, need to convert it to string
     # name
     startDate = startDt.strftime('%Y-%m-%dT%H:%M:%S.000')
@@ -143,6 +156,7 @@ def mpcScheduleLine(desig, startDt,centerDt, skycoord, dRA:float, dDec:float, vM
     lineList = [startDate, "1", desig, "1", coords, exposure, "CLEAR", description]
     expLine = "|".join(lineList)
     return expLine
+
 
 def _formatEphem(ephems, desig):
     # Internal: take an object in the form returned from self.mpc.get_ephemeris() and convert each line to the scheduler format, before returning it in a dictionary of {startDt : line}
@@ -223,7 +237,7 @@ def pullEphems(mpcInst, designations: list, whenDt: datetime, minAltitudeLimit, 
 async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, asyncHelper: asyncUtils.AsyncHelper,
                           logger, autoFormat=False,
                           mpcPostURL='https://cgi.minorplanetcenter.net/cgi-bin/confirmeph2.cgi', obsCode=654):
-    """
+    """tls -
     Asynchronously retrieves and parses multiple ephemeris data for given designations.
 
    :param designations: A list of object designations.
@@ -255,13 +269,13 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
         # parse valid ephems
         ephem = ephemResults[designation][0]
         if ephem is None:
-            print("No ephem for",designation)
+            print("No ephem for", designation)
             ephemDict[designation] = None
             continue
 
         ephem = ephem.find_all('pre')
         if len(ephem) == 0:
-            print("No pre tags for ephem",designation)
+            print("No pre tags for ephem", designation)
             ephemDict[designation] = None
             continue
 
@@ -328,8 +342,15 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
         if isinstance(when, str):
             when = datetime.strptime(when, '%Y-%m-%dT%H:%M')
         when = when.replace(tzinfo=pytz.UTC)
+        print("When after UTC:", when)
+        print(now_dt)
         if now_dt < when:
             start_at = round((when - now_dt).total_seconds() / 3600.) + 1
+            print("When:", when)
+            print("Hour offset:", start_at)
+            print("Start + hours:", now_dt + timedelta(hours=start_at))
+        else:
+            print("Time", when, "is not after time", now_dt)
 
     for objectName in designations:
         newPostContent = defaultPostParams.copy()
@@ -387,6 +408,8 @@ def candidatesForTimeRange(obsStart, obsEnd, duration, dbConnection):
                                           "RemovedReason IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",
                                           [datetime.utcnow() - timedelta(hours=36)], returnAsCandidates=True)
 
+    if candidates is None:
+        return []
     res = [candidate for candidate in candidates if candidate.isObservableBetween(obsStart, obsEnd, duration)]
     candidateDict = {}
     for c in res:

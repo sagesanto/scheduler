@@ -1,16 +1,12 @@
 import asyncio
 import logging
-import sys
-import time
-
 from datetime import datetime as dt, timedelta
 
 from colorlog import ColoredFormatter
-
-from scheduleLib import mpcTargetSelectorCore as targetCore
-from scheduleLib.candidateDatabase import CandidateDatabase, Candidate, generateID
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
-from scheduleLib import mpcUtils, genUtils, asyncUtils
+
+from scheduleLib import mpcUtils, genUtils
+from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
 from scheduleLib.mpcTargetSelectorCore import TargetSelector
 
 

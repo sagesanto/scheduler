@@ -1,23 +1,25 @@
 #---standard
-import json, pandas as pd, time, os, asyncio, numpy as np
+from datetime import datetime
+from io import BytesIO  # to support in saving images
 
-#---webtools
-import httpx #this and selenium are our main tools for interacting with the web
-from io import BytesIO # to support in saving images
-from PIL import Image #to save uncertainty map images
-from bs4 import BeautifulSoup #to parse html files
-
+import asyncio
+# ---webtools
+import httpx  # this and selenium are our main tools for interacting with the web
+import numpy as np
+import os
+import pandas as pd
+import time
+from PIL import Image  # to save uncertainty map images
+from astral import LocationInfo
+from astropy.coordinates import Angle
+# --- astronomy stuff
+from astropy.time import Time
+from bs4 import BeautifulSoup  # to parse html files
 # --- Selenium allows us to control the browser
 from selenium import webdriver
 from selenium.common import NoSuchElementException
-from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
-
-#--- astronomy stuff
-from astropy.time import Time
-from astral import LocationInfo, zoneinfo
-from datetime import datetime, timezone,timedelta
-from astropy.coordinates import Angle
+from selenium.webdriver.common.by import By
 
 offsetClient = httpx.AsyncClient(follow_redirects=True,timeout=45.0) #client for uncertainty retrieval
 

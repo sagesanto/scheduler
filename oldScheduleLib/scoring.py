@@ -1,12 +1,12 @@
 # view-source:https://cgi.minorplanetcenter.net/cgi-bin/uncertaintymap.cgi?Obj=X81536&JD=2460001.666667&Form=Y&Ext=VAR&OC=000&META=apm00
-from sCore import *
-from scheduleTests import runTestingSuite
-from astral.sun import sun
-from astral import LocationInfo, zoneinfo
-from datetime import datetime, timezone,timedelta
-from astropy import time, units as u
+from datetime import timedelta
+
+from astropy import units as u
 from astropy.coordinates import AltAz, EarthLocation, SkyCoord
 from astropy.time import Time
+
+from sCore import *
+from scheduleTests import runTestingSuite
 
 schedule = readSchedule("files/exampleGoodSchedule.txt")
 

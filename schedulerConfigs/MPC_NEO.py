@@ -1,9 +1,12 @@
 from datetime import datetime as datetime, timedelta
-import astroplan, numpy
-from scheduleLib import mpcUtils, genUtils
-from scheduleLib.genUtils import stringToTime, TypeConfiguration
+
+import astroplan
 import astropy.units as u
-from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
+import numpy
+
+from scheduleLib import mpcUtils
+from scheduleLib.candidateDatabase import CandidateDatabase
+from scheduleLib.genUtils import stringToTime, TypeConfiguration
 
 
 class MPCScorer(astroplan.Scorer):
@@ -28,16 +31,16 @@ class MPCScorer(astroplan.Scorer):
                                               times=times)
                     scoreArray[i] *= appliedScore  # scoreArray[i] is an array of len(times) items
 
-                window = (stringToTime(candidate.EndObservability) - stringToTime(
-                    candidate.StartObservability)).total_seconds()
+                # window = (stringToTime(candidate.EndObservability) - stringToTime(
+                #     candidate.StartObservability)).total_seconds()
 
                 # scoreArray[i] *= (round(block.duration.to_value(u.second) / window,
                 #                         4))  # favor targets with short windows so that they get observed
                 # scoreArray[i] *= (round(1 / block.duration.to_value(u.second),
                 #                         4))  # favor targets with long windows so it's more likely they get 2 obs in
-                # scoreArray[i] *= 1/(float(candidate.Magnitude))
-                scoreArray[i] *= mpcUtils.isBlockCentered(block, candidate,
-                                                          times)  # only allow observations at times where the blocks would be centered around a ten-minute interval
+                scoreArray[i] *= 1/(float(candidate.Magnitude))
+                # scoreArray[i] *= mpcUtils.isBlockCentered(block, candidate,
+                #                                           times)  # only allow observations at times where the blocks would be centered around a ten-minute interval
         for constraint in self.global_constraints:  # constraints applied to all targets
             scoreArray *= constraint(self.observer, self.targets, times, grid_times_targets=True)
         return scoreArray
@@ -47,19 +50,23 @@ def generateSchedulerLine(row, targetName, candidateDict):
     targetName = targetName[:-2]
     c = candidateDict[targetName]
     startDt = stringToTime(row["start time (UTC)"])
-    return mpcUtils.candidateToScheduleLine(c, startDt, genUtils.roundToTenMinutes(startDt+timedelta(minutes=5)))
+    duration = timedelta(minutes=row["duration (minutes)"])
+    center = startDt + duration / 2
+    center -= timedelta(seconds=center.second, microseconds=center.microsecond)
+    return mpcUtils.candidateToScheduleLine(c, startDt, center)
 
 
 def getConfig(startTimeUTC: datetime, endTimeUTC: datetime):
     # returns a TypeConfiguration object for targets of type "MPC NEO"
     dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
     candidates = [c for c in mpcUtils.candidatesForTimeRange(startTimeUTC, endTimeUTC, 1, dbConnection) if
-                  c.CandidateName not in ["P21GxRx", "C9CY6M2", "P21G0G2", "C9CZK12"]]
+                  c.CandidateName]
     designations = [c.CandidateName for c in candidates]
 
     objTransitionDict = {'default': 240 * u.second}
     for d in designations:
-        objTransitionDict[("FocusLoop", d)] = 0 * u.second
+        objTransitionDict[("Focus", d)] = 0 * u.second
+        objTransitionDict[("Unused Time", d)] = 0 * u.second
 
     configuration = TypeConfiguration(candidates, MPCScorer, objTransitionDict, generateSchedulerLine, numObs=2,
                                       maxMinutesWithoutFocus=65, minMinutesBetweenObs=35)

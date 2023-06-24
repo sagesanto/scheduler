@@ -1,4 +1,3 @@
-import sCore
 class Error:
     def __init__(self,eType,lineNum,message,out=None): #out is a print or other output function
         self.eType, self.lineNum, self.message, self.output = eType,lineNum,message,out

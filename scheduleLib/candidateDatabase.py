@@ -1,12 +1,13 @@
-import os, uuid, pytz, pandas as pd
+import logging
+import os
+import pandas as pd
+import pytz
+import sqlite3
 from collections import OrderedDict
-import sqlite3, logging
-import sys
-import time
+from datetime import datetime, timedelta
 from string import Template
 
 from photometrics.sql_database import SQLDatabase
-from datetime import datetime, timedelta
 
 from scheduleLib import genUtils
 

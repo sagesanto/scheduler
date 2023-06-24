@@ -2,16 +2,14 @@ from datetime import datetime, timezone, timedelta
 
 import numpy as np
 import pytz
-from astropy.coordinates import Angle
-from astropy import units as u
-from matplotlib import pyplot as plt
+from astral import LocationInfo, sun, SunDirection
 from astropy.table import Table
-from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
-from scheduleLib.mpcUtils import candidatesForTimeRange
+from matplotlib import pyplot as plt
+
 from scheduleLib import genUtils
+from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
 from scheduleLib.genUtils import ScheduleError
-import pandas as pd
-from astral import LocationInfo, zoneinfo, sun, SunDirection
+from scheduleLib.mpcUtils import candidatesForTimeRange
 
 # most of this is proof-of-concept stuff for the newScheduler, just packaged to be semi-useful as a tool before i implement it
 
@@ -137,7 +135,6 @@ if __name__ == "__main__":
         sunsetUTC = sunsetUTC - timedelta(days=1)
 
     # sunsetUTC += timedelta(hours=2) # this is temporary
-    sunriseUTC = sunsetUTC + timedelta(hours=2)
 
     print("Sunset:", sunsetUTC)
     print("Sunrise:", sunriseUTC)

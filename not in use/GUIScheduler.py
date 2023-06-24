@@ -1,6 +1,11 @@
-import sys, os, flet as ft
+import flet as ft
+import os
+import sys
+
+from flet import (Page)
+
 from scheduleLib import sCoreCondensed as sc
-from flet import (Column, ElevatedButton, FilePicker, FilePickerResultEvent, FilePickerUploadEvent, FilePickerUploadFile, Page, ProgressRing, Ref, Row, Text, icons)
+
 
 def expandPath(workingDir, returner):
     if not os.path.isdir(workingDir):  # we're a file. append ourselves and return!
