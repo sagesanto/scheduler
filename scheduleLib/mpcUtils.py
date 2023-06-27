@@ -8,13 +8,13 @@ import numpy as np
 import pytz
 from astroplan.scheduling import ObservingBlock
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpc
-
+from astropy import units as u
 from scheduleLib import asyncUtils
 from scheduleLib import genUtils
 from scheduleLib.candidateDatabase import Candidate
 
 mpcInst = mpc()
-mpcInst.int=3
+mpcInst.int = 3
 
 
 # this isn't terribly elegant
@@ -119,14 +119,19 @@ def timeFromEphem(ephem):
     return datetime.strptime(inBetween, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
 
-def candidateToScheduleLine(candidate: Candidate, startDt, centerDt:datetime):
+def candidateToScheduleLine(candidate: Candidate, startDt, centerDt: datetime,name=None):
     c = candidate
-    truncated = centerDt - timedelta(minutes=centerDt.minute)
-    ephems = pullEphem(mpcInst, c.CandidateName,truncated,
+    truncated = centerDt - timedelta(minutes=(centerDt.minute - 5))
+    print("Ephems for", truncated)
+    ephems = pullEphem(mpcInst, c.CandidateName, truncated,
                        0, True)
+    print(ephems.keys())
     lineAtObs = ephems[centerDt].split("|")
     lineAtObs[0] = startDt.strftime('%Y-%m-%dT%H:%M:%S.000')
-    return "|".join(lineAtObs)
+    line = "|".join(lineAtObs)
+    if name is not None:
+        line = line.replace(c.CandidateName,name,1)
+    return line
     # RA = Angle(float(ephemAtTransit["RA"]), unit=u.degree) * 15
     # Dec = genUtils.ensureAngle(ephemAtTransit["dec"])
     # return mpcScheduleLine(c.CandidateName, startDt, centerDt, SkyCoord(ra=RA, dec=Dec), dRA=float(ephemAtTransit["dRA"]),
@@ -148,7 +153,7 @@ def mpcScheduleLine(desig, startDt, centerDt, skycoord, dRA: float, dDec: float,
     dDec = str(round(dDec, 2))
 
     # for the description, we need RA and Dec in sexagesimal
-    sexagesimal = skycoord.to_string("hmsdms").split(" ")
+    sexagesimal = (skycoord.ra.to_string(unit=u.hour, sep=':'), skycoord.dec.to_string(unit=u.degree,sep=":"))
     # the end of the scheduler line must have a description that looks like this
     description = "\'MPC Asteroid " + desig + ", UT: " + datetime.strftime(centerDt, "%H%M") + " RA: " + \
                   sexagesimal[0] + " DEC: " + sexagesimal[1] + " dRA: " + dRa + " dDEC: " + dDec + "\'"
@@ -186,10 +191,10 @@ def _formatEphem(ephems, desig):
         dDec = str(round(float(i[4]) * 60, 2))
 
         # for the description, we need RA and Dec in sexagesimal
-        sexagesimal = i[1].to_string("hmsdms").split(" ")
+        sexagesimal = (i[1].ra.to_string(unit=u.hour, sep=':'), i[1].dec.to_string(unit=u.degree, sep=":"))
         # the end of the scheduler line must have a description that looks like this
-        description = "\'MPC Asteroid " + target + ", UT: " + datetime.strftime(dateTime, "%H%M") + " RA: " + \
-                      sexagesimal[0] + " DEC: " + sexagesimal[1] + " dRA: " + dRa + " dDEC: " + dDec + "\'"
+        description = "\'MPC Asteroid " + target + ", UT: " + datetime.strftime(dateTime, "%H%M") + ", RA: " + \
+                      sexagesimal[0] + ", DEC: " + sexagesimal[1] + ", dRA: " + dRa + ", dDEC: " + dDec + "\'"
 
         lineList = [date, "1", target, "1", coords, exposure, "CLEAR", description]
         expLine = "|".join(lineList)
@@ -342,15 +347,8 @@ async def asyncMultiEphemRequest(designations, when, minAltitudeLimit, mpcInst: 
         if isinstance(when, str):
             when = datetime.strptime(when, '%Y-%m-%dT%H:%M')
         when = when.replace(tzinfo=pytz.UTC)
-        print("When after UTC:", when)
-        print(now_dt)
         if now_dt < when:
             start_at = round((when - now_dt).total_seconds() / 3600.) + 1
-            print("When:", when)
-            print("Hour offset:", start_at)
-            print("Start + hours:", now_dt + timedelta(hours=start_at))
-        else:
-            print("Time", when, "is not after time", now_dt)
 
     for objectName in designations:
         newPostContent = defaultPostParams.copy()

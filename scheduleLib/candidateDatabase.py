@@ -204,7 +204,7 @@ class CandidateDatabase(SQLDatabase):
             Results
         Return
         ------
-        rows : dict
+        rows : dict or list
             Python list of dicts, indexed by column name, or list of Candidate objects
         """
         result = _queryToDict(super().table_query(table_name, columns, condition, values))

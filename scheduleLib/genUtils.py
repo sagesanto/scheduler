@@ -11,6 +11,7 @@ from astral import sun
 from astropy import units as u
 from astropy.coordinates import Angle
 from astropy.time import Time
+from abc import ABCMeta, abstractmethod
 
 
 class ScheduleError(Exception):
@@ -24,22 +25,39 @@ class ScheduleError(Exception):
         super().__init__(self.message)
 
 
-class TypeConfiguration:
-    def __init__(self, selectedCandidates, scorer: type[astroplan.Scorer], transitionDict, lineGenerator, maxMinutesWithoutFocus=60,
-                 numObs=1, typeConstraints=None, minMinutesBetweenObs=None):
-        self.selectedCandidates = selectedCandidates  # list of candidate objects that it has selected to be scheduled
-        self.scorer = scorer  # *uninitialized* subclass of astroplan.Scorer
-        self.transitionDict = transitionDict  # dictionary to define behavior of transitions for your type of object - see astroplan # dict(str,dict(tuple,u.Quantity))
+class TypeConfiguration(metaclass=ABCMeta):
+    @abstractmethod
+    def __init__(self, scorer: astroplan.Scorer, maxMinutesWithoutFocus=60, numObs=1, minMinutesBetweenObs=None):
+        self.scorer = scorer
         self.maxMinutesWithoutFocus = maxMinutesWithoutFocus  # max time, in minutes, that this object can be scheduled after the most recent focus loop
-        self.typeConstraints = typeConstraints
-        self.minMinutesBetweenObs = minMinutesBetweenObs  # minimum time, in minutes, between the start times of multiple observations of the same object
         self.numObs = numObs
-        self.generateLine = lineGenerator
+        self.minMinutesBetweenObs = minMinutesBetweenObs  # minimum time, in minutes, between the start times of multiple observations of the same object
+
+    @abstractmethod
+    def generateSchedulerLine(self, row, targetName, candidateDict):
+        pass
+
+    @abstractmethod
+    def selectCandidates(self, startTimeUTC: datetime, endTimeUTC: datetime):
+        pass
+
+    @abstractmethod
+    def generateTransitionDict(self):
+        pass
+
+    @abstractmethod
+    def generateTypeConstraints(self):
+        pass
+
+    @abstractmethod
+    def scoreRepeatObs(self, c, scoreLine, numPrev, currentTime):
+        pass
 
 
 def timeToString(dt, logger=None, scheduler=False):
     try:
-        if isinstance(dt, str):  # if we get a string, check that it's valid by casting it to dt. If it isn't, we'll return None
+        if isinstance(dt,
+                      str):  # if we get a string, check that it's valid by casting it to dt. If it isn't, we'll return None
             dt = stringToTime(dt)
         return dt.strftime("%Y-%m-%d %H:%M:%S") if not scheduler else dt.strftime("%Y-%m-%dT%H:%M:%S.000")
     except:
@@ -54,7 +72,7 @@ class AutoFocus:
         self.endTime = self.startTime + timedelta(minutes=5)
 
     def genLine(self):
-        return "\n" + timeToString(self.startTime,scheduler=True) + "|1|Focus|0|0|0|0|0|CLEAR|'Refocusing'\n"
+        return "\n" + timeToString(self.startTime, scheduler=True) + "|1|Focus|0|0|0|0|0|CLEAR|'Refocusing'\n"
 
     @classmethod
     def fromLine(cls, line):
@@ -62,7 +80,8 @@ class AutoFocus:
         time = stringToTime(time)
         return cls(time)
 
-def findCenterTime(startTime:datetime,duration:timedelta):
+
+def findCenterTime(startTime: datetime, duration: timedelta):
     """
     Find the nearest ten minute interval to the center of the time window {start, start+duration}
     :param startTime: datetime object representing the start of the window
@@ -71,7 +90,6 @@ def findCenterTime(startTime:datetime,duration:timedelta):
     """
     center = startTime + (duration / 2)
     return roundToTenMinutes(center)
-
 
 
 def ensureDatetime(time, logger=None):

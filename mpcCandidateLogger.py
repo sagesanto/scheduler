@@ -81,6 +81,8 @@ async def runLogging(logger, lookback):
     currentCandidates = {}  # store desig:candidate for each candidate in the MPC's list of current candidates
     mpc.get_neo_list()  # prompt the mpc object to fetch the list
     logger.info("Constructing Candidates from MPC List")
+    if mpc.neo_confirm_list is None:
+        raise ConnectionError("Can't get list of candidates from MPC. Check internet connection")
     for entry in mpc.neo_confirm_list:  # access the list and create dict
         ent = await listEntryToCandidate(entry, mpc, logger, targetSelector)  # transform list entries to candidates
         currentCandidates[ent.CandidateName] = ent

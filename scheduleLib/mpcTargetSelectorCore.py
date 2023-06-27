@@ -412,11 +412,11 @@ class TargetSelector:
         hourAngleWindow = genUtils.getHourAngleLimits(dec)
         raWindow = (self.dateToSidereal(dt) - hourAngleWindow[0],
                     self.dateToSidereal(dt) - hourAngleWindow[1])
-        print("Datetime:",dt)
-        print("Hour angle window:",hourAngleWindow)
-        print("RA window:", raWindow)
-        print("RA, dec:",ra,dec)
-        print("Is within bounds:",ra.is_within_bounds(raWindow[1], raWindow[0]))
+        # print("Datetime:",dt)
+        # print("Hour angle window:",hourAngleWindow)
+        # print("RA window:", raWindow)
+        # print("RA, dec:",ra,dec)
+        # print("Is within bounds:",ra.is_within_bounds(raWindow[1], raWindow[0]))
         return ra.is_within_bounds(raWindow[1], raWindow[0])
 
     def isObservable(self, ephem):
@@ -466,10 +466,10 @@ class TargetSelector:
                 break
 
             if desig in secondEphems.keys() and secondEphems[desig] is not None:
-                print("Have",len(ephems[desig]),"ephems. Concatenating...")
+                # print("Have",len(ephems[desig]),"ephems. Concatenating...")
                 ephems[desig] = ephems[desig] + secondEphems[desig]  # if we got ephems for now and the window following, append them together before continuing
-                print("New len",len(ephems[desig]))
-                print(desig,"can read all the way to",mpcUtils.timeFromEphem(list(ephems.values())[-1][0]))
+                # print("New len",len(ephems[desig]))
+                # print(desig,"can read all the way to",mpcUtils.timeFromEphem(list(ephems.values())[-1][0]))
             for ephem in ephems[desig]:
                 ephem = mpcUtils.dictFromEphemLine(ephem)
                 obsTime = ephem["obsTime"]

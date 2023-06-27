@@ -43955,3 +43955,2702 @@
 06/23/2023 20:47:37 DEBUG | Updated P21Gsxa.
 06/23/2023 20:47:37 INFO | ---Finished MPC selection without error at 06/23/2023 20:47:37 PST
 06/23/2023 20:47:37 INFO | ---Done. will run again at 06/23/2023 21:02:37 PST.
+06/23/2023 23:31:10 INFO | ---Starting cycle at 06/23/2023 23:31:10 PST
+06/23/2023 23:31:10 INFO | --- Acquiring Candidates ---
+06/23/2023 23:31:11 INFO | Constructing Candidates from MPC List
+06/23/2023 23:31:17 INFO | Construction complete.
+06/23/2023 23:31:17 INFO | Querying the MPC for uncertainties...
+06/23/2023 23:31:50 INFO | C9D4A92 is a near-approach!
+06/23/2023 23:31:53 INFO | Queried.
+06/23/2023 23:31:53 INFO | Updating A10VKeW
+06/23/2023 23:31:53 INFO | Updating C4D996Z
+06/23/2023 23:31:53 INFO | Updating P11GBMr
+06/23/2023 23:31:53 INFO | Updating P11GB8H
+06/23/2023 23:31:53 INFO | Updating C0HQLY5
+06/23/2023 23:31:53 INFO | Updating A10VKeD
+06/23/2023 23:31:53 INFO | Updating A10VKez
+06/23/2023 23:31:54 INFO | Updating C9D0L02
+06/23/2023 23:31:54 INFO | Updating 3FM6E21
+06/23/2023 23:31:54 INFO | Updating P11GAQm
+06/23/2023 23:31:54 INFO | Updating P11GAQl
+06/23/2023 23:31:54 INFO | Updating P11Gzkj
+06/23/2023 23:31:54 INFO | Updating P11GzhE
+06/23/2023 23:31:54 INFO | Updating P21GyQj
+06/23/2023 23:31:54 INFO | Updating P21GyDW
+06/23/2023 23:31:54 INFO | Updating P21GxRx
+06/23/2023 23:31:54 INFO | Updating C9CZM32
+06/23/2023 23:31:54 INFO | Updating C0HQ065
+06/23/2023 23:31:54 INFO | Updating C9CZRR2
+06/23/2023 23:31:54 INFO | Updating C9CZRJ2
+06/23/2023 23:31:54 INFO | Updating C9CZQM2
+06/23/2023 23:31:54 INFO | Updating C9CZK12
+06/23/2023 23:31:54 INFO | Updating P11Gwgv
+06/23/2023 23:31:54 INFO | Updating P11Gwgu
+06/23/2023 23:31:54 INFO | Updating P21Gvs0
+06/23/2023 23:31:54 INFO | Updating P21GvrZ
+06/23/2023 23:31:54 INFO | Updating P21GvaM
+06/23/2023 23:31:54 INFO | Updating 3FK1K21
+06/23/2023 23:31:54 INFO | Updating C9CYHH2
+06/23/2023 23:31:54 INFO | Updating A10VJYv
+06/23/2023 23:31:54 INFO | Updating HsH8MV1
+06/23/2023 23:31:54 INFO | Updating ST23F23
+06/23/2023 23:31:54 INFO | Updating P21Gsxa
+06/23/2023 23:31:54 INFO | Updating P21Gsxb
+06/23/2023 23:31:54 INFO | Updating P21Gsp7
+06/23/2023 23:31:54 INFO | Updating P21Gs1U
+06/23/2023 23:31:54 INFO | Updating P21GiNw
+06/23/2023 23:31:54 INFO | Updating P11Gebp
+06/23/2023 23:31:54 INFO | Updating P21Ge7Z
+06/23/2023 23:31:54 INFO | Updating P11Ge6q
+06/23/2023 23:31:54 INFO | Updating P11Ge6p
+06/23/2023 23:31:54 INFO | Updating P21Gd2q
+06/23/2023 23:31:54 INFO | Updating HirtMR2
+06/23/2023 23:31:54 INFO | Updating P21G0G2
+06/23/2023 23:31:54 INFO | Updating C9CWMP2
+06/23/2023 23:31:54 INFO | Updating JKm001
+06/23/2023 23:31:54 INFO | Updating A10UeAm
+06/23/2023 23:31:54 DEBUG | Created C9D4A92 with ID -4168932654729275460.
+06/23/2023 23:31:54 DEBUG | Created C0HQZG5 with ID 8593339022330236133.
+06/23/2023 23:31:54 INFO | -Assessed Candidates
+06/23/2023 23:31:54 INFO | New (2)
+06/23/2023 23:31:54 DEBUG | [Candidate C9D4A92 (MPC NEO), Candidate C0HQZG5 (MPC NEO)]
+06/23/2023 23:31:54 INFO | Static (0)
+06/23/2023 23:31:54 DEBUG | []
+06/23/2023 23:31:54 INFO | Updated (47)
+06/23/2023 23:31:54 DEBUG | [Candidate A10VKeW (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate P11GBMr (MPC NEO), Candidate P11GB8H (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKeD (MPC NEO), Candidate A10VKez (MPC NEO), Candidate C9D0L02 (MPC NEO), Candidate 3FM6E21 (MPC NEO), Candidate P11GAQm (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11Gzkj (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate P21GyQj (MPC NEO), Candidate P21GyDW (MPC NEO), Candidate P21GxRx (MPC NEO), Candidate C9CZM32 (MPC NEO), Candidate C0HQ065 (MPC NEO), Candidate C9CZRR2 (MPC NEO), Candidate C9CZRJ2 (MPC NEO), Candidate C9CZQM2 (MPC NEO), Candidate C9CZK12 (MPC NEO), Candidate P11Gwgv (MPC NEO), Candidate P11Gwgu (MPC NEO), Candidate P21Gvs0 (MPC NEO), Candidate P21GvrZ (MPC NEO), Candidate P21GvaM (MPC NEO), Candidate 3FK1K21 (MPC NEO), Candidate C9CYHH2 (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate HsH8MV1 (MPC NEO), Candidate ST23F23 (MPC NEO), Candidate P21Gsxa (MPC NEO), Candidate P21Gsxb (MPC NEO), Candidate P21Gsp7 (MPC NEO), Candidate P21Gs1U (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P11Ge6q (MPC NEO), Candidate P11Ge6p (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate HirtMR2 (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/23/2023 23:31:54 INFO | Removed (0)
+06/23/2023 23:31:54 DEBUG | []
+06/23/2023 23:31:54 INFO | ---Finished MPC logging without error at 06/23/2023 23:31:54 PST
+06/23/2023 23:31:54 INFO | --- Selecting ---
+06/23/2023 23:31:54 INFO | Finding observability and evaluating 49 objects.
+06/23/2023 23:32:03 DEBUG | Found window for A10VKeW!
+06/23/2023 23:32:03 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P11Ge6q!
+06/23/2023 23:32:03 DEBUG | Found window for P21Gd2q!
+06/23/2023 23:32:03 DEBUG | Found window for ST23F23!
+06/23/2023 23:32:03 DEBUG | Got None window for A10VKeD. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P11GBMr!
+06/23/2023 23:32:03 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P11Ge6p!
+06/23/2023 23:32:03 DEBUG | Found window for C4D996Z!
+06/23/2023 23:32:03 DEBUG | Found window for P11GAQm!
+06/23/2023 23:32:03 DEBUG | Found window for C9CZRR2!
+06/23/2023 23:32:03 DEBUG | Found window for C9D4A92!
+06/23/2023 23:32:03 DEBUG | Found window for P11GB8H!
+06/23/2023 23:32:03 DEBUG | Found window for P21GyQj!
+06/23/2023 23:32:03 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P11GAQl!
+06/23/2023 23:32:03 DEBUG | Found window for C9D0L02!
+06/23/2023 23:32:03 DEBUG | Found window for P11Gwgv!
+06/23/2023 23:32:03 DEBUG | Found window for C9CZRJ2!
+06/23/2023 23:32:03 DEBUG | Found window for P21Gsxb!
+06/23/2023 23:32:03 DEBUG | Found window for P11Gwgu!
+06/23/2023 23:32:03 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P21GyDW!
+06/23/2023 23:32:03 DEBUG | Got None window for P21GvaM. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P21Gsp7!
+06/23/2023 23:32:03 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P21Gs1U!
+06/23/2023 23:32:03 DEBUG | Found window for C9CZM32!
+06/23/2023 23:32:03 DEBUG | Found window for C9CZK12!
+06/23/2023 23:32:03 DEBUG | Got None window for HsH8MV1. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P11Gzkj!
+06/23/2023 23:32:03 DEBUG | Found window for C9CZQM2!
+06/23/2023 23:32:03 DEBUG | Found window for P21G0G2!
+06/23/2023 23:32:03 DEBUG | Found window for 3FK1K21!
+06/23/2023 23:32:03 DEBUG | Found window for P21GvrZ!
+06/23/2023 23:32:03 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P21Gvs0!
+06/23/2023 23:32:03 DEBUG | Found window for A10VJYv!
+06/23/2023 23:32:03 DEBUG | Found window for C0HQ065!
+06/23/2023 23:32:03 DEBUG | Found window for C9CYHH2!
+06/23/2023 23:32:03 DEBUG | Got None window for HirtMR2. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Got None window for 3FM6E21. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for P21GxRx!
+06/23/2023 23:32:03 DEBUG | Got None window for C0HQZG5. Rejected for Observability.
+06/23/2023 23:32:03 DEBUG | Found window for C0HQLY5!
+06/23/2023 23:32:03 DEBUG | Found window for P21Gsxa!
+06/23/2023 23:32:03 INFO | Rejecting targets
+06/23/2023 23:32:03 DEBUG | Rejected P11Ge6q for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected ST23F23 for error limit.
+06/23/2023 23:32:03 DEBUG | Rejected JKm001 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P11Ge6p for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected C4D996Z for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P11GAQm for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected C9D4A92 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P11Gebp for error limit.
+06/23/2023 23:32:03 DEBUG | Rejected P11GAQl for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P11Gwgv for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected C9CZRJ2 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P11Gwgu for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21GvaM for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21Gsp7 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected HsH8MV1 for error limit.
+06/23/2023 23:32:03 DEBUG | Rejected A10VKez for error limit.
+06/23/2023 23:32:03 DEBUG | Rejected P11Gzkj for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected C9CZQM2 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21G0G2 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected 3FK1K21 for error limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21GvrZ for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21Gvs0 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected A10VJYv for error limit.
+06/23/2023 23:32:03 DEBUG | Rejected C0HQ065 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected C9CYHH2 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected HirtMR2 for error limit.
+06/23/2023 23:32:03 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/23/2023 23:32:03 DEBUG | Rejected P21Gsxa for magnitude limit.
+06/23/2023 23:32:03 INFO | Updating database
+06/23/2023 23:32:03 DEBUG | Updated A10VKeW.
+06/23/2023 23:32:03 DEBUG | Updated P11GzhE.
+06/23/2023 23:32:03 DEBUG | Updated P11Ge6q.
+06/23/2023 23:32:03 DEBUG | Updated P21Gd2q.
+06/23/2023 23:32:03 DEBUG | Updated ST23F23.
+06/23/2023 23:32:03 DEBUG | Updated A10VKeD.
+06/23/2023 23:32:03 DEBUG | Updated P11GBMr.
+06/23/2023 23:32:03 DEBUG | Updated JKm001.
+06/23/2023 23:32:03 DEBUG | Updated P11Ge6p.
+06/23/2023 23:32:03 DEBUG | Updated C4D996Z.
+06/23/2023 23:32:03 DEBUG | Updated P11GAQm.
+06/23/2023 23:32:03 DEBUG | Updated C9CZRR2.
+06/23/2023 23:32:03 DEBUG | Updated C9D4A92.
+06/23/2023 23:32:03 DEBUG | Updated P11GB8H.
+06/23/2023 23:32:03 DEBUG | Updated P21GyQj.
+06/23/2023 23:32:03 DEBUG | Updated P11Gebp.
+06/23/2023 23:32:03 DEBUG | Updated P11GAQl.
+06/23/2023 23:32:03 DEBUG | Updated C9D0L02.
+06/23/2023 23:32:03 DEBUG | Updated P11Gwgv.
+06/23/2023 23:32:03 DEBUG | Updated C9CZRJ2.
+06/23/2023 23:32:03 DEBUG | Updated P21Gsxb.
+06/23/2023 23:32:03 DEBUG | Updated P11Gwgu.
+06/23/2023 23:32:03 DEBUG | Updated P21GiNw.
+06/23/2023 23:32:03 DEBUG | Updated P21GyDW.
+06/23/2023 23:32:03 DEBUG | Updated P21GvaM.
+06/23/2023 23:32:03 DEBUG | Updated P21Gsp7.
+06/23/2023 23:32:03 DEBUG | Updated P21Ge7Z.
+06/23/2023 23:32:03 DEBUG | Updated P21Gs1U.
+06/23/2023 23:32:03 DEBUG | Updated C9CZM32.
+06/23/2023 23:32:03 DEBUG | Updated C9CZK12.
+06/23/2023 23:32:03 DEBUG | Updated HsH8MV1.
+06/23/2023 23:32:03 DEBUG | Updated A10VKez.
+06/23/2023 23:32:03 DEBUG | Updated P11Gzkj.
+06/23/2023 23:32:03 DEBUG | Updated C9CZQM2.
+06/23/2023 23:32:03 DEBUG | Updated P21G0G2.
+06/23/2023 23:32:03 DEBUG | Updated 3FK1K21.
+06/23/2023 23:32:03 DEBUG | Updated P21GvrZ.
+06/23/2023 23:32:03 DEBUG | Updated A10UeAm.
+06/23/2023 23:32:03 DEBUG | Updated P21Gvs0.
+06/23/2023 23:32:03 DEBUG | Updated A10VJYv.
+06/23/2023 23:32:03 DEBUG | Updated C0HQ065.
+06/23/2023 23:32:03 DEBUG | Updated C9CYHH2.
+06/23/2023 23:32:03 DEBUG | Updated HirtMR2.
+06/23/2023 23:32:03 DEBUG | Updated 3FM6E21.
+06/23/2023 23:32:03 DEBUG | Updated C9CWMP2.
+06/23/2023 23:32:03 DEBUG | Updated P21GxRx.
+06/23/2023 23:32:03 DEBUG | Updated C0HQZG5.
+06/23/2023 23:32:03 DEBUG | Updated C0HQLY5.
+06/23/2023 23:32:03 DEBUG | Updated P21Gsxa.
+06/23/2023 23:32:03 INFO | ---Finished MPC selection without error at 06/23/2023 23:32:03 PST
+06/23/2023 23:32:03 INFO | ---Done. will run again at 06/23/2023 23:47:03 PST.
+06/26/2023 00:22:00 INFO | ---Starting cycle at 06/26/2023 00:22:00 PST
+06/26/2023 00:22:01 INFO | --- Acquiring Candidates ---
+06/26/2023 00:22:01 INFO | Constructing Candidates from MPC List
+06/26/2023 00:22:05 INFO | Construction complete.
+06/26/2023 00:22:05 INFO | Querying the MPC for uncertainties...
+06/26/2023 00:22:45 INFO | C4LJFPZ is a near-approach!
+06/26/2023 00:22:46 INFO | C0HQLY5 is a near-approach!
+06/26/2023 00:22:47 INFO | Queried.
+06/26/2023 00:22:47 INFO | No candidates added in the last 48 hours. Adding all targets in list.
+06/26/2023 00:22:47 DEBUG | Created C4LJFPZ with ID -6658104514714435997.
+06/26/2023 00:22:47 DEBUG | Created C9DCAU2 with ID -1508352795820126010.
+06/26/2023 00:22:47 DEBUG | Created C9D6ND2 with ID 8381283918388083233.
+06/26/2023 00:22:47 DEBUG | Created C0HTGG5 with ID 5761720778381147430.
+06/26/2023 00:22:47 DEBUG | Created C3RA0Z1 with ID 5779340376210802084.
+06/26/2023 00:22:47 DEBUG | Created C9D4A92 with ID -7609082209035092613.
+06/26/2023 00:22:47 DEBUG | Created C0HQZG5 with ID -7977419231842189384.
+06/26/2023 00:22:47 DEBUG | Created C4D996Z with ID -371574662088415907.
+06/26/2023 00:22:47 DEBUG | Created C0HQLY5 with ID 2855525539255737960.
+06/26/2023 00:22:47 DEBUG | Created A10VKez with ID 3339975291065765445.
+06/26/2023 00:22:47 DEBUG | Created P11GAQm with ID -8076027968768713402.
+06/26/2023 00:22:47 DEBUG | Created P11GAQl with ID -8616577452336826986.
+06/26/2023 00:22:47 DEBUG | Created P11Gzkj with ID 4195801876818692132.
+06/26/2023 00:22:47 DEBUG | Created P11GzhE with ID -2725855019664491048.
+06/26/2023 00:22:47 DEBUG | Created C0HQ065 with ID -6723946277775744491.
+06/26/2023 00:22:47 DEBUG | Created C9CZQM2 with ID 147371453931527593.
+06/26/2023 00:22:47 DEBUG | Created P11Gwgv with ID 4541178387666134957.
+06/26/2023 00:22:47 DEBUG | Created P11Gwgu with ID 3109842286978505429.
+06/26/2023 00:22:47 DEBUG | Created P21GvaM with ID 3967444140786129784.
+06/26/2023 00:22:47 DEBUG | Created 3FK1K21 with ID 3522678658287500466.
+06/26/2023 00:22:47 DEBUG | Created C9CYHH2 with ID 1850213576761346356.
+06/26/2023 00:22:47 DEBUG | Created A10VJYv with ID -8946785336397180820.
+06/26/2023 00:22:47 DEBUG | Created HsH8MV1 with ID 3170179110833303289.
+06/26/2023 00:22:47 DEBUG | Created P21Gsxa with ID 6911364605808221653.
+06/26/2023 00:22:47 DEBUG | Created P21GiNw with ID -4631040722264174366.
+06/26/2023 00:22:47 DEBUG | Created P11Gebp with ID 6223505070793728971.
+06/26/2023 00:22:47 DEBUG | Created P21Ge7Z with ID -1366644307294082636.
+06/26/2023 00:22:47 DEBUG | Created P21Gd2q with ID 6650050652031501804.
+06/26/2023 00:22:47 DEBUG | Created P21G0G2 with ID -5080985684639603958.
+06/26/2023 00:22:48 DEBUG | Created C9CWMP2 with ID -6235785545012335608.
+06/26/2023 00:22:48 DEBUG | Created JKm001 with ID -5069237112714755535.
+06/26/2023 00:22:48 DEBUG | Created A10UeAm with ID 7844980545410769910.
+06/26/2023 00:22:48 INFO | -Assessed Candidates
+06/26/2023 00:22:48 INFO | New (32)
+06/26/2023 00:22:48 DEBUG | [Candidate C4LJFPZ (MPC NEO), Candidate C9DCAU2 (MPC NEO), Candidate C9D6ND2 (MPC NEO), Candidate C0HTGG5 (MPC NEO), Candidate C3RA0Z1 (MPC NEO), Candidate C9D4A92 (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQm (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11Gzkj (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate C0HQ065 (MPC NEO), Candidate C9CZQM2 (MPC NEO), Candidate P11Gwgv (MPC NEO), Candidate P11Gwgu (MPC NEO), Candidate P21GvaM (MPC NEO), Candidate 3FK1K21 (MPC NEO), Candidate C9CYHH2 (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate HsH8MV1 (MPC NEO), Candidate P21Gsxa (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 00:22:48 INFO | Static (0)
+06/26/2023 00:22:48 DEBUG | []
+06/26/2023 00:22:48 INFO | Updated (0)
+06/26/2023 00:22:48 DEBUG | []
+06/26/2023 00:22:48 INFO | Removed (0)
+06/26/2023 00:22:48 DEBUG | []
+06/26/2023 00:22:48 INFO | ---Finished MPC logging without error at 06/26/2023 00:22:48 PST
+06/26/2023 00:22:48 INFO | --- Selecting ---
+06/26/2023 00:22:48 INFO | Finding observability and evaluating 32 objects.
+06/26/2023 00:22:54 DEBUG | Found window for A10VJYv!
+06/26/2023 00:22:54 DEBUG | Found window for P11GAQl!
+06/26/2023 00:22:54 DEBUG | Found window for P11GAQm!
+06/26/2023 00:22:54 DEBUG | Got None window for C0HQZG5. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Found window for C9D4A92!
+06/26/2023 00:22:54 DEBUG | Found window for C0HQ065!
+06/26/2023 00:22:54 DEBUG | Found window for C4LJFPZ!
+06/26/2023 00:22:54 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Found window for P21G0G2!
+06/26/2023 00:22:54 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Found window for C9DCAU2!
+06/26/2023 00:22:54 DEBUG | Got None window for P21Ge7Z. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Found window for C4D996Z!
+06/26/2023 00:22:54 DEBUG | Found window for C9CZQM2!
+06/26/2023 00:22:54 DEBUG | Found window for C9CYHH2!
+06/26/2023 00:22:54 DEBUG | Found window for C0HQLY5!
+06/26/2023 00:22:54 DEBUG | Found window for P11Gwgu!
+06/26/2023 00:22:54 DEBUG | Got None window for HsH8MV1. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Found window for 3FK1K21!
+06/26/2023 00:22:54 DEBUG | Found window for P21GvaM!
+06/26/2023 00:22:54 DEBUG | Found window for P11Gzkj!
+06/26/2023 00:22:54 DEBUG | Found window for P11Gwgv!
+06/26/2023 00:22:54 DEBUG | Found window for C0HTGG5!
+06/26/2023 00:22:54 DEBUG | Got None window for C3RA0Z1. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Found window for P21Gd2q!
+06/26/2023 00:22:54 DEBUG | Found window for P21Gsxa!
+06/26/2023 00:22:54 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 00:22:54 DEBUG | Found window for C9D6ND2!
+06/26/2023 00:22:54 INFO | Rejecting targets
+06/26/2023 00:22:54 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P11GAQm for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C9D4A92 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C0HQ065 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C4LJFPZ for error limit.
+06/26/2023 00:22:54 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P21G0G2 for error limit.
+06/26/2023 00:22:54 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P21Ge7Z for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C9CZQM2 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P11Gwgu for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected HsH8MV1 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected A10VKez for error limit.
+06/26/2023 00:22:54 DEBUG | Rejected 3FK1K21 for error limit.
+06/26/2023 00:22:54 DEBUG | Rejected P21GvaM for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P11Gzkj for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P11Gwgv for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C0HTGG5 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected C3RA0Z1 for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 00:22:54 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 00:22:54 DEBUG | Rejected P21Gsxa for magnitude limit.
+06/26/2023 00:22:54 INFO | Updating database
+06/26/2023 00:22:54 DEBUG | Updated A10VJYv.
+06/26/2023 00:22:54 DEBUG | Updated P11GAQl.
+06/26/2023 00:22:54 DEBUG | Updated P11GAQm.
+06/26/2023 00:22:54 DEBUG | Updated C0HQZG5.
+06/26/2023 00:22:54 DEBUG | Updated C9D4A92.
+06/26/2023 00:22:54 DEBUG | Updated C0HQ065.
+06/26/2023 00:22:54 DEBUG | Updated C4LJFPZ.
+06/26/2023 00:22:54 DEBUG | Updated C9CWMP2.
+06/26/2023 00:22:54 DEBUG | Updated P21G0G2.
+06/26/2023 00:22:54 DEBUG | Updated JKm001.
+06/26/2023 00:22:54 DEBUG | Updated P21GiNw.
+06/26/2023 00:22:54 DEBUG | Updated P11GzhE.
+06/26/2023 00:22:54 DEBUG | Updated C9DCAU2.
+06/26/2023 00:22:54 DEBUG | Updated P21Ge7Z.
+06/26/2023 00:22:54 DEBUG | Updated C4D996Z.
+06/26/2023 00:22:54 DEBUG | Updated C9CZQM2.
+06/26/2023 00:22:54 DEBUG | Updated C9CYHH2.
+06/26/2023 00:22:54 DEBUG | Updated C0HQLY5.
+06/26/2023 00:22:54 DEBUG | Updated P11Gwgu.
+06/26/2023 00:22:54 DEBUG | Updated HsH8MV1.
+06/26/2023 00:22:54 DEBUG | Updated A10VKez.
+06/26/2023 00:22:54 DEBUG | Updated 3FK1K21.
+06/26/2023 00:22:54 DEBUG | Updated P21GvaM.
+06/26/2023 00:22:54 DEBUG | Updated P11Gzkj.
+06/26/2023 00:22:54 DEBUG | Updated P11Gwgv.
+06/26/2023 00:22:54 DEBUG | Updated C0HTGG5.
+06/26/2023 00:22:54 DEBUG | Updated C3RA0Z1.
+06/26/2023 00:22:54 DEBUG | Updated P11Gebp.
+06/26/2023 00:22:54 DEBUG | Updated P21Gd2q.
+06/26/2023 00:22:54 DEBUG | Updated P21Gsxa.
+06/26/2023 00:22:54 DEBUG | Updated A10UeAm.
+06/26/2023 00:22:54 DEBUG | Updated C9D6ND2.
+06/26/2023 00:22:54 INFO | ---Finished MPC selection without error at 06/26/2023 00:22:54 PST
+06/26/2023 00:22:54 INFO | ---Done. will run again at 06/26/2023 00:37:54 PST.
+06/26/2023 10:54:42 INFO | ---Starting cycle at 06/26/2023 10:54:42 PST
+06/26/2023 10:54:43 INFO | --- Acquiring Candidates ---
+06/26/2023 10:54:44 INFO | Constructing Candidates from MPC List
+06/26/2023 10:54:49 INFO | Construction complete.
+06/26/2023 10:54:49 INFO | Querying the MPC for uncertainties...
+06/26/2023 11:13:42 INFO | ---Starting cycle at 06/26/2023 11:13:42 PST
+06/26/2023 11:13:43 INFO | --- Acquiring Candidates ---
+06/26/2023 11:13:43 INFO | Constructing Candidates from MPC List
+06/26/2023 11:13:46 INFO | Construction complete.
+06/26/2023 11:13:46 INFO | Querying the MPC for uncertainties...
+06/26/2023 11:13:58 INFO | C0HQLY5 is a near-approach!
+06/26/2023 11:13:59 INFO | Queried.
+06/26/2023 11:13:59 INFO | Updating C4LJFPZ
+06/26/2023 11:13:59 INFO | Updating C3RA0Z1
+06/26/2023 11:13:59 INFO | Updating C0HQZG5
+06/26/2023 11:13:59 INFO | Updating C4D996Z
+06/26/2023 11:13:59 INFO | Updating C0HQLY5
+06/26/2023 11:13:59 INFO | Updating A10VKez
+06/26/2023 11:13:59 INFO | Updating P11GAQl
+06/26/2023 11:13:59 INFO | Updating P11GzhE
+06/26/2023 11:13:59 INFO | Updating 3FK1K21
+06/26/2023 11:13:59 INFO | Updating A10VJYv
+06/26/2023 11:13:59 INFO | Updating P21GiNw
+06/26/2023 11:13:59 INFO | Updating P11Gebp
+06/26/2023 11:13:59 INFO | Updating P21Gd2q
+06/26/2023 11:13:59 INFO | Updating C9CWMP2
+06/26/2023 11:13:59 INFO | Updating JKm001
+06/26/2023 11:13:59 INFO | Updating A10UeAm
+06/26/2023 11:13:59 INFO | Candidate P11GAQm is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate C9D4A92 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate C0HQ065 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate P21G0G2 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate C9DCAU2 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate P21Ge7Z is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate C9CZQM2 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate C9CYHH2 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate P11Gwgu is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate HsH8MV1 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate P21GvaM is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate P11Gzkj is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate P11Gwgv is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate C0HTGG5 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate P21Gsxa is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 INFO | Candidate C9D6ND2 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 11:13:59 DEBUG | Created P21GELa with ID 6281027841436253595.
+06/26/2023 11:13:59 DEBUG | Created C9DRXC2 with ID -2871716392571008486.
+06/26/2023 11:13:59 DEBUG | Created C9DM1Z2 with ID 4167253793382699174.
+06/26/2023 11:13:59 INFO | -Assessed Candidates
+06/26/2023 11:13:59 INFO | New (3)
+06/26/2023 11:13:59 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO)]
+06/26/2023 11:13:59 INFO | Static (0)
+06/26/2023 11:13:59 DEBUG | []
+06/26/2023 11:13:59 INFO | Updated (16)
+06/26/2023 11:13:59 DEBUG | [Candidate C4LJFPZ (MPC NEO), Candidate C3RA0Z1 (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate 3FK1K21 (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 11:13:59 INFO | Removed (16)
+06/26/2023 11:13:59 DEBUG | [Candidate P11GAQm (MPC NEO), Candidate C9D4A92 (MPC NEO), Candidate C0HQ065 (MPC NEO), Candidate P21G0G2 (MPC NEO), Candidate C9DCAU2 (MPC NEO), Candidate P21Ge7Z (MPC NEO), Candidate C9CZQM2 (MPC NEO), Candidate C9CYHH2 (MPC NEO), Candidate P11Gwgu (MPC NEO), Candidate HsH8MV1 (MPC NEO), Candidate P21GvaM (MPC NEO), Candidate P11Gzkj (MPC NEO), Candidate P11Gwgv (MPC NEO), Candidate C0HTGG5 (MPC NEO), Candidate P21Gsxa (MPC NEO), Candidate C9D6ND2 (MPC NEO)]
+06/26/2023 11:13:59 INFO | ---Finished MPC logging without error at 06/26/2023 11:13:59 PST
+06/26/2023 11:13:59 INFO | --- Selecting ---
+06/26/2023 11:13:59 INFO | Finding observability and evaluating 19 objects.
+06/26/2023 11:14:03 DEBUG | Found window for A10VJYv!
+06/26/2023 11:14:03 DEBUG | Found window for P11GAQl!
+06/26/2023 11:14:03 DEBUG | Found window for C0HQZG5!
+06/26/2023 11:14:03 DEBUG | Found window for C4LJFPZ!
+06/26/2023 11:14:03 DEBUG | Found window for C9CWMP2!
+06/26/2023 11:14:03 DEBUG | Found window for JKm001!
+06/26/2023 11:14:03 DEBUG | Found window for P21GiNw!
+06/26/2023 11:14:03 DEBUG | Found window for C9DRXC2!
+06/26/2023 11:14:03 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 11:14:03 DEBUG | Found window for C4D996Z!
+06/26/2023 11:14:03 DEBUG | Found window for C0HQLY5!
+06/26/2023 11:14:03 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 11:14:03 DEBUG | Got None window for 3FK1K21. Rejected for Observability.
+06/26/2023 11:14:03 DEBUG | Found window for C9DM1Z2!
+06/26/2023 11:14:03 DEBUG | Found window for C3RA0Z1!
+06/26/2023 11:14:03 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 11:14:03 DEBUG | Found window for P21GELa!
+06/26/2023 11:14:03 DEBUG | Found window for P21Gd2q!
+06/26/2023 11:14:03 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 11:14:03 INFO | Rejecting targets
+06/26/2023 11:14:03 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected 3FK1K21 for error limit.
+06/26/2023 11:14:03 DEBUG | Rejected C3RA0Z1 for magnitude limit.
+06/26/2023 11:14:03 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 11:14:03 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 11:14:03 INFO | Updating database
+06/26/2023 11:14:03 DEBUG | Updated A10VJYv.
+06/26/2023 11:14:03 DEBUG | Updated P11GAQl.
+06/26/2023 11:14:03 DEBUG | Updated C0HQZG5.
+06/26/2023 11:14:03 DEBUG | Updated C4LJFPZ.
+06/26/2023 11:14:03 DEBUG | Updated C9CWMP2.
+06/26/2023 11:14:03 DEBUG | Updated JKm001.
+06/26/2023 11:14:03 DEBUG | Updated P21GiNw.
+06/26/2023 11:14:03 DEBUG | Updated C9DRXC2.
+06/26/2023 11:14:03 DEBUG | Updated P11GzhE.
+06/26/2023 11:14:03 DEBUG | Updated C4D996Z.
+06/26/2023 11:14:03 DEBUG | Updated C0HQLY5.
+06/26/2023 11:14:03 DEBUG | Updated A10VKez.
+06/26/2023 11:14:03 DEBUG | Updated 3FK1K21.
+06/26/2023 11:14:03 DEBUG | Updated C9DM1Z2.
+06/26/2023 11:14:03 DEBUG | Updated C3RA0Z1.
+06/26/2023 11:14:03 DEBUG | Updated P11Gebp.
+06/26/2023 11:14:03 DEBUG | Updated P21GELa.
+06/26/2023 11:14:03 DEBUG | Updated P21Gd2q.
+06/26/2023 11:14:03 DEBUG | Updated A10UeAm.
+06/26/2023 11:14:03 INFO | ---Finished MPC selection without error at 06/26/2023 11:14:03 PST
+06/26/2023 11:14:03 INFO | ---Done. will run again at 06/26/2023 11:29:03 PST.
+06/26/2023 11:15:28 INFO | ---Starting cycle at 06/26/2023 11:15:28 PST
+06/26/2023 11:15:28 INFO | --- Acquiring Candidates ---
+06/26/2023 11:15:29 INFO | Constructing Candidates from MPC List
+06/26/2023 11:15:31 INFO | Construction complete.
+06/26/2023 11:15:31 INFO | Querying the MPC for uncertainties...
+06/26/2023 11:15:43 INFO | C0HQLY5 is a near-approach!
+06/26/2023 11:15:44 INFO | Queried.
+06/26/2023 11:15:44 INFO | Updating P21GELa
+06/26/2023 11:15:44 INFO | Updating C9DRXC2
+06/26/2023 11:15:44 INFO | Updating C9DM1Z2
+06/26/2023 11:15:44 INFO | Updating C4LJFPZ
+06/26/2023 11:15:44 INFO | Updating C3RA0Z1
+06/26/2023 11:15:44 INFO | Updating C0HQZG5
+06/26/2023 11:15:44 INFO | Updating C4D996Z
+06/26/2023 11:15:44 INFO | Updating C0HQLY5
+06/26/2023 11:15:44 INFO | Updating A10VKez
+06/26/2023 11:15:44 INFO | Updating P11GAQl
+06/26/2023 11:15:44 INFO | Updating P11GzhE
+06/26/2023 11:15:44 INFO | Updating 3FK1K21
+06/26/2023 11:15:44 INFO | Updating A10VJYv
+06/26/2023 11:15:44 INFO | Updating P21GiNw
+06/26/2023 11:15:44 INFO | Updating P11Gebp
+06/26/2023 11:15:44 INFO | Updating P21Gd2q
+06/26/2023 11:15:44 INFO | Updating C9CWMP2
+06/26/2023 11:15:44 INFO | Updating JKm001
+06/26/2023 11:15:44 INFO | Updating A10UeAm
+06/26/2023 11:15:44 INFO | -Assessed Candidates
+06/26/2023 11:15:44 INFO | New (0)
+06/26/2023 11:15:44 DEBUG | []
+06/26/2023 11:15:44 INFO | Static (0)
+06/26/2023 11:15:44 DEBUG | []
+06/26/2023 11:15:44 INFO | Updated (19)
+06/26/2023 11:15:44 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C3RA0Z1 (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate 3FK1K21 (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 11:15:44 INFO | Removed (0)
+06/26/2023 11:15:44 DEBUG | []
+06/26/2023 11:15:44 INFO | ---Finished MPC logging without error at 06/26/2023 11:15:44 PST
+06/26/2023 11:15:44 INFO | --- Selecting ---
+06/26/2023 11:15:44 INFO | Finding observability and evaluating 19 objects.
+06/26/2023 11:15:47 DEBUG | Found window for A10VJYv!
+06/26/2023 11:15:47 DEBUG | Found window for P11GAQl!
+06/26/2023 11:15:47 DEBUG | Found window for C0HQZG5!
+06/26/2023 11:15:47 DEBUG | Found window for C4LJFPZ!
+06/26/2023 11:15:47 DEBUG | Found window for C9CWMP2!
+06/26/2023 11:15:47 DEBUG | Found window for JKm001!
+06/26/2023 11:15:47 DEBUG | Found window for P21GiNw!
+06/26/2023 11:15:47 DEBUG | Found window for C9DRXC2!
+06/26/2023 11:15:47 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 11:15:47 DEBUG | Found window for C4D996Z!
+06/26/2023 11:15:47 DEBUG | Found window for C0HQLY5!
+06/26/2023 11:15:47 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 11:15:47 DEBUG | Got None window for 3FK1K21. Rejected for Observability.
+06/26/2023 11:15:47 DEBUG | Found window for C9DM1Z2!
+06/26/2023 11:15:47 DEBUG | Found window for C3RA0Z1!
+06/26/2023 11:15:47 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 11:15:47 DEBUG | Found window for P21GELa!
+06/26/2023 11:15:47 DEBUG | Found window for P21Gd2q!
+06/26/2023 11:15:47 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 11:15:47 INFO | Rejecting targets
+06/26/2023 11:15:47 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected 3FK1K21 for error limit.
+06/26/2023 11:15:47 DEBUG | Rejected C3RA0Z1 for magnitude limit.
+06/26/2023 11:15:47 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 11:15:47 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 11:15:47 INFO | Updating database
+06/26/2023 11:15:47 DEBUG | Updated A10VJYv.
+06/26/2023 11:15:47 DEBUG | Updated P11GAQl.
+06/26/2023 11:15:47 DEBUG | Updated C0HQZG5.
+06/26/2023 11:15:47 DEBUG | Updated C4LJFPZ.
+06/26/2023 11:15:47 DEBUG | Updated C9CWMP2.
+06/26/2023 11:15:47 DEBUG | Updated JKm001.
+06/26/2023 11:15:47 DEBUG | Updated P21GiNw.
+06/26/2023 11:15:47 DEBUG | Updated C9DRXC2.
+06/26/2023 11:15:47 DEBUG | Updated P11GzhE.
+06/26/2023 11:15:47 DEBUG | Updated C4D996Z.
+06/26/2023 11:15:47 DEBUG | Updated C0HQLY5.
+06/26/2023 11:15:47 DEBUG | Updated A10VKez.
+06/26/2023 11:15:47 DEBUG | Updated 3FK1K21.
+06/26/2023 11:15:47 DEBUG | Updated C9DM1Z2.
+06/26/2023 11:15:47 DEBUG | Updated C3RA0Z1.
+06/26/2023 11:15:47 DEBUG | Updated P11Gebp.
+06/26/2023 11:15:47 DEBUG | Updated P21GELa.
+06/26/2023 11:15:47 DEBUG | Updated P21Gd2q.
+06/26/2023 11:15:47 DEBUG | Updated A10UeAm.
+06/26/2023 11:15:47 INFO | ---Finished MPC selection without error at 06/26/2023 11:15:47 PST
+06/26/2023 11:15:47 INFO | ---Done. will run again at 06/26/2023 11:30:47 PST.
+06/26/2023 18:12:03 INFO | ---Starting cycle at 06/26/2023 18:12:03 PST
+06/26/2023 18:12:04 INFO | --- Acquiring Candidates ---
+06/26/2023 18:12:04 INFO | Constructing Candidates from MPC List
+06/26/2023 18:13:29 INFO | ---Starting cycle at 06/26/2023 18:13:29 PST
+06/26/2023 18:13:30 INFO | --- Acquiring Candidates ---
+06/26/2023 18:13:30 INFO | Constructing Candidates from MPC List
+06/26/2023 18:13:33 INFO | Construction complete.
+06/26/2023 18:13:33 INFO | Querying the MPC for uncertainties...
+06/26/2023 18:13:45 INFO | C0HQLY5 is a near-approach!
+06/26/2023 18:13:45 INFO | Queried.
+06/26/2023 18:13:45 INFO | Updating P21GELa
+06/26/2023 18:13:45 INFO | Updating C9DRXC2
+06/26/2023 18:13:45 INFO | Updating C9DM1Z2
+06/26/2023 18:13:45 INFO | Updating C4LJFPZ
+06/26/2023 18:13:45 INFO | Updating C0HQZG5
+06/26/2023 18:13:45 INFO | Updating C4D996Z
+06/26/2023 18:13:45 INFO | Updating C0HQLY5
+06/26/2023 18:13:45 INFO | Updating A10VKez
+06/26/2023 18:13:45 INFO | Updating P11GAQl
+06/26/2023 18:13:45 INFO | Updating P11GzhE
+06/26/2023 18:13:45 INFO | Updating A10VJYv
+06/26/2023 18:13:45 INFO | Updating P21GiNw
+06/26/2023 18:13:45 INFO | Updating P11Gebp
+06/26/2023 18:13:45 INFO | Updating P21Gd2q
+06/26/2023 18:13:45 INFO | Updating C9CWMP2
+06/26/2023 18:13:45 INFO | Updating JKm001
+06/26/2023 18:13:45 INFO | Updating A10UeAm
+06/26/2023 18:13:45 INFO | Candidate 3FK1K21 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 18:13:45 INFO | Candidate C3RA0Z1 is in the database but not in the MPC table. Marking as removed.
+06/26/2023 18:13:46 INFO | -Assessed Candidates
+06/26/2023 18:13:46 INFO | New (0)
+06/26/2023 18:13:46 DEBUG | []
+06/26/2023 18:13:46 INFO | Static (0)
+06/26/2023 18:13:46 DEBUG | []
+06/26/2023 18:13:46 INFO | Updated (17)
+06/26/2023 18:13:46 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 18:13:46 INFO | Removed (2)
+06/26/2023 18:13:46 DEBUG | [Candidate 3FK1K21 (MPC NEO), Candidate C3RA0Z1 (MPC NEO)]
+06/26/2023 18:13:46 INFO | ---Finished MPC logging without error at 06/26/2023 18:13:46 PST
+06/26/2023 18:13:46 INFO | --- Selecting ---
+06/26/2023 18:13:46 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 18:13:52 DEBUG | Found window for A10VJYv!
+06/26/2023 18:13:52 DEBUG | Found window for P11GAQl!
+06/26/2023 18:13:52 DEBUG | Found window for C0HQZG5!
+06/26/2023 18:13:52 DEBUG | Found window for C4LJFPZ!
+06/26/2023 18:13:52 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 18:13:52 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 18:13:52 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 18:13:52 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 18:13:52 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 18:13:52 DEBUG | Found window for C4D996Z!
+06/26/2023 18:13:52 DEBUG | Found window for C0HQLY5!
+06/26/2023 18:13:52 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 18:13:52 DEBUG | Found window for C9DM1Z2!
+06/26/2023 18:13:52 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 18:13:52 DEBUG | Found window for P21GELa!
+06/26/2023 18:13:52 DEBUG | Found window for P21Gd2q!
+06/26/2023 18:13:52 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 18:13:52 INFO | Rejecting targets
+06/26/2023 18:13:52 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 18:13:52 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 18:13:52 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 18:13:52 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 18:13:52 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 18:13:52 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 18:13:52 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 18:13:52 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 18:13:52 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 18:13:52 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 18:13:52 INFO | Updating database
+06/26/2023 18:13:52 DEBUG | Updated A10VJYv.
+06/26/2023 18:13:52 DEBUG | Updated P11GAQl.
+06/26/2023 18:13:52 DEBUG | Updated C0HQZG5.
+06/26/2023 18:13:52 DEBUG | Updated C4LJFPZ.
+06/26/2023 18:13:52 DEBUG | Updated C9CWMP2.
+06/26/2023 18:13:52 DEBUG | Updated JKm001.
+06/26/2023 18:13:52 DEBUG | Updated P21GiNw.
+06/26/2023 18:13:52 DEBUG | Updated C9DRXC2.
+06/26/2023 18:13:52 DEBUG | Updated P11GzhE.
+06/26/2023 18:13:52 DEBUG | Updated C4D996Z.
+06/26/2023 18:13:52 DEBUG | Updated C0HQLY5.
+06/26/2023 18:13:52 DEBUG | Updated A10VKez.
+06/26/2023 18:13:52 DEBUG | Updated C9DM1Z2.
+06/26/2023 18:13:52 DEBUG | Updated P11Gebp.
+06/26/2023 18:13:52 DEBUG | Updated P21GELa.
+06/26/2023 18:13:52 DEBUG | Updated P21Gd2q.
+06/26/2023 18:13:52 DEBUG | Updated A10UeAm.
+06/26/2023 18:13:52 INFO | ---Finished MPC selection without error at 06/26/2023 18:13:52 PST
+06/26/2023 18:13:52 INFO | ---Done. will run again at 06/26/2023 18:28:52 PST.
+06/26/2023 18:28:52 INFO | ---Starting cycle at 06/26/2023 18:28:52 PST
+06/26/2023 18:28:53 INFO | --- Acquiring Candidates ---
+06/26/2023 18:28:53 INFO | Constructing Candidates from MPC List
+06/26/2023 18:28:55 INFO | Construction complete.
+06/26/2023 18:28:55 INFO | Querying the MPC for uncertainties...
+06/26/2023 18:29:13 INFO | C0HQLY5 is a near-approach!
+06/26/2023 18:29:13 INFO | Queried.
+06/26/2023 18:29:13 INFO | Updating P21GELa
+06/26/2023 18:29:13 INFO | Updating C9DRXC2
+06/26/2023 18:29:13 INFO | Updating C9DM1Z2
+06/26/2023 18:29:13 INFO | Updating C4LJFPZ
+06/26/2023 18:29:13 INFO | Updating C0HQZG5
+06/26/2023 18:29:13 INFO | Updating C4D996Z
+06/26/2023 18:29:13 INFO | Updating C0HQLY5
+06/26/2023 18:29:13 INFO | Updating A10VKez
+06/26/2023 18:29:13 INFO | Updating P11GAQl
+06/26/2023 18:29:13 INFO | Updating P11GzhE
+06/26/2023 18:29:13 INFO | Updating A10VJYv
+06/26/2023 18:29:13 INFO | Updating P21GiNw
+06/26/2023 18:29:13 INFO | Updating P11Gebp
+06/26/2023 18:29:13 INFO | Updating P21Gd2q
+06/26/2023 18:29:13 INFO | Updating C9CWMP2
+06/26/2023 18:29:13 INFO | Updating JKm001
+06/26/2023 18:29:13 INFO | Updating A10UeAm
+06/26/2023 18:29:13 INFO | -Assessed Candidates
+06/26/2023 18:29:13 INFO | New (0)
+06/26/2023 18:29:13 DEBUG | []
+06/26/2023 18:29:13 INFO | Static (0)
+06/26/2023 18:29:13 DEBUG | []
+06/26/2023 18:29:13 INFO | Updated (17)
+06/26/2023 18:29:13 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 18:29:13 INFO | Removed (0)
+06/26/2023 18:29:13 DEBUG | []
+06/26/2023 18:29:13 INFO | ---Finished MPC logging without error at 06/26/2023 18:29:13 PST
+06/26/2023 18:29:13 INFO | --- Selecting ---
+06/26/2023 18:29:13 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 18:29:19 DEBUG | Found window for A10VJYv!
+06/26/2023 18:29:19 DEBUG | Found window for P11GAQl!
+06/26/2023 18:29:19 DEBUG | Found window for C0HQZG5!
+06/26/2023 18:29:19 DEBUG | Found window for C4LJFPZ!
+06/26/2023 18:29:19 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 18:29:19 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 18:29:19 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 18:29:19 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 18:29:19 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 18:29:19 DEBUG | Found window for C4D996Z!
+06/26/2023 18:29:19 DEBUG | Found window for C0HQLY5!
+06/26/2023 18:29:19 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 18:29:19 DEBUG | Found window for C9DM1Z2!
+06/26/2023 18:29:19 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 18:29:19 DEBUG | Found window for P21GELa!
+06/26/2023 18:29:19 DEBUG | Found window for P21Gd2q!
+06/26/2023 18:29:19 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 18:29:19 INFO | Rejecting targets
+06/26/2023 18:29:19 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 18:29:19 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 18:29:19 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 18:29:19 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 18:29:19 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 18:29:19 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 18:29:19 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 18:29:19 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 18:29:19 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 18:29:19 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 18:29:19 INFO | Updating database
+06/26/2023 18:29:19 DEBUG | Updated A10VJYv.
+06/26/2023 18:29:19 DEBUG | Updated P11GAQl.
+06/26/2023 18:29:19 DEBUG | Updated C0HQZG5.
+06/26/2023 18:29:19 DEBUG | Updated C4LJFPZ.
+06/26/2023 18:29:19 DEBUG | Updated C9CWMP2.
+06/26/2023 18:29:19 DEBUG | Updated JKm001.
+06/26/2023 18:29:19 DEBUG | Updated P21GiNw.
+06/26/2023 18:29:19 DEBUG | Updated C9DRXC2.
+06/26/2023 18:29:19 DEBUG | Updated P11GzhE.
+06/26/2023 18:29:19 DEBUG | Updated C4D996Z.
+06/26/2023 18:29:19 DEBUG | Updated C0HQLY5.
+06/26/2023 18:29:19 DEBUG | Updated A10VKez.
+06/26/2023 18:29:19 DEBUG | Updated C9DM1Z2.
+06/26/2023 18:29:19 DEBUG | Updated P11Gebp.
+06/26/2023 18:29:19 DEBUG | Updated P21GELa.
+06/26/2023 18:29:19 DEBUG | Updated P21Gd2q.
+06/26/2023 18:29:19 DEBUG | Updated A10UeAm.
+06/26/2023 18:29:19 INFO | ---Finished MPC selection without error at 06/26/2023 18:29:19 PST
+06/26/2023 18:29:19 INFO | ---Done. will run again at 06/26/2023 18:44:19 PST.
+06/26/2023 18:44:19 INFO | ---Starting cycle at 06/26/2023 18:44:19 PST
+06/26/2023 18:44:19 INFO | --- Acquiring Candidates ---
+06/26/2023 18:44:19 INFO | Constructing Candidates from MPC List
+06/26/2023 18:44:22 INFO | Construction complete.
+06/26/2023 18:44:22 INFO | Querying the MPC for uncertainties...
+06/26/2023 18:44:55 INFO | C0HQLY5 is a near-approach!
+06/26/2023 18:44:55 INFO | Queried.
+06/26/2023 18:44:55 INFO | Updating P21GELa
+06/26/2023 18:44:55 INFO | Updating C9DRXC2
+06/26/2023 18:44:55 INFO | Updating C9DM1Z2
+06/26/2023 18:44:55 INFO | Updating C4LJFPZ
+06/26/2023 18:44:55 INFO | Updating C0HQZG5
+06/26/2023 18:44:55 INFO | Updating C4D996Z
+06/26/2023 18:44:55 INFO | Updating C0HQLY5
+06/26/2023 18:44:55 INFO | Updating A10VKez
+06/26/2023 18:44:55 INFO | Updating P11GAQl
+06/26/2023 18:44:55 INFO | Updating P11GzhE
+06/26/2023 18:44:55 INFO | Updating A10VJYv
+06/26/2023 18:44:55 INFO | Updating P21GiNw
+06/26/2023 18:44:55 INFO | Updating P11Gebp
+06/26/2023 18:44:55 INFO | Updating P21Gd2q
+06/26/2023 18:44:55 INFO | Updating C9CWMP2
+06/26/2023 18:44:55 INFO | Updating JKm001
+06/26/2023 18:44:55 INFO | Updating A10UeAm
+06/26/2023 18:44:55 INFO | -Assessed Candidates
+06/26/2023 18:44:55 INFO | New (0)
+06/26/2023 18:44:55 DEBUG | []
+06/26/2023 18:44:55 INFO | Static (0)
+06/26/2023 18:44:55 DEBUG | []
+06/26/2023 18:44:55 INFO | Updated (17)
+06/26/2023 18:44:55 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 18:44:55 INFO | Removed (0)
+06/26/2023 18:44:55 DEBUG | []
+06/26/2023 18:44:55 INFO | ---Finished MPC logging without error at 06/26/2023 18:44:55 PST
+06/26/2023 18:44:55 INFO | --- Selecting ---
+06/26/2023 18:44:56 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 18:45:00 DEBUG | Found window for A10VJYv!
+06/26/2023 18:45:00 DEBUG | Found window for P11GAQl!
+06/26/2023 18:45:00 DEBUG | Found window for C0HQZG5!
+06/26/2023 18:45:00 DEBUG | Found window for C4LJFPZ!
+06/26/2023 18:45:00 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 18:45:00 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 18:45:00 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 18:45:00 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 18:45:00 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 18:45:00 DEBUG | Found window for C4D996Z!
+06/26/2023 18:45:00 DEBUG | Found window for C0HQLY5!
+06/26/2023 18:45:00 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 18:45:00 DEBUG | Found window for C9DM1Z2!
+06/26/2023 18:45:00 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 18:45:00 DEBUG | Found window for P21GELa!
+06/26/2023 18:45:00 DEBUG | Found window for P21Gd2q!
+06/26/2023 18:45:00 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 18:45:00 INFO | Rejecting targets
+06/26/2023 18:45:00 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 18:45:00 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 18:45:00 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 18:45:00 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 18:45:00 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 18:45:00 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 18:45:00 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 18:45:00 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 18:45:00 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 18:45:00 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 18:45:00 INFO | Updating database
+06/26/2023 18:45:00 DEBUG | Updated A10VJYv.
+06/26/2023 18:45:00 DEBUG | Updated P11GAQl.
+06/26/2023 18:45:00 DEBUG | Updated C0HQZG5.
+06/26/2023 18:45:00 DEBUG | Updated C4LJFPZ.
+06/26/2023 18:45:00 DEBUG | Updated C9CWMP2.
+06/26/2023 18:45:00 DEBUG | Updated JKm001.
+06/26/2023 18:45:00 DEBUG | Updated P21GiNw.
+06/26/2023 18:45:00 DEBUG | Updated C9DRXC2.
+06/26/2023 18:45:00 DEBUG | Updated P11GzhE.
+06/26/2023 18:45:00 DEBUG | Updated C4D996Z.
+06/26/2023 18:45:00 DEBUG | Updated C0HQLY5.
+06/26/2023 18:45:00 DEBUG | Updated A10VKez.
+06/26/2023 18:45:00 DEBUG | Updated C9DM1Z2.
+06/26/2023 18:45:00 DEBUG | Updated P11Gebp.
+06/26/2023 18:45:01 DEBUG | Updated P21GELa.
+06/26/2023 18:45:01 DEBUG | Updated P21Gd2q.
+06/26/2023 18:45:01 DEBUG | Updated A10UeAm.
+06/26/2023 18:45:01 INFO | ---Finished MPC selection without error at 06/26/2023 18:45:01 PST
+06/26/2023 18:45:01 INFO | ---Done. will run again at 06/26/2023 19:00:01 PST.
+06/26/2023 19:00:01 INFO | ---Starting cycle at 06/26/2023 19:00:01 PST
+06/26/2023 19:00:01 INFO | --- Acquiring Candidates ---
+06/26/2023 19:00:01 INFO | Constructing Candidates from MPC List
+06/26/2023 19:00:03 INFO | Construction complete.
+06/26/2023 19:00:03 INFO | Querying the MPC for uncertainties...
+06/26/2023 19:00:14 INFO | C0HQLY5 is a near-approach!
+06/26/2023 19:00:14 INFO | Queried.
+06/26/2023 19:00:14 INFO | Updating P21GELa
+06/26/2023 19:00:14 INFO | Updating C9DRXC2
+06/26/2023 19:00:14 INFO | Updating C9DM1Z2
+06/26/2023 19:00:14 INFO | Updating C4LJFPZ
+06/26/2023 19:00:14 INFO | Updating C0HQZG5
+06/26/2023 19:00:14 INFO | Updating C4D996Z
+06/26/2023 19:00:14 INFO | Updating C0HQLY5
+06/26/2023 19:00:14 INFO | Updating A10VKez
+06/26/2023 19:00:14 INFO | Updating P11GAQl
+06/26/2023 19:00:14 INFO | Updating P11GzhE
+06/26/2023 19:00:14 INFO | Updating A10VJYv
+06/26/2023 19:00:14 INFO | Updating P21GiNw
+06/26/2023 19:00:14 INFO | Updating P11Gebp
+06/26/2023 19:00:14 INFO | Updating P21Gd2q
+06/26/2023 19:00:15 INFO | Updating C9CWMP2
+06/26/2023 19:00:15 INFO | Updating JKm001
+06/26/2023 19:00:15 INFO | Updating A10UeAm
+06/26/2023 19:00:15 INFO | -Assessed Candidates
+06/26/2023 19:00:15 INFO | New (0)
+06/26/2023 19:00:15 DEBUG | []
+06/26/2023 19:00:15 INFO | Static (0)
+06/26/2023 19:00:15 DEBUG | []
+06/26/2023 19:00:15 INFO | Updated (17)
+06/26/2023 19:00:15 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 19:00:15 INFO | Removed (0)
+06/26/2023 19:00:15 DEBUG | []
+06/26/2023 19:00:15 INFO | ---Finished MPC logging without error at 06/26/2023 19:00:15 PST
+06/26/2023 19:00:15 INFO | --- Selecting ---
+06/26/2023 19:00:15 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 19:00:17 DEBUG | Found window for A10VJYv!
+06/26/2023 19:00:17 DEBUG | Found window for P11GAQl!
+06/26/2023 19:00:17 DEBUG | Found window for C0HQZG5!
+06/26/2023 19:00:17 DEBUG | Found window for C4LJFPZ!
+06/26/2023 19:00:17 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 19:00:17 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 19:00:17 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 19:00:17 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 19:00:17 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 19:00:17 DEBUG | Found window for C4D996Z!
+06/26/2023 19:00:17 DEBUG | Found window for C0HQLY5!
+06/26/2023 19:00:17 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 19:00:17 DEBUG | Found window for C9DM1Z2!
+06/26/2023 19:00:17 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 19:00:17 DEBUG | Found window for P21GELa!
+06/26/2023 19:00:17 DEBUG | Found window for P21Gd2q!
+06/26/2023 19:00:17 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 19:00:17 INFO | Rejecting targets
+06/26/2023 19:00:17 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 19:00:17 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 19:00:17 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 19:00:17 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 19:00:17 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 19:00:17 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 19:00:17 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 19:00:17 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 19:00:17 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 19:00:17 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 19:00:17 INFO | Updating database
+06/26/2023 19:00:17 DEBUG | Updated A10VJYv.
+06/26/2023 19:00:17 DEBUG | Updated P11GAQl.
+06/26/2023 19:00:17 DEBUG | Updated C0HQZG5.
+06/26/2023 19:00:17 DEBUG | Updated C4LJFPZ.
+06/26/2023 19:00:17 DEBUG | Updated C9CWMP2.
+06/26/2023 19:00:17 DEBUG | Updated JKm001.
+06/26/2023 19:00:17 DEBUG | Updated P21GiNw.
+06/26/2023 19:00:17 DEBUG | Updated C9DRXC2.
+06/26/2023 19:00:17 DEBUG | Updated P11GzhE.
+06/26/2023 19:00:17 DEBUG | Updated C4D996Z.
+06/26/2023 19:00:17 DEBUG | Updated C0HQLY5.
+06/26/2023 19:00:17 DEBUG | Updated A10VKez.
+06/26/2023 19:00:17 DEBUG | Updated C9DM1Z2.
+06/26/2023 19:00:17 DEBUG | Updated P11Gebp.
+06/26/2023 19:00:17 DEBUG | Updated P21GELa.
+06/26/2023 19:00:17 DEBUG | Updated P21Gd2q.
+06/26/2023 19:00:17 DEBUG | Updated A10UeAm.
+06/26/2023 19:00:17 INFO | ---Finished MPC selection without error at 06/26/2023 19:00:17 PST
+06/26/2023 19:00:17 INFO | ---Done. will run again at 06/26/2023 19:15:17 PST.
+06/26/2023 19:15:17 INFO | ---Starting cycle at 06/26/2023 19:15:17 PST
+06/26/2023 19:15:17 INFO | --- Acquiring Candidates ---
+06/26/2023 19:15:18 INFO | Constructing Candidates from MPC List
+06/26/2023 19:15:20 INFO | Construction complete.
+06/26/2023 19:15:20 INFO | Querying the MPC for uncertainties...
+06/26/2023 19:16:01 INFO | C0HQLY5 is a near-approach!
+06/26/2023 19:16:02 INFO | Queried.
+06/26/2023 19:16:02 INFO | Updating P21GELa
+06/26/2023 19:16:02 INFO | Updating C9DRXC2
+06/26/2023 19:16:02 INFO | Updating C9DM1Z2
+06/26/2023 19:16:02 INFO | Updating C4LJFPZ
+06/26/2023 19:16:02 INFO | Updating C0HQZG5
+06/26/2023 19:16:02 INFO | Updating C4D996Z
+06/26/2023 19:16:02 INFO | Updating C0HQLY5
+06/26/2023 19:16:02 INFO | Updating A10VKez
+06/26/2023 19:16:02 INFO | Updating P11GAQl
+06/26/2023 19:16:02 INFO | Updating P11GzhE
+06/26/2023 19:16:02 INFO | Updating A10VJYv
+06/26/2023 19:16:02 INFO | Updating P21GiNw
+06/26/2023 19:16:02 INFO | Updating P11Gebp
+06/26/2023 19:16:02 INFO | Updating P21Gd2q
+06/26/2023 19:16:02 INFO | Updating C9CWMP2
+06/26/2023 19:16:02 INFO | Updating JKm001
+06/26/2023 19:16:02 INFO | Updating A10UeAm
+06/26/2023 19:16:02 INFO | -Assessed Candidates
+06/26/2023 19:16:02 INFO | New (0)
+06/26/2023 19:16:02 DEBUG | []
+06/26/2023 19:16:02 INFO | Static (0)
+06/26/2023 19:16:02 DEBUG | []
+06/26/2023 19:16:02 INFO | Updated (17)
+06/26/2023 19:16:02 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 19:16:02 INFO | Removed (0)
+06/26/2023 19:16:02 DEBUG | []
+06/26/2023 19:16:02 INFO | ---Finished MPC logging without error at 06/26/2023 19:16:02 PST
+06/26/2023 19:16:02 INFO | --- Selecting ---
+06/26/2023 19:16:02 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 19:16:07 DEBUG | Found window for A10VJYv!
+06/26/2023 19:16:07 DEBUG | Found window for P11GAQl!
+06/26/2023 19:16:07 DEBUG | Found window for C0HQZG5!
+06/26/2023 19:16:07 DEBUG | Found window for C4LJFPZ!
+06/26/2023 19:16:07 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 19:16:07 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 19:16:07 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 19:16:07 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 19:16:07 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 19:16:07 DEBUG | Found window for C4D996Z!
+06/26/2023 19:16:07 DEBUG | Found window for C0HQLY5!
+06/26/2023 19:16:07 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 19:16:07 DEBUG | Found window for C9DM1Z2!
+06/26/2023 19:16:07 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 19:16:07 DEBUG | Found window for P21GELa!
+06/26/2023 19:16:07 DEBUG | Found window for P21Gd2q!
+06/26/2023 19:16:07 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 19:16:07 INFO | Rejecting targets
+06/26/2023 19:16:07 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 19:16:07 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 19:16:07 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 19:16:07 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 19:16:07 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 19:16:07 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 19:16:07 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 19:16:07 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 19:16:07 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 19:16:07 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 19:16:07 INFO | Updating database
+06/26/2023 19:16:07 DEBUG | Updated A10VJYv.
+06/26/2023 19:16:07 DEBUG | Updated P11GAQl.
+06/26/2023 19:16:07 DEBUG | Updated C0HQZG5.
+06/26/2023 19:16:07 DEBUG | Updated C4LJFPZ.
+06/26/2023 19:16:07 DEBUG | Updated C9CWMP2.
+06/26/2023 19:16:07 DEBUG | Updated JKm001.
+06/26/2023 19:16:07 DEBUG | Updated P21GiNw.
+06/26/2023 19:16:07 DEBUG | Updated C9DRXC2.
+06/26/2023 19:16:07 DEBUG | Updated P11GzhE.
+06/26/2023 19:16:07 DEBUG | Updated C4D996Z.
+06/26/2023 19:16:07 DEBUG | Updated C0HQLY5.
+06/26/2023 19:16:07 DEBUG | Updated A10VKez.
+06/26/2023 19:16:07 DEBUG | Updated C9DM1Z2.
+06/26/2023 19:16:07 DEBUG | Updated P11Gebp.
+06/26/2023 19:16:07 DEBUG | Updated P21GELa.
+06/26/2023 19:16:07 DEBUG | Updated P21Gd2q.
+06/26/2023 19:16:07 DEBUG | Updated A10UeAm.
+06/26/2023 19:16:07 INFO | ---Finished MPC selection without error at 06/26/2023 19:16:07 PST
+06/26/2023 19:16:07 INFO | ---Done. will run again at 06/26/2023 19:31:07 PST.
+06/26/2023 19:28:50 INFO | ---Starting cycle at 06/26/2023 19:28:50 PST
+06/26/2023 19:28:50 INFO | --- Acquiring Candidates ---
+06/26/2023 19:28:51 INFO | Constructing Candidates from MPC List
+06/26/2023 19:28:53 INFO | Construction complete.
+06/26/2023 19:28:53 INFO | Querying the MPC for uncertainties...
+06/26/2023 19:29:04 INFO | C0HQLY5 is a near-approach!
+06/26/2023 19:29:05 INFO | Queried.
+06/26/2023 19:29:05 INFO | Updating P21GELa
+06/26/2023 19:29:05 INFO | Updating C9DRXC2
+06/26/2023 19:29:05 INFO | Updating C9DM1Z2
+06/26/2023 19:29:05 INFO | Updating C4LJFPZ
+06/26/2023 19:29:05 INFO | Updating C0HQZG5
+06/26/2023 19:29:05 INFO | Updating C4D996Z
+06/26/2023 19:29:05 INFO | Updating C0HQLY5
+06/26/2023 19:29:05 INFO | Updating A10VKez
+06/26/2023 19:29:05 INFO | Updating P11GAQl
+06/26/2023 19:29:05 INFO | Updating P11GzhE
+06/26/2023 19:29:05 INFO | Updating A10VJYv
+06/26/2023 19:29:05 INFO | Updating P21GiNw
+06/26/2023 19:29:05 INFO | Updating P11Gebp
+06/26/2023 19:29:05 INFO | Updating P21Gd2q
+06/26/2023 19:29:05 INFO | Updating C9CWMP2
+06/26/2023 19:29:05 INFO | Updating JKm001
+06/26/2023 19:29:05 INFO | Updating A10UeAm
+06/26/2023 19:29:05 INFO | -Assessed Candidates
+06/26/2023 19:29:05 INFO | New (0)
+06/26/2023 19:29:05 DEBUG | []
+06/26/2023 19:29:05 INFO | Static (0)
+06/26/2023 19:29:05 DEBUG | []
+06/26/2023 19:29:05 INFO | Updated (17)
+06/26/2023 19:29:05 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 19:29:05 INFO | Removed (0)
+06/26/2023 19:29:05 DEBUG | []
+06/26/2023 19:29:05 INFO | ---Finished MPC logging without error at 06/26/2023 19:29:05 PST
+06/26/2023 19:29:05 INFO | --- Selecting ---
+06/26/2023 19:29:05 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 19:29:09 DEBUG | Found window for A10VJYv!
+06/26/2023 19:29:09 DEBUG | Found window for P11GAQl!
+06/26/2023 19:29:09 DEBUG | Found window for C0HQZG5!
+06/26/2023 19:29:09 DEBUG | Found window for C4LJFPZ!
+06/26/2023 19:29:09 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 19:29:09 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 19:29:09 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 19:29:09 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 19:29:09 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 19:29:09 DEBUG | Found window for C4D996Z!
+06/26/2023 19:29:09 DEBUG | Found window for C0HQLY5!
+06/26/2023 19:29:09 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 19:29:09 DEBUG | Found window for C9DM1Z2!
+06/26/2023 19:29:09 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 19:29:09 DEBUG | Found window for P21GELa!
+06/26/2023 19:29:09 DEBUG | Found window for P21Gd2q!
+06/26/2023 19:29:09 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 19:29:09 INFO | Rejecting targets
+06/26/2023 19:29:09 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 19:29:09 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 19:29:09 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 19:29:09 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 19:29:09 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 19:29:09 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 19:29:09 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 19:29:09 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 19:29:09 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 19:29:09 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 19:29:09 INFO | Updating database
+06/26/2023 19:29:09 DEBUG | Updated A10VJYv.
+06/26/2023 19:29:09 DEBUG | Updated P11GAQl.
+06/26/2023 19:29:09 DEBUG | Updated C0HQZG5.
+06/26/2023 19:29:09 DEBUG | Updated C4LJFPZ.
+06/26/2023 19:29:09 DEBUG | Updated C9CWMP2.
+06/26/2023 19:29:09 DEBUG | Updated JKm001.
+06/26/2023 19:29:09 DEBUG | Updated P21GiNw.
+06/26/2023 19:29:09 DEBUG | Updated C9DRXC2.
+06/26/2023 19:29:09 DEBUG | Updated P11GzhE.
+06/26/2023 19:29:09 DEBUG | Updated C4D996Z.
+06/26/2023 19:29:09 DEBUG | Updated C0HQLY5.
+06/26/2023 19:29:09 DEBUG | Updated A10VKez.
+06/26/2023 19:29:09 DEBUG | Updated C9DM1Z2.
+06/26/2023 19:29:09 DEBUG | Updated P11Gebp.
+06/26/2023 19:29:09 DEBUG | Updated P21GELa.
+06/26/2023 19:29:09 DEBUG | Updated P21Gd2q.
+06/26/2023 19:29:09 DEBUG | Updated A10UeAm.
+06/26/2023 19:29:09 INFO | ---Finished MPC selection without error at 06/26/2023 19:29:09 PST
+06/26/2023 19:29:09 INFO | ---Done. will run again at 06/26/2023 19:44:09 PST.
+06/26/2023 19:31:07 INFO | ---Starting cycle at 06/26/2023 19:31:07 PST
+06/26/2023 19:31:07 INFO | --- Acquiring Candidates ---
+06/26/2023 19:31:08 INFO | Constructing Candidates from MPC List
+06/26/2023 19:31:11 INFO | Construction complete.
+06/26/2023 19:31:11 INFO | Querying the MPC for uncertainties...
+06/26/2023 19:31:21 INFO | C0HQLY5 is a near-approach!
+06/26/2023 19:31:22 INFO | Queried.
+06/26/2023 19:31:22 INFO | Updating P21GELa
+06/26/2023 19:31:22 INFO | Updating C9DRXC2
+06/26/2023 19:31:22 INFO | Updating C9DM1Z2
+06/26/2023 19:31:22 INFO | Updating C4LJFPZ
+06/26/2023 19:31:22 INFO | Updating C0HQZG5
+06/26/2023 19:31:22 INFO | Updating C4D996Z
+06/26/2023 19:31:22 INFO | Updating C0HQLY5
+06/26/2023 19:31:22 INFO | Updating A10VKez
+06/26/2023 19:31:22 INFO | Updating P11GAQl
+06/26/2023 19:31:22 INFO | Updating P11GzhE
+06/26/2023 19:31:22 INFO | Updating A10VJYv
+06/26/2023 19:31:22 INFO | Updating P21GiNw
+06/26/2023 19:31:22 INFO | Updating P11Gebp
+06/26/2023 19:31:22 INFO | Updating P21Gd2q
+06/26/2023 19:31:22 INFO | Updating C9CWMP2
+06/26/2023 19:31:22 INFO | Updating JKm001
+06/26/2023 19:31:22 INFO | Updating A10UeAm
+06/26/2023 19:31:22 INFO | -Assessed Candidates
+06/26/2023 19:31:22 INFO | New (0)
+06/26/2023 19:31:22 DEBUG | []
+06/26/2023 19:31:22 INFO | Static (0)
+06/26/2023 19:31:22 DEBUG | []
+06/26/2023 19:31:22 INFO | Updated (17)
+06/26/2023 19:31:22 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 19:31:22 INFO | Removed (0)
+06/26/2023 19:31:22 DEBUG | []
+06/26/2023 19:31:23 INFO | ---Finished MPC logging without error at 06/26/2023 19:31:23 PST
+06/26/2023 19:31:23 INFO | --- Selecting ---
+06/26/2023 19:31:23 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 19:31:28 DEBUG | Found window for A10VJYv!
+06/26/2023 19:31:28 DEBUG | Found window for P11GAQl!
+06/26/2023 19:31:28 DEBUG | Found window for C0HQZG5!
+06/26/2023 19:31:28 DEBUG | Found window for C4LJFPZ!
+06/26/2023 19:31:28 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 19:31:28 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 19:31:28 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 19:31:28 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 19:31:28 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 19:31:28 DEBUG | Found window for C4D996Z!
+06/26/2023 19:31:28 DEBUG | Found window for C0HQLY5!
+06/26/2023 19:31:28 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 19:31:28 DEBUG | Found window for C9DM1Z2!
+06/26/2023 19:31:28 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 19:31:28 DEBUG | Found window for P21GELa!
+06/26/2023 19:31:28 DEBUG | Found window for P21Gd2q!
+06/26/2023 19:31:28 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 19:31:28 INFO | Rejecting targets
+06/26/2023 19:31:28 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 19:31:28 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 19:31:28 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 19:31:28 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 19:31:28 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 19:31:28 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 19:31:28 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 19:31:28 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 19:31:28 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 19:31:28 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 19:31:28 INFO | Updating database
+06/26/2023 19:31:28 DEBUG | Updated A10VJYv.
+06/26/2023 19:31:28 DEBUG | Updated P11GAQl.
+06/26/2023 19:31:28 DEBUG | Updated C0HQZG5.
+06/26/2023 19:31:28 DEBUG | Updated C4LJFPZ.
+06/26/2023 19:31:28 DEBUG | Updated C9CWMP2.
+06/26/2023 19:31:28 DEBUG | Updated JKm001.
+06/26/2023 19:31:28 DEBUG | Updated P21GiNw.
+06/26/2023 19:31:28 DEBUG | Updated C9DRXC2.
+06/26/2023 19:31:28 DEBUG | Updated P11GzhE.
+06/26/2023 19:31:28 DEBUG | Updated C4D996Z.
+06/26/2023 19:31:28 DEBUG | Updated C0HQLY5.
+06/26/2023 19:31:28 DEBUG | Updated A10VKez.
+06/26/2023 19:31:28 DEBUG | Updated C9DM1Z2.
+06/26/2023 19:31:28 DEBUG | Updated P11Gebp.
+06/26/2023 19:31:28 DEBUG | Updated P21GELa.
+06/26/2023 19:31:28 DEBUG | Updated P21Gd2q.
+06/26/2023 19:31:28 DEBUG | Updated A10UeAm.
+06/26/2023 19:31:28 INFO | ---Finished MPC selection without error at 06/26/2023 19:31:28 PST
+06/26/2023 19:31:28 INFO | ---Done. will run again at 06/26/2023 19:46:28 PST.
+06/26/2023 19:44:09 INFO | ---Starting cycle at 06/26/2023 19:44:09 PST
+06/26/2023 19:44:09 INFO | --- Acquiring Candidates ---
+06/26/2023 19:44:10 INFO | Constructing Candidates from MPC List
+06/26/2023 19:44:12 INFO | Construction complete.
+06/26/2023 19:44:12 INFO | Querying the MPC for uncertainties...
+06/26/2023 19:44:23 INFO | C0HQLY5 is a near-approach!
+06/26/2023 19:44:24 INFO | Queried.
+06/26/2023 19:44:24 INFO | Updating P21GELa
+06/26/2023 19:44:24 INFO | Updating C9DRXC2
+06/26/2023 19:44:24 INFO | Updating C9DM1Z2
+06/26/2023 19:44:24 INFO | Updating C4LJFPZ
+06/26/2023 19:44:24 INFO | Updating C0HQZG5
+06/26/2023 19:44:24 INFO | Updating C4D996Z
+06/26/2023 19:44:24 INFO | Updating C0HQLY5
+06/26/2023 19:44:24 INFO | Updating A10VKez
+06/26/2023 19:44:24 INFO | Updating P11GAQl
+06/26/2023 19:44:24 INFO | Updating P11GzhE
+06/26/2023 19:44:24 INFO | Updating A10VJYv
+06/26/2023 19:44:24 INFO | Updating P21GiNw
+06/26/2023 19:44:24 INFO | Updating P11Gebp
+06/26/2023 19:44:24 INFO | Updating P21Gd2q
+06/26/2023 19:44:24 INFO | Updating C9CWMP2
+06/26/2023 19:44:24 INFO | Updating JKm001
+06/26/2023 19:44:24 INFO | Updating A10UeAm
+06/26/2023 19:44:24 INFO | -Assessed Candidates
+06/26/2023 19:44:24 INFO | New (0)
+06/26/2023 19:44:24 DEBUG | []
+06/26/2023 19:44:24 INFO | Static (0)
+06/26/2023 19:44:24 DEBUG | []
+06/26/2023 19:44:24 INFO | Updated (17)
+06/26/2023 19:44:24 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 19:44:24 INFO | Removed (0)
+06/26/2023 19:44:24 DEBUG | []
+06/26/2023 19:44:24 INFO | ---Finished MPC logging without error at 06/26/2023 19:44:24 PST
+06/26/2023 19:44:24 INFO | --- Selecting ---
+06/26/2023 19:44:24 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 19:44:28 DEBUG | Found window for A10VJYv!
+06/26/2023 19:44:28 DEBUG | Found window for P11GAQl!
+06/26/2023 19:44:28 DEBUG | Found window for C0HQZG5!
+06/26/2023 19:44:28 DEBUG | Found window for C4LJFPZ!
+06/26/2023 19:44:28 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 19:44:28 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 19:44:28 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 19:44:28 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 19:44:28 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 19:44:28 DEBUG | Found window for C4D996Z!
+06/26/2023 19:44:28 DEBUG | Found window for C0HQLY5!
+06/26/2023 19:44:28 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 19:44:28 DEBUG | Found window for C9DM1Z2!
+06/26/2023 19:44:28 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 19:44:28 DEBUG | Found window for P21GELa!
+06/26/2023 19:44:28 DEBUG | Found window for P21Gd2q!
+06/26/2023 19:44:28 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 19:44:28 INFO | Rejecting targets
+06/26/2023 19:44:28 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 19:44:28 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 19:44:28 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 19:44:28 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 19:44:28 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 19:44:28 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 19:44:28 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 19:44:28 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 19:44:28 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 19:44:28 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 19:44:28 INFO | Updating database
+06/26/2023 19:44:28 DEBUG | Updated A10VJYv.
+06/26/2023 19:44:28 DEBUG | Updated P11GAQl.
+06/26/2023 19:44:28 DEBUG | Updated C0HQZG5.
+06/26/2023 19:44:28 DEBUG | Updated C4LJFPZ.
+06/26/2023 19:44:28 DEBUG | Updated C9CWMP2.
+06/26/2023 19:44:28 DEBUG | Updated JKm001.
+06/26/2023 19:44:28 DEBUG | Updated P21GiNw.
+06/26/2023 19:44:28 DEBUG | Updated C9DRXC2.
+06/26/2023 19:44:28 DEBUG | Updated P11GzhE.
+06/26/2023 19:44:28 DEBUG | Updated C4D996Z.
+06/26/2023 19:44:28 DEBUG | Updated C0HQLY5.
+06/26/2023 19:44:28 DEBUG | Updated A10VKez.
+06/26/2023 19:44:28 DEBUG | Updated C9DM1Z2.
+06/26/2023 19:44:28 DEBUG | Updated P11Gebp.
+06/26/2023 19:44:28 DEBUG | Updated P21GELa.
+06/26/2023 19:44:28 DEBUG | Updated P21Gd2q.
+06/26/2023 19:44:28 DEBUG | Updated A10UeAm.
+06/26/2023 19:44:28 INFO | ---Finished MPC selection without error at 06/26/2023 19:44:28 PST
+06/26/2023 19:44:28 INFO | ---Done. will run again at 06/26/2023 19:59:28 PST.
+06/26/2023 19:46:28 INFO | ---Starting cycle at 06/26/2023 19:46:28 PST
+06/26/2023 19:46:28 INFO | --- Acquiring Candidates ---
+06/26/2023 19:46:28 INFO | Constructing Candidates from MPC List
+06/26/2023 19:46:32 INFO | Construction complete.
+06/26/2023 19:46:32 INFO | Querying the MPC for uncertainties...
+06/26/2023 19:46:44 INFO | C0HQLY5 is a near-approach!
+06/26/2023 19:46:44 INFO | Queried.
+06/26/2023 19:46:44 INFO | Updating P21GELa
+06/26/2023 19:46:44 INFO | Updating C9DRXC2
+06/26/2023 19:46:44 INFO | Updating C9DM1Z2
+06/26/2023 19:46:44 INFO | Updating C4LJFPZ
+06/26/2023 19:46:44 INFO | Updating C0HQZG5
+06/26/2023 19:46:44 INFO | Updating C4D996Z
+06/26/2023 19:46:45 INFO | Updating C0HQLY5
+06/26/2023 19:46:45 INFO | Updating A10VKez
+06/26/2023 19:46:45 INFO | Updating P11GAQl
+06/26/2023 19:46:45 INFO | Updating P11GzhE
+06/26/2023 19:46:45 INFO | Updating A10VJYv
+06/26/2023 19:46:45 INFO | Updating P21GiNw
+06/26/2023 19:46:45 INFO | Updating P11Gebp
+06/26/2023 19:46:45 INFO | Updating P21Gd2q
+06/26/2023 19:46:45 INFO | Updating C9CWMP2
+06/26/2023 19:46:45 INFO | Updating JKm001
+06/26/2023 19:46:45 INFO | Updating A10UeAm
+06/26/2023 19:46:45 INFO | -Assessed Candidates
+06/26/2023 19:46:45 INFO | New (0)
+06/26/2023 19:46:45 DEBUG | []
+06/26/2023 19:46:45 INFO | Static (0)
+06/26/2023 19:46:45 DEBUG | []
+06/26/2023 19:46:45 INFO | Updated (17)
+06/26/2023 19:46:45 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 19:46:45 INFO | Removed (0)
+06/26/2023 19:46:45 DEBUG | []
+06/26/2023 19:46:45 INFO | ---Finished MPC logging without error at 06/26/2023 19:46:45 PST
+06/26/2023 19:46:45 INFO | --- Selecting ---
+06/26/2023 19:46:45 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 19:46:48 DEBUG | Found window for A10VJYv!
+06/26/2023 19:46:48 DEBUG | Found window for P11GAQl!
+06/26/2023 19:46:48 DEBUG | Found window for C0HQZG5!
+06/26/2023 19:46:48 DEBUG | Found window for C4LJFPZ!
+06/26/2023 19:46:48 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 19:46:48 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 19:46:48 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 19:46:48 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 19:46:48 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 19:46:48 DEBUG | Found window for C4D996Z!
+06/26/2023 19:46:48 DEBUG | Found window for C0HQLY5!
+06/26/2023 19:46:48 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 19:46:48 DEBUG | Found window for C9DM1Z2!
+06/26/2023 19:46:48 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 19:46:48 DEBUG | Found window for P21GELa!
+06/26/2023 19:46:48 DEBUG | Found window for P21Gd2q!
+06/26/2023 19:46:48 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 19:46:48 INFO | Rejecting targets
+06/26/2023 19:46:48 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 19:46:48 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 19:46:48 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 19:46:48 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 19:46:48 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 19:46:48 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 19:46:48 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 19:46:48 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 19:46:48 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 19:46:48 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 19:46:48 INFO | Updating database
+06/26/2023 19:46:48 DEBUG | Updated A10VJYv.
+06/26/2023 19:46:48 DEBUG | Updated P11GAQl.
+06/26/2023 19:46:48 DEBUG | Updated C0HQZG5.
+06/26/2023 19:46:48 DEBUG | Updated C4LJFPZ.
+06/26/2023 19:46:48 DEBUG | Updated C9CWMP2.
+06/26/2023 19:46:48 DEBUG | Updated JKm001.
+06/26/2023 19:46:48 DEBUG | Updated P21GiNw.
+06/26/2023 19:46:48 DEBUG | Updated C9DRXC2.
+06/26/2023 19:46:48 DEBUG | Updated P11GzhE.
+06/26/2023 19:46:48 DEBUG | Updated C4D996Z.
+06/26/2023 19:46:48 DEBUG | Updated C0HQLY5.
+06/26/2023 19:46:48 DEBUG | Updated A10VKez.
+06/26/2023 19:46:48 DEBUG | Updated C9DM1Z2.
+06/26/2023 19:46:48 DEBUG | Updated P11Gebp.
+06/26/2023 19:46:48 DEBUG | Updated P21GELa.
+06/26/2023 19:46:48 DEBUG | Updated P21Gd2q.
+06/26/2023 19:46:48 DEBUG | Updated A10UeAm.
+06/26/2023 19:46:48 INFO | ---Finished MPC selection without error at 06/26/2023 19:46:48 PST
+06/26/2023 19:46:48 INFO | ---Done. will run again at 06/26/2023 20:01:48 PST.
+06/26/2023 19:59:28 INFO | ---Starting cycle at 06/26/2023 19:59:28 PST
+06/26/2023 19:59:29 INFO | --- Acquiring Candidates ---
+06/26/2023 19:59:29 INFO | Constructing Candidates from MPC List
+06/26/2023 19:59:34 INFO | Construction complete.
+06/26/2023 19:59:34 INFO | Querying the MPC for uncertainties...
+06/26/2023 19:59:47 INFO | C0HQLY5 is a near-approach!
+06/26/2023 19:59:48 INFO | Queried.
+06/26/2023 19:59:48 INFO | Updating P21GELa
+06/26/2023 19:59:48 INFO | Updating C9DRXC2
+06/26/2023 19:59:48 INFO | Updating C9DM1Z2
+06/26/2023 19:59:48 INFO | Updating C4LJFPZ
+06/26/2023 19:59:48 INFO | Updating C0HQZG5
+06/26/2023 19:59:48 INFO | Updating C4D996Z
+06/26/2023 19:59:48 INFO | Updating C0HQLY5
+06/26/2023 19:59:48 INFO | Updating A10VKez
+06/26/2023 19:59:48 INFO | Updating P11GAQl
+06/26/2023 19:59:48 INFO | Updating P11GzhE
+06/26/2023 19:59:48 INFO | Updating A10VJYv
+06/26/2023 19:59:48 INFO | Updating P21GiNw
+06/26/2023 19:59:48 INFO | Updating P11Gebp
+06/26/2023 19:59:48 INFO | Updating P21Gd2q
+06/26/2023 19:59:48 INFO | Updating C9CWMP2
+06/26/2023 19:59:48 INFO | Updating JKm001
+06/26/2023 19:59:48 INFO | Updating A10UeAm
+06/26/2023 19:59:48 INFO | -Assessed Candidates
+06/26/2023 19:59:48 INFO | New (0)
+06/26/2023 19:59:48 DEBUG | []
+06/26/2023 19:59:48 INFO | Static (0)
+06/26/2023 19:59:48 DEBUG | []
+06/26/2023 19:59:48 INFO | Updated (17)
+06/26/2023 19:59:48 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 19:59:48 INFO | Removed (0)
+06/26/2023 19:59:48 DEBUG | []
+06/26/2023 19:59:48 INFO | ---Finished MPC logging without error at 06/26/2023 19:59:48 PST
+06/26/2023 19:59:48 INFO | --- Selecting ---
+06/26/2023 19:59:48 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 19:59:53 DEBUG | Found window for A10VJYv!
+06/26/2023 19:59:53 DEBUG | Found window for P11GAQl!
+06/26/2023 19:59:53 DEBUG | Found window for C0HQZG5!
+06/26/2023 19:59:53 DEBUG | Found window for C4LJFPZ!
+06/26/2023 19:59:53 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 19:59:53 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 19:59:53 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 19:59:53 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 19:59:53 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 19:59:53 DEBUG | Found window for C4D996Z!
+06/26/2023 19:59:53 DEBUG | Found window for C0HQLY5!
+06/26/2023 19:59:53 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 19:59:53 DEBUG | Found window for C9DM1Z2!
+06/26/2023 19:59:53 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 19:59:53 DEBUG | Found window for P21GELa!
+06/26/2023 19:59:53 DEBUG | Found window for P21Gd2q!
+06/26/2023 19:59:53 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 19:59:53 INFO | Rejecting targets
+06/26/2023 19:59:53 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 19:59:53 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 19:59:53 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 19:59:53 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 19:59:53 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 19:59:53 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 19:59:53 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 19:59:53 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 19:59:53 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 19:59:53 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 19:59:53 INFO | Updating database
+06/26/2023 19:59:53 DEBUG | Updated A10VJYv.
+06/26/2023 19:59:53 DEBUG | Updated P11GAQl.
+06/26/2023 19:59:53 DEBUG | Updated C0HQZG5.
+06/26/2023 19:59:53 DEBUG | Updated C4LJFPZ.
+06/26/2023 19:59:53 DEBUG | Updated C9CWMP2.
+06/26/2023 19:59:53 DEBUG | Updated JKm001.
+06/26/2023 19:59:53 DEBUG | Updated P21GiNw.
+06/26/2023 19:59:53 DEBUG | Updated C9DRXC2.
+06/26/2023 19:59:53 DEBUG | Updated P11GzhE.
+06/26/2023 19:59:53 DEBUG | Updated C4D996Z.
+06/26/2023 19:59:53 DEBUG | Updated C0HQLY5.
+06/26/2023 19:59:53 DEBUG | Updated A10VKez.
+06/26/2023 19:59:53 DEBUG | Updated C9DM1Z2.
+06/26/2023 19:59:53 DEBUG | Updated P11Gebp.
+06/26/2023 19:59:53 DEBUG | Updated P21GELa.
+06/26/2023 19:59:53 DEBUG | Updated P21Gd2q.
+06/26/2023 19:59:53 DEBUG | Updated A10UeAm.
+06/26/2023 19:59:53 INFO | ---Finished MPC selection without error at 06/26/2023 19:59:53 PST
+06/26/2023 19:59:53 INFO | ---Done. will run again at 06/26/2023 20:14:53 PST.
+06/26/2023 20:01:48 INFO | ---Starting cycle at 06/26/2023 20:01:48 PST
+06/26/2023 20:01:49 INFO | --- Acquiring Candidates ---
+06/26/2023 20:01:50 INFO | Constructing Candidates from MPC List
+06/26/2023 20:01:53 INFO | Construction complete.
+06/26/2023 20:01:53 INFO | Querying the MPC for uncertainties...
+06/26/2023 20:02:06 INFO | C0HQLY5 is a near-approach!
+06/26/2023 20:02:06 INFO | Queried.
+06/26/2023 20:02:06 INFO | Updating P21GELa
+06/26/2023 20:02:06 INFO | Updating C9DRXC2
+06/26/2023 20:02:06 INFO | Updating C9DM1Z2
+06/26/2023 20:02:06 INFO | Updating C4LJFPZ
+06/26/2023 20:02:06 INFO | Updating C0HQZG5
+06/26/2023 20:02:06 INFO | Updating C4D996Z
+06/26/2023 20:02:06 INFO | Updating C0HQLY5
+06/26/2023 20:02:06 INFO | Updating A10VKez
+06/26/2023 20:02:06 INFO | Updating P11GAQl
+06/26/2023 20:02:06 INFO | Updating P11GzhE
+06/26/2023 20:02:06 INFO | Updating A10VJYv
+06/26/2023 20:02:06 INFO | Updating P21GiNw
+06/26/2023 20:02:06 INFO | Updating P11Gebp
+06/26/2023 20:02:06 INFO | Updating P21Gd2q
+06/26/2023 20:02:06 INFO | Updating C9CWMP2
+06/26/2023 20:02:06 INFO | Updating JKm001
+06/26/2023 20:02:06 INFO | Updating A10UeAm
+06/26/2023 20:02:06 INFO | -Assessed Candidates
+06/26/2023 20:02:06 INFO | New (0)
+06/26/2023 20:02:06 DEBUG | []
+06/26/2023 20:02:06 INFO | Static (0)
+06/26/2023 20:02:06 DEBUG | []
+06/26/2023 20:02:06 INFO | Updated (17)
+06/26/2023 20:02:06 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 20:02:06 INFO | Removed (0)
+06/26/2023 20:02:06 DEBUG | []
+06/26/2023 20:02:06 INFO | ---Finished MPC logging without error at 06/26/2023 20:02:06 PST
+06/26/2023 20:02:06 INFO | --- Selecting ---
+06/26/2023 20:02:06 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 20:02:11 DEBUG | Found window for A10VJYv!
+06/26/2023 20:02:11 DEBUG | Found window for P11GAQl!
+06/26/2023 20:02:11 DEBUG | Found window for C0HQZG5!
+06/26/2023 20:02:11 DEBUG | Found window for C4LJFPZ!
+06/26/2023 20:02:11 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 20:02:11 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 20:02:11 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 20:02:11 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 20:02:11 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 20:02:11 DEBUG | Found window for C4D996Z!
+06/26/2023 20:02:11 DEBUG | Found window for C0HQLY5!
+06/26/2023 20:02:11 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 20:02:11 DEBUG | Found window for C9DM1Z2!
+06/26/2023 20:02:11 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 20:02:11 DEBUG | Found window for P21GELa!
+06/26/2023 20:02:11 DEBUG | Found window for P21Gd2q!
+06/26/2023 20:02:11 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 20:02:11 INFO | Rejecting targets
+06/26/2023 20:02:11 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 20:02:11 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 20:02:11 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 20:02:11 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 20:02:11 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 20:02:11 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 20:02:11 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 20:02:11 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 20:02:11 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 20:02:11 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 20:02:11 INFO | Updating database
+06/26/2023 20:02:11 DEBUG | Updated A10VJYv.
+06/26/2023 20:02:11 DEBUG | Updated P11GAQl.
+06/26/2023 20:02:11 DEBUG | Updated C0HQZG5.
+06/26/2023 20:02:11 DEBUG | Updated C4LJFPZ.
+06/26/2023 20:02:11 DEBUG | Updated C9CWMP2.
+06/26/2023 20:02:11 DEBUG | Updated JKm001.
+06/26/2023 20:02:11 DEBUG | Updated P21GiNw.
+06/26/2023 20:02:11 DEBUG | Updated C9DRXC2.
+06/26/2023 20:02:11 DEBUG | Updated P11GzhE.
+06/26/2023 20:02:11 DEBUG | Updated C4D996Z.
+06/26/2023 20:02:11 DEBUG | Updated C0HQLY5.
+06/26/2023 20:02:11 DEBUG | Updated A10VKez.
+06/26/2023 20:02:11 DEBUG | Updated C9DM1Z2.
+06/26/2023 20:02:11 DEBUG | Updated P11Gebp.
+06/26/2023 20:02:11 DEBUG | Updated P21GELa.
+06/26/2023 20:02:11 DEBUG | Updated P21Gd2q.
+06/26/2023 20:02:11 DEBUG | Updated A10UeAm.
+06/26/2023 20:02:11 INFO | ---Finished MPC selection without error at 06/26/2023 20:02:11 PST
+06/26/2023 20:02:11 INFO | ---Done. will run again at 06/26/2023 20:17:11 PST.
+06/26/2023 20:15:32 INFO | ---Starting cycle at 06/26/2023 20:15:32 PST
+06/26/2023 20:15:33 INFO | --- Acquiring Candidates ---
+06/26/2023 20:15:33 INFO | Constructing Candidates from MPC List
+06/26/2023 20:15:37 INFO | Construction complete.
+06/26/2023 20:15:37 INFO | Querying the MPC for uncertainties...
+06/26/2023 20:15:49 INFO | C0HQLY5 is a near-approach!
+06/26/2023 20:15:49 INFO | Queried.
+06/26/2023 20:15:49 INFO | Updating P21GELa
+06/26/2023 20:15:49 INFO | Updating C9DRXC2
+06/26/2023 20:15:50 INFO | Updating C9DM1Z2
+06/26/2023 20:15:50 INFO | Updating C4LJFPZ
+06/26/2023 20:15:50 INFO | Updating C0HQZG5
+06/26/2023 20:15:50 INFO | Updating C4D996Z
+06/26/2023 20:15:50 INFO | Updating C0HQLY5
+06/26/2023 20:15:50 INFO | Updating A10VKez
+06/26/2023 20:15:50 INFO | Updating P11GAQl
+06/26/2023 20:15:50 INFO | Updating P11GzhE
+06/26/2023 20:15:50 INFO | Updating A10VJYv
+06/26/2023 20:15:50 INFO | Updating P21GiNw
+06/26/2023 20:15:50 INFO | Updating P11Gebp
+06/26/2023 20:15:50 INFO | Updating P21Gd2q
+06/26/2023 20:15:50 INFO | Updating C9CWMP2
+06/26/2023 20:15:50 INFO | Updating JKm001
+06/26/2023 20:15:50 INFO | Updating A10UeAm
+06/26/2023 20:15:50 INFO | -Assessed Candidates
+06/26/2023 20:15:50 INFO | New (0)
+06/26/2023 20:15:50 DEBUG | []
+06/26/2023 20:15:50 INFO | Static (0)
+06/26/2023 20:15:50 DEBUG | []
+06/26/2023 20:15:50 INFO | Updated (17)
+06/26/2023 20:15:50 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 20:15:50 INFO | Removed (0)
+06/26/2023 20:15:50 DEBUG | []
+06/26/2023 20:15:50 INFO | ---Finished MPC logging without error at 06/26/2023 20:15:50 PST
+06/26/2023 20:15:50 INFO | --- Selecting ---
+06/26/2023 20:15:50 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 20:15:55 DEBUG | Found window for A10VJYv!
+06/26/2023 20:15:55 DEBUG | Found window for P11GAQl!
+06/26/2023 20:15:55 DEBUG | Found window for C0HQZG5!
+06/26/2023 20:15:55 DEBUG | Found window for C4LJFPZ!
+06/26/2023 20:15:55 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 20:15:55 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 20:15:55 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 20:15:55 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 20:15:55 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 20:15:55 DEBUG | Found window for C4D996Z!
+06/26/2023 20:15:55 DEBUG | Found window for C0HQLY5!
+06/26/2023 20:15:55 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 20:15:55 DEBUG | Found window for C9DM1Z2!
+06/26/2023 20:15:55 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 20:15:55 DEBUG | Found window for P21GELa!
+06/26/2023 20:15:55 DEBUG | Found window for P21Gd2q!
+06/26/2023 20:15:55 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 20:15:55 INFO | Rejecting targets
+06/26/2023 20:15:55 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 20:15:55 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 20:15:55 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 20:15:55 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 20:15:55 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 20:15:55 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 20:15:55 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 20:15:55 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 20:15:55 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 20:15:55 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 20:15:55 INFO | Updating database
+06/26/2023 20:15:55 DEBUG | Updated A10VJYv.
+06/26/2023 20:15:55 DEBUG | Updated P11GAQl.
+06/26/2023 20:15:55 DEBUG | Updated C0HQZG5.
+06/26/2023 20:15:55 DEBUG | Updated C4LJFPZ.
+06/26/2023 20:15:55 DEBUG | Updated C9CWMP2.
+06/26/2023 20:15:55 DEBUG | Updated JKm001.
+06/26/2023 20:15:55 DEBUG | Updated P21GiNw.
+06/26/2023 20:15:55 DEBUG | Updated C9DRXC2.
+06/26/2023 20:15:55 DEBUG | Updated P11GzhE.
+06/26/2023 20:15:55 DEBUG | Updated C4D996Z.
+06/26/2023 20:15:55 DEBUG | Updated C0HQLY5.
+06/26/2023 20:15:55 DEBUG | Updated A10VKez.
+06/26/2023 20:15:55 DEBUG | Updated C9DM1Z2.
+06/26/2023 20:15:55 DEBUG | Updated P11Gebp.
+06/26/2023 20:15:55 DEBUG | Updated P21GELa.
+06/26/2023 20:15:55 DEBUG | Updated P21Gd2q.
+06/26/2023 20:15:55 DEBUG | Updated A10UeAm.
+06/26/2023 20:15:55 INFO | ---Finished MPC selection without error at 06/26/2023 20:15:55 PST
+06/26/2023 20:15:55 INFO | ---Done. will run again at 06/26/2023 20:30:55 PST.
+06/26/2023 20:17:50 INFO | ---Starting cycle at 06/26/2023 20:17:50 PST
+06/26/2023 20:17:51 INFO | --- Acquiring Candidates ---
+06/26/2023 20:17:51 INFO | Constructing Candidates from MPC List
+06/26/2023 20:17:55 INFO | Construction complete.
+06/26/2023 20:17:55 INFO | Querying the MPC for uncertainties...
+06/26/2023 20:18:17 INFO | C0HQLY5 is a near-approach!
+06/26/2023 20:18:18 INFO | Queried.
+06/26/2023 20:18:18 INFO | Updating P21GELa
+06/26/2023 20:18:18 INFO | Updating C9DRXC2
+06/26/2023 20:18:18 INFO | Updating C9DM1Z2
+06/26/2023 20:18:18 INFO | Updating C4LJFPZ
+06/26/2023 20:18:18 INFO | Updating C0HQZG5
+06/26/2023 20:18:18 INFO | Updating C4D996Z
+06/26/2023 20:18:18 INFO | Updating C0HQLY5
+06/26/2023 20:18:18 INFO | Updating A10VKez
+06/26/2023 20:18:18 INFO | Updating P11GAQl
+06/26/2023 20:18:18 INFO | Updating P11GzhE
+06/26/2023 20:18:18 INFO | Updating A10VJYv
+06/26/2023 20:18:18 INFO | Updating P21GiNw
+06/26/2023 20:18:18 INFO | Updating P11Gebp
+06/26/2023 20:18:18 INFO | Updating P21Gd2q
+06/26/2023 20:18:18 INFO | Updating C9CWMP2
+06/26/2023 20:18:18 INFO | Updating JKm001
+06/26/2023 20:18:18 INFO | Updating A10UeAm
+06/26/2023 20:18:18 INFO | -Assessed Candidates
+06/26/2023 20:18:18 INFO | New (0)
+06/26/2023 20:18:18 DEBUG | []
+06/26/2023 20:18:18 INFO | Static (0)
+06/26/2023 20:18:18 DEBUG | []
+06/26/2023 20:18:18 INFO | Updated (17)
+06/26/2023 20:18:18 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 20:18:18 INFO | Removed (0)
+06/26/2023 20:18:18 DEBUG | []
+06/26/2023 20:18:18 INFO | ---Finished MPC logging without error at 06/26/2023 20:18:18 PST
+06/26/2023 20:18:18 INFO | --- Selecting ---
+06/26/2023 20:18:18 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 20:18:23 DEBUG | Found window for A10VJYv!
+06/26/2023 20:18:23 DEBUG | Found window for P11GAQl!
+06/26/2023 20:18:23 DEBUG | Found window for C0HQZG5!
+06/26/2023 20:18:23 DEBUG | Found window for C4LJFPZ!
+06/26/2023 20:18:23 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 20:18:23 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 20:18:23 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 20:18:23 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 20:18:23 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 20:18:23 DEBUG | Found window for C4D996Z!
+06/26/2023 20:18:23 DEBUG | Found window for C0HQLY5!
+06/26/2023 20:18:23 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 20:18:23 DEBUG | Found window for C9DM1Z2!
+06/26/2023 20:18:23 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 20:18:23 DEBUG | Found window for P21GELa!
+06/26/2023 20:18:23 DEBUG | Found window for P21Gd2q!
+06/26/2023 20:18:23 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 20:18:23 INFO | Rejecting targets
+06/26/2023 20:18:23 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 20:18:23 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 20:18:23 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 20:18:23 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 20:18:23 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 20:18:23 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 20:18:23 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 20:18:23 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 20:18:23 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 20:18:23 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 20:18:23 INFO | Updating database
+06/26/2023 20:18:23 DEBUG | Updated A10VJYv.
+06/26/2023 20:18:23 DEBUG | Updated P11GAQl.
+06/26/2023 20:18:23 DEBUG | Updated C0HQZG5.
+06/26/2023 20:18:23 DEBUG | Updated C4LJFPZ.
+06/26/2023 20:18:23 DEBUG | Updated C9CWMP2.
+06/26/2023 20:18:23 DEBUG | Updated JKm001.
+06/26/2023 20:18:23 DEBUG | Updated P21GiNw.
+06/26/2023 20:18:23 DEBUG | Updated C9DRXC2.
+06/26/2023 20:18:23 DEBUG | Updated P11GzhE.
+06/26/2023 20:18:23 DEBUG | Updated C4D996Z.
+06/26/2023 20:18:23 DEBUG | Updated C0HQLY5.
+06/26/2023 20:18:23 DEBUG | Updated A10VKez.
+06/26/2023 20:18:23 DEBUG | Updated C9DM1Z2.
+06/26/2023 20:18:23 DEBUG | Updated P11Gebp.
+06/26/2023 20:18:23 DEBUG | Updated P21GELa.
+06/26/2023 20:18:23 DEBUG | Updated P21Gd2q.
+06/26/2023 20:18:23 DEBUG | Updated A10UeAm.
+06/26/2023 20:18:23 INFO | ---Finished MPC selection without error at 06/26/2023 20:18:23 PST
+06/26/2023 20:18:23 INFO | ---Done. will run again at 06/26/2023 20:33:23 PST.
+06/26/2023 20:30:55 INFO | ---Starting cycle at 06/26/2023 20:30:55 PST
+06/26/2023 20:30:55 INFO | --- Acquiring Candidates ---
+06/26/2023 20:30:55 INFO | Constructing Candidates from MPC List
+06/26/2023 20:30:58 INFO | Construction complete.
+06/26/2023 20:30:58 INFO | Querying the MPC for uncertainties...
+06/26/2023 20:31:09 INFO | C0HQLY5 is a near-approach!
+06/26/2023 20:31:10 INFO | Queried.
+06/26/2023 20:31:10 INFO | Updating P21GELa
+06/26/2023 20:31:10 INFO | Updating C9DRXC2
+06/26/2023 20:31:10 INFO | Updating C9DM1Z2
+06/26/2023 20:31:10 INFO | Updating C4LJFPZ
+06/26/2023 20:31:10 INFO | Updating C0HQZG5
+06/26/2023 20:31:10 INFO | Updating C4D996Z
+06/26/2023 20:31:10 INFO | Updating C0HQLY5
+06/26/2023 20:31:10 INFO | Updating A10VKez
+06/26/2023 20:31:10 INFO | Updating P11GAQl
+06/26/2023 20:31:10 INFO | Updating P11GzhE
+06/26/2023 20:31:10 INFO | Updating A10VJYv
+06/26/2023 20:31:10 INFO | Updating P21GiNw
+06/26/2023 20:31:10 INFO | Updating P11Gebp
+06/26/2023 20:31:10 INFO | Updating P21Gd2q
+06/26/2023 20:31:10 INFO | Updating C9CWMP2
+06/26/2023 20:31:10 INFO | Updating JKm001
+06/26/2023 20:31:10 INFO | Updating A10UeAm
+06/26/2023 20:31:10 INFO | -Assessed Candidates
+06/26/2023 20:31:10 INFO | New (0)
+06/26/2023 20:31:10 DEBUG | []
+06/26/2023 20:31:10 INFO | Static (0)
+06/26/2023 20:31:10 DEBUG | []
+06/26/2023 20:31:10 INFO | Updated (17)
+06/26/2023 20:31:10 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 20:31:10 INFO | Removed (0)
+06/26/2023 20:31:10 DEBUG | []
+06/26/2023 20:31:10 INFO | ---Finished MPC logging without error at 06/26/2023 20:31:10 PST
+06/26/2023 20:31:10 INFO | --- Selecting ---
+06/26/2023 20:31:10 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 20:31:12 DEBUG | Found window for A10VJYv!
+06/26/2023 20:31:12 DEBUG | Found window for P11GAQl!
+06/26/2023 20:31:12 DEBUG | Found window for C0HQZG5!
+06/26/2023 20:31:12 DEBUG | Found window for C4LJFPZ!
+06/26/2023 20:31:12 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 20:31:12 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 20:31:12 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 20:31:12 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 20:31:12 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 20:31:12 DEBUG | Found window for C4D996Z!
+06/26/2023 20:31:12 DEBUG | Found window for C0HQLY5!
+06/26/2023 20:31:12 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 20:31:12 DEBUG | Found window for C9DM1Z2!
+06/26/2023 20:31:12 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 20:31:12 DEBUG | Found window for P21GELa!
+06/26/2023 20:31:12 DEBUG | Found window for P21Gd2q!
+06/26/2023 20:31:12 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 20:31:12 INFO | Rejecting targets
+06/26/2023 20:31:12 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 20:31:12 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 20:31:12 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 20:31:12 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 20:31:12 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 20:31:12 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 20:31:12 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 20:31:12 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 20:31:12 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 20:31:12 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 20:31:12 INFO | Updating database
+06/26/2023 20:31:12 DEBUG | Updated A10VJYv.
+06/26/2023 20:31:12 DEBUG | Updated P11GAQl.
+06/26/2023 20:31:12 DEBUG | Updated C0HQZG5.
+06/26/2023 20:31:12 DEBUG | Updated C4LJFPZ.
+06/26/2023 20:31:13 DEBUG | Updated C9CWMP2.
+06/26/2023 20:31:13 DEBUG | Updated JKm001.
+06/26/2023 20:31:13 DEBUG | Updated P21GiNw.
+06/26/2023 20:31:13 DEBUG | Updated C9DRXC2.
+06/26/2023 20:31:13 DEBUG | Updated P11GzhE.
+06/26/2023 20:31:13 DEBUG | Updated C4D996Z.
+06/26/2023 20:31:13 DEBUG | Updated C0HQLY5.
+06/26/2023 20:31:13 DEBUG | Updated A10VKez.
+06/26/2023 20:31:13 DEBUG | Updated C9DM1Z2.
+06/26/2023 20:31:13 DEBUG | Updated P11Gebp.
+06/26/2023 20:31:13 DEBUG | Updated P21GELa.
+06/26/2023 20:31:13 DEBUG | Updated P21Gd2q.
+06/26/2023 20:31:13 DEBUG | Updated A10UeAm.
+06/26/2023 20:31:13 INFO | ---Finished MPC selection without error at 06/26/2023 20:31:13 PST
+06/26/2023 20:31:13 INFO | ---Done. will run again at 06/26/2023 20:46:13 PST.
+06/26/2023 20:33:23 INFO | ---Starting cycle at 06/26/2023 20:33:23 PST
+06/26/2023 20:33:23 INFO | --- Acquiring Candidates ---
+06/26/2023 20:33:24 INFO | Constructing Candidates from MPC List
+06/26/2023 20:33:26 INFO | Construction complete.
+06/26/2023 20:33:26 INFO | Querying the MPC for uncertainties...
+06/26/2023 20:33:37 INFO | C0HQLY5 is a near-approach!
+06/26/2023 20:33:37 INFO | Queried.
+06/26/2023 20:33:37 INFO | Updating P21GELa
+06/26/2023 20:33:37 INFO | Updating C9DRXC2
+06/26/2023 20:33:37 INFO | Updating C9DM1Z2
+06/26/2023 20:33:37 INFO | Updating C4LJFPZ
+06/26/2023 20:33:37 INFO | Updating C0HQZG5
+06/26/2023 20:33:37 INFO | Updating C4D996Z
+06/26/2023 20:33:37 INFO | Updating C0HQLY5
+06/26/2023 20:33:37 INFO | Updating A10VKez
+06/26/2023 20:33:37 INFO | Updating P11GAQl
+06/26/2023 20:33:37 INFO | Updating P11GzhE
+06/26/2023 20:33:37 INFO | Updating A10VJYv
+06/26/2023 20:33:37 INFO | Updating P21GiNw
+06/26/2023 20:33:37 INFO | Updating P11Gebp
+06/26/2023 20:33:37 INFO | Updating P21Gd2q
+06/26/2023 20:33:37 INFO | Updating C9CWMP2
+06/26/2023 20:33:37 INFO | Updating JKm001
+06/26/2023 20:33:37 INFO | Updating A10UeAm
+06/26/2023 20:33:37 INFO | -Assessed Candidates
+06/26/2023 20:33:37 INFO | New (0)
+06/26/2023 20:33:37 DEBUG | []
+06/26/2023 20:33:37 INFO | Static (0)
+06/26/2023 20:33:37 DEBUG | []
+06/26/2023 20:33:37 INFO | Updated (17)
+06/26/2023 20:33:37 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 20:33:37 INFO | Removed (0)
+06/26/2023 20:33:37 DEBUG | []
+06/26/2023 20:33:37 INFO | ---Finished MPC logging without error at 06/26/2023 20:33:37 PST
+06/26/2023 20:33:37 INFO | --- Selecting ---
+06/26/2023 20:33:38 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 20:33:42 DEBUG | Found window for A10VJYv!
+06/26/2023 20:33:42 DEBUG | Found window for P11GAQl!
+06/26/2023 20:33:42 DEBUG | Found window for C0HQZG5!
+06/26/2023 20:33:42 DEBUG | Found window for C4LJFPZ!
+06/26/2023 20:33:42 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 20:33:42 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 20:33:42 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 20:33:42 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 20:33:42 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 20:33:42 DEBUG | Found window for C4D996Z!
+06/26/2023 20:33:42 DEBUG | Found window for C0HQLY5!
+06/26/2023 20:33:42 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 20:33:42 DEBUG | Found window for C9DM1Z2!
+06/26/2023 20:33:42 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 20:33:42 DEBUG | Found window for P21GELa!
+06/26/2023 20:33:42 DEBUG | Found window for P21Gd2q!
+06/26/2023 20:33:42 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 20:33:42 INFO | Rejecting targets
+06/26/2023 20:33:42 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 20:33:42 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 20:33:42 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 20:33:42 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 20:33:42 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 20:33:42 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 20:33:42 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 20:33:42 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 20:33:42 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 20:33:42 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 20:33:42 INFO | Updating database
+06/26/2023 20:33:42 DEBUG | Updated A10VJYv.
+06/26/2023 20:33:42 DEBUG | Updated P11GAQl.
+06/26/2023 20:33:42 DEBUG | Updated C0HQZG5.
+06/26/2023 20:33:42 DEBUG | Updated C4LJFPZ.
+06/26/2023 20:33:42 DEBUG | Updated C9CWMP2.
+06/26/2023 20:33:42 DEBUG | Updated JKm001.
+06/26/2023 20:33:42 DEBUG | Updated P21GiNw.
+06/26/2023 20:33:42 DEBUG | Updated C9DRXC2.
+06/26/2023 20:33:42 DEBUG | Updated P11GzhE.
+06/26/2023 20:33:42 DEBUG | Updated C4D996Z.
+06/26/2023 20:33:42 DEBUG | Updated C0HQLY5.
+06/26/2023 20:33:42 DEBUG | Updated A10VKez.
+06/26/2023 20:33:42 DEBUG | Updated C9DM1Z2.
+06/26/2023 20:33:42 DEBUG | Updated P11Gebp.
+06/26/2023 20:33:42 DEBUG | Updated P21GELa.
+06/26/2023 20:33:42 DEBUG | Updated P21Gd2q.
+06/26/2023 20:33:42 DEBUG | Updated A10UeAm.
+06/26/2023 20:33:42 INFO | ---Finished MPC selection without error at 06/26/2023 20:33:42 PST
+06/26/2023 20:33:42 INFO | ---Done. will run again at 06/26/2023 20:48:42 PST.
+06/26/2023 20:46:13 INFO | ---Starting cycle at 06/26/2023 20:46:13 PST
+06/26/2023 20:46:13 INFO | --- Acquiring Candidates ---
+06/26/2023 20:46:14 INFO | Constructing Candidates from MPC List
+06/26/2023 20:46:17 INFO | Construction complete.
+06/26/2023 20:46:17 INFO | Querying the MPC for uncertainties...
+06/26/2023 20:46:53 INFO | C0HQLY5 is a near-approach!
+06/26/2023 20:46:54 INFO | Queried.
+06/26/2023 20:46:54 INFO | Updating P21GELa
+06/26/2023 20:46:54 INFO | Updating C9DRXC2
+06/26/2023 20:46:54 INFO | Updating C9DM1Z2
+06/26/2023 20:46:54 INFO | Updating C4LJFPZ
+06/26/2023 20:46:54 INFO | Updating C0HQZG5
+06/26/2023 20:46:54 INFO | Updating C4D996Z
+06/26/2023 20:46:54 INFO | Updating C0HQLY5
+06/26/2023 20:46:54 INFO | Updating A10VKez
+06/26/2023 20:46:54 INFO | Updating P11GAQl
+06/26/2023 20:46:54 INFO | Updating P11GzhE
+06/26/2023 20:46:54 INFO | Updating A10VJYv
+06/26/2023 20:46:54 INFO | Updating P21GiNw
+06/26/2023 20:46:54 INFO | Updating P11Gebp
+06/26/2023 20:46:54 INFO | Updating P21Gd2q
+06/26/2023 20:46:54 INFO | Updating C9CWMP2
+06/26/2023 20:46:54 INFO | Updating JKm001
+06/26/2023 20:46:54 INFO | Updating A10UeAm
+06/26/2023 20:46:54 INFO | -Assessed Candidates
+06/26/2023 20:46:54 INFO | New (0)
+06/26/2023 20:46:54 DEBUG | []
+06/26/2023 20:46:54 INFO | Static (0)
+06/26/2023 20:46:54 DEBUG | []
+06/26/2023 20:46:54 INFO | Updated (17)
+06/26/2023 20:46:54 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 20:46:54 INFO | Removed (0)
+06/26/2023 20:46:54 DEBUG | []
+06/26/2023 20:46:54 INFO | ---Finished MPC logging without error at 06/26/2023 20:46:54 PST
+06/26/2023 20:46:54 INFO | --- Selecting ---
+06/26/2023 20:46:54 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 20:46:59 DEBUG | Found window for A10VJYv!
+06/26/2023 20:46:59 DEBUG | Found window for P11GAQl!
+06/26/2023 20:46:59 DEBUG | Found window for C0HQZG5!
+06/26/2023 20:46:59 DEBUG | Found window for C4LJFPZ!
+06/26/2023 20:46:59 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 20:46:59 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 20:46:59 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 20:46:59 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 20:46:59 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 20:46:59 DEBUG | Found window for C4D996Z!
+06/26/2023 20:46:59 DEBUG | Found window for C0HQLY5!
+06/26/2023 20:46:59 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 20:46:59 DEBUG | Found window for C9DM1Z2!
+06/26/2023 20:46:59 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 20:46:59 DEBUG | Found window for P21GELa!
+06/26/2023 20:46:59 DEBUG | Found window for P21Gd2q!
+06/26/2023 20:46:59 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 20:46:59 INFO | Rejecting targets
+06/26/2023 20:46:59 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 20:46:59 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 20:46:59 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 20:46:59 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 20:46:59 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 20:46:59 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 20:46:59 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 20:46:59 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 20:46:59 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 20:46:59 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 20:46:59 INFO | Updating database
+06/26/2023 20:46:59 DEBUG | Updated A10VJYv.
+06/26/2023 20:46:59 DEBUG | Updated P11GAQl.
+06/26/2023 20:46:59 DEBUG | Updated C0HQZG5.
+06/26/2023 20:46:59 DEBUG | Updated C4LJFPZ.
+06/26/2023 20:46:59 DEBUG | Updated C9CWMP2.
+06/26/2023 20:46:59 DEBUG | Updated JKm001.
+06/26/2023 20:46:59 DEBUG | Updated P21GiNw.
+06/26/2023 20:46:59 DEBUG | Updated C9DRXC2.
+06/26/2023 20:46:59 DEBUG | Updated P11GzhE.
+06/26/2023 20:46:59 DEBUG | Updated C4D996Z.
+06/26/2023 20:46:59 DEBUG | Updated C0HQLY5.
+06/26/2023 20:46:59 DEBUG | Updated A10VKez.
+06/26/2023 20:46:59 DEBUG | Updated C9DM1Z2.
+06/26/2023 20:46:59 DEBUG | Updated P11Gebp.
+06/26/2023 20:46:59 DEBUG | Updated P21GELa.
+06/26/2023 20:46:59 DEBUG | Updated P21Gd2q.
+06/26/2023 20:46:59 DEBUG | Updated A10UeAm.
+06/26/2023 20:46:59 INFO | ---Finished MPC selection without error at 06/26/2023 20:46:59 PST
+06/26/2023 20:46:59 INFO | ---Done. will run again at 06/26/2023 21:01:59 PST.
+06/26/2023 20:48:42 INFO | ---Starting cycle at 06/26/2023 20:48:42 PST
+06/26/2023 20:48:43 INFO | --- Acquiring Candidates ---
+06/26/2023 20:48:43 INFO | Constructing Candidates from MPC List
+06/26/2023 20:48:48 INFO | Construction complete.
+06/26/2023 20:48:48 INFO | Querying the MPC for uncertainties...
+06/26/2023 20:49:01 INFO | C0HQLY5 is a near-approach!
+06/26/2023 20:49:02 INFO | Queried.
+06/26/2023 20:49:02 INFO | Updating P21GELa
+06/26/2023 20:49:02 INFO | Updating C9DRXC2
+06/26/2023 20:49:02 INFO | Updating C9DM1Z2
+06/26/2023 20:49:02 INFO | Updating C4LJFPZ
+06/26/2023 20:49:02 INFO | Updating C0HQZG5
+06/26/2023 20:49:02 INFO | Updating C4D996Z
+06/26/2023 20:49:02 INFO | Updating C0HQLY5
+06/26/2023 20:49:02 INFO | Updating A10VKez
+06/26/2023 20:49:02 INFO | Updating P11GAQl
+06/26/2023 20:49:02 INFO | Updating P11GzhE
+06/26/2023 20:49:02 INFO | Updating A10VJYv
+06/26/2023 20:49:02 INFO | Updating P21GiNw
+06/26/2023 20:49:02 INFO | Updating P11Gebp
+06/26/2023 20:49:02 INFO | Updating P21Gd2q
+06/26/2023 20:49:02 INFO | Updating C9CWMP2
+06/26/2023 20:49:02 INFO | Updating JKm001
+06/26/2023 20:49:02 INFO | Updating A10UeAm
+06/26/2023 20:49:02 INFO | -Assessed Candidates
+06/26/2023 20:49:02 INFO | New (0)
+06/26/2023 20:49:02 DEBUG | []
+06/26/2023 20:49:02 INFO | Static (0)
+06/26/2023 20:49:02 DEBUG | []
+06/26/2023 20:49:02 INFO | Updated (17)
+06/26/2023 20:49:02 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 20:49:02 INFO | Removed (0)
+06/26/2023 20:49:02 DEBUG | []
+06/26/2023 20:49:02 INFO | ---Finished MPC logging without error at 06/26/2023 20:49:02 PST
+06/26/2023 20:49:02 INFO | --- Selecting ---
+06/26/2023 20:49:02 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 20:49:07 DEBUG | Found window for A10VJYv!
+06/26/2023 20:49:07 DEBUG | Found window for P11GAQl!
+06/26/2023 20:49:07 DEBUG | Found window for C0HQZG5!
+06/26/2023 20:49:07 DEBUG | Found window for C4LJFPZ!
+06/26/2023 20:49:07 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 20:49:07 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 20:49:07 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 20:49:07 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 20:49:07 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 20:49:07 DEBUG | Found window for C4D996Z!
+06/26/2023 20:49:07 DEBUG | Found window for C0HQLY5!
+06/26/2023 20:49:07 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 20:49:07 DEBUG | Found window for C9DM1Z2!
+06/26/2023 20:49:07 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 20:49:07 DEBUG | Found window for P21GELa!
+06/26/2023 20:49:07 DEBUG | Found window for P21Gd2q!
+06/26/2023 20:49:07 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 20:49:07 INFO | Rejecting targets
+06/26/2023 20:49:07 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 20:49:07 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 20:49:07 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 20:49:07 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 20:49:07 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 20:49:07 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 20:49:07 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 20:49:07 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 20:49:07 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 20:49:07 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 20:49:07 INFO | Updating database
+06/26/2023 20:49:07 DEBUG | Updated A10VJYv.
+06/26/2023 20:49:07 DEBUG | Updated P11GAQl.
+06/26/2023 20:49:07 DEBUG | Updated C0HQZG5.
+06/26/2023 20:49:07 DEBUG | Updated C4LJFPZ.
+06/26/2023 20:49:07 DEBUG | Updated C9CWMP2.
+06/26/2023 20:49:07 DEBUG | Updated JKm001.
+06/26/2023 20:49:07 DEBUG | Updated P21GiNw.
+06/26/2023 20:49:07 DEBUG | Updated C9DRXC2.
+06/26/2023 20:49:07 DEBUG | Updated P11GzhE.
+06/26/2023 20:49:07 DEBUG | Updated C4D996Z.
+06/26/2023 20:49:07 DEBUG | Updated C0HQLY5.
+06/26/2023 20:49:07 DEBUG | Updated A10VKez.
+06/26/2023 20:49:07 DEBUG | Updated C9DM1Z2.
+06/26/2023 20:49:07 DEBUG | Updated P11Gebp.
+06/26/2023 20:49:07 DEBUG | Updated P21GELa.
+06/26/2023 20:49:07 DEBUG | Updated P21Gd2q.
+06/26/2023 20:49:07 DEBUG | Updated A10UeAm.
+06/26/2023 20:49:07 INFO | ---Finished MPC selection without error at 06/26/2023 20:49:07 PST
+06/26/2023 20:49:07 INFO | ---Done. will run again at 06/26/2023 21:04:07 PST.
+06/26/2023 21:01:59 INFO | ---Starting cycle at 06/26/2023 21:01:59 PST
+06/26/2023 21:02:00 INFO | --- Acquiring Candidates ---
+06/26/2023 21:02:00 INFO | Constructing Candidates from MPC List
+06/26/2023 21:02:03 INFO | Construction complete.
+06/26/2023 21:02:03 INFO | Querying the MPC for uncertainties...
+06/26/2023 21:02:13 INFO | C0HQLY5 is a near-approach!
+06/26/2023 21:02:14 INFO | Queried.
+06/26/2023 21:02:14 INFO | Updating P21GELa
+06/26/2023 21:02:14 INFO | Updating C9DRXC2
+06/26/2023 21:02:14 INFO | Updating C9DM1Z2
+06/26/2023 21:02:14 INFO | Updating C4LJFPZ
+06/26/2023 21:02:14 INFO | Updating C0HQZG5
+06/26/2023 21:02:14 INFO | Updating C4D996Z
+06/26/2023 21:02:14 INFO | Updating C0HQLY5
+06/26/2023 21:02:14 INFO | Updating A10VKez
+06/26/2023 21:02:14 INFO | Updating P11GAQl
+06/26/2023 21:02:14 INFO | Updating P11GzhE
+06/26/2023 21:02:14 INFO | Updating A10VJYv
+06/26/2023 21:02:14 INFO | Updating P21GiNw
+06/26/2023 21:02:14 INFO | Updating P11Gebp
+06/26/2023 21:02:14 INFO | Updating P21Gd2q
+06/26/2023 21:02:14 INFO | Updating C9CWMP2
+06/26/2023 21:02:14 INFO | Updating JKm001
+06/26/2023 21:02:14 INFO | Updating A10UeAm
+06/26/2023 21:02:14 INFO | -Assessed Candidates
+06/26/2023 21:02:14 INFO | New (0)
+06/26/2023 21:02:14 DEBUG | []
+06/26/2023 21:02:14 INFO | Static (0)
+06/26/2023 21:02:14 DEBUG | []
+06/26/2023 21:02:14 INFO | Updated (17)
+06/26/2023 21:02:14 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 21:02:14 INFO | Removed (0)
+06/26/2023 21:02:14 DEBUG | []
+06/26/2023 21:02:14 INFO | ---Finished MPC logging without error at 06/26/2023 21:02:14 PST
+06/26/2023 21:02:14 INFO | --- Selecting ---
+06/26/2023 21:02:14 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 21:02:18 DEBUG | Found window for A10VJYv!
+06/26/2023 21:02:18 DEBUG | Found window for P11GAQl!
+06/26/2023 21:02:18 DEBUG | Found window for C0HQZG5!
+06/26/2023 21:02:18 DEBUG | Found window for C4LJFPZ!
+06/26/2023 21:02:18 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 21:02:18 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 21:02:18 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 21:02:18 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 21:02:18 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 21:02:18 DEBUG | Found window for C4D996Z!
+06/26/2023 21:02:18 DEBUG | Found window for C0HQLY5!
+06/26/2023 21:02:18 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 21:02:18 DEBUG | Found window for C9DM1Z2!
+06/26/2023 21:02:18 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 21:02:18 DEBUG | Found window for P21GELa!
+06/26/2023 21:02:18 DEBUG | Found window for P21Gd2q!
+06/26/2023 21:02:18 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 21:02:18 INFO | Rejecting targets
+06/26/2023 21:02:18 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 21:02:18 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 21:02:18 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 21:02:18 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 21:02:18 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 21:02:18 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 21:02:18 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 21:02:18 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 21:02:18 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 21:02:18 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 21:02:18 INFO | Updating database
+06/26/2023 21:02:18 DEBUG | Updated A10VJYv.
+06/26/2023 21:02:18 DEBUG | Updated P11GAQl.
+06/26/2023 21:02:18 DEBUG | Updated C0HQZG5.
+06/26/2023 21:02:18 DEBUG | Updated C4LJFPZ.
+06/26/2023 21:02:18 DEBUG | Updated C9CWMP2.
+06/26/2023 21:02:18 DEBUG | Updated JKm001.
+06/26/2023 21:02:18 DEBUG | Updated P21GiNw.
+06/26/2023 21:02:18 DEBUG | Updated C9DRXC2.
+06/26/2023 21:02:18 DEBUG | Updated P11GzhE.
+06/26/2023 21:02:18 DEBUG | Updated C4D996Z.
+06/26/2023 21:02:18 DEBUG | Updated C0HQLY5.
+06/26/2023 21:02:18 DEBUG | Updated A10VKez.
+06/26/2023 21:02:18 DEBUG | Updated C9DM1Z2.
+06/26/2023 21:02:19 DEBUG | Updated P11Gebp.
+06/26/2023 21:02:19 DEBUG | Updated P21GELa.
+06/26/2023 21:02:19 DEBUG | Updated P21Gd2q.
+06/26/2023 21:02:19 DEBUG | Updated A10UeAm.
+06/26/2023 21:02:19 INFO | ---Finished MPC selection without error at 06/26/2023 21:02:19 PST
+06/26/2023 21:02:19 INFO | ---Done. will run again at 06/26/2023 21:17:19 PST.
+06/26/2023 21:04:07 INFO | ---Starting cycle at 06/26/2023 21:04:07 PST
+06/26/2023 21:04:07 INFO | --- Acquiring Candidates ---
+06/26/2023 21:04:08 INFO | Constructing Candidates from MPC List
+06/26/2023 21:04:11 INFO | Construction complete.
+06/26/2023 21:04:11 INFO | Querying the MPC for uncertainties...
+06/26/2023 21:04:21 INFO | C0HQLY5 is a near-approach!
+06/26/2023 21:04:22 INFO | Queried.
+06/26/2023 21:04:22 INFO | Updating P21GELa
+06/26/2023 21:04:22 INFO | Updating C9DRXC2
+06/26/2023 21:04:22 INFO | Updating C9DM1Z2
+06/26/2023 21:04:22 INFO | Updating C4LJFPZ
+06/26/2023 21:04:22 INFO | Updating C0HQZG5
+06/26/2023 21:04:22 INFO | Updating C4D996Z
+06/26/2023 21:04:22 INFO | Updating C0HQLY5
+06/26/2023 21:04:22 INFO | Updating A10VKez
+06/26/2023 21:04:22 INFO | Updating P11GAQl
+06/26/2023 21:04:22 INFO | Updating P11GzhE
+06/26/2023 21:04:22 INFO | Updating A10VJYv
+06/26/2023 21:04:22 INFO | Updating P21GiNw
+06/26/2023 21:04:22 INFO | Updating P11Gebp
+06/26/2023 21:04:22 INFO | Updating P21Gd2q
+06/26/2023 21:04:22 INFO | Updating C9CWMP2
+06/26/2023 21:04:22 INFO | Updating JKm001
+06/26/2023 21:04:22 INFO | Updating A10UeAm
+06/26/2023 21:04:22 INFO | -Assessed Candidates
+06/26/2023 21:04:22 INFO | New (0)
+06/26/2023 21:04:22 DEBUG | []
+06/26/2023 21:04:22 INFO | Static (0)
+06/26/2023 21:04:22 DEBUG | []
+06/26/2023 21:04:22 INFO | Updated (17)
+06/26/2023 21:04:22 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 21:04:22 INFO | Removed (0)
+06/26/2023 21:04:22 DEBUG | []
+06/26/2023 21:04:22 INFO | ---Finished MPC logging without error at 06/26/2023 21:04:22 PST
+06/26/2023 21:04:22 INFO | --- Selecting ---
+06/26/2023 21:04:22 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 21:04:25 DEBUG | Found window for A10VJYv!
+06/26/2023 21:04:25 DEBUG | Found window for P11GAQl!
+06/26/2023 21:04:25 DEBUG | Found window for C0HQZG5!
+06/26/2023 21:04:25 DEBUG | Found window for C4LJFPZ!
+06/26/2023 21:04:25 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 21:04:25 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 21:04:25 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 21:04:25 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 21:04:25 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 21:04:25 DEBUG | Found window for C4D996Z!
+06/26/2023 21:04:25 DEBUG | Found window for C0HQLY5!
+06/26/2023 21:04:25 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 21:04:25 DEBUG | Found window for C9DM1Z2!
+06/26/2023 21:04:25 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 21:04:25 DEBUG | Found window for P21GELa!
+06/26/2023 21:04:25 DEBUG | Found window for P21Gd2q!
+06/26/2023 21:04:25 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 21:04:25 INFO | Rejecting targets
+06/26/2023 21:04:25 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 21:04:25 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 21:04:25 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 21:04:25 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 21:04:25 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 21:04:25 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 21:04:25 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 21:04:25 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 21:04:25 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 21:04:25 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 21:04:25 INFO | Updating database
+06/26/2023 21:04:25 DEBUG | Updated A10VJYv.
+06/26/2023 21:04:25 DEBUG | Updated P11GAQl.
+06/26/2023 21:04:25 DEBUG | Updated C0HQZG5.
+06/26/2023 21:04:25 DEBUG | Updated C4LJFPZ.
+06/26/2023 21:04:25 DEBUG | Updated C9CWMP2.
+06/26/2023 21:04:25 DEBUG | Updated JKm001.
+06/26/2023 21:04:25 DEBUG | Updated P21GiNw.
+06/26/2023 21:04:25 DEBUG | Updated C9DRXC2.
+06/26/2023 21:04:25 DEBUG | Updated P11GzhE.
+06/26/2023 21:04:25 DEBUG | Updated C4D996Z.
+06/26/2023 21:04:25 DEBUG | Updated C0HQLY5.
+06/26/2023 21:04:25 DEBUG | Updated A10VKez.
+06/26/2023 21:04:25 DEBUG | Updated C9DM1Z2.
+06/26/2023 21:04:25 DEBUG | Updated P11Gebp.
+06/26/2023 21:04:25 DEBUG | Updated P21GELa.
+06/26/2023 21:04:25 DEBUG | Updated P21Gd2q.
+06/26/2023 21:04:25 DEBUG | Updated A10UeAm.
+06/26/2023 21:04:25 INFO | ---Finished MPC selection without error at 06/26/2023 21:04:25 PST
+06/26/2023 21:04:25 INFO | ---Done. will run again at 06/26/2023 21:19:25 PST.
+06/26/2023 21:17:19 INFO | ---Starting cycle at 06/26/2023 21:17:19 PST
+06/26/2023 21:17:20 INFO | --- Acquiring Candidates ---
+06/26/2023 21:17:20 INFO | Constructing Candidates from MPC List
+06/26/2023 21:17:23 INFO | Construction complete.
+06/26/2023 21:17:23 INFO | Querying the MPC for uncertainties...
+06/26/2023 21:17:36 INFO | C0HQLY5 is a near-approach!
+06/26/2023 21:17:37 INFO | Queried.
+06/26/2023 21:17:37 INFO | Updating P21GELa
+06/26/2023 21:17:37 INFO | Updating C9DRXC2
+06/26/2023 21:17:37 INFO | Updating C9DM1Z2
+06/26/2023 21:17:37 INFO | Updating C4LJFPZ
+06/26/2023 21:17:37 INFO | Updating C0HQZG5
+06/26/2023 21:17:37 INFO | Updating C4D996Z
+06/26/2023 21:17:37 INFO | Updating C0HQLY5
+06/26/2023 21:17:37 INFO | Updating A10VKez
+06/26/2023 21:17:37 INFO | Updating P11GAQl
+06/26/2023 21:17:37 INFO | Updating P11GzhE
+06/26/2023 21:17:37 INFO | Updating A10VJYv
+06/26/2023 21:17:37 INFO | Updating P21GiNw
+06/26/2023 21:17:37 INFO | Updating P11Gebp
+06/26/2023 21:17:37 INFO | Updating P21Gd2q
+06/26/2023 21:17:37 INFO | Updating C9CWMP2
+06/26/2023 21:17:37 INFO | Updating JKm001
+06/26/2023 21:17:37 INFO | Updating A10UeAm
+06/26/2023 21:17:37 INFO | -Assessed Candidates
+06/26/2023 21:17:37 INFO | New (0)
+06/26/2023 21:17:37 DEBUG | []
+06/26/2023 21:17:37 INFO | Static (0)
+06/26/2023 21:17:37 DEBUG | []
+06/26/2023 21:17:37 INFO | Updated (17)
+06/26/2023 21:17:37 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 21:17:37 INFO | Removed (0)
+06/26/2023 21:17:37 DEBUG | []
+06/26/2023 21:17:37 INFO | ---Finished MPC logging without error at 06/26/2023 21:17:37 PST
+06/26/2023 21:17:37 INFO | --- Selecting ---
+06/26/2023 21:17:37 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 21:17:40 DEBUG | Found window for A10VJYv!
+06/26/2023 21:17:40 DEBUG | Found window for P11GAQl!
+06/26/2023 21:17:40 DEBUG | Found window for C0HQZG5!
+06/26/2023 21:17:40 DEBUG | Found window for C4LJFPZ!
+06/26/2023 21:17:40 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 21:17:40 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 21:17:40 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 21:17:40 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 21:17:40 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 21:17:40 DEBUG | Found window for C4D996Z!
+06/26/2023 21:17:40 DEBUG | Found window for C0HQLY5!
+06/26/2023 21:17:40 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 21:17:40 DEBUG | Found window for C9DM1Z2!
+06/26/2023 21:17:40 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 21:17:40 DEBUG | Found window for P21GELa!
+06/26/2023 21:17:40 DEBUG | Found window for P21Gd2q!
+06/26/2023 21:17:40 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 21:17:40 INFO | Rejecting targets
+06/26/2023 21:17:40 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 21:17:40 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 21:17:40 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 21:17:40 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 21:17:40 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 21:17:40 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 21:17:40 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 21:17:40 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 21:17:40 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 21:17:40 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 21:17:40 INFO | Updating database
+06/26/2023 21:17:40 DEBUG | Updated A10VJYv.
+06/26/2023 21:17:40 DEBUG | Updated P11GAQl.
+06/26/2023 21:17:40 DEBUG | Updated C0HQZG5.
+06/26/2023 21:17:40 DEBUG | Updated C4LJFPZ.
+06/26/2023 21:17:40 DEBUG | Updated C9CWMP2.
+06/26/2023 21:17:40 DEBUG | Updated JKm001.
+06/26/2023 21:17:40 DEBUG | Updated P21GiNw.
+06/26/2023 21:17:40 DEBUG | Updated C9DRXC2.
+06/26/2023 21:17:40 DEBUG | Updated P11GzhE.
+06/26/2023 21:17:40 DEBUG | Updated C4D996Z.
+06/26/2023 21:17:40 DEBUG | Updated C0HQLY5.
+06/26/2023 21:17:40 DEBUG | Updated A10VKez.
+06/26/2023 21:17:40 DEBUG | Updated C9DM1Z2.
+06/26/2023 21:17:40 DEBUG | Updated P11Gebp.
+06/26/2023 21:17:40 DEBUG | Updated P21GELa.
+06/26/2023 21:17:40 DEBUG | Updated P21Gd2q.
+06/26/2023 21:17:40 DEBUG | Updated A10UeAm.
+06/26/2023 21:17:40 INFO | ---Finished MPC selection without error at 06/26/2023 21:17:40 PST
+06/26/2023 21:17:40 INFO | ---Done. will run again at 06/26/2023 21:32:40 PST.
+06/26/2023 21:19:23 INFO | ---Starting cycle at 06/26/2023 21:19:23 PST
+06/26/2023 21:19:23 INFO | --- Acquiring Candidates ---
+06/26/2023 21:19:24 INFO | Constructing Candidates from MPC List
+06/26/2023 21:19:26 INFO | Construction complete.
+06/26/2023 21:19:26 INFO | Querying the MPC for uncertainties...
+06/26/2023 21:19:36 INFO | C0HQLY5 is a near-approach!
+06/26/2023 21:19:37 INFO | Queried.
+06/26/2023 21:19:37 INFO | Updating P21GELa
+06/26/2023 21:19:37 INFO | Updating C9DRXC2
+06/26/2023 21:19:37 INFO | Updating C9DM1Z2
+06/26/2023 21:19:37 INFO | Updating C4LJFPZ
+06/26/2023 21:19:37 INFO | Updating C0HQZG5
+06/26/2023 21:19:37 INFO | Updating C4D996Z
+06/26/2023 21:19:37 INFO | Updating C0HQLY5
+06/26/2023 21:19:37 INFO | Updating A10VKez
+06/26/2023 21:19:37 INFO | Updating P11GAQl
+06/26/2023 21:19:37 INFO | Updating P11GzhE
+06/26/2023 21:19:37 INFO | Updating A10VJYv
+06/26/2023 21:19:37 INFO | Updating P21GiNw
+06/26/2023 21:19:37 INFO | Updating P11Gebp
+06/26/2023 21:19:37 INFO | Updating P21Gd2q
+06/26/2023 21:19:37 INFO | Updating C9CWMP2
+06/26/2023 21:19:37 INFO | Updating JKm001
+06/26/2023 21:19:37 INFO | Updating A10UeAm
+06/26/2023 21:19:37 INFO | -Assessed Candidates
+06/26/2023 21:19:37 INFO | New (0)
+06/26/2023 21:19:37 DEBUG | []
+06/26/2023 21:19:37 INFO | Static (0)
+06/26/2023 21:19:37 DEBUG | []
+06/26/2023 21:19:37 INFO | Updated (17)
+06/26/2023 21:19:37 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 21:19:37 INFO | Removed (0)
+06/26/2023 21:19:37 DEBUG | []
+06/26/2023 21:19:37 INFO | ---Finished MPC logging without error at 06/26/2023 21:19:37 PST
+06/26/2023 21:19:37 INFO | --- Selecting ---
+06/26/2023 21:19:37 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 21:19:41 DEBUG | Found window for A10VJYv!
+06/26/2023 21:19:41 DEBUG | Found window for P11GAQl!
+06/26/2023 21:19:41 DEBUG | Found window for C0HQZG5!
+06/26/2023 21:19:41 DEBUG | Found window for C4LJFPZ!
+06/26/2023 21:19:41 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 21:19:41 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 21:19:41 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 21:19:41 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 21:19:41 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 21:19:41 DEBUG | Found window for C4D996Z!
+06/26/2023 21:19:41 DEBUG | Found window for C0HQLY5!
+06/26/2023 21:19:41 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 21:19:41 DEBUG | Found window for C9DM1Z2!
+06/26/2023 21:19:41 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 21:19:41 DEBUG | Found window for P21GELa!
+06/26/2023 21:19:41 DEBUG | Found window for P21Gd2q!
+06/26/2023 21:19:41 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 21:19:41 INFO | Rejecting targets
+06/26/2023 21:19:41 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 21:19:41 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 21:19:41 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 21:19:41 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 21:19:41 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 21:19:41 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 21:19:41 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 21:19:41 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 21:19:41 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 21:19:41 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 21:19:41 INFO | Updating database
+06/26/2023 21:19:41 DEBUG | Updated A10VJYv.
+06/26/2023 21:19:41 DEBUG | Updated P11GAQl.
+06/26/2023 21:19:41 DEBUG | Updated C0HQZG5.
+06/26/2023 21:19:41 DEBUG | Updated C4LJFPZ.
+06/26/2023 21:19:41 DEBUG | Updated C9CWMP2.
+06/26/2023 21:19:41 DEBUG | Updated JKm001.
+06/26/2023 21:19:41 DEBUG | Updated P21GiNw.
+06/26/2023 21:19:41 DEBUG | Updated C9DRXC2.
+06/26/2023 21:19:41 DEBUG | Updated P11GzhE.
+06/26/2023 21:19:41 DEBUG | Updated C4D996Z.
+06/26/2023 21:19:41 DEBUG | Updated C0HQLY5.
+06/26/2023 21:19:41 DEBUG | Updated A10VKez.
+06/26/2023 21:19:41 DEBUG | Updated C9DM1Z2.
+06/26/2023 21:19:41 DEBUG | Updated P11Gebp.
+06/26/2023 21:19:41 DEBUG | Updated P21GELa.
+06/26/2023 21:19:41 DEBUG | Updated P21Gd2q.
+06/26/2023 21:19:41 DEBUG | Updated A10UeAm.
+06/26/2023 21:19:41 INFO | ---Finished MPC selection without error at 06/26/2023 21:19:41 PST
+06/26/2023 21:19:41 INFO | ---Done. will run again at 06/26/2023 21:34:41 PST.
+06/26/2023 21:45:36 INFO | ---Starting cycle at 06/26/2023 21:45:36 PST
+06/26/2023 21:45:36 INFO | --- Acquiring Candidates ---
+06/26/2023 21:45:37 INFO | Constructing Candidates from MPC List
+06/26/2023 21:45:39 INFO | Construction complete.
+06/26/2023 21:45:39 INFO | Querying the MPC for uncertainties...
+06/26/2023 21:45:50 INFO | C0HQLY5 is a near-approach!
+06/26/2023 21:45:50 INFO | Queried.
+06/26/2023 21:45:50 INFO | Updating P21GELa
+06/26/2023 21:45:50 INFO | Updating C9DRXC2
+06/26/2023 21:45:50 INFO | Updating C9DM1Z2
+06/26/2023 21:45:50 INFO | Updating C4LJFPZ
+06/26/2023 21:45:50 INFO | Updating C0HQZG5
+06/26/2023 21:45:50 INFO | Updating C4D996Z
+06/26/2023 21:45:50 INFO | Updating C0HQLY5
+06/26/2023 21:45:50 INFO | Updating A10VKez
+06/26/2023 21:45:50 INFO | Updating P11GAQl
+06/26/2023 21:45:50 INFO | Updating P11GzhE
+06/26/2023 21:45:50 INFO | Updating A10VJYv
+06/26/2023 21:45:50 INFO | Updating P21GiNw
+06/26/2023 21:45:50 INFO | Updating P11Gebp
+06/26/2023 21:45:50 INFO | Updating P21Gd2q
+06/26/2023 21:45:50 INFO | Updating C9CWMP2
+06/26/2023 21:45:50 INFO | Updating JKm001
+06/26/2023 21:45:50 INFO | Updating A10UeAm
+06/26/2023 21:45:50 INFO | -Assessed Candidates
+06/26/2023 21:45:50 INFO | New (0)
+06/26/2023 21:45:50 DEBUG | []
+06/26/2023 21:45:50 INFO | Static (0)
+06/26/2023 21:45:50 DEBUG | []
+06/26/2023 21:45:50 INFO | Updated (17)
+06/26/2023 21:45:50 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 21:45:50 INFO | Removed (0)
+06/26/2023 21:45:50 DEBUG | []
+06/26/2023 21:45:50 INFO | ---Finished MPC logging without error at 06/26/2023 21:45:50 PST
+06/26/2023 21:45:50 INFO | --- Selecting ---
+06/26/2023 21:45:50 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 21:45:53 DEBUG | Found window for A10VJYv!
+06/26/2023 21:45:53 DEBUG | Found window for P11GAQl!
+06/26/2023 21:45:53 DEBUG | Found window for C0HQZG5!
+06/26/2023 21:45:53 DEBUG | Found window for C4LJFPZ!
+06/26/2023 21:45:53 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 21:45:53 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 21:45:53 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 21:45:53 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 21:45:53 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 21:45:53 DEBUG | Found window for C4D996Z!
+06/26/2023 21:45:53 DEBUG | Found window for C0HQLY5!
+06/26/2023 21:45:53 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 21:45:53 DEBUG | Found window for C9DM1Z2!
+06/26/2023 21:45:53 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 21:45:53 DEBUG | Found window for P21GELa!
+06/26/2023 21:45:53 DEBUG | Found window for P21Gd2q!
+06/26/2023 21:45:53 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 21:45:53 INFO | Rejecting targets
+06/26/2023 21:45:53 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 21:45:53 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 21:45:53 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 21:45:53 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 21:45:53 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 21:45:53 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 21:45:53 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 21:45:53 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 21:45:53 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 21:45:53 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 21:45:53 INFO | Updating database
+06/26/2023 21:45:53 DEBUG | Updated A10VJYv.
+06/26/2023 21:45:53 DEBUG | Updated P11GAQl.
+06/26/2023 21:45:53 DEBUG | Updated C0HQZG5.
+06/26/2023 21:45:53 DEBUG | Updated C4LJFPZ.
+06/26/2023 21:45:53 DEBUG | Updated C9CWMP2.
+06/26/2023 21:45:53 DEBUG | Updated JKm001.
+06/26/2023 21:45:53 DEBUG | Updated P21GiNw.
+06/26/2023 21:45:53 DEBUG | Updated C9DRXC2.
+06/26/2023 21:45:53 DEBUG | Updated P11GzhE.
+06/26/2023 21:45:53 DEBUG | Updated C4D996Z.
+06/26/2023 21:45:53 DEBUG | Updated C0HQLY5.
+06/26/2023 21:45:53 DEBUG | Updated A10VKez.
+06/26/2023 21:45:53 DEBUG | Updated C9DM1Z2.
+06/26/2023 21:45:53 DEBUG | Updated P11Gebp.
+06/26/2023 21:45:53 DEBUG | Updated P21GELa.
+06/26/2023 21:45:53 DEBUG | Updated P21Gd2q.
+06/26/2023 21:45:53 DEBUG | Updated A10UeAm.
+06/26/2023 21:45:53 INFO | ---Finished MPC selection without error at 06/26/2023 21:45:53 PST
+06/26/2023 21:45:53 INFO | ---Done. will run again at 06/26/2023 22:00:53 PST.
+06/26/2023 22:00:53 INFO | ---Starting cycle at 06/26/2023 22:00:53 PST
+06/26/2023 22:00:54 INFO | --- Acquiring Candidates ---
+06/26/2023 22:00:54 INFO | Constructing Candidates from MPC List
+06/26/2023 22:00:56 INFO | Construction complete.
+06/26/2023 22:00:56 INFO | Querying the MPC for uncertainties...
+06/26/2023 22:01:08 INFO | Queried.
+06/26/2023 22:01:08 INFO | Updating P21GELa
+06/26/2023 22:01:08 INFO | Updating C9DRXC2
+06/26/2023 22:01:08 INFO | Updating C9DM1Z2
+06/26/2023 22:01:08 INFO | Updating C4LJFPZ
+06/26/2023 22:01:08 INFO | Updating C0HQZG5
+06/26/2023 22:01:08 INFO | Updating C4D996Z
+06/26/2023 22:01:08 INFO | Updating C0HQLY5
+06/26/2023 22:01:08 INFO | Updating A10VKez
+06/26/2023 22:01:08 INFO | Updating P11GAQl
+06/26/2023 22:01:08 INFO | Updating P11GzhE
+06/26/2023 22:01:08 INFO | Updating A10VJYv
+06/26/2023 22:01:08 INFO | Updating P21GiNw
+06/26/2023 22:01:08 INFO | Updating P11Gebp
+06/26/2023 22:01:08 INFO | Updating P21Gd2q
+06/26/2023 22:01:08 INFO | Updating C9CWMP2
+06/26/2023 22:01:08 INFO | Updating JKm001
+06/26/2023 22:01:08 INFO | Updating A10UeAm
+06/26/2023 22:01:08 INFO | -Assessed Candidates
+06/26/2023 22:01:08 INFO | New (0)
+06/26/2023 22:01:08 DEBUG | []
+06/26/2023 22:01:08 INFO | Static (0)
+06/26/2023 22:01:08 DEBUG | []
+06/26/2023 22:01:08 INFO | Updated (17)
+06/26/2023 22:01:08 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate P21Gd2q (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/26/2023 22:01:08 INFO | Removed (0)
+06/26/2023 22:01:08 DEBUG | []
+06/26/2023 22:01:08 INFO | ---Finished MPC logging without error at 06/26/2023 22:01:08 PST
+06/26/2023 22:01:08 INFO | --- Selecting ---
+06/26/2023 22:01:08 INFO | Finding observability and evaluating 17 objects.
+06/26/2023 22:01:11 DEBUG | Found window for A10VJYv!
+06/26/2023 22:01:11 DEBUG | Found window for P11GAQl!
+06/26/2023 22:01:11 DEBUG | Found window for C0HQZG5!
+06/26/2023 22:01:11 DEBUG | Found window for C4LJFPZ!
+06/26/2023 22:01:11 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/26/2023 22:01:11 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/26/2023 22:01:11 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/26/2023 22:01:11 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/26/2023 22:01:11 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/26/2023 22:01:11 DEBUG | Found window for C4D996Z!
+06/26/2023 22:01:11 DEBUG | Found window for C0HQLY5!
+06/26/2023 22:01:11 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/26/2023 22:01:11 DEBUG | Found window for C9DM1Z2!
+06/26/2023 22:01:11 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/26/2023 22:01:11 DEBUG | Found window for P21GELa!
+06/26/2023 22:01:11 DEBUG | Found window for P21Gd2q!
+06/26/2023 22:01:11 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/26/2023 22:01:11 INFO | Rejecting targets
+06/26/2023 22:01:11 DEBUG | Rejected A10VJYv for error limit.
+06/26/2023 22:01:11 DEBUG | Rejected P11GAQl for magnitude limit.
+06/26/2023 22:01:11 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/26/2023 22:01:11 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/26/2023 22:01:11 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/26/2023 22:01:11 DEBUG | Rejected JKm001 for magnitude limit.
+06/26/2023 22:01:11 DEBUG | Rejected C4D996Z for magnitude limit.
+06/26/2023 22:01:11 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/26/2023 22:01:11 DEBUG | Rejected P11Gebp for error limit.
+06/26/2023 22:01:11 DEBUG | Rejected P21Gd2q for magnitude limit.
+06/26/2023 22:01:11 INFO | Updating database
+06/26/2023 22:01:11 DEBUG | Updated A10VJYv.
+06/26/2023 22:01:11 DEBUG | Updated P11GAQl.
+06/26/2023 22:01:11 DEBUG | Updated C0HQZG5.
+06/26/2023 22:01:11 DEBUG | Updated C4LJFPZ.
+06/26/2023 22:01:11 DEBUG | Updated C9CWMP2.
+06/26/2023 22:01:11 DEBUG | Updated JKm001.
+06/26/2023 22:01:11 DEBUG | Updated P21GiNw.
+06/26/2023 22:01:11 DEBUG | Updated C9DRXC2.
+06/26/2023 22:01:11 DEBUG | Updated P11GzhE.
+06/26/2023 22:01:11 DEBUG | Updated C4D996Z.
+06/26/2023 22:01:11 DEBUG | Updated C0HQLY5.
+06/26/2023 22:01:11 DEBUG | Updated A10VKez.
+06/26/2023 22:01:11 DEBUG | Updated C9DM1Z2.
+06/26/2023 22:01:11 DEBUG | Updated P11Gebp.
+06/26/2023 22:01:11 DEBUG | Updated P21GELa.
+06/26/2023 22:01:11 DEBUG | Updated P21Gd2q.
+06/26/2023 22:01:11 DEBUG | Updated A10UeAm.
+06/26/2023 22:01:11 INFO | ---Finished MPC selection without error at 06/26/2023 22:01:11 PST
+06/26/2023 22:01:11 INFO | ---Done. will run again at 06/26/2023 22:16:11 PST.
+06/26/2023 22:16:11 INFO | ---Starting cycle at 06/26/2023 22:16:11 PST
+06/26/2023 22:16:11 INFO | --- Acquiring Candidates ---
+06/26/2023 22:16:14 INFO | Constructing Candidates from MPC List
+06/27/2023 11:39:07 INFO | ---Starting cycle at 06/27/2023 11:39:07 PST
+06/27/2023 11:39:08 INFO | --- Acquiring Candidates ---
+06/27/2023 11:39:08 INFO | Constructing Candidates from MPC List
+06/27/2023 11:39:13 INFO | Construction complete.
+06/27/2023 11:39:13 INFO | Querying the MPC for uncertainties...
+06/27/2023 11:39:58 INFO | Queried.
+06/27/2023 11:39:58 INFO | Updating P21GELa
+06/27/2023 11:39:58 INFO | Updating C9DRXC2
+06/27/2023 11:39:58 INFO | Updating C9DM1Z2
+06/27/2023 11:39:58 INFO | Updating C4LJFPZ
+06/27/2023 11:39:58 INFO | Updating C0HQZG5
+06/27/2023 11:39:58 INFO | Updating C4D996Z
+06/27/2023 11:39:58 INFO | Updating C0HQLY5
+06/27/2023 11:39:58 INFO | Updating A10VKez
+06/27/2023 11:39:58 INFO | Updating P11GAQl
+06/27/2023 11:39:58 INFO | Updating P11GzhE
+06/27/2023 11:39:58 INFO | Updating A10VJYv
+06/27/2023 11:39:58 INFO | Updating P21GiNw
+06/27/2023 11:39:58 INFO | Updating P11Gebp
+06/27/2023 11:39:58 INFO | Updating C9CWMP2
+06/27/2023 11:39:58 INFO | Updating JKm001
+06/27/2023 11:39:58 INFO | Updating A10UeAm
+06/27/2023 11:39:58 INFO | Candidate P21Gd2q is in the database but not in the MPC table. Marking as removed.
+06/27/2023 11:39:58 DEBUG | Created P21GGRT with ID 7888161264000467238.
+06/27/2023 11:39:58 DEBUG | Created P21GGRl with ID -3935026414964780742.
+06/27/2023 11:39:58 DEBUG | Created P11GF6P with ID -4498519172061183134.
+06/27/2023 11:39:58 DEBUG | Created P21GF6O with ID -6349997516754039865.
+06/27/2023 11:39:58 DEBUG | Created C9DT362 with ID -2117903870614638311.
+06/27/2023 11:39:58 DEBUG | Created P21GF6y with ID -7759736886648763914.
+06/27/2023 11:39:58 DEBUG | Created C9DT2X2 with ID -143005568237104247.
+06/27/2023 11:39:58 DEBUG | Created C3RA2R1 with ID 554364634443156092.
+06/27/2023 11:39:58 INFO | -Assessed Candidates
+06/27/2023 11:39:58 INFO | New (8)
+06/27/2023 11:39:58 DEBUG | [Candidate P21GGRT (MPC NEO), Candidate P21GGRl (MPC NEO), Candidate P11GF6P (MPC NEO), Candidate P21GF6O (MPC NEO), Candidate C9DT362 (MPC NEO), Candidate P21GF6y (MPC NEO), Candidate C9DT2X2 (MPC NEO), Candidate C3RA2R1 (MPC NEO)]
+06/27/2023 11:39:58 INFO | Static (0)
+06/27/2023 11:39:58 DEBUG | []
+06/27/2023 11:39:58 INFO | Updated (16)
+06/27/2023 11:39:58 DEBUG | [Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C4LJFPZ (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/27/2023 11:39:58 INFO | Removed (1)
+06/27/2023 11:39:58 DEBUG | [Candidate P21Gd2q (MPC NEO)]
+06/27/2023 11:39:58 INFO | ---Finished MPC logging without error at 06/27/2023 11:39:58 PST
+06/27/2023 11:39:58 INFO | --- Selecting ---
+06/27/2023 11:39:58 INFO | Finding observability and evaluating 24 objects.
+06/27/2023 11:40:16 DEBUG | Found window for A10VJYv!
+06/27/2023 11:40:16 DEBUG | Found window for P11GAQl!
+06/27/2023 11:40:16 DEBUG | Found window for C0HQZG5!
+06/27/2023 11:40:16 DEBUG | Found window for P21GF6y!
+06/27/2023 11:40:16 DEBUG | Found window for C4LJFPZ!
+06/27/2023 11:40:16 DEBUG | Found window for P21GF6O!
+06/27/2023 11:40:16 DEBUG | Found window for C9CWMP2!
+06/27/2023 11:40:16 DEBUG | Found window for JKm001!
+06/27/2023 11:40:16 DEBUG | Found window for P21GiNw!
+06/27/2023 11:40:16 DEBUG | Found window for P11GF6P!
+06/27/2023 11:40:16 DEBUG | Found window for P21GGRl!
+06/27/2023 11:40:16 DEBUG | Found window for C9DRXC2!
+06/27/2023 11:40:16 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/27/2023 11:40:16 DEBUG | Found window for C9DT362!
+06/27/2023 11:40:16 DEBUG | Found window for C4D996Z!
+06/27/2023 11:40:16 DEBUG | Found window for C9DT2X2!
+06/27/2023 11:40:16 DEBUG | Found window for C3RA2R1!
+06/27/2023 11:40:16 DEBUG | Found window for C0HQLY5!
+06/27/2023 11:40:16 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/27/2023 11:40:16 DEBUG | Found window for C9DM1Z2!
+06/27/2023 11:40:16 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/27/2023 11:40:16 DEBUG | Found window for P21GELa!
+06/27/2023 11:40:16 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/27/2023 11:40:16 DEBUG | Found window for P21GGRT!
+06/27/2023 11:40:16 INFO | Rejecting targets
+06/27/2023 11:40:16 DEBUG | Rejected A10VJYv for error limit.
+06/27/2023 11:40:16 DEBUG | Rejected P11GAQl for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected C4LJFPZ for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected JKm001 for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected P11GF6P for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected C4D996Z for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected C9DT2X2 for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/27/2023 11:40:16 DEBUG | Rejected P11Gebp for error limit.
+06/27/2023 11:40:16 DEBUG | Rejected P21GGRT for magnitude limit.
+06/27/2023 11:40:16 INFO | Updating database
+06/27/2023 11:40:16 DEBUG | Updated A10VJYv.
+06/27/2023 11:40:16 DEBUG | Updated P11GAQl.
+06/27/2023 11:40:16 DEBUG | Updated C0HQZG5.
+06/27/2023 11:40:16 DEBUG | Updated P21GF6y.
+06/27/2023 11:40:16 DEBUG | Updated C4LJFPZ.
+06/27/2023 11:40:16 DEBUG | Updated P21GF6O.
+06/27/2023 11:40:16 DEBUG | Updated C9CWMP2.
+06/27/2023 11:40:16 DEBUG | Updated JKm001.
+06/27/2023 11:40:16 DEBUG | Updated P21GiNw.
+06/27/2023 11:40:16 DEBUG | Updated P11GF6P.
+06/27/2023 11:40:16 DEBUG | Updated P21GGRl.
+06/27/2023 11:40:16 DEBUG | Updated C9DRXC2.
+06/27/2023 11:40:16 DEBUG | Updated P11GzhE.
+06/27/2023 11:40:16 DEBUG | Updated C9DT362.
+06/27/2023 11:40:16 DEBUG | Updated C4D996Z.
+06/27/2023 11:40:16 DEBUG | Updated C9DT2X2.
+06/27/2023 11:40:16 DEBUG | Updated C3RA2R1.
+06/27/2023 11:40:16 DEBUG | Updated C0HQLY5.
+06/27/2023 11:40:16 DEBUG | Updated A10VKez.
+06/27/2023 11:40:16 DEBUG | Updated C9DM1Z2.
+06/27/2023 11:40:16 DEBUG | Updated P11Gebp.
+06/27/2023 11:40:16 DEBUG | Updated P21GELa.
+06/27/2023 11:40:16 DEBUG | Updated A10UeAm.
+06/27/2023 11:40:16 DEBUG | Updated P21GGRT.
+06/27/2023 11:40:16 INFO | ---Finished MPC selection without error at 06/27/2023 11:40:16 PST
+06/27/2023 11:40:16 INFO | ---Done. will run again at 06/27/2023 11:55:16 PST.
+06/27/2023 16:26:43 INFO | ---Starting cycle at 06/27/2023 16:26:43 PST
+06/27/2023 16:26:44 INFO | --- Acquiring Candidates ---
+06/27/2023 16:26:45 INFO | Constructing Candidates from MPC List
+06/27/2023 16:26:48 INFO | Construction complete.
+06/27/2023 16:26:48 INFO | Querying the MPC for uncertainties...
+06/27/2023 16:27:47 INFO | Queried.
+06/27/2023 16:27:47 INFO | Updating P21GGRT
+06/27/2023 16:27:47 INFO | Updating P21GGRl
+06/27/2023 16:27:47 INFO | Updating P11GF6P
+06/27/2023 16:27:47 INFO | Updating P21GF6O
+06/27/2023 16:27:47 INFO | Updating C9DT362
+06/27/2023 16:27:47 INFO | Updating P21GF6y
+06/27/2023 16:27:47 INFO | Updating C9DT2X2
+06/27/2023 16:27:47 INFO | Updating C3RA2R1
+06/27/2023 16:27:47 INFO | Updating P21GELa
+06/27/2023 16:27:47 INFO | Updating C9DRXC2
+06/27/2023 16:27:47 INFO | Updating C9DM1Z2
+06/27/2023 16:27:47 INFO | Updating C0HQZG5
+06/27/2023 16:27:47 INFO | Updating C4D996Z
+06/27/2023 16:27:47 INFO | Updating C0HQLY5
+06/27/2023 16:27:47 INFO | Updating A10VKez
+06/27/2023 16:27:47 INFO | Updating P11GAQl
+06/27/2023 16:27:47 INFO | Updating P11GzhE
+06/27/2023 16:27:47 INFO | Updating A10VJYv
+06/27/2023 16:27:47 INFO | Updating P21GiNw
+06/27/2023 16:27:47 INFO | Updating P11Gebp
+06/27/2023 16:27:47 INFO | Updating C9CWMP2
+06/27/2023 16:27:47 INFO | Updating JKm001
+06/27/2023 16:27:47 INFO | Updating A10UeAm
+06/27/2023 16:27:47 INFO | Candidate C4LJFPZ is in the database but not in the MPC table. Marking as removed.
+06/27/2023 16:27:47 INFO | -Assessed Candidates
+06/27/2023 16:27:47 INFO | New (0)
+06/27/2023 16:27:47 DEBUG | []
+06/27/2023 16:27:47 INFO | Static (0)
+06/27/2023 16:27:47 DEBUG | []
+06/27/2023 16:27:47 INFO | Updated (23)
+06/27/2023 16:27:47 DEBUG | [Candidate P21GGRT (MPC NEO), Candidate P21GGRl (MPC NEO), Candidate P11GF6P (MPC NEO), Candidate P21GF6O (MPC NEO), Candidate C9DT362 (MPC NEO), Candidate P21GF6y (MPC NEO), Candidate C9DT2X2 (MPC NEO), Candidate C3RA2R1 (MPC NEO), Candidate P21GELa (MPC NEO), Candidate C9DRXC2 (MPC NEO), Candidate C9DM1Z2 (MPC NEO), Candidate C0HQZG5 (MPC NEO), Candidate C4D996Z (MPC NEO), Candidate C0HQLY5 (MPC NEO), Candidate A10VKez (MPC NEO), Candidate P11GAQl (MPC NEO), Candidate P11GzhE (MPC NEO), Candidate A10VJYv (MPC NEO), Candidate P21GiNw (MPC NEO), Candidate P11Gebp (MPC NEO), Candidate C9CWMP2 (MPC NEO), Candidate JKm001 (MPC NEO), Candidate A10UeAm (MPC NEO)]
+06/27/2023 16:27:47 INFO | Removed (1)
+06/27/2023 16:27:47 DEBUG | [Candidate C4LJFPZ (MPC NEO)]
+06/27/2023 16:27:47 INFO | ---Finished MPC logging without error at 06/27/2023 16:27:47 PST
+06/27/2023 16:27:47 INFO | --- Selecting ---
+06/27/2023 16:27:47 INFO | Finding observability and evaluating 23 objects.
+06/27/2023 16:27:51 DEBUG | Found window for A10VJYv!
+06/27/2023 16:27:51 DEBUG | Found window for P11GAQl!
+06/27/2023 16:27:51 DEBUG | Found window for C0HQZG5!
+06/27/2023 16:27:51 DEBUG | Found window for P21GF6y!
+06/27/2023 16:27:51 DEBUG | Found window for P21GF6O!
+06/27/2023 16:27:51 DEBUG | Got None window for C9CWMP2. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Got None window for JKm001. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Got None window for P21GiNw. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Found window for P11GF6P!
+06/27/2023 16:27:51 DEBUG | Found window for P21GGRl!
+06/27/2023 16:27:51 DEBUG | Got None window for C9DRXC2. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Got None window for P11GzhE. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Found window for C9DT362!
+06/27/2023 16:27:51 DEBUG | Found window for C4D996Z!
+06/27/2023 16:27:51 DEBUG | Found window for C9DT2X2!
+06/27/2023 16:27:51 DEBUG | Found window for C3RA2R1!
+06/27/2023 16:27:51 DEBUG | Found window for C0HQLY5!
+06/27/2023 16:27:51 DEBUG | Got None window for A10VKez. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Found window for C9DM1Z2!
+06/27/2023 16:27:51 DEBUG | Got None window for P11Gebp. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Found window for P21GELa!
+06/27/2023 16:27:51 DEBUG | Got None window for A10UeAm. Rejected for Observability.
+06/27/2023 16:27:51 DEBUG | Found window for P21GGRT!
+06/27/2023 16:27:51 INFO | Rejecting targets
+06/27/2023 16:27:51 DEBUG | Rejected A10VJYv for error limit.
+06/27/2023 16:27:51 DEBUG | Rejected P11GAQl for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected C0HQZG5 for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected C9CWMP2 for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected JKm001 for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected P11GF6P for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected C4D996Z for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected C9DT2X2 for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected C0HQLY5 for magnitude limit.
+06/27/2023 16:27:51 DEBUG | Rejected P11Gebp for error limit.
+06/27/2023 16:27:51 INFO | Updating database
+06/27/2023 16:27:51 DEBUG | Updated A10VJYv.
+06/27/2023 16:27:51 DEBUG | Updated P11GAQl.
+06/27/2023 16:27:51 DEBUG | Updated C0HQZG5.
+06/27/2023 16:27:51 DEBUG | Updated P21GF6y.
+06/27/2023 16:27:51 DEBUG | Updated P21GF6O.
+06/27/2023 16:27:51 DEBUG | Updated C9CWMP2.
+06/27/2023 16:27:51 DEBUG | Updated JKm001.
+06/27/2023 16:27:51 DEBUG | Updated P21GiNw.
+06/27/2023 16:27:51 DEBUG | Updated P11GF6P.
+06/27/2023 16:27:51 DEBUG | Updated P21GGRl.
+06/27/2023 16:27:51 DEBUG | Updated C9DRXC2.
+06/27/2023 16:27:51 DEBUG | Updated P11GzhE.
+06/27/2023 16:27:51 DEBUG | Updated C9DT362.
+06/27/2023 16:27:51 DEBUG | Updated C4D996Z.
+06/27/2023 16:27:51 DEBUG | Updated C9DT2X2.
+06/27/2023 16:27:51 DEBUG | Updated C3RA2R1.
+06/27/2023 16:27:51 DEBUG | Updated C0HQLY5.
+06/27/2023 16:27:51 DEBUG | Updated A10VKez.
+06/27/2023 16:27:51 DEBUG | Updated C9DM1Z2.
+06/27/2023 16:27:51 DEBUG | Updated P11Gebp.
+06/27/2023 16:27:51 DEBUG | Updated P21GELa.
+06/27/2023 16:27:51 DEBUG | Updated A10UeAm.
+06/27/2023 16:27:51 DEBUG | Updated P21GGRT.
+06/27/2023 16:27:51 INFO | ---Finished MPC selection without error at 06/27/2023 16:27:51 PST
+06/27/2023 16:27:51 INFO | ---Done. will run again at 06/27/2023 16:42:51 PST.

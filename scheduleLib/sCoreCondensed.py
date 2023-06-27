@@ -175,16 +175,16 @@ def angleToHMS(angle):
 
 # take time as string from scheduler, return time object
 def stringToTime(tstring):  # example input: 2022-12-26T05:25:00.000
-    time = datetime.strptime(tstring, '%Y-%m-%dT%I:%M:%S.000')
+    time = datetime.strptime(tstring, '%Y-%m-%dT%H:%M:%S.000')
     return time.replace(tzinfo=pytz.UTC)
 
 
 def timeToString(time):
-    return datetime.strftime(time, '%Y-%m-%dT%I:%M:%S.000')
+    return datetime.strftime(time, '%Y-%m-%dT%H:%M:%S.000')
 
 
 def friendlyString(time):
-    return datetime.strftime(time, '%m/%d %I:%M')
+    return datetime.strftime(time, '%m/%d %H:%M')
 
 
 # takes existing schedule file, returns schedule object
