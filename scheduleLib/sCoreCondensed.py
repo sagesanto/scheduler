@@ -1,5 +1,21 @@
-import pytz
+import os, sys, fileinput, pytz
+from datetime import datetime, time, timedelta
 from dateutil.relativedelta import relativedelta
+import astropy
+from astral.sun import sun
+from astral import LocationInfo
+from astropy.coordinates import EarthLocation
+from astropy.time import Time
+from astropy import units as u
+from astral.sun import sun
+from astral.sun import sun
+from astral import LocationInfo, zoneinfo
+from astral import LocationInfo
+from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone, timedelta
+from astropy import time, units as u
+from astropy import time, units as u
+from astropy.coordinates import AltAz, EarthLocation, SkyCoord
 
 
 class Observation:
@@ -33,7 +49,8 @@ class Observation:
             return cls(startTime, targetName, RA, Dec, exposureTime, numExposures, duration, filter, ephemTime, dRA,
                        dDec, description)
         except Exception as e:
-            raise Exception("Failed to create observation from line \"" + line + "\"")
+            raise e
+            # raise Exception("Failed to create observation from line \"" + line + "\"")
 
     # generate a Scheduler.txt line
     def genLine(self, num):  # num is the number (1-index) of times this object has been added to the schedule
@@ -161,7 +178,7 @@ class Schedule:
 # to maximize the chances that the ephemTime has the correct date on it (if on border between days, UTC), it will assume the month/day/year of the middle of the observation
 def processEphemTime(eTime, midTime):
     h = eTime[:2]
-    m = eTime[2:]
+    m = eTime[2:-1]
     return midTime.replace(hour=int(h), minute=int(m), second=0)
 
 

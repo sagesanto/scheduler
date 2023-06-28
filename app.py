@@ -1,15 +1,39 @@
 import sys, os, keyring  # manage files, api key
+from abc import abstractmethod
 
 import pandas as pd
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFileDialog, QButtonGroup, QTableWidget, \
     QTableWidgetItem as QTableItem, QListWidget, QLineEdit
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, pyqtSignal, QRunnable, QObject, QThreadPool
 from PyQt6 import uic, QtCore
-from PyQt6.QtCore import QObject
 from MainWindow import Ui_MainWindow
 from scheduleLib import genUtils, mpcUtils, mpcTargetSelectorCore, asyncUtils
 from scheduleLib.candidateDatabase import Candidate, CandidateDatabase
 from datetime import datetime, timedelta
+
+
+class Worker(QRunnable):
+    @abstractmethod
+    def __init__(self):
+        super().__init__()
+        self.finished = pyqtSignal()
+        self.progress = pyqtSignal(int)
+
+    @abstractmethod
+    def run(self):
+        self.progress.emit(1)
+        self.finished.emit()
+
+
+class Ephemerides(Worker):
+    def __init__(self):
+        super().__init__()
+        self.finished = pyqtSignal()
+        self.progress = pyqtSignal(int)
+        self.error = pyqtSignal(str)
+
+    def run(self):
+        pass
 
 
 def link(itemEvent, function):
@@ -26,18 +50,19 @@ def removeSelectedItems(tableOrList):
 def addEntryToList(entry, list: QListWidget):
     list.addItem(entry)
 
-def addLineContentsToList(lineEdit:QLineEdit,list:QListWidget):
+
+def addLineContentsToList(lineEdit: QLineEdit, list: QListWidget):
     addEntryToList(lineEdit.text(), list)
     lineEdit.clear()
 
+
+
 def getSelected(table, colIndex):
-    print("getting")
     selected = []
     indexes = table.selectionModel().selectedRows(column=1)
     model = table.model()
     for index in indexes:
         selected.append(model.data(model.index(index.row(), colIndex)))
-    print(selected)
     return selected
 
 
@@ -45,7 +70,6 @@ def loadDfInTable(dataframe: pd.DataFrame, table: QTableWidget, checkboxes=False
     df = dataframe.copy()  # .reset_index()
     columnHeaders = df.columns
     numRows, numCols = len(df.index), len(columnHeaders)
-    print(numRows, numCols)
     table.setRowCount(numRows)
     table.setColumnCount(numCols)
     for i in range(numRows):
@@ -71,27 +95,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setConnections()
         self.filterProxyModel = QtCore.QSortFilterProxyModel()
         self.candidatesByID = None
+        self.pool = QThreadPool.globalInstance()
+        self.maxThreads = self.pool.maxThreadCount()
+        print("Max threads:", self.maxThreads)
 
+    def useCandidateTableEphemeris(self):
+        for desig in getSelected(self.candidateTable, 0):
+            addEntryToList(desig, self.ephemList)
+        self.tabWidget.setCurrentWidget(self.tabWidget.findChild(QWidget, "ephemsTab"))
+        # add the desigs of all selected candidates in the candidate table to the ephem table
+        # set the ephem tab as the active tab
+        #
 
-    # def useSelectedEphemeris(self):
-    #
-    #
     # def initializeStates(self):
-
 
     def setConnections(self):
         self.refreshCandButtons.clicked.connect(lambda refresh: self.getTargets().displayCandidates())
-        # self.candidateTable.horizontalHeader().sectionClicked.connect(lambda c: print("clicked"))
         self.showRejectedCheckbox.stateChanged.connect(self.displayCandidates)
         self.showRemovedCheckbox.stateChanged.connect(self.displayCandidates)
-        self.candidateEphemerisButton.clicked.connect(lambda f: getSelected(self.candidateTable, 0))
+        self.candidateEphemerisButton.clicked.connect(self.useCandidateTableEphemeris)
         self.ephemRemoveSelected.clicked.connect(lambda g: removeSelectedItems(self.ephemList))
         self.ephemNameEntry.returnPressed.connect(lambda: addLineContentsToList(self.ephemNameEntry, self.ephemList))
-        # , QtCore.PYQT_SIGNAL("sectionClicked()"), lambda c: print("clicked"))
-        # self.candidateTable.selectionModel().selectionChanged.connect(
-        #     self.tableSelectionChanged
-        # )
-        # self.candidateTable.clicked.connect(self.tableSingleClicked)
 
     def getTargets(self):
         print("get")

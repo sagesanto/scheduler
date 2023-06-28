@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="scheduleTab">
      <attribute name="title">
@@ -1009,11 +1009,6 @@
                <property name="itemAlignment">
                 <set>Qt::AlignLeading</set>
                </property>
-               <item>
-                <property name="text">
-                 <string>h</string>
-                </property>
-               </item>
               </widget>
              </item>
             </layout>
