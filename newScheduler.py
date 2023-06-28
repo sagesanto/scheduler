@@ -163,7 +163,7 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
         times = [sCoreCondensed.friendlyString(t.datetime) for t in
                  astroplan.time_grid_from_range((start, end), self.time_resolution)]
         arrayDf = pd.DataFrame(scoreArray, columns=times, index=bNames)
-        print(arrayDf)
+        # print(arrayDf)
         arrayDf.to_csv("arrayDf.csv")
 
         # this calculates the scores for the blocks at each time, returning a numpy array with dimensions (rows: number of blocks, columns: schedule length/time_resolution (time slots) )
@@ -379,9 +379,16 @@ def createSchedule(startTime, endTime):
     configDict = {}
 
     # import configurations from python files placed in the schedulerConfigs folder
-    files = os.listdir("schedulerConfigs")
-    files = ["schedulerConfigs." + f[:-3] for f in os.listdir("./schedulerConfigs") if
-             f[-3:] == ".py" and "init" not in f]
+    # files = os.listdir("schedulerConfigs")
+    files = []
+    # files = ["schedulerConfigs." + v+"."+i[:-3] for v,i in {d:f for r,d,f in os.walk("./schedulerConfigs/")} if i.endswith(".py") and "schedule" in i]
+    # print([(r,f) for r,d,f in os.walk("./schedulerConfigs/",topdown=False)])
+    # files = ["schedulerConfigs." + r+"."+i[:-3] for r,i in ((g,h) for g,h in ((r,f) for r,d,f in os.walk("./schedulerConfigs/",topdown=False) if len(r) and len(d) and len(f))) if i.endswith(".py") and "schedule" in i]
+    for root, dir, file in os.walk("./schedulerConfigs"):
+        files += [".".join([root.replace("./","").replace("\\","."), f[:-3]]) for f in file if f.endswith(".py") and "schedule" in f]
+    print(files)
+    # files = ["schedulerConfigs." + f[:-3] for f in [i for i in [os.listdir("./schedulerConfigs/"+h) for h in os.listdir("./schedulerConfigs/") if os.path.isdir(h)]] if
+    #          f[-3:] == ".py" and "init" not in f]
     # maybe wrap this in a try?:
     for file in files:
         module = import_module(file, "schedulerConfigs")

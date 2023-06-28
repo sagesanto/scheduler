@@ -122,10 +122,8 @@ def timeFromEphem(ephem):
 def candidateToScheduleLine(candidate: Candidate, startDt, centerDt: datetime,name=None):
     c = candidate
     truncated = centerDt - timedelta(minutes=(centerDt.minute - 5))
-    print("Ephems for", truncated)
     ephems = pullEphem(mpcInst, c.CandidateName, truncated,
                        0, True)
-    print(ephems.keys())
     lineAtObs = ephems[centerDt].split("|")
     lineAtObs[0] = startDt.strftime('%Y-%m-%dT%H:%M:%S.000')
     line = "|".join(lineAtObs)

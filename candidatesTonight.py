@@ -32,7 +32,7 @@ def visualizeObservability(candidates: list, beginDt, endDt, schedule=None):
     :type schedule: Table
 
     """
-    print(beginDt, endDt)
+    # print(beginDt, endDt)
     # Filter candidates with observability windows
     observabilityCandidates = [c for c in candidates if
                                c.hasField("StartObservability") and c.hasField("EndObservability")]

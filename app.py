@@ -2,7 +2,7 @@ import sys, os, keyring  # manage files, api key
 
 import pandas as pd
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFileDialog, QButtonGroup, QTableWidget, \
-    QTableWidgetItem as QTableItem
+    QTableWidgetItem as QTableItem, QListWidget, QLineEdit
 from PyQt6.QtCore import Qt
 from PyQt6 import uic, QtCore
 from PyQt6.QtCore import QObject
@@ -16,7 +16,21 @@ def link(itemEvent, function):
     itemEvent.connect(function)
 
 
-def getSelected(table,colIndex):
+def removeSelectedItems(tableOrList):
+    listItems = tableOrList.selectedItems()
+    if not listItems: return
+    for item in listItems:
+        tableOrList.takeItem(tableOrList.row(item))
+
+
+def addEntryToList(entry, list: QListWidget):
+    list.addItem(entry)
+
+def addLineContentsToList(lineEdit:QLineEdit,list:QListWidget):
+    addEntryToList(lineEdit.text(), list)
+    lineEdit.clear()
+
+def getSelected(table, colIndex):
     print("getting")
     selected = []
     indexes = table.selectionModel().selectedRows(column=1)
@@ -34,19 +48,13 @@ def loadDfInTable(dataframe: pd.DataFrame, table: QTableWidget, checkboxes=False
     print(numRows, numCols)
     table.setRowCount(numRows)
     table.setColumnCount(numCols)
-    checkBoxes = {}
     for i in range(numRows):
         for j in range(numCols):
             item = QTableItem(str(df.iloc[i][j]))
-            # if j == 0 and checkboxes:
-            #     item.setFlags(Qt.ItemFlag.ItemIsUserCheckable | Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable)
-            #     item.setCheckState(Qt.CheckState.Unchecked)
-            #     checkBoxes[df.iloc[i][j]] = item
             table.setItem(i, j, item)
     table.resizeColumnsToContents()
     table.resizeRowsToContents()
     table.setHorizontalHeaderLabels(columnHeaders)
-    return checkBoxes
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
@@ -57,21 +65,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.sunriseUTC, self.sunsetUTC = genUtils.roundToTenMinutes(self.sunriseUTC), genUtils.roundToTenMinutes(
             self.sunsetUTC)
         self.sunriseUTC -= timedelta(hours=1)
-        self.dbConnection = CandidateDatabase("candidate database.db", "App")
+        self.dbConnection = CandidateDatabase("candidate database.db", "Maestro")
         self.candidates = None
         self.candidateDf = None
         self.setConnections()
         self.filterProxyModel = QtCore.QSortFilterProxyModel()
-        self.selectedCandidates = []
         self.candidatesByID = None
 
-    def candidateSelected(self, ID):
-        print(ID, "toggled")
-        c = self.candidatesByID[ID]
-        if c not in self.selectedCandidates:
-            self.selectedCandidates.append(c)
-        else:
-            self.selectedCandidates.remove(c)
 
     # def useSelectedEphemeris(self):
     #
@@ -81,10 +81,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def setConnections(self):
         self.refreshCandButtons.clicked.connect(lambda refresh: self.getTargets().displayCandidates())
-        self.candidateTable.horizontalHeader().sectionClicked.connect(lambda c: print("clicked"))
+        # self.candidateTable.horizontalHeader().sectionClicked.connect(lambda c: print("clicked"))
         self.showRejectedCheckbox.stateChanged.connect(self.displayCandidates)
         self.showRemovedCheckbox.stateChanged.connect(self.displayCandidates)
-        self.candidateEphemerisButton.clicked.connect(lambda g: getSelected(self.candidateTable, 1))
+        self.candidateEphemerisButton.clicked.connect(lambda f: getSelected(self.candidateTable, 0))
+        self.ephemRemoveSelected.clicked.connect(lambda g: removeSelectedItems(self.ephemList))
+        self.ephemNameEntry.returnPressed.connect(lambda: addLineContentsToList(self.ephemNameEntry, self.ephemList))
         # , QtCore.PYQT_SIGNAL("sectionClicked()"), lambda c: print("clicked"))
         # self.candidateTable.selectionModel().selectionChanged.connect(
         #     self.tableSelectionChanged
@@ -109,30 +111,20 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             dispDf = dispDf[dispDf["RejectedReason"].isna()]
         if not self.showRemovedCheckbox.isChecked() and "RemovedReason" in dispDf.columns:
             dispDf = dispDf[dispDf["RemovedReason"].isna()]
-        checkBoxes = loadDfInTable(dispDf, self.candidateTable, checkboxes=True)
-        # # for key, box in checkBoxes.items():
-        # #     box.stateChange.connect(lambda click: print("c"))
+        loadDfInTable(dispDf, self.candidateTable, checkboxes=True)
+
         return self
 
-    def tableSelectionChanged(
-            self, selected: QtCore.QItemSelection, deselected: QtCore.QItemSelection
-    ):
-        """Catch Selection changed behaviour"""
-
-        for index in selected.indexes():
-            # self.filterProxyModel.setData(index, Qt.CheckState.Checked, Qt.ItemDataRole.CheckStateRole)
-            print("selected", index)
-        for index in deselected.indexes():
-            print("deselected", index)
-            # self.filterProxyModel.setData(index, Qt.CheckState.Unchecked, Qt.ItemDataRole.CheckStateRole)
-
-    def tableSingleClicked(self, modelIndex: QtCore.QModelIndex):
-        # print(modelIndex)
-        checkState = self.filterProxyModel.itemData(modelIndex).get(10)
-        if (checkState == 2 and modelIndex not in self.candidateTable.selectedIndexes()) \
-                or (checkState == 0 and modelIndex in self.candidateTable.selectedIndexes()):
-            self.candidateTable.selectionModel().select(modelIndex, QtCore.QItemSelectionModel.SelectionFlag.Toggle)
-            print(modelIndex)
+    def getEphemeris(self):
+        pass
+        # launch waiting window
+        # gather the candidates indicated
+        # read the specified ephem parameters
+        # sort candidates by config
+        # fire off (asynchronously) to their respective configs to get ephems, en masse
+        # collect the results (lists of strings, each list being its own file, each string being its own line)
+        # launch save window
+        # save the files to the indicated location
 
 
 app = QApplication([])

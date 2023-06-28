@@ -19,7 +19,7 @@ def reverseNonzeroRunInplace(arr):
 
 
 class MpcConfig(TypeConfiguration):
-    def __init__(self, scorer, maxMinutesWithoutFocus=30, numObs=2, minMinutesBetweenObs=120):
+    def __init__(self, scorer, maxMinutesWithoutFocus=65, numObs=2, minMinutesBetweenObs=45):
         self.scorer = scorer
         self.maxMinutesWithoutFocus = maxMinutesWithoutFocus  # max time, in minutes, that this object can be scheduled after the most recent focus loop
         self.numObs = numObs

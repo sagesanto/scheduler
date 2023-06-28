@@ -51,4 +51,5 @@ while True:
 
     logger.info("---Done. will run again at " + (dt.now() + timedelta(minutes=interval)).strftime(dateFormat) + " PST.")
     print("\n")
+    exit()
     time.sleep(interval * 60)
