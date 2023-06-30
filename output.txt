@@ -1,0 +1,30 @@
+Script stdout 1
+
+Script stdout 2
+
+Script stdout 3
+
+Total time: 00:05:00
+
+Total complete: 10%
+
+Script stdout 4
+
+Script stdout 5
+
+Total complete: 30%
+
+Elapsed time: 00:00:10
+
+Elapsed time: 00:00:50
+
+Total complete: 50%
+
+Elapsed time: 00:01:10
+
+Total complete: 100%
+
+Script stdout 6
+
+Script stdout 7
+

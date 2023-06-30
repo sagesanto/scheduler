@@ -464,8 +464,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>781</width>
-            <height>421</height>
+            <width>98</width>
+            <height>28</height>
            </rect>
           </property>
           <attribute name="label">
@@ -831,7 +831,7 @@
               </sizepolicy>
              </property>
              <property name="editable">
-              <bool>true</bool>
+              <bool>false</bool>
              </property>
              <property name="currentText">
               <string>Scheduler</string>
@@ -984,7 +984,7 @@
            <item>
             <layout class="QVBoxLayout" name="verticalLayout_6">
              <item>
-              <widget class="QListWidget" name="ephemList">
+              <widget class="QListView" name="ephemListView">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
                  <horstretch>0</horstretch>
@@ -1009,11 +1009,6 @@
                <property name="itemAlignment">
                 <set>Qt::AlignLeading</set>
                </property>
-               <item>
-                <property name="text">
-                 <string>h</string>
-                </property>
-               </item>
               </widget>
              </item>
             </layout>

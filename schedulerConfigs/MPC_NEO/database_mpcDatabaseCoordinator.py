@@ -49,7 +49,8 @@ while True:
     except Exception:
         logger.exception("Selecting targets failed! Skipping.")
 
-    logger.info("---Done. will run again at " + (dt.now() + timedelta(minutes=interval)).strftime(dateFormat) + " PST.")
+    # logger.info("---Done. will run again at " + (dt.now() + timedelta(minutes=interval)).strftime(dateFormat) + " PST.")
+    logger.info("---Done---")
     print("\n")
     exit()
-    time.sleep(interval * 60)
+    # time.sleep(interval * 60)

@@ -179,9 +179,6 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
         # ^ this is a placedholder right now, need to know how long before the beginning of our scheduling period the last SUCCESSFUL focus loop happened
         currentTime = startTime
 
-        scheduleDict = {}
-        scheduledNames = []
-
         while currentTime < self.schedule.end_time:
             scheduledDict = {b.target.name.split("_")[0]: b.start_time for b in self.schedule.observing_blocks}
             scheduledNames = [b.target.name.split("_")[0] for b in self.schedule.observing_blocks]
@@ -204,13 +201,6 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                     if T1 is not None:  # transition needed
                         schedQueue.put(T1)
                         runningTime = T1.end_time
-                # print("(run time + block duration - lastFocusTime) = ", runningTime, "+", block.duration, "-",
-                #       lastFocusTime, "=", (runningTime + block.duration), "-", lastFocusTime, "=",
-                #       (runningTime + block.duration) - lastFocusTime)
-                # print("This", "is" if (runningTime + block.duration) - lastFocusTime >= timedelta(
-                #     minutes=config.maxMinutesWithoutFocus) else "is not", "greater than",
-                #       timedelta(minutes=config.maxMinutesWithoutFocus))
-                # print((runningTime + block.duration) - lastFocusTime)
                 if (runningTime + block.duration) - lastFocusTime >= timedelta(
                         minutes=config.maxMinutesWithoutFocus):  # focus loop needed
                     focusBlock = makeFocusBlock()
@@ -242,9 +232,6 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                     if config.minMinutesBetweenObs:
                         if runningTime - scheduledDict[block.target.name[:-2]] < timedelta(
                                 minutes=config.minMinutesBetweenObs):
-                            # print("Skipping", block.target.name, "at time", currentTime,
-                            #       "because it's too close to the last occurrence at",
-                            #       scheduledDict[block.target.name[:-2]])
                             continue
                 schedQueue.put(block)
                 score = scoreArray[i, runningIdx]
@@ -257,9 +244,7 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
 
             maxIdx = max(prospectiveDict.keys())
             bestQueue = prospectiveDict[maxIdx]
-            # print(prospectiveDict)
-            # print(maxIdx)
-            # print(bestQueue)
+
             for i in range(bestQueue.qsize()):
                 b = bestQueue.get()
                 if isinstance(b, ObservingBlock) and b.target.name == "Focus":
@@ -277,8 +262,7 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
                 newArr = copy.deepcopy(scoreArray[justIdx, :])
                 newArr = conf.scoreRepeatObs(c, newArr, numPrev, currentTime)
                 scoreArray = np.r_[scoreArray, [newArr]]
-                # print("Considering additional observation of", justInserted.target.name, "which has", numPrev,
-                #       "previous observations")
+
                 blockCopy = copy.deepcopy(justInserted)
                 # print(len(blocks))
                 blockCopy.target.name = blockCopy.target.name[:-2] + "_" + str(numPrev + 2)
@@ -385,7 +369,7 @@ def createSchedule(startTime, endTime):
     # print([(r,f) for r,d,f in os.walk("./schedulerConfigs/",topdown=False)])
     # files = ["schedulerConfigs." + r+"."+i[:-3] for r,i in ((g,h) for g,h in ((r,f) for r,d,f in os.walk("./schedulerConfigs/",topdown=False) if len(r) and len(d) and len(f))) if i.endswith(".py") and "schedule" in i]
     for root, dir, file in os.walk("./schedulerConfigs"):
-        files += [".".join([root.replace("./","").replace("\\","."), f[:-3]]) for f in file if f.endswith(".py") and "schedule" in f]
+        files += [".".join([root.replace("./","").replace("\\","."), f[:-3]]) for f in file if f.endswith(".py") and "schedule_" in f]
     print(files)
     # files = ["schedulerConfigs." + f[:-3] for f in [i for i in [os.listdir("./schedulerConfigs/"+h) for h in os.listdir("./schedulerConfigs/") if os.path.isdir(h)]] if
     #          f[-3:] == ".py" and "init" not in f]

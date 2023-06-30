@@ -1,1 +1,1 @@
-__all__ = ["sCoreCondensed", "asyncUtils", "mpcTargetSelectorCore", "mpcUtils", "genUtils.py", "candidateDatabase"]
+__all__ = ["sCoreCondensed", "asyncUtils", "mpcTargetSelectorCore", "mpcUtils", "genUtils", "candidateDatabase", "processes"]
