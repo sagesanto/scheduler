@@ -75,6 +75,10 @@ class TreeItem:
 
 class Process(QProcess):
     deleted = pyqtSignal()
+    logged = pyqtSignal(str)
+    error = pyqtSignal(str)
+    msg = pyqtSignal(str)
+    lastLog = pyqtSignal(str)
 
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -85,12 +89,19 @@ class Process(QProcess):
         self.startString = generateTimestampString()
         self.result = ""  # short string or error msg
         self.end = None
+        self.log = []
+        self.connect()
+
+    def connect(self):
+        self.readyReadStandardError.connect(lambda: self.writeToErrorLog(decodeStdErr(self)))
+        self.readyReadStandardOutput.connect(lambda: self.writeToLog(decodeStdOut(self)))
+        self.finished.connect(lambda: self.lastLog.emit(self.log[-1] if len(self.log) else ""))
         self.finished.connect(self.terminate)
 
     def __del__(self):
         print("Deleting process", self.name, "with PID", self.processId())
-        self.deleted.emit()
         self.terminate()
+        self.deleted.emit()
 
     @property
     def status(self):
@@ -100,16 +111,21 @@ class Process(QProcess):
     def isActive(self):
         return self.state() != QProcess.ProcessState.NotRunning
 
-    @property
-    def stdOutput(self):
-        return decodeStdOut(self)
+    def writeToErrorLog(self,error):
+        error = self.name + " encountered an error: "+error
+        self.errorLog.append(error)
+        self.error.emit(error)
+        self.msg.emit(error)
 
-    @property
-    def stdError(self):
-        return decodeStdErr(self)
+
+    def writeToLog(self,content):
+        self.log.append(content)
+        self.logged.emit(content)
+        self.msg.emit(content)
 
 
 class ProcessModel(QtCore.QAbstractItemModel):
+
     def __init__(self, processes=None, parent=None):
         # processes is a list of [(Name, QProcess)] pairs
         super(ProcessModel, self).__init__(parent)
@@ -127,18 +143,18 @@ class ProcessModel(QtCore.QAbstractItemModel):
     def data(self, index, role):
         if not index.isValid():
             return None
-        if role != QtCore.Qt.DisplayRole:
+        if role != Qt.ItemDataRole.DisplayRole:
             return None
         item = index.internalPointer()
         return item.data(index.column())
 
     def flags(self, index):
         if not index.isValid():
-            return QtCore.Qt.NoItemFlags
-        return QtCore.Qt.ItemIsEnabled | QtCore.Qt.ItemIsSelectable
+            return Qt.ItemFlag.NoItemFlags
+        return Qt.ItemFlag.ItemIsEnabled | Qt.ItemFlag.ItemIsSelectable
 
     def headerData(self, section, orientation, role):
-        if orientation == QtCore.Qt.Horizontal and role == QtCore.Qt.DisplayRole:
+        if orientation == Qt.Orientation.Horizontal and role == Qt.ItemDataRole.DisplayRole:
             return self.rootItem.data(section)
         return None
 
@@ -178,7 +194,6 @@ class ProcessModel(QtCore.QAbstractItemModel):
         process.stateChanged.connect(lambda state: topItem.updateData(1, interpretState(state)))
         process.deleted.connect(lambda: topItem.updateData(1, "Deleted"))
 
-
         startItem = TreeItem(["Start", process.startString], topItem)
 
         endItem = TreeItem(["End", ""], topItem)
@@ -186,11 +201,9 @@ class ProcessModel(QtCore.QAbstractItemModel):
         process.errorOccurred.connect(lambda: endItem.updateData(1, generateTimestampString()))
 
         resultItem = TreeItem(["Result", ""], topItem)
-        process.finished.connect(lambda: resultItem.updateData(1, process.stdOutput))
+        process.lastLog.connect(lambda msg: resultItem.updateData(1, msg))
         process.errorOccurred.connect(lambda: resultItem.updateData(1, process.error()))
-
-        process.finished.connect(lambda: print("finished"))
-        process.errorOccurred.connect(lambda: print("error"))
+        process.error.connect(lambda msg: resultItem.updateData(1, msg))
 
         topItem.appendChild(startItem).appendChild(endItem).appendChild(resultItem)
 

@@ -77,7 +77,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.p.start("python", ['dummyScript.py'])
         # print(self.p.processId())
         self.processModel = ProcessModel()
-
+        self.processesTreeView.setModel(self.processModel)
         self.ephemProcess = None
         self.gettingEphemeris = False
         self.ephemListModel = StringListModel()
@@ -126,9 +126,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     continue
                 candidates.append(self.candidateDict[i])
             except:
+                # TODO: Handle this
                 if handleErrorFunc:
                     handleErrorFunc("Couldn't find candidate for entry " + i)
-                raise  # probably don't want
         return candidates
         # selectedIds = table.selectionModel().selectedRows(column=table.model().)
 
@@ -158,8 +158,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ephemProcess = Process("Ephemerides")
 
         ephemPopUp = EphemPopup()  # implement this - use progress bar
-        self.ephemProcess.readyReadStandardOutput.connect(lambda: print("StdOut:", self.ephemProcess.stdOutput))
-        self.ephemProcess.readyReadStandardError.connect(lambda: print("StdErr:", self.ephemProcess.stdError))
+        self.ephemProcess.msg.connect(lambda message: print(message))
         self.processModel.add(self.ephemProcess)
         self.ephemProcess.finished.connect(lambda: print(self.ephemProcess.__dict__))
         print(self.ephemListModel.selectedRows(self.ephemListView))

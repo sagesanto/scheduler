@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="scheduleTab">
      <attribute name="title">
@@ -464,8 +464,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>28</height>
+            <width>100</width>
+            <height>30</height>
            </rect>
           </property>
           <attribute name="label">
@@ -1035,6 +1035,111 @@
           <widget class="QPushButton" name="getEphemsButton">
            <property name="text">
             <string>Get Ephems</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="processesTab">
+     <attribute name="title">
+      <string>Processes</string>
+     </attribute>
+     <widget class="QDockWidget" name="processesDock">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>791</width>
+        <height>539</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="features">
+       <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+      </property>
+      <property name="windowTitle">
+       <string>Processes</string>
+      </property>
+      <widget class="QWidget" name="processesDockContents">
+       <widget class="QWidget" name="layoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>1</y>
+          <width>791</width>
+          <height>501</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="vertLayout_22">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QPushButton" name="processesDudButton2">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Dud</string>
+             </property>
+             <property name="shortcut">
+              <string>R</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="processesDudButton5">
+             <property name="text">
+              <string>Dud</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="processesDudButton3">
+             <property name="text">
+              <string>Dud</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="processesDudButton1">
+             <property name="text">
+              <string>Dud</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="processesDudButton4">
+             <property name="text">
+              <string>Dud</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTreeView" name="processesTreeView">
+           <property name="editTriggers">
+            <set>QAbstractItemView::NoEditTriggers</set>
+           </property>
+           <property name="dragDropOverwriteMode">
+            <bool>false</bool>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::MultiSelection</enum>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
            </property>
           </widget>
          </item>

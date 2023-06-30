@@ -39,13 +39,14 @@ try:
             subprocess.call(['python', ephemPrograms[key][0], json.dumps(desigs), settingsJstr,
                              ephemsSaveDir])  # should probably switch to asyncio subprocesses at some point but whatever
             fetched += len(desigs)
-            sys.stdout.write(" ".join(["Ephemeris: completed", str(fetched), "out of", str(total)]))
+            sys.stdout.write(" ".join(["Ephemeris: completed", str(fetched), "out of", str(total),"\n"]))
             sys.stdout.flush()
-
         else:
             sys.stdout.write("No configured ephemerides file for "+key)
-        sys.stdout.flush()
-    sys.stdout.write("Succeeded in fetching ephems.")
+
+    sys.stdout.write("Done fetching ephems.")
+    sys.stdout.flush()
+
 
 except Exception as e:
     sys.stderr.write("ERROR: "+repr(e))
