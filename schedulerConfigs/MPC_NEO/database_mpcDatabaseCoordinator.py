@@ -35,22 +35,21 @@ logger.addFilter(genUtils.filter)
 interval = 15  # minutes between runs
 lookback = 48  # edit targets that were added within [lookback] hours ago, add a duplicate for older
 
-while True:
-    logger.info("---Starting cycle at "+ dt.now().strftime(dateFormat) + " PST")
-    try:
-        asyncio.run(runLogging(logger,lookback))
-        logger.info("---Finished MPC logging without error at " + dt.now().strftime(dateFormat) + " PST")
-    except Exception:
-        logger.exception("---Logging targets failed! Skipping.")
+logger.info("---Starting cycle at "+ dt.now().strftime(dateFormat) + " PST")
+try:
+    asyncio.run(runLogging(logger,lookback))
+    logger.info("---Finished MPC logging without error at " + dt.now().strftime(dateFormat) + " PST")
+except Exception:
+    logger.exception("---Logging targets failed! Skipping.")
 
-    try:
-        asyncio.run(selectTargets(logger,lookback))
-        logger.info("---Finished MPC selection without error at " + dt.now().strftime(dateFormat) + " PST")
-    except Exception:
-        logger.exception("Selecting targets failed! Skipping.")
+try:
+    asyncio.run(selectTargets(logger,lookback))
+    logger.info("---Finished MPC selection without error at " + dt.now().strftime(dateFormat) + " PST")
+except Exception:
+    logger.exception("Selecting targets failed! Skipping.")
 
-    # logger.info("---Done. will run again at " + (dt.now() + timedelta(minutes=interval)).strftime(dateFormat) + " PST.")
-    logger.info("---Done---")
-    print("\n")
-    exit()
+# logger.info("---Done. will run again at " + (dt.now() + timedelta(minutes=interval)).strftime(dateFormat) + " PST.")
+logger.info("---Done---")
+print("\n")
+exit()
     # time.sleep(interval * 60)

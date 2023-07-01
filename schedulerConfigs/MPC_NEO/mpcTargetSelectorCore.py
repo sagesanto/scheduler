@@ -19,7 +19,9 @@ from bs4 import BeautifulSoup  # to parse html files
 from numpy import sqrt
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 
-from scheduleLib import mpcUtils, genUtils, asyncUtils
+from scheduleLib import genUtils, asyncUtils
+from schedulerConfigs.MPC_NEO import mpcUtils
+
 
 utc = pytz.UTC
 

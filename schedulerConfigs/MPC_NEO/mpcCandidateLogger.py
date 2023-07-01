@@ -5,9 +5,10 @@ from datetime import datetime as dt, timedelta
 from colorlog import ColoredFormatter
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 
-from scheduleLib import mpcUtils, genUtils
+from scheduleLib import genUtils
 from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
-from scheduleLib.mpcTargetSelectorCore import TargetSelector
+from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
+from schedulerConfigs.MPC_NEO import mpcUtils
 
 
 async def testGetVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec

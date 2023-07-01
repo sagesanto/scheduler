@@ -5,21 +5,26 @@ from abc import abstractmethod
 import pandas as pd
 import pytz
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFileDialog, QButtonGroup, QTableWidget, \
-    QTableWidgetItem as QTableItem, QListWidget, QLineEdit, QListView
+    QTableWidgetItem as QTableItem, QListWidget, QLineEdit, QListView, QDockWidget
 from PyQt6.QtCore import Qt, pyqtSignal, QRunnable, QObject, QThreadPool, QProcess, QAbstractListModel
 from PyQt6 import uic, QtCore
-from MaestroCore.Qt.MainWindow import Ui_MainWindow
-from MaestroCore.Qt.EphemDialog import Ui_Dialog as EphemPopup
+from MaestroCore.GUI.MainWindow import Ui_MainWindow
+from MaestroCore.GUI.EphemDialog import Ui_Dialog as EphemPopup
 from scheduleLib import genUtils, asyncUtils
 from scheduleLib.candidateDatabase import Candidate, CandidateDatabase
-from MaestroCore.Qt.processes import ProcessModel, Process
-from MaestroCore.Qt.listModel import StringListModel
+from MaestroCore.MaestroUtils.processes import ProcessModel, Process
+from MaestroCore.MaestroUtils.listModel import FlexibleListModel
 from datetime import datetime, timedelta
 
 
 def getSelectedFromList(view: QListView):
     selectedIndexes = view.selectedIndexes()
     return [index.data(Qt.ItemDataRole.DisplayRole) for index in selectedIndexes]
+
+
+def redock(dock: QDockWidget, window):
+    dock.setParent(window)
+    dock.setFloating(False)
 
 
 def addLineContentsToList(lineEdit: QLineEdit, lis):
@@ -29,7 +34,7 @@ def addLineContentsToList(lineEdit: QLineEdit, lis):
 
 def getSelectedFromTable(table, colIndex):
     selected = []
-    indexes = table.selectionModel().selectedRows(column=1)
+    indexes = table.selectionModel().selectedRows()
     model = table.model()
     for index in indexes:
         selected.append(model.data(model.index(index.row(), colIndex)))
@@ -70,6 +75,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.candidatesByID = None
         self.pool = QThreadPool.globalInstance()
         self.maxThreads = self.pool.maxThreadCount()
+        self.dockWidgets = [w for w in self.__dict__.values() if isinstance(w,QDockWidget)]
+        print(self.dockWidgets)
         print("Max threads:", self.maxThreads)
         # self.p = None
         # self.p = QProcess()
@@ -78,10 +85,22 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # print(self.p.processId())
         self.processModel = ProcessModel()
         self.processesTreeView.setModel(self.processModel)
+        # self.processModel.updated.connect(self.processesTreeView.update)
         self.ephemProcess = None
-        self.gettingEphemeris = False
-        self.ephemListModel = StringListModel()
+        self.ephemListModel = FlexibleListModel()
         self.ephemListView.setModel(self.ephemListModel)
+        self.ephemProcessIDs = []
+        self.toggleRejectButton.clicked.connect(self.tabDocks)
+        # self.toggleRejectButton.clicked.connect(lambda: self.undockTab(self.candidatesTab))
+
+    def tabDocks(self):
+        for i in range(len(self.dockWidgets)-1):
+            self.tabifyDockWidget(self.dockWidgets[0],self.dockWidgets[i+1])
+    # def undockTab(self, tab: QWidget):
+    #     if tab.parent():
+    #         tab.parent = None
+    #         self.tabWidget.removeTab(self.tabWidget.currentIndex())
+    #         tab.setWindowFlag(Qt.Window)
 
     def useCandidateTableEphemeris(self):
         for desig, ID in zip(getSelectedFromTable(self.candidateTable, self.indexOfNameColumn),
@@ -100,7 +119,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.candidateEphemerisButton.clicked.connect(self.useCandidateTableEphemeris)
         self.getEphemsButton.clicked.connect(self.getEphemeris)
         self.ephemRemoveSelected.clicked.connect(lambda g: self.ephemListModel.removeSelectedItems(self.ephemListView))
-        self.ephemNameEntry.returnPressed.connect(lambda: addLineContentsToList(self.ephemNameEntry, self.ephemListModel))
+        self.ephemNameEntry.returnPressed.connect(
+            lambda: addLineContentsToList(self.ephemNameEntry, self.ephemListModel))
 
     def getTargets(self):
         print("get")
@@ -147,29 +167,33 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         return self
 
     def getEphemeris(self):
-        if self.gettingEphemeris:
-            print("Already getting.")
-            return None
         if self.ephemProcess is not None:
             if self.ephemProcess.isActive:
-                print("EPHEM PROCESS LEFT OPEN")
-            del self.ephemProcess
+                print("Already getting.")
+                return
+            print("EphemProcess is not None and not active")
+            self.ephemProcess.reset()
+
+        candidatesToRequest = self.getStringsAsCandidates(self.ephemListModel.data)
+        if len(candidatesToRequest) == 0:
+            print("No ephems to get.")
+            return
 
         self.ephemProcess = Process("Ephemerides")
-
-        ephemPopUp = EphemPopup()  # implement this - use progress bar
-        self.ephemProcess.msg.connect(lambda message: print(message))
+        self.ephemProcessIDs.append(id(self.ephemProcess))
+        print(self.ephemProcessIDs)
         self.processModel.add(self.ephemProcess)
-        self.ephemProcess.finished.connect(lambda: print(self.ephemProcess.__dict__))
-        print(self.ephemListModel.selectedRows(self.ephemListView))
-        candidatesToRequest = self.getStringsAsCandidates(self.ephemListModel._data)
-        print(candidatesToRequest)
+        ephemPopUp = EphemPopup()  # implement this - use progress bar
+        # self.ephemProcess.msg.connect(lambda message: print(message))
+        self.ephemProcess.finished.connect(lambda: print(self.processModel.rootItem.__dict__))
         targetDict = {
-            candidate.CandidateType: [c.CandidateName for c in candidatesToRequest if c.CandidateType == candidate.CandidateType] for
+            candidate.CandidateType: [c.CandidateName for c in candidatesToRequest if
+                                      c.CandidateType == candidate.CandidateType] for
             candidate in candidatesToRequest}
         print(targetDict)
         self.ephemProcess.start("python", ['./MaestroCore/ephemerides.py', json.dumps(targetDict), "settings", "path"])
 
+        self.gettingEphemeris = False
         # launch waiting window
         # gather the candidates indicated
         # read the specified ephem parameters

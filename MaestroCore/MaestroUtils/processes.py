@@ -29,17 +29,31 @@ def interpretState(state):
     return states[state]
 
 
-class TreeItem:
+class TreeItem(QObject):
+    updated = pyqtSignal(QtCore.QModelIndex)
+    # updated = pyqtSignal()
+
     def __init__(self, data, parent=None):
+        super().__init__()
         self.parentItem = parent
         self.itemData = data
+        self.index = None
         self.childItems = []
 
     def __repr__(self):
         return "Tree Item" + (": Root: " if self.parentItem is None else " ") + str(self.itemData)
 
+    def setIndex(self,index:QtCore.QModelIndex):
+        self.index = index
+        print("Setting index")
+        print(self.index)
+        print(self.index.column())
+        print(self.index.row())
+        print(self.index.isValid())
+        print(type(self.index))
+
     def appendChild(self, item):
-        self.childItems.insert(0,item)
+        self.childItems.append(item)
         return self
 
     def child(self, row):
@@ -61,6 +75,7 @@ class TreeItem:
     def updateData(self, column, data):
         try:
             self.itemData[column] = data
+            self.updated.emit(self.index)
         except IndexError:
             raise
 
@@ -96,12 +111,17 @@ class Process(QProcess):
         self.readyReadStandardError.connect(lambda: self.writeToErrorLog(decodeStdErr(self)))
         self.readyReadStandardOutput.connect(lambda: self.writeToLog(decodeStdOut(self)))
         self.finished.connect(lambda: self.lastLog.emit(self.log[-1] if len(self.log) else ""))
-        self.finished.connect(self.terminate)
+        self.finished.connect(self.terminate)  # this might not be necessary
 
     def __del__(self):
         print("Deleting process", self.name, "with PID", self.processId())
-        self.terminate()
         self.deleted.emit()
+        self.terminate()
+        del self
+
+    def reset(self):
+        print("Resetting")
+        # self.deleted.emit()
 
     @property
     def status(self):
@@ -111,20 +131,20 @@ class Process(QProcess):
     def isActive(self):
         return self.state() != QProcess.ProcessState.NotRunning
 
-    def writeToErrorLog(self,error):
-        error = self.name + " encountered an error: "+error
+    def writeToErrorLog(self, error):
+        error = self.name + " encountered an error: " + error
         self.errorLog.append(error)
         self.error.emit(error)
         self.msg.emit(error)
 
-
-    def writeToLog(self,content):
+    def writeToLog(self, content):
         self.log.append(content)
         self.logged.emit(content)
         self.msg.emit(content)
 
 
 class ProcessModel(QtCore.QAbstractItemModel):
+    updated = pyqtSignal()
 
     def __init__(self, processes=None, parent=None):
         # processes is a list of [(Name, QProcess)] pairs
@@ -189,23 +209,61 @@ class ProcessModel(QtCore.QAbstractItemModel):
             parentItem = parent.internalPointer()
         return parentItem.childCount()
 
+    def emitDataChanged(self, index:QtCore.QModelIndex):
+        print("updating items")
+        self.dataChanged.emit(index,index)
+        print("is valid index:",index.isValid())
+        # try:
+        print("Data:", self.data(index, Qt.ItemDataRole.DisplayRole))
+        # except Exception as e:
+        #     print(e)
+
+        # startIndex = self.index(0, 0, QtCore.QModelIndex())
+        # endIndex = self.index(len(self.rootItem.childItems) - 1, 1, QtCore.QModelIndex())
+        # # print(startIndex,endIndex)
+        # # # self.modelReset.emit()
+        # # self.dataChanged.emit(startIndex, endIndex)
+        # self.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
+        # print("Start:", self.data(startIndex, Qt.ItemDataRole.DisplayRole))
+        # print("End:", self.data(endIndex, Qt.ItemDataRole.DisplayRole))
+
+    def setData(self, index: QtCore.QModelIndex, newData):
+        if not index.isValid():
+            print("Index is not valid in setData")
+            return False
+        item = index.internalPointer()
+        # item.
+        self.dataChanged.emit(index, index) # <---
+
     def add(self, process: Process):
+        self.beginInsertRows(QtCore.QModelIndex(),0,4)
         topItem = TreeItem([process.name, process.status], parent=self.rootItem)
+        startItem = TreeItem(["Start", process.startString], topItem)
+        endItem = TreeItem(["End", ""], topItem)
+        locItem = TreeItem(["Location", str(id(process))], topItem)
+        resultItem = TreeItem(["Result", ""], topItem)
+
+        topItem.appendChild(startItem).appendChild(endItem).appendChild(resultItem).appendChild(locItem)
+        self.rootItem.appendChild(topItem)
+
+        topIndex = self.index(0,0,QtCore.QModelIndex())
+        topItem.setIndex(topIndex)
+        topItem.updated.connect(self.emitDataChanged)
+
+        for i, item in enumerate([startItem, endItem, resultItem, locItem]):
+            item.setIndex(self.index(i, 0, topIndex))
+            item.updated.connect(self.emitDataChanged)
+
         process.stateChanged.connect(lambda state: topItem.updateData(1, interpretState(state)))
         process.deleted.connect(lambda: topItem.updateData(1, "Deleted"))
+        # topIndex = self.createIndex(row, column, childItem)
 
-        startItem = TreeItem(["Start", process.startString], topItem)
-
-        endItem = TreeItem(["End", ""], topItem)
         process.finished.connect(lambda: endItem.updateData(1, generateTimestampString()))
         process.errorOccurred.connect(lambda: endItem.updateData(1, generateTimestampString()))
 
-        resultItem = TreeItem(["Result", ""], topItem)
         process.lastLog.connect(lambda msg: resultItem.updateData(1, msg))
         process.errorOccurred.connect(lambda: resultItem.updateData(1, process.error()))
         process.error.connect(lambda msg: resultItem.updateData(1, msg))
 
-        topItem.appendChild(startItem).appendChild(endItem).appendChild(resultItem)
-
-        self.rootItem.appendChild(topItem)
+        self.endInsertRows()
         print("Done")

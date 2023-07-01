@@ -20,8 +20,8 @@ try:
         desired_files = [os.sep.join([root, f]) for f in files if
                                       f.endswith(".py") and "ephemeris_" in f]
         ephemPrograms[subdirectory.replace("_", " ")] = desired_files
-    sys.stdout.write("ephemPrograms:" + str(ephemPrograms))
-    sys.stdout.flush()
+    # sys.stdout.write("ephemPrograms:" + str(ephemPrograms))
+    # sys.stdout.flush()
 
     targetsDict = json.loads(sys.argv[1])
     settingsJstr = sys.argv[2]
@@ -33,9 +33,9 @@ try:
     for key in targetsDict.keys():
         if key in ephemPrograms.keys():
             desigs = targetsDict[key]
-            sys.stdout.write("Cmd: "+str(['python', ephemPrograms[key][0], json.dumps(desigs), settingsJstr,
-                             ephemsSaveDir]))
-            sys.stdout.flush()
+            # sys.stdout.write("Cmd: "+str(['python', ephemPrograms[key][0], json.dumps(desigs), settingsJstr,
+            #                  ephemsSaveDir]))
+            # sys.stdout.flush()
             subprocess.call(['python', ephemPrograms[key][0], json.dumps(desigs), settingsJstr,
                              ephemsSaveDir])  # should probably switch to asyncio subprocesses at some point but whatever
             fetched += len(desigs)

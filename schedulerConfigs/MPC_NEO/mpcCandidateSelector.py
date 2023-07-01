@@ -4,7 +4,7 @@ from datetime import datetime as dt, timedelta
 
 from scheduleLib import genUtils
 from scheduleLib.candidateDatabase import CandidateDatabase
-from scheduleLib.mpcTargetSelectorCore import TargetSelector
+from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
 
 
 # pull MPC NEO candidates that are not removed and have been added in the last [lookback] hours

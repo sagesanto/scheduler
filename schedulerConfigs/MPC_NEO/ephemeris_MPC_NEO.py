@@ -1,5 +1,4 @@
-import sys
-
+import sys, time
 from mpcUtils import asyncMultiEphem
 
 # desigs, settings,

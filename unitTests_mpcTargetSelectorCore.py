@@ -8,8 +8,9 @@ from astropy import units as u
 from astropy.coordinates import Angle, SkyCoord
 from astropy.time import Time
 
-from scheduleLib import genUtils, mpcUtils, sCoreCondensed
-from scheduleLib.mpcTargetSelectorCore import TargetSelector
+from scheduleLib import genUtils, sCoreCondensed
+from schedulerConfigs.MPC_NEO import mpcUtils
+from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
 
 
 class Test(unittest.TestCase):
