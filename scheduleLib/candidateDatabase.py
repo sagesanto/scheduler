@@ -66,6 +66,8 @@ class Candidate:
 
     @staticmethod
     def candidatesToDf(candidateList: list):
+        if not len(candidateList):
+            return None
         candidateDicts = [candidate.asDict() for candidate in candidateList]
         keys = list(OrderedDict.fromkeys(key for dictionary in candidateDicts for key in dictionary.keys()))
         seriesList = [pd.Series(d) for d in candidateDicts]

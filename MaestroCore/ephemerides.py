@@ -25,7 +25,6 @@ try:
 
     targetsDict = json.loads(sys.argv[1])
     settingsJstr = sys.argv[2]
-    ephemsSaveDir = sys.argv[3]  # this should be an absolute path to the folder in which the ephems should be saved
 
     total = sum(len(value) for value in targetsDict.values())
     fetched = 0
@@ -36,8 +35,7 @@ try:
             # sys.stdout.write("Cmd: "+str(['python', ephemPrograms[key][0], json.dumps(desigs), settingsJstr,
             #                  ephemsSaveDir]))
             # sys.stdout.flush()
-            subprocess.call(['python', ephemPrograms[key][0], json.dumps(desigs), settingsJstr,
-                             ephemsSaveDir])  # should probably switch to asyncio subprocesses at some point but whatever
+            subprocess.call(['python', ephemPrograms[key][0], json.dumps(desigs), settingsJstr])  # should probably switch to asyncio subprocesses at some point but whatever
             fetched += len(desigs)
             sys.stdout.write(" ".join(["Ephemeris: completed", str(fetched), "out of", str(total),"\n"]))
             sys.stdout.flush()

@@ -1,0 +1,4 @@
+DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description
+2023-07-04T05:30:00.000|1|P11GLcv|1|332.83|-31.206|(-1, -1)|CLEAR|'MPC Asteroid P11GLcv, UT: 0530, RA: 22:11:19.32, DEC: -31:12:21.6, dRA: 1.8, dDEC: -0.78'
+2023-07-04T05:40:00.000|1|P11GLcv|1|332.835|-31.209|(-1, -1)|CLEAR|'MPC Asteroid P11GLcv, UT: 0540, RA: 22:11:20.4, DEC: -31:12:32.4, dRA: 1.8, dDEC: -0.78'
+2023-07-04T05:50:00.000|1|P11GLcv|1|332.841|-31.211|(-1, -1)|CLEAR|'MPC Asteroid P11GLcv, UT: 0550, RA: 22:11:21.84, DEC: -31:12:39.6, dRA: 1.8, dDEC: -0.78'

@@ -1,5 +1,5 @@
 # Sage Santomenna 2023
-
+import sys
 from datetime import datetime, timedelta
 
 import astropy
@@ -294,14 +294,15 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
             for i in range(0, numRecs - 3, 4):
                 # get datetime, ra, dec, vmag and motion
                 if i == 0:
-                    obsRec = ephem[i].split('\n')[-1].replace('\n', '')
+                    obsRec = ephem[i].split('\n')[-1].replace('\n', '').replace("... <suppressed> ...", '')
                 else:
-                    obsRec = ephem[i].replace('\n', '').replace('!', '').replace('*', '')
+                    obsRec = ephem[i].replace('\n', '').replace('!', '').replace('*', '').replace("... <suppressed> ...",'')
 
                 # keep a running count of ephem entries
                 ephem_entry_num += 1
 
                 # parse obs_rec
+                sys.stdout.write(str(ephem))
                 obsDatetime, coords, vMag, vRa, vDec = mpcInst._MPCNeoConfirm__parse_ephemeris(obsRec)
 
                 deltaErr = None

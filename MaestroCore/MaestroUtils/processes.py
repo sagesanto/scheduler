@@ -1,9 +1,14 @@
+import os
+import signal
+import sys
+
 import pandas as pd
 import pytz
 from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFileDialog, QButtonGroup, QTableWidget, \
-    QTableWidgetItem as QTableItem, QListWidget, QLineEdit
+    QTableWidgetItem as QTableItem, QListWidget, QLineEdit, QDialog, QDialogButtonBox, QVBoxLayout, QLabel, QMessageBox
 from PyQt6.QtCore import Qt, pyqtSignal, QRunnable, QObject, QThreadPool, QProcess
-from PyQt6 import QtCore
+from PyQt6.QtGui import QIcon
+from PyQt6 import QtCore, QtWidgets
 from datetime import datetime, timedelta
 
 
@@ -31,29 +36,28 @@ def interpretState(state):
 
 class TreeItem(QObject):
     updated = pyqtSignal(QtCore.QModelIndex)
+
     # updated = pyqtSignal()
 
-    def __init__(self, data, parent=None):
+    def __init__(self, data, parent=None, tags=None):
         super().__init__()
         self.parentItem = parent
         self.itemData = data
         self.index = None
         self.childItems = []
+        self.tags = tags or {}
 
     def __repr__(self):
         return "Tree Item" + (": Root: " if self.parentItem is None else " ") + str(self.itemData)
 
-    def setIndex(self,index:QtCore.QModelIndex):
+    def setIndex(self, index: QtCore.QModelIndex):  # don't think this is very pythonic
         self.index = index
-        print("Setting index")
-        print(self.index)
-        print(self.index.column())
-        print(self.index.row())
-        print(self.index.isValid())
-        print(type(self.index))
+
+    def addTag(self, key, value):
+        self.tags[key] = value
 
     def appendChild(self, item):
-        self.childItems.append(item)
+        self.childItems.insert(0, item)
         return self
 
     def child(self, row):
@@ -91,20 +95,24 @@ class TreeItem(QObject):
 class Process(QProcess):
     deleted = pyqtSignal()
     logged = pyqtSignal(str)
-    error = pyqtSignal(str)
+    errorSignal = pyqtSignal(str)
     msg = pyqtSignal(str)
     lastLog = pyqtSignal(str)
+    paused = pyqtSignal()
+    resumed = pyqtSignal()
+    ended = pyqtSignal(str)
 
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.name = name
-        # self.id = QProcess.processId(self.process)
         self.startLocal = datetime.now()
         self.startUTC = datetime.now(pytz.UTC)
         self.startString = generateTimestampString()
         self.result = ""  # short string or error msg
         self.end = None
         self.log = []
+        self.errorLog = []
+        self.isPaused = False
         self.connect()
 
     def connect(self):
@@ -112,10 +120,13 @@ class Process(QProcess):
         self.readyReadStandardOutput.connect(lambda: self.writeToLog(decodeStdOut(self)))
         self.finished.connect(lambda: self.lastLog.emit(self.log[-1] if len(self.log) else ""))
         self.finished.connect(self.terminate)  # this might not be necessary
+        self.finished.connect(lambda exitCode: self.ended.emit("Finished" if not exitCode else "Error"))
+
+        self.errorOccurred.connect(lambda: self.ended.emit("Error"))
 
     def __del__(self):
         print("Deleting process", self.name, "with PID", self.processId())
-        self.deleted.emit()
+        self.ended.emit("Deleted")
         self.terminate()
         del self
 
@@ -131,10 +142,28 @@ class Process(QProcess):
     def isActive(self):
         return self.state() != QProcess.ProcessState.NotRunning
 
+    def pause(self):
+        """
+        Attempt to pause this process. If it has subprocesses of its own, pausing may not acheive complete stoppage
+        """
+        if not self.isPaused and self.isActive:
+            print("Pausing", self.name)
+            self.paused.emit()
+            self.isPaused = True
+            os.kill(self.processId(), signal.SIGSTOP)
+            return
+
+    def resume(self):
+        if self.paused:
+            print("Resuming", self.name)
+            self.resumed.emit()
+            self.isPaused = False
+            os.kill(self.processId(), signal.SIGCONT)
+
     def writeToErrorLog(self, error):
         error = self.name + " encountered an error: " + error
         self.errorLog.append(error)
-        self.error.emit(error)
+        self.errorSignal.emit(error)
         self.msg.emit(error)
 
     def writeToLog(self, content):
@@ -142,17 +171,24 @@ class Process(QProcess):
         self.logged.emit(content)
         self.msg.emit(content)
 
+    def abort(self):
+        if self.isActive:
+            self.writeToErrorLog("User Abort")
+            self.ended.emit("Aborted")
+            self.kill()
+            self.blockSignals(True)
+
 
 class ProcessModel(QtCore.QAbstractItemModel):
     updated = pyqtSignal()
 
-    def __init__(self, processes=None, parent=None):
-        # processes is a list of [(Name, QProcess)] pairs
+    def __init__(self, processes=None, parent=None, statusBar=None):
         super(ProcessModel, self).__init__(parent)
         processes = processes or []
-        self.rootItem = TreeItem(("Field", "Info"))
+        self.rootItem = TreeItem(("Process", "Status"))
         for process in processes:
             self.add(process)
+        self.statusBar = statusBar
 
     def columnCount(self, parent):
         if parent.isValid():
@@ -209,44 +245,27 @@ class ProcessModel(QtCore.QAbstractItemModel):
             parentItem = parent.internalPointer()
         return parentItem.childCount()
 
-    def emitDataChanged(self, index:QtCore.QModelIndex):
-        print("updating items")
-        self.dataChanged.emit(index,index)
-        print("is valid index:",index.isValid())
-        # try:
-        print("Data:", self.data(index, Qt.ItemDataRole.DisplayRole))
-        # except Exception as e:
-        #     print(e)
-
-        # startIndex = self.index(0, 0, QtCore.QModelIndex())
-        # endIndex = self.index(len(self.rootItem.childItems) - 1, 1, QtCore.QModelIndex())
-        # # print(startIndex,endIndex)
-        # # # self.modelReset.emit()
-        # # self.dataChanged.emit(startIndex, endIndex)
-        # self.dataChanged.emit(QtCore.QModelIndex(), QtCore.QModelIndex())
-        # print("Start:", self.data(startIndex, Qt.ItemDataRole.DisplayRole))
-        # print("End:", self.data(endIndex, Qt.ItemDataRole.DisplayRole))
+    def emitDataChanged(self, index: QtCore.QModelIndex):
+        self.dataChanged.emit(index, index)
 
     def setData(self, index: QtCore.QModelIndex, newData):
-        if not index.isValid():
-            print("Index is not valid in setData")
-            return False
-        item = index.internalPointer()
-        # item.
-        self.dataChanged.emit(index, index) # <---
+        if index.isValid():
+            item = index.internalPointer()
+            item.updateData(1, newData)
+            self.dataChanged.emit(index, index)  # <---
 
     def add(self, process: Process):
-        self.beginInsertRows(QtCore.QModelIndex(),0,4)
-        topItem = TreeItem([process.name, process.status], parent=self.rootItem)
+        self.beginInsertRows(QtCore.QModelIndex(), 0, 4)
+        topItem = TreeItem([process.name, process.status], parent=self.rootItem, tags={"Process":process})
         startItem = TreeItem(["Start", process.startString], topItem)
         endItem = TreeItem(["End", ""], topItem)
-        locItem = TreeItem(["Location", str(id(process))], topItem)
         resultItem = TreeItem(["Result", ""], topItem)
+        locItem = TreeItem(["PID", str(process.processId())], topItem)
 
-        topItem.appendChild(startItem).appendChild(endItem).appendChild(resultItem).appendChild(locItem)
+        topItem.appendChild(locItem).appendChild(resultItem).appendChild(endItem).appendChild(startItem)
         self.rootItem.appendChild(topItem)
 
-        topIndex = self.index(0,0,QtCore.QModelIndex())
+        topIndex = self.index(0, 0, QtCore.QModelIndex())
         topItem.setIndex(topIndex)
         topItem.updated.connect(self.emitDataChanged)
 
@@ -254,16 +273,37 @@ class ProcessModel(QtCore.QAbstractItemModel):
             item.setIndex(self.index(i, 0, topIndex))
             item.updated.connect(self.emitDataChanged)
 
-        process.stateChanged.connect(lambda state: topItem.updateData(1, interpretState(state)))
-        process.deleted.connect(lambda: topItem.updateData(1, "Deleted"))
-        # topIndex = self.createIndex(row, column, childItem)
+        process.stateChanged.connect(lambda state: self.setData(locItem.index, process.processId()))
+        process.stateChanged.connect(lambda state: self.setData(topItem.index, interpretState(state)))
+        process.ended.connect(lambda msg: self.setData(topItem.index, msg))
+        process.paused.connect(lambda: self.setData(topItem.index, "Paused"))
+        process.resumed.connect(lambda state: self.setData(topItem.index, interpretState(state)))
 
-        process.finished.connect(lambda: endItem.updateData(1, generateTimestampString()))
-        process.errorOccurred.connect(lambda: endItem.updateData(1, generateTimestampString()))
+        process.ended.connect(lambda: self.setData(endItem.index, generateTimestampString()))
 
-        process.lastLog.connect(lambda msg: resultItem.updateData(1, msg))
-        process.errorOccurred.connect(lambda: resultItem.updateData(1, process.error()))
-        process.error.connect(lambda msg: resultItem.updateData(1, msg))
+        process.lastLog.connect(lambda msg: self.setData(resultItem.index, msg))
+        process.errorOccurred.connect(lambda: self.setData(resultItem.index, process.error()))
+        process.errorSignal.connect(lambda msg: self.setData(resultItem.index, msg))
 
+        if self.statusBar is not None:
+            process.ended.connect(lambda msg: self.statusBar.showMessage("Process '{}' ended with status '{}'".format(process.name,msg), 10000))
         self.endInsertRows()
         print("Done")
+
+
+class ProcessDialog(QDialog):
+    def __init__(self, windowName, process: Process, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle(windowName)
+        self.abortButton = QPushButton("Abort")
+        self.layout = QVBoxLayout()
+        message = QLabel("Fetching Ephemerides")
+        self.progressBar = QtWidgets.QProgressBar(parent=self)
+        self.layout.addWidget(message)
+        self.layout.addWidget(self.progressBar)
+        self.layout.addWidget(self.abortButton)
+        self.setLayout(self.layout)
+        self.abortButton.clicked.connect(process.abort)
+        self.abortButton.clicked.connect(self.close)
+        process.finished.connect(self.close)
+        process.errorOccurred.connect(self.close)
