@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import sys
 import time
 from datetime import datetime as dt, timedelta
 
@@ -17,7 +18,7 @@ fileFormatter = formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-2s |
 
 stream = logging.StreamHandler()
 stream.setFormatter(colorFormatter)
-stream.setLevel(logging.INFO)
+stream.setLevel(logging.INFO if len(sys.argv) == 1 else logging.ERROR)
 
 fileHandler = logging.FileHandler("mpcCandidate.log")
 fileHandler.setFormatter(fileFormatter)
@@ -27,23 +28,25 @@ logger = logging.getLogger(__name__)
 
 logger.addHandler(fileHandler)
 logger.addHandler(stream)
-logger.setLevel(logging.DEBUG)
+
+logger.setLevel(logging.DEBUG if len(sys.argv) == 1 else logging.ERROR)
 
 logger.addFilter(genUtils.filter)
 
+dbPath = sys.argv[1] if len(sys.argv) > 1 else "./candidate database.db"
 
 interval = 15  # minutes between runs
 lookback = 48  # edit targets that were added within [lookback] hours ago, add a duplicate for older
 
 logger.info("---Starting cycle at "+ dt.now().strftime(dateFormat) + " PST")
 try:
-    asyncio.run(runLogging(logger,lookback))
+    asyncio.run(runLogging(logger,lookback, dbPath))
     logger.info("---Finished MPC logging without error at " + dt.now().strftime(dateFormat) + " PST")
 except Exception:
     logger.exception("---Logging targets failed! Skipping.")
 
 try:
-    asyncio.run(selectTargets(logger,lookback))
+    asyncio.run(selectTargets(logger,lookback, dbPath))
     logger.info("---Finished MPC selection without error at " + dt.now().strftime(dateFormat) + " PST")
 except Exception:
     logger.exception("Selecting targets failed! Skipping.")

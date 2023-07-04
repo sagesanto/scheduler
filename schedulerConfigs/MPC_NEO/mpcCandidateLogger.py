@@ -73,10 +73,10 @@ def updateCandidate(dbCandidate: Candidate, listCandidate: Candidate, dbConnecti
 
 
 # this is where everything happens
-async def runLogging(logger, lookback):
+async def runLogging(logger, lookback, candidateDbPath):
     mpc = mpcObj()
     targetSelector = TargetSelector()
-    dbConnection = CandidateDatabase("./candidate database.db", "MPCLogger")
+    dbConnection = CandidateDatabase(candidateDbPath, "MPCLogger")
 
     logger.info("--- Acquiring Candidates ---")
     currentCandidates = {}  # store desig:candidate for each candidate in the MPC's list of current candidates

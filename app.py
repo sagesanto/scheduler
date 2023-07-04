@@ -1,19 +1,18 @@
 import json
-import sys, os, keyring
-from abc import abstractmethod
+import sys, os
+import time
 
 import pandas as pd
 import pytz
-from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFileDialog, QButtonGroup, QTableWidget, \
-    QTableWidgetItem as QTableItem, QListWidget, QLineEdit, QListView, QDockWidget, QDialog, QStatusBar
-from PyQt6.QtCore import Qt, pyqtSignal, QRunnable, QObject, QThreadPool, QProcess, QAbstractListModel, \
-    QItemSelectionModel
-from PyQt6 import uic, QtCore, QtGui
+from PyQt6 import QtGui, QtCore
+from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, \
+    QTableWidgetItem as QTableItem, QLineEdit, QListView, QDockWidget, QComboBox
+from PyQt6.QtCore import Qt, QItemSelectionModel, QDateTime
 from MaestroCore.GUI.MainWindow import Ui_MainWindow
-from scheduleLib import genUtils, asyncUtils
+from scheduleLib import genUtils
 from scheduleLib.candidateDatabase import Candidate, CandidateDatabase
-from MaestroCore.MaestroUtils.processes import ProcessModel, Process, ProcessDialog
-from MaestroCore.MaestroUtils.listModel import FlexibleListModel
+from MaestroCore.utils.processes import ProcessModel, Process  # , ProcessDialog
+from MaestroCore.utils.listModel import FlexibleListModel
 from datetime import datetime, timedelta
 
 defaultSettings = {}  # don't know how this should be stored/managed/updated - should submodules be able to register their own settings? probably. that's annoying
@@ -23,13 +22,15 @@ class Settings:
     def __init__(self, settingsFilePath):
         self.path = settingsFilePath
         self._settings = {}
+        self._linkBacks = []  # (settingName, writeFunction) tuples
 
     def loadSettings(self):
         with open(self.path, "r") as settingsFile:
             self._settings = json.load(settingsFile)
 
     def saveSettings(self):
-        json.dump(self._settings, self.path)
+        with open(self.path, "w") as settingsFile:
+            json.dump(self._settings, settingsFile)
 
     def query(self, key):
         """
@@ -41,22 +42,30 @@ class Settings:
 
     def add(self, key, value, settingType):
         self._settings[key] = (value, settingType)
+        self.saveSettings()
 
-    def linkWatch(self, signal, key, valueSource):
+    def linkWatch(self, signal, key, valueSource, linkBack, datatype):
         """
         Link function signal to setting key such that setting key is set to the value from valueSource (can be a function) when signal is triggered
         :param signal: Qt signal
         :param key: string, name of existing setting
         :param valueSource: function or value
-        """
-        signal.connect(lambda: self.set(key, valueSource))
 
-    def set(self, key, value):
+        """
+        signal.connect(lambda: self.set(key, valueSource, datatype))
+        self._linkBacks.append((key, (linkBack, datatype)))
+
+    def update(self):
+        for key, (func, datatype) in self._linkBacks:
+            func(datatype(self._settings[key][0]))
+
+    def set(self, key, value, datatype):
         if callable(value):
             value = value()
         if key in self._settings.keys():
-            self._settings[key][0] = value
+            self._settings[key][0] = datatype(value)
             print(self.asDict())
+            self.saveSettings()
             return
         raise ValueError("No such setting " + key)
 
@@ -108,16 +117,35 @@ def loadDfInTable(dataframe: pd.DataFrame, table: QTableWidget):  # SHARED MUTAB
     table.setHorizontalHeaderLabels(columnHeaders)
 
 
+def comboValToIndex(comboBox: QComboBox, val):
+    return comboBox.findText(val())
+
+
+def datetimeToQDateTime(dt: datetime):
+    return QDateTime.fromSecsSinceEpoch(int(dt.timestamp()))
+
+
+def qDateTimeToDatetime(t):
+    print("t in qdatetimetodatetime:", type(t.toSecsSinceEpoch()))
+    return datetime.fromtimestamp(t.toSecsSinceEpoch())
+
+
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
+        self.scheduleDf = None
+        self.setWindowIcon(QtGui.QIcon("MaestroCore/logosAndIcons/windowIcon.png"))  # ----
         self.setupUi(self)
+
 
         # initialize custom things
         self.dbConnection = CandidateDatabase("candidate database.db", "Maestro")
         self.processModel = ProcessModel(statusBar=self.statusBar())
         self.ephemListModel = FlexibleListModel()
         self.settings = Settings("./MaestroCore/settings.txt")
+        self.chooseSchedSavePath.setPrompt("Choose Save Path").isDirectoryDialog(True)
+        self.databasePathChooseButton.setPrompt("Select Database File").setPrompt("Database File (*.db)")
+        self.ephemChooseSaveButton.setPrompt("Choose Save Path").isDirectoryDialog(True)
 
         # initialize misc things
         self.candidateDict = None
@@ -132,13 +160,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.candidatesByID = None
         self.ephemProcess = None
         self.ephemProcessIDs = []
+        self.databaseProcess = None
 
         # call setup functions
+        self.settings.loadSettings()
         self.setConnections()
+
         self.processesTreeView.setModel(self.processModel)
         self.ephemListView.setModel(self.ephemListModel)
-        self.settings.loadSettings()
         self.processesTreeView.selectionModel().selectionChanged.connect(self.toggleProcessButtons)
+        # self.startCoordinator()  # commented while testing
+
+        if self.settings.query("candidateDbPath") != "":
+            self.databasePathChooseButton.setText(self.settings.query("candidateDbPath")[0].split(os.sep)[-1])
 
     def setConnections(self):
         self.refreshCandButton.clicked.connect(lambda refresh: self.getTargets().displayCandidates())
@@ -154,16 +188,107 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.processResumeButton.clicked.connect(self.resumeProcess)
         self.processAbortButton.clicked.connect(self.abortProcess)
         self.processModel.rowsInserted.connect(lambda parent: self.processesTreeView.expandRecursively(parent))
+        self.requestDbRestartButton.clicked.connect(self.startCoordinator)
+        self.scheduleAutoTimeSetButton.clicked.connect(self.autoSetSchedulerTimes)
+        self.genScheduleButton.clicked.connect(self.runScheduler)
+        self.pingButton.clicked.connect(self.pingProcess)
+        self.requestDbCycleButton.clicked.connect(self.requestDbCycle)
+
         self.settings.linkWatch(self.intervalComboBox.currentTextChanged, "ephemInterval",
-                                self.intervalComboBox.currentText)
-        self.settings.linkWatch(self.obsCodeLineEdit.textChanged, "ephemsObsCode", self.obsCodeLineEdit.text)
+                                lambda: comboValToIndex(self.intervalComboBox, self.intervalComboBox.currentText),
+                                self.intervalComboBox.setCurrentIndex, int)
+        self.settings.linkWatch(self.obsCodeLineEdit.textChanged, "ephemsObsCode", self.obsCodeLineEdit.text,
+                                self.obsCodeLineEdit.setText, str)
         self.settings.linkWatch(self.ephemStartDelayHrsSpinBox.valueChanged, "ephemStartDelayHrs",
-                                self.ephemStartDelayHrsSpinBox.value)
-        self.settings.linkWatch(self.formatComboBox.currentTextChanged, "ephemFormat", self.formatComboBox.currentText)
+                                self.ephemStartDelayHrsSpinBox.value, self.ephemStartDelayHrsSpinBox.setValue, int)
+        self.settings.linkWatch(self.formatComboBox.currentTextChanged, "ephemFormat",
+                                lambda: comboValToIndex(self.formatComboBox, self.formatComboBox.currentText),
+                                self.formatComboBox.setCurrentIndex, int)
+        self.settings.linkWatch(self.minutesBetweenCyclesSpinBox.valueChanged, "databaseWaitTimeMinutes",
+                                self.minutesBetweenCyclesSpinBox.value, self.minutesBetweenCyclesSpinBox.setValue, int)
+        self.settings.linkWatch(self.scheduleStartTimeEdit.dateTimeChanged, "scheduleStartTimeSecs",
+                                lambda: self.scheduleStartTimeEdit.dateTime().toSecsSinceEpoch(),
+                                lambda secs: self.scheduleStartTimeEdit.setDateTime(QDateTime.fromSecsSinceEpoch(secs)),
+                                int)
+        self.settings.linkWatch(self.scheduleEndTimeEdit.dateTimeChanged, "scheduleEndTimeSecs",
+                                lambda: self.scheduleEndTimeEdit.dateTime().toSecsSinceEpoch(),
+                                lambda secs: self.scheduleEndTimeEdit.setDateTime(QDateTime.fromSecsSinceEpoch(secs)),
+                                int)
+
+        self.settings.linkWatch(self.chooseSchedSavePath.chosen, "scheduleSaveDir", self.chooseSchedSavePath.getPath,
+                                self.chooseSchedSavePath.updateFilePath, str)
+        self.settings.linkWatch(self.ephemChooseSaveButton.chosen, "ephemsSavePath", self.ephemChooseSaveButton.getPath,
+                                self.ephemChooseSaveButton.updateFilePath, str)
+        self.settings.linkWatch(self.databasePathChooseButton.chosen, "candidateDbPath",
+                                self.databasePathChooseButton.getPath,
+                                self.databasePathChooseButton.updateFilePath, str)
+
+        self.settings.update()
+
+    def startCoordinator(self):
+        if not os.path.exists(self.settings.query("candidateDbPath")[0]):
+            self.statusBar().showMessage(
+                "To run database coordination, choose a database under Database > Control, then press 'Request Restart'",
+                10000)
+        if self.databaseProcess is not None:
+            if self.databaseProcess.isActive:  # run a restart
+                print("Restarting database coordinator.")
+                self.databaseProcess.abort()
+                time.sleep(1)
+                self.databaseProcess = None
+                self.startCoordinator()
+                return
+        self.databaseProcess = Process("Database")
+        self.processModel.add(self.databaseProcess)
+        self.databaseProcess.msg.connect(lambda message: print(message))
+        self.databaseProcess.msg.connect(self.dbStatusChecker)
+        self.databaseProcess.ended.connect(self.getTargets)
+
+        self.databaseProcess.start("python", ['./MaestroCore/database.py', json.dumps(self.settings.asDict())])
+
+    def runScheduler(self):
+        print("Generating...")
+        self.genScheduleButton.setDisabled(True)
+        self.scheduleProcess = Process("Scheduler")
+        self.processModel.add(self.scheduleProcess)
+        self.scheduleProcess.msg.connect(lambda msg: print("Scheduler: ", msg))
+        self.scheduleProcess.start("python", ["newScheduler.py", json.dumps(self.settings.asDict())])
+        self.scheduleProcess.ended.connect(lambda: self.genScheduleButton.setDisabled(False))
+        self.scheduleProcess.ended.connect(self.displaySchedule)
+
+    def displaySchedule(self):
+        basepath = self.settings.query("scheduleSaveDir")[0] + os.sep + "schedule"
+        imgPath = basepath + ".png"
+        csvPath = basepath + ".csv"
+        if os.path.isfile(imgPath):
+            imgProfile = QtGui.QImage(imgPath)  # QImage object
+            imgProfile = imgProfile.scaled(self.scheduleImageDisplay.width(), self.scheduleImageDisplay.height(), aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio,
+                                           transformMode=QtCore.Qt.TransformationMode.SmoothTransformation)
+            self.scheduleImageDisplay.setPixmap(QtGui.QPixmap.fromImage(imgProfile))
+        else:
+            print("Can't find saved image!")
+        if os.path.isfile(csvPath):
+            self.scheduleDf = pd.read_csv(csvPath)
+            loadDfInTable(self.scheduleDf,self.scheduleTable)
+    def autoSetSchedulerTimes(self):
+        start = datetimeToQDateTime(max(self.sunsetUTC, pytz.UTC.localize(datetime.utcnow())))
+        end = datetimeToQDateTime(self.sunriseUTC)
+
+        self.scheduleStartTimeEdit.setDateTime(start)
+        self.scheduleEndTimeEdit.setDateTime(end)
+
+    def requestDbCycle(self):
+        print("Requesting")
+        self.databaseProcess.write("Database: Cycle\n")
+
+    def dbStatusChecker(self, msg):
+        if "Database: Status:" in msg:
+            print("Db status received:", msg)
+            self.databaseProcess.ended.emit(msg.replace("Database: Status:", ""))  # this is cheating
 
     def toggleProcessButtons(self):
         self.processesTreeView.selectionModel().blockSignals(True)
-        for button in [self.processAbortButton, self.processPauseButton, self.processResumeButton]:
+        for button in [self.processAbortButton, self.processPauseButton, self.processResumeButton, self.pingButton]:
             button.setDisabled(not bool(len(self.processesTreeView.selectedIndexes())))
         processItems = []
         for index in self.processesTreeView.selectedIndexes():
@@ -196,6 +321,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for index in self.processesTreeView.selectedIndexes():
             index.internalPointer().tags["Process"].abort()
 
+    def pingProcess(self):
+        for index in self.processesTreeView.selectedIndexes():
+            index.internalPointer().tags["Process"].ping()
+
     def useCandidateTableEphemeris(self):
         """
         Add the desigs of all selected candidates in the candidate table to the ephems list, then set the ephem tab as the active tab
@@ -206,7 +335,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.tabWidget.setCurrentWidget(self.tabWidget.findChild(QWidget, "ephemsTab"))
 
     def getTargets(self):
-        print("get")
         self.candidates = self.dbConnection.table_query("Candidates", "*",
                                                         "DateAdded > ?",
                                                         [datetime.utcnow() - timedelta(hours=36)],
@@ -267,11 +395,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.getEphemsButton.setDisabled(True)
         self.ephemProcess = Process("Ephemerides")
-        self.ephemProcessIDs.append(id(self.ephemProcess))
-        print(self.ephemProcessIDs)
         self.processModel.add(self.ephemProcess)
-        # ephemPopUp = ProcessDialog("Ephemerides", process=self.ephemProcess, parent=self)
-        self.ephemProcess.msg.connect(lambda message: print(message))
         self.ephemProcess.ended.connect(lambda: print(self.processModel.rootItem.__dict__))
         self.ephemProcess.ended.connect(lambda: self.getEphemsButton.setDisabled(False))
         targetDict = {

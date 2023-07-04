@@ -1,7 +1,10 @@
 import copy
+import json
 import os
 import queue
 import random
+import shutil
+import sys
 from datetime import datetime, timedelta
 from importlib import import_module
 
@@ -66,8 +69,9 @@ class ScorerSwitchboard(astroplan.Scorer):
                     random.uniform(1 - self.temperature, 1 + self.temperature), 3)
                 scoreArray[indices] = modifiedRows
             except Exception as e:
-                raise e
-                print("score error:", e)
+                # raise e
+                sys.stderr.write("score error:", e)
+                sys.stderr.flush()
                 scoreArray[indices] = self.genericScoreArray(blocksOfType, time_resolution) * round(
                     random.uniform(1 - self.temperature, 1 + self.temperature), 3)
         return scoreArray
@@ -103,7 +107,7 @@ def makeFocusBlock():
                           constraints=None)
 
 
-def plotScores(scoreArray, targetNames, times, title):
+def plotScores(scoreArray, targetNames, times, title, savepath):
     targetNames = [t for t in targetNames if t != "Focus"]
 
     x = np.arange(scoreArray.shape[1])  # Create x-axis values based on the number of columns
@@ -131,8 +135,91 @@ def plotScores(scoreArray, targetNames, times, title):
     plt.legend()
 
     plt.tight_layout()
+    plt.savefig(os.sep.join([savepath, "scorePlot.png"]))
     plt.show()
     plt.close()
+
+
+def visualizeSchedule(scheduleDf: pd.DataFrame, startDt=None, endDt=None, full=None, temp=None):
+    schedule = scheduleDf.loc[(scheduleDf["target"] != "TransitionBlock")]
+    if startDt is None:
+        startDt = stringToTime(schedule.iloc[0]["start time (UTC)"])
+    if endDt is None:
+        endDt = stringToTime(schedule.iloc[len(schedule.index) - 1]["end time (UTC)"])
+
+    xMin, xMax = startDt.timestamp(), endDt.timestamp()
+    # xMin, xMax = (startDt + timedelta(hours=7)).timestamp(), (endDt + timedelta(hours=7)).timestamp()
+
+    xTicks = []
+    val = xMax - xMax % 3600
+    while val > xMin:
+        xTicks.append(val)
+        val -= 3600
+
+    targetNames = schedule.loc[(schedule["target"] != "Unused Time") & (schedule["target"] != "TransitionBlock")][
+        "target"].tolist()
+    targetNames = list(set([t[:-2] if "_" in t else t for t in targetNames]))
+    numTargets = len(targetNames)
+    # numTargets = len(schedule.index)
+    sbPalette = sns.color_palette("hls", numTargets)
+    cmap = ListedColormap(sns.color_palette(sbPalette).as_hex())
+    # Generate a list of colors using a loop
+    colorDict = {}
+    for i in range(numTargets):
+        color = cmap(i)
+        colorDict[targetNames[i]] = color
+    colorDict["Unused Time"] = plt.cm.tab20(14)
+    colorDict["TransitionBlock"] = plt.cm.tab20(17)
+
+    fig, ax = plt.subplots(figsize=(10, 4))
+    for i in range(0, len(schedule.index)):
+        row = schedule.iloc[i]
+        startTime, endTime = stringToTime(row["start time (UTC)"]), stringToTime(row["end time (UTC)"])
+        name = row["target"]
+
+        startUnix = startTime.timestamp()
+        endUnix = endTime.timestamp()
+
+        # Calculate the duration of the observability window
+        duration = endUnix - startUnix
+
+        # Plot a rectangle representing the observability window
+        ax.barh(0, duration, left=startUnix, height=0.6, color=colorDict[name[:-2] if "_" in name else name],
+                edgecolor="black")
+
+        # Place the label at the center of the bar
+        if name != "Unused Time" and name != "Focus":
+            ax.text(max(startUnix + duration / 2, xMin + duration / 2), 0, '\n'.join(name), ha='center',
+                    va='center' if name != "Focus" else "top", bbox={'facecolor': 'white', 'alpha': 0.75,
+                                                                     'pad': 3})  # we use '\n'.join( ) to make the labels vertical
+
+    # Set the x-axis limits based on start and end timestamps
+    ax.set_xlim(xMin, xMax)
+
+    # Format x-axis labels as human-readable datetime
+    def formatFunc(value, tickNumber):
+        dt = datetime.fromtimestamp(value)
+        return dt.strftime("%H:%M\n%d-%b")
+
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(formatFunc))
+    ax.set_xticks(xTicks)
+    # Set the x-axis label
+    ax.set_xlabel("Time (UTC)")
+
+    # Set the y-axis label
+
+    ax.set_yticks([])
+    # Adjust spacing
+    plt.subplots_adjust(left=0.1, right=0.95, bottom=0.11, top=0.85)
+    plt.suptitle("Schedule for " + startDt.strftime("%b %d, %Y"))
+    plt.title(
+        startDt.strftime("%b %d, %Y, %H:%M") + " to " + endDt.strftime(
+            "%b %d, %Y, %H:%M"))
+
+    # Show the plot
+    plt.show()
+
+    schedule.to_csv("schedule.csv")
 
 
 class TMOScheduler(astroplan.scheduling.Scheduler):
@@ -272,19 +359,19 @@ class TMOScheduler(astroplan.scheduling.Scheduler):
             continue
 
         # print("All done!")
-        plotScores(scoreArray, [b.target.name for b in blocks], times, "All Targets")
+        plotScores(scoreArray, [b.target.name for b in blocks], times, "All Targets", savepath)
         # plotScores(scoreArray, scheduledNames, times, "Scheduled Targets")
         return self.schedule
 
 
-def visualizeSchedule(scheduleDf: pd.DataFrame, startDt=None, endDt=None, full=None, temp=None):
-    schedule = scheduleDf.loc[(scheduleDf["target"] != "TransitionBlock")]
+def visualizeSchedule2(scheduleDf: pd.DataFrame, savepath, startDt=None, endDt=None, full=None, temp=None):
+    schedule = scheduleDf.loc[(scheduleDf["Target"] != "TransitionBlock")]
     if startDt is None:
-        startDt = stringToTime(schedule.iloc[0]["start time (UTC)"])
+        startDt = stringToTime(schedule.iloc[0]["Start Time (UTC)"])
     if endDt is None:
-        endDt = stringToTime(schedule.iloc[len(schedule.index) - 1]["end time (UTC)"])
+        endDt = stringToTime(schedule.iloc[len(schedule.index) - 1]["End Time (UTC)"])
 
-    xMin, xMax = (startDt + timedelta(hours=7)).timestamp(), (endDt + timedelta(hours=7)).timestamp()
+    xMin, xMax = startDt.timestamp(), endDt.timestamp()
 
     xTicks = []
     val = xMax - xMax % 3600
@@ -292,14 +379,14 @@ def visualizeSchedule(scheduleDf: pd.DataFrame, startDt=None, endDt=None, full=N
         xTicks.append(val)
         val -= 3600
 
-    targetNames = schedule.loc[(schedule["target"] != "Unused Time") & (schedule["target"] != "TransitionBlock")][
-        "target"].tolist()
+    targetNames = schedule.loc[(schedule["Target"] != "Unused Time") & (schedule["Target"] != "TransitionBlock")][
+        "Target"].tolist()
     targetNames = list(set([t[:-2] if "_" in t else t for t in targetNames]))
     numTargets = len(targetNames)
-    # numTargets = len(schedule.index)
+
     sbPalette = sns.color_palette("hls", numTargets)
     cmap = ListedColormap(sns.color_palette(sbPalette).as_hex())
-    # Generate a list of colors using a loop
+
     colorDict = {}
     for i in range(numTargets):
         color = cmap(i)
@@ -307,83 +394,84 @@ def visualizeSchedule(scheduleDf: pd.DataFrame, startDt=None, endDt=None, full=N
     colorDict["Unused Time"] = plt.cm.tab20(14)
     colorDict["TransitionBlock"] = plt.cm.tab20(17)
 
-    fig, ax = plt.subplots(figsize=(10, 4))
+    fig, ax = plt.subplots(figsize=(4, 8))
     for i in range(0, len(schedule.index)):
         row = schedule.iloc[i]
-        startTime, endTime = stringToTime(row["start time (UTC)"]), stringToTime(row["end time (UTC)"])
-        name = row["target"]
+        startTime, endTime = stringToTime(row["Start Time (UTC)"]), stringToTime(row["End Time (UTC)"])
+        name = row["Target"]
 
         startUnix = startTime.timestamp()
         endUnix = endTime.timestamp()
 
-        # Calculate the duration of the observability window
         duration = endUnix - startUnix
 
-        # Plot a rectangle representing the observability window
-        ax.barh(0, duration, left=startUnix, height=0.6, color=colorDict[name[:-2] if "_" in name else name],
-                edgecolor="black")
+        ax.bar(0, duration, bottom=startUnix, width=0.6, color=colorDict[name[:-2] if "_" in name else name],
+               edgecolor="black")
 
-        # Place the label at the center of the bar
         if name != "Unused Time" and name != "Focus":
-            ax.text(max(startUnix + duration / 2, xMin + duration / 2), 0, '\n'.join(name), ha='center',
+            ax.text(0, max(startUnix + duration / 2, xMin + duration / 2), name, ha='center',
                     va='center' if name != "Focus" else "top", bbox={'facecolor': 'white', 'alpha': 0.75,
-                                                                     'pad': 3})  # we use '\n'.join( ) to make the labels vertical
+                                                                     'pad': 3})
 
-    # Set the x-axis limits based on start and end timestamps
-    ax.set_xlim(xMin, xMax)
+    ax.set_ylim(xMin, xMax)
 
-    # Format x-axis labels as human-readable datetime
     def formatFunc(value, tickNumber):
         dt = datetime.fromtimestamp(value)
         return dt.strftime("%H:%M\n%d-%b")
 
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(formatFunc))
-    ax.set_xticks(xTicks)
-    # Set the x-axis label
-    ax.set_xlabel("Time (UTC)")
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(formatFunc))
+    ax.set_yticks(xTicks)
+    # ax.set_ylabel("Time (UTC)")
 
-    # Set the y-axis label
-
-    ax.set_yticks([])
-    # Adjust spacing
-    plt.subplots_adjust(left=0.1, right=0.95, bottom=0.11, top=0.85)
+    ax.set_xticks([])
+    ax.invert_yaxis()
+    plt.subplots_adjust(left=0.15, right=0.85, bottom=0.05, top=0.9)
     plt.suptitle("Schedule for " + startDt.strftime("%b %d, %Y"))
     plt.title(
-        startDt.strftime("%b %d, %Y, %H:%M") + " to " + endDt.strftime(
-            "%b %d, %Y, %H:%M"))
+        startDt.strftime("%H:%M") + " to " + endDt.strftime(
+            "%H:%M") + " UTC\n")
 
-    # Show the plot
+    plt.savefig(os.sep.join([savepath, "schedule.png"]))
     plt.show()
+    plt.close()
+    schedule.to_csv(os.sep.join([savepath, "schedule.csv"]), index=None)
 
-    schedule.to_csv("schedule.csv")
+
+def cleanScheduleDf(df: pd.DataFrame):
+    df = df.set_axis(
+        ['Target', 'Start Time (UTC)', 'End Time (UTC)', 'Duration (Minutes)', 'RA', 'Dec', 'Tags'], axis=1)
+    df["Start Time (UTC)"] = df["Start Time (UTC)"].apply(lambda row: row[:-4])
+    df["End Time (UTC)"] = df["End Time (UTC)"].apply(lambda row: row[:-4])
+    df["Duration (Minutes)"] = df["Duration (Minutes)"].apply(lambda row: round(float(row), 1))
+    df["RA"] = df["RA"].apply(lambda row: round(float(row), 4) if row else row)
+    df["Dec"] = df["Dec"].apply(lambda row: round(float(row), 4) if row else row)
+
+    return df
 
 
-def createSchedule(startTime, endTime):
+def createSchedule(startTime, endTime, savepath):
     # candidates = candidates.copy()  # don't want to mess with the candidates passed in
     configDict = {}
 
     # import configurations from python files placed in the schedulerConfigs folder
-    # files = os.listdir("schedulerConfigs")
     files = []
-    # files = ["schedulerConfigs." + v+"."+i[:-3] for v,i in {d:f for r,d,f in os.walk("./schedulerConfigs/")} if i.endswith(".py") and "schedule" in i]
-    # print([(r,f) for r,d,f in os.walk("./schedulerConfigs/",topdown=False)])
-    # files = ["schedulerConfigs." + r+"."+i[:-3] for r,i in ((g,h) for g,h in ((r,f) for r,d,f in os.walk("./schedulerConfigs/",topdown=False) if len(r) and len(d) and len(f))) if i.endswith(".py") and "schedule" in i]
     for root, dir, file in os.walk("./schedulerConfigs"):
-        files += [".".join([root.replace("./","").replace("\\","."), f[:-3]]) for f in file if f.endswith(".py") and "schedule_" in f]
-    print(files)
-    # files = ["schedulerConfigs." + f[:-3] for f in [i for i in [os.listdir("./schedulerConfigs/"+h) for h in os.listdir("./schedulerConfigs/") if os.path.isdir(h)]] if
-    #          f[-3:] == ".py" and "init" not in f]
+        files += [".".join([root.replace("./", "").replace("\\", "."), f[:-3]]) for f in file if
+                  f.endswith(".py") and "schedule_" in f]
+    # print(files)
     # maybe wrap this in a try?:
     for file in files:
         module = import_module(file, "schedulerConfigs")
         typeName, conf = module.getConfig()
         configDict[typeName] = conf
 
-    candidates = [candidate for candidateList in [c.selectCandidates(startTime, endTime) for c in configDict.values()] for candidate in
+    candidates = [candidate for candidateList in [c.selectCandidates(startTime, endTime) for c in configDict.values()]
+                  for candidate in
                   candidateList]  # turn the lists of candidates into one list
 
     if len(candidates) == 0:
         print("No candidates provided - nothing to schedule. Exiting.")
+        sys.stdout.flush()
         exit()
     for c in candidates:
         c.RA = genUtils.ensureAngle(str(c.RA) + "h")
@@ -441,24 +529,24 @@ def createSchedule(startTime, endTime):
                                 time_resolution=60 * u.second, gap_time=1 * u.minute)
     schedule = copy.deepcopy(Schedule(Time(startTime), Time(endTime)))
     tmoScheduler(copy.deepcopy(blocks), schedule)  # do the scheduling (modifies schedule inplace)
-    print(schedule)
-    scheduleDf = schedule.to_table(show_unused=True).to_pandas()
+    # print(schedule)
+    scheduleDf = cleanScheduleDf(schedule.to_table(show_unused=True).to_pandas())
     # print(scheduleDf.dtypes)
     # print("Columns:", scheduleDf.columns)
     # print(scheduleDf.info)
     # print(scheduleDf.to_string())
-    unused = scheduleDf.loc[scheduleDf["target"] == "Unused Time"]["duration (minutes)"].sum()
-    total = scheduleDf["duration (minutes)"].sum()
+    unused = scheduleDf.loc[scheduleDf["Target"] == "Unused Time"]["Duration (Minutes)"].sum()
+    total = scheduleDf["Duration (Minutes)"].sum()
     fullness = 1 - (unused / total)
-    print("Schedule is " + str(fullness * 100) + "% full")
+    print(repr(schedule) + ",", str(round(fullness * 100)) + "% full")
 
     # print("Temp", temperature, "#" + str(i)+ ":", str(fullness * 100) + "% full")
     # newRow = dict(zip(logDf.columns, [temperature, fullness]))
     # logDf.loc[len(logDf)] = newRow
-    visualizeSchedule(scheduleDf, startTime, endTime, fullness, temp=temperature)
+    visualizeSchedule2(scheduleDf, savepath, startTime, endTime, fullness, temp=temperature)
     # temperature += 10
     schedLines = scheduleToTextFile(scheduleDf, configDict, candidateDict)
-    with open("schedule.txt", "w") as f:
+    with open(os.sep.join([savepath, "schedule.txt"]), "w") as f:
         f.writelines(schedLines)
 
     # logDf.to_csv("TempVsFullness.csv")
@@ -477,7 +565,8 @@ def lineConverter(row: pd.Series, configDict, candidateDict, runningList: list):
         return
 
     try:
-        runningList.append(configDict[row["configuration"]["type"]].generateSchedulerLine(row, targetName, candidateDict))
+        runningList.append(
+            configDict[row["Tags"]["type"]].generateSchedulerLine(row, targetName, candidateDict))
     except Exception as e:
         raise e
         raise ValueError("Object " + str(targetName) + " doesn't have a schedule line generator. " + str(row))
@@ -488,7 +577,7 @@ def scheduleToTextFile(scheduleDf, configDict, candidateDict, prevSched=None):
     # scheduler line - maybe we'll make a default version later
     linesList = ["DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"]
     scheduleDf.apply(lambda row: lineConverter(row, configDict, candidateDict, runningList=linesList), axis=1)
-    print(linesList)
+    # print(linesList)
     return linesList
 
 
@@ -499,15 +588,31 @@ if __name__ == "__main__":
                    timezone=utc,
                    )  # timezone=pytz.timezone('US/Pacific')
 
-    sunriseUTC, sunsetUTC = genUtils.getSunriseSunset()
-    sunriseUTC, sunsetUTC = roundToTenMinutes(sunriseUTC), roundToTenMinutes(sunsetUTC)
-    sunriseUTC -= timedelta(hours=1)  # to account for us closing the dome one hour before sunrise
+    if len(sys.argv) == 1:
+        sunriseUTC, sunsetUTC = genUtils.getSunriseSunset()
+        sunriseUTC, sunsetUTC = roundToTenMinutes(sunriseUTC), roundToTenMinutes(sunsetUTC)
+        sunriseUTC -= timedelta(hours=1)  # to account for us closing the dome one hour before sunrise
+        sunsetUTC = max(sunsetUTC, pytz.UTC.localize(datetime.utcnow()))
+        savepath = "./scheduleOut"
+        overwrite = False
+    else:
+        settings = json.loads(sys.argv[1])
+        sunsetUTC = datetime.fromtimestamp(settings["scheduleStartTimeSecs"]) + timedelta(hours=7)
+        sunriseUTC = datetime.fromtimestamp(settings["scheduleEndTimeSecs"]) + timedelta(hours=7)
+        savepath = settings["scheduleSaveDir"]
+        overwrite = True
     # sunsetUTC = datetime.now()
     # dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
     #
     # candidates = mpcUtils.candidatesForTimeRange(sunsetUTC, sunriseUTC, 1, dbConnection)
+    if not os.path.exists(savepath):
+        os.mkdir(savepath)
+    elif overwrite and len(os.listdir(savepath)) <= 5:  # safety precaution lol
+        shutil.rmtree(savepath)
+        os.mkdir(savepath)
 
-    scheduleTable, _, _ = createSchedule(max(sunsetUTC,pytz.UTC.localize(datetime.utcnow())), sunriseUTC)
+    print(sunsetUTC, sunriseUTC)
+    scheduleTable, _, _ = createSchedule(sunsetUTC, sunriseUTC, savepath)
     # scheduleTable.pprint(max_width=2000)
     # visualizeSchedule(scheduleTable, sunsetUTC, sunriseUTC)
 

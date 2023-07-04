@@ -9,7 +9,7 @@ import shutil
 from colorlog import ColoredFormatter
 from httpx import RemoteProtocolError
 
-from scheduleLib import mpcTargetSelectorCore as targetCore
+from schedulerConfigs.MPC_NEO import mpcTargetSelectorCore as targetCore
 
 #Sage Santomenna 2023
 

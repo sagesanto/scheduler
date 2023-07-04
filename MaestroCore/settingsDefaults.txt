@@ -1,0 +1,1 @@
+{"ephemTimeout": [120, "spinBox"], "ephemStartDelayHrs": [0, "spinBox"], "ephemInterval": ["1 minute", "dropdown"], "ephemFormat": ["Scheduler", "dropdwon"], "ephemsObsCode": [654, "entry"],"ephemsSavePath": ["./MaestroCore/ephems", "folderSelect"], "candidateDbPath": ["","fileSelect"],"databaseWaitTimeMinutes":[15,"spinBox"]}

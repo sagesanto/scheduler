@@ -302,7 +302,6 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
                 ephem_entry_num += 1
 
                 # parse obs_rec
-                sys.stdout.write(str(ephem))
                 obsDatetime, coords, vMag, vRa, vDec = mpcInst._MPCNeoConfirm__parse_ephemeris(obsRec)
 
                 deltaErr = None

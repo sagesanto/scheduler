@@ -1,15 +1,10 @@
 import os
 import signal
-import sys
-
-import pandas as pd
-import pytz
-from PyQt6.QtWidgets import QApplication, QWidget, QPushButton, QMainWindow, QFileDialog, QButtonGroup, QTableWidget, \
-    QTableWidgetItem as QTableItem, QListWidget, QLineEdit, QDialog, QDialogButtonBox, QVBoxLayout, QLabel, QMessageBox
-from PyQt6.QtCore import Qt, pyqtSignal, QRunnable, QObject, QThreadPool, QProcess
-from PyQt6.QtGui import QIcon
-from PyQt6 import QtCore, QtWidgets
 from datetime import datetime, timedelta
+
+import pytz
+from PyQt6 import QtCore
+from PyQt6.QtCore import Qt, pyqtSignal, QObject, QProcess
 
 
 def generateTimestampString():
@@ -101,6 +96,7 @@ class Process(QProcess):
     paused = pyqtSignal()
     resumed = pyqtSignal()
     ended = pyqtSignal(str)
+    ponged = pyqtSignal(str)
 
     def __init__(self, name: str, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -114,6 +110,7 @@ class Process(QProcess):
         self.errorLog = []
         self.isPaused = False
         self.connect()
+        self.lastPing = None
 
     def connect(self):
         self.readyReadStandardError.connect(lambda: self.writeToErrorLog(decodeStdErr(self)))
@@ -121,7 +118,7 @@ class Process(QProcess):
         self.finished.connect(lambda: self.lastLog.emit(self.log[-1] if len(self.log) else ""))
         self.finished.connect(self.terminate)  # this might not be necessary
         self.finished.connect(lambda exitCode: self.ended.emit("Finished" if not exitCode else "Error"))
-
+        self.msg.connect(self.pong)
         self.errorOccurred.connect(lambda: self.ended.emit("Error"))
 
     def __del__(self):
@@ -159,6 +156,22 @@ class Process(QProcess):
             self.resumed.emit()
             self.isPaused = False
             os.kill(self.processId(), signal.SIGCONT)
+
+    def ping(self):
+        self.write("{}: Ping!\n".format(self.name))
+        self.lastPing = datetime.now()
+
+    def write(self, msg: str):
+        super().write(bytes(msg, "utf-8"))
+
+    def pong(self, msg):
+        if self.lastPing is not None and datetime.now() - self.lastPing > timedelta(seconds=1):
+            self.writeToErrorLog("Dead ping!")
+            return
+        if "{}: Pong!".format(self.name) in msg:
+            print("Got pong: ", msg)
+            self.ponged.emit(msg.replace("{}: ".format(self.name),""))
+            self.lastPing = None
 
     def writeToErrorLog(self, error):
         error = self.name + " encountered an error: " + error
@@ -256,7 +269,7 @@ class ProcessModel(QtCore.QAbstractItemModel):
 
     def add(self, process: Process):
         self.beginInsertRows(QtCore.QModelIndex(), 0, 4)
-        topItem = TreeItem([process.name, process.status], parent=self.rootItem, tags={"Process":process})
+        topItem = TreeItem([process.name, process.status], parent=self.rootItem, tags={"Process": process})
         startItem = TreeItem(["Start", process.startString], topItem)
         endItem = TreeItem(["End", ""], topItem)
         resultItem = TreeItem(["Result", ""], topItem)
@@ -282,28 +295,33 @@ class ProcessModel(QtCore.QAbstractItemModel):
         process.ended.connect(lambda: self.setData(endItem.index, generateTimestampString()))
 
         process.lastLog.connect(lambda msg: self.setData(resultItem.index, msg))
+        process.ponged.connect(lambda msg: self.setData(resultItem.index, msg))
         process.errorOccurred.connect(lambda: self.setData(resultItem.index, process.error()))
         process.errorSignal.connect(lambda msg: self.setData(resultItem.index, msg))
 
         if self.statusBar is not None:
-            process.ended.connect(lambda msg: self.statusBar.showMessage("Process '{}' ended with status '{}'".format(process.name,msg), 10000))
+            process.ponged.connect(lambda msg: self.statusBar.showMessage("Process '{}': '{}'".format(process.name, msg),
+                                                   750))
+            process.ended.connect(
+                lambda msg: self.statusBar.showMessage("Process '{}' ended with status '{}'".format(process.name, msg),
+                                                       10000))
         self.endInsertRows()
         print("Done")
 
 
-class ProcessDialog(QDialog):
-    def __init__(self, windowName, process: Process, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle(windowName)
-        self.abortButton = QPushButton("Abort")
-        self.layout = QVBoxLayout()
-        message = QLabel("Fetching Ephemerides")
-        self.progressBar = QtWidgets.QProgressBar(parent=self)
-        self.layout.addWidget(message)
-        self.layout.addWidget(self.progressBar)
-        self.layout.addWidget(self.abortButton)
-        self.setLayout(self.layout)
-        self.abortButton.clicked.connect(process.abort)
-        self.abortButton.clicked.connect(self.close)
-        process.finished.connect(self.close)
-        process.errorOccurred.connect(self.close)
+# class ProcessDialog(QDialog):
+#     def __init__(self, windowName, process: Process, parent=None):
+#         super().__init__(parent)
+#         self.setWindowTitle(windowName)
+#         self.abortButton = QPushButton("Abort")
+#         self.layout = QVBoxLayout()
+#         message = QLabel("Fetching Ephemerides")
+#         self.progressBar = QtWidgets.QProgressBar(parent=self)
+#         self.layout.addWidget(message)
+#         self.layout.addWidget(self.progressBar)
+#         self.layout.addWidget(self.abortButton)
+#         self.setLayout(self.layout)
+#         self.abortButton.clicked.connect(process.abort)
+#         self.abortButton.clicked.connect(self.close)
+#         process.finished.connect(self.close)
+#         process.errorOccurred.connect(self.close)

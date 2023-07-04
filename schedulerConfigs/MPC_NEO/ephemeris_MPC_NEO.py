@@ -18,16 +18,13 @@ try:
     mpcInst = MPCNeoConfirm()
     interval = intervalDict[settings["ephemInterval"]]
     mpcInst.int = interval
-    print(mpcInst.int)
-    print(interval)
-    print(settings["ephemInterval"])
 
     asyncInst = AsyncHelper(True, timeout=int(settings["ephemTimeout"]))
     ephems = asyncio.run(
         asyncMultiEphem(desigs, datetime.utcnow() + timedelta(hours=int(settings["ephemStartDelayHrs"])), -15, mpcInst,
                         asyncInst, logger=logging.getLogger("__name__"),
                         autoFormat=settings["ephemFormat"] == "Scheduler", obsCode=settings["ephemsObsCode"]))
-    print(ephems)
+
     for desig, ephDict in ephems.items():
         lines = [l for (_,l) in ephDict.items()] if settings["ephemFormat"] == "Scheduler" else ephDict
         with open(settings["ephemsSavePath"]+os.sep+desig,"w") as f:

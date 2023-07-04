@@ -11,10 +11,10 @@ from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
 # check if they have a removal reason. if they do, ignore them
 # if they don't, do the selection process, marking rejected reason if they're not observable by TMO
 
-async def selectTargets(logger, lookback):
+async def selectTargets(logger, lookback, dbPath):
     logger.info("--- Selecting ---")
 
-    dbConnection = CandidateDatabase("./candidate database.db", "MPC Selector")
+    dbConnection = CandidateDatabase(dbPath, "MPC Selector")
     targetSelector = TargetSelector()
 
     candidates = dbConnection.table_query("Candidates", "*",

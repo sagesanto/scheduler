@@ -1,5 +1,5 @@
 from PyQt6.QtCore import Qt, QAbstractListModel, QModelIndex
-from PyQt6.QtWidgets import QApplication, QListView
+
 from scheduleLib.candidateDatabase import Candidate
 
 

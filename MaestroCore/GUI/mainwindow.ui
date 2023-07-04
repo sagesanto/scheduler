@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>596</height>
+    <width>1094</width>
+    <height>727</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,17 +20,29 @@
    <string>Maestro</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>100</horstretch>
+     <verstretch>100</verstretch>
+    </sizepolicy>
+   </property>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>800</width>
-      <height>591</height>
+      <width>1091</width>
+      <height>701</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+      <horstretch>100</horstretch>
+      <verstretch>100</verstretch>
+     </sizepolicy>
+    </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="movable">
      <bool>true</bool>
@@ -39,90 +51,221 @@
      <attribute name="title">
       <string>Schedule</string>
      </attribute>
-     <widget class="QWidget" name="horizontalLayoutWidget_2">
+     <widget class="QDockWidget" name="schedDock">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>791</width>
-        <height>541</height>
+        <width>1081</width>
+        <height>669</height>
        </rect>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QDockWidget" name="schedDock">
-         <property name="floating">
-          <bool>false</bool>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="floating">
+       <bool>false</bool>
+      </property>
+      <property name="features">
+       <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
+      </property>
+      <property name="windowTitle">
+       <string>Schedule</string>
+      </property>
+      <widget class="QWidget" name="dockWidgetContents_7">
+       <widget class="QWidget" name="verticalLayoutWidget_3">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>1081</width>
+          <height>631</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_4">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetDefaultConstraint</enum>
          </property>
-         <property name="features">
-          <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
-         </property>
-         <property name="windowTitle">
-          <string>Schedule</string>
-         </property>
-         <widget class="QWidget" name="dockWidgetContents_7">
-          <widget class="QWidget" name="verticalLayoutWidget_3">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>791</width>
-             <height>511</height>
-            </rect>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <property name="leftMargin">
+            <number>4</number>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_9">
-              <item>
-               <widget class="QPushButton" name="genScheduleButton">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Generate Schedule</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="editScheduleButton">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Edit Mode</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <spacer name="horizontalSpacer_3">
-                <property name="orientation">
-                 <enum>Qt::Horizontal</enum>
-                </property>
-                <property name="sizeHint" stdset="0">
-                 <size>
-                  <width>40</width>
-                  <height>20</height>
-                 </size>
-                </property>
-               </spacer>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QTableWidget" name="scheduleTable"/>
-            </item>
-           </layout>
-          </widget>
-         </widget>
-        </widget>
-       </item>
-      </layout>
+           <property name="rightMargin">
+            <number>7</number>
+           </property>
+           <item>
+            <widget class="QDateTimeEdit" name="scheduleStartTimeEdit">
+             <property name="currentSection">
+              <enum>QDateTimeEdit::MonthSection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>M/d hh:mm UTC</string>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::UTC</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_9">
+             <property name="text">
+              <string>to</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDateTimeEdit" name="scheduleEndTimeEdit">
+             <property name="currentSection">
+              <enum>QDateTimeEdit::MonthSection</enum>
+             </property>
+             <property name="displayFormat">
+              <string>M/d hh:mm UTC</string>
+             </property>
+             <property name="timeSpec">
+              <enum>Qt::UTC</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="scheduleAutoTimeSetButton">
+             <property name="text">
+              <string>Auto</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>Schedule Save Directory</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="FileSelectionButton" name="chooseSchedSavePath">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Choose</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="schedulerSaveEphemsBox">
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>Save Ephems</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="genScheduleButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="font">
+              <font>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Generate Schedule</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <widget class="QTableWidget" name="scheduleTable">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+               <horstretch>70</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="frameShadow">
+              <enum>QFrame::Sunken</enum>
+             </property>
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="showDropIndicator" stdset="0">
+              <bool>false</bool>
+             </property>
+             <property name="dragDropOverwriteMode">
+              <bool>false</bool>
+             </property>
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+             <attribute name="horizontalHeaderCascadingSectionResizes">
+              <bool>true</bool>
+             </attribute>
+             <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+              <bool>true</bool>
+             </attribute>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="scheduleImageDisplay">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+               <horstretch>30</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string notr="true"> </string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::PlainText</enum>
+             </property>
+             <property name="textInteractionFlags">
+              <set>Qt::NoTextInteraction</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="candidatesTab">
@@ -134,8 +277,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>791</width>
-        <height>539</height>
+        <width>1081</width>
+        <height>661</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -156,8 +299,8 @@
          <rect>
           <x>0</x>
           <y>1</y>
-          <width>791</width>
-          <height>501</height>
+          <width>1081</width>
+          <height>631</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="candVertLayout">
@@ -165,6 +308,12 @@
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
             <widget class="QCheckBox" name="showRejectedCheckbox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Rejected</string>
              </property>
@@ -172,6 +321,12 @@
            </item>
            <item>
             <widget class="QCheckBox" name="showRemovedCheckbox">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Removed</string>
              </property>
@@ -195,6 +350,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="toggleRejectButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Toggle Rejection</string>
              </property>
@@ -202,6 +360,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="removeToggleButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Toggle Removal</string>
              </property>
@@ -209,10 +370,26 @@
            </item>
            <item>
             <widget class="QPushButton" name="addCandidateButton">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
              <property name="text">
               <string>Add Candidate</string>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <widget class="QPushButton" name="candidateEphemerisButton">
@@ -250,17 +427,17 @@
       </widget>
      </widget>
     </widget>
-    <widget class="QWidget" name="statusTab">
+    <widget class="QWidget" name="databaseTab">
      <attribute name="title">
-      <string>Status</string>
+      <string>Database</string>
      </attribute>
      <widget class="QDockWidget" name="dbDock">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>791</width>
-        <height>531</height>
+        <width>1081</width>
+        <height>671</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -281,8 +458,8 @@
          <rect>
           <x>0</x>
           <y>10</y>
-          <width>771</width>
-          <height>501</height>
+          <width>1081</width>
+          <height>621</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -305,8 +482,8 @@
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>781</width>
-           <height>491</height>
+           <width>1081</width>
+           <height>621</height>
           </rect>
          </property>
          <property name="sizePolicy">
@@ -316,15 +493,15 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="statusPage">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>781</width>
-            <height>421</height>
+            <width>1081</width>
+            <height>551</height>
            </rect>
           </property>
           <attribute name="label">
@@ -470,8 +647,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>28</height>
+            <width>1081</width>
+            <height>551</height>
            </rect>
           </property>
           <attribute name="label">
@@ -482,49 +659,42 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>771</width>
-             <height>281</height>
+             <width>1021</width>
+             <height>501</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_6">
               <item>
-               <widget class="QPushButton" name="pushButton_5">
+               <widget class="QPushButton" name="requestDbRestartButton">
                 <property name="text">
                  <string>Request Restart</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_6">
+               <widget class="QPushButton" name="requestDbCycleButton">
                 <property name="text">
                  <string>Request Cycle</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_8">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
+               <widget class="QPushButton" name="stopDbCycleButton">
+                <property name="enabled">
+                 <bool>false</bool>
                 </property>
-                <property name="text">
-                 <string>Ping</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButton_7">
                 <property name="text">
                  <string>Stop Cycle</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_4">
+               <widget class="QPushButton" name="dbShutdownButton">
+                <property name="enabled">
+                 <bool>false</bool>
+                </property>
                 <property name="text">
                  <string>Shut Down</string>
                 </property>
@@ -534,6 +704,46 @@
             </item>
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_7">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <property name="leftMargin">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="QLabel" name="label_8">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Candidate Database Location</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="FileSelectionButton" name="databasePathChooseButton">
+                  <property name="text">
+                   <string>Choose</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_4">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+               </layout>
+              </item>
               <item>
                <widget class="QLabel" name="label_7">
                 <property name="sizePolicy">
@@ -548,7 +758,7 @@
                </widget>
               </item>
               <item>
-               <widget class="QSpinBox" name="spinBox">
+               <widget class="QSpinBox" name="minutesBetweenCyclesSpinBox">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -570,6 +780,9 @@
                <spacer name="horizontalSpacer_2">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                 <enum>QSizePolicy::Expanding</enum>
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
@@ -614,8 +827,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>791</width>
-        <height>531</height>
+        <width>1081</width>
+        <height>661</height>
        </rect>
       </property>
       <property name="features">
@@ -630,8 +843,8 @@
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>791</width>
-          <height>481</height>
+          <width>1081</width>
+          <height>631</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="ephemVertLayout">
@@ -961,6 +1174,20 @@
             </widget>
            </item>
            <item>
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>Choose Save Path</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="FileSelectionButton" name="ephemChooseSaveButton">
+             <property name="text">
+              <string>Choose</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer_16">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -1058,8 +1285,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>791</width>
-        <height>539</height>
+        <width>1081</width>
+        <height>671</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -1080,8 +1307,8 @@
          <rect>
           <x>0</x>
           <y>1</y>
-          <width>791</width>
-          <height>501</height>
+          <width>1081</width>
+          <height>631</height>
          </rect>
         </property>
         <layout class="QVBoxLayout" name="vertLayout_22">
@@ -1127,16 +1354,18 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="processesDudButton1">
-             <property name="text">
-              <string>Dud</string>
+            <widget class="QPushButton" name="pingButton">
+             <property name="enabled">
+              <bool>false</bool>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="processesDudButton4">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
-              <string>Dud</string>
+              <string>Ping</string>
              </property>
             </widget>
            </item>
@@ -1167,6 +1396,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>FileSelectionButton</class>
+   <extends>QPushButton</extends>
+   <header>MaestroCore.utils.fileButton.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

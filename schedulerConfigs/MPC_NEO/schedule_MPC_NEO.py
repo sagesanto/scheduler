@@ -7,7 +7,7 @@ import numpy
 import numpy as np
 from astropy.time import Time
 
-from scheduleLib import mpcUtils
+from schedulerConfigs.MPC_NEO import mpcUtils
 from scheduleLib.candidateDatabase import CandidateDatabase
 from scheduleLib.genUtils import stringToTime, TypeConfiguration
 
@@ -19,7 +19,7 @@ def reverseNonzeroRunInplace(arr):
 
 
 class MpcConfig(TypeConfiguration):
-    def __init__(self, scorer, maxMinutesWithoutFocus=65, numObs=2, minMinutesBetweenObs=45):
+    def __init__(self, scorer, maxMinutesWithoutFocus=70, numObs=2, minMinutesBetweenObs=35):
         self.scorer = scorer
         self.maxMinutesWithoutFocus = maxMinutesWithoutFocus  # max time, in minutes, that this object can be scheduled after the most recent focus loop
         self.numObs = numObs
@@ -52,8 +52,8 @@ class MpcConfig(TypeConfiguration):
     def generateSchedulerLine(self, row, targetName, candidateDict):
         desig = targetName[:-2]
         c = candidateDict[desig]
-        startDt = stringToTime(row["start time (UTC)"])
-        duration = timedelta(minutes=row["duration (minutes)"])
+        startDt = stringToTime(row["Start Time (UTC)"])
+        duration = timedelta(minutes=row["Duration (Minutes)"])
         center = startDt + duration / 2
         center -= timedelta(seconds=center.second, microseconds=center.microsecond)
         return mpcUtils.candidateToScheduleLine(c, startDt, center, targetName)
