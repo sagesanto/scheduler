@@ -8,8 +8,8 @@ from PyQt6.QtCore import Qt, pyqtSignal, QObject, QProcess
 
 
 def generateTimestampString():
-    return datetime.now().strftime("%m/%d %H:%M") + " local / " + datetime.now(pytz.UTC).strftime(
-        "%m/%d %H:%M") + " UTC"
+    return datetime.now().strftime("%m/%d %H:%M:%S") + " local / " + datetime.now(pytz.UTC).strftime(
+        "%m/%d %H:%M:%S") + " UTC"
 
 
 def decodeStdOut(p: QProcess):

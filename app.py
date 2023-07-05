@@ -137,7 +137,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setWindowIcon(QtGui.QIcon("MaestroCore/logosAndIcons/windowIcon.png"))  # ----
         self.setupUi(self)
 
-
         # initialize custom things
         self.dbConnection = CandidateDatabase("candidate database.db", "Maestro")
         self.processModel = ProcessModel(statusBar=self.statusBar())
@@ -169,7 +168,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.processesTreeView.setModel(self.processModel)
         self.ephemListView.setModel(self.ephemListModel)
         self.processesTreeView.selectionModel().selectionChanged.connect(self.toggleProcessButtons)
-        # self.startCoordinator()  # commented while testing
+        self.startCoordinator()
 
         if self.settings.query("candidateDbPath") != "":
             self.databasePathChooseButton.setText(self.settings.query("candidateDbPath")[0].split(os.sep)[-1])
@@ -222,6 +221,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings.linkWatch(self.databasePathChooseButton.chosen, "candidateDbPath",
                                 self.databasePathChooseButton.getPath,
                                 self.databasePathChooseButton.updateFilePath, str)
+        self.settings.linkWatch(self.allCandidatesCheckbox.stateChanged, "showAllCandidates", self.allCandidatesCheckbox.isChecked, self.allCandidatesCheckbox.setChecked, bool)
 
         self.settings.update()
 
@@ -262,14 +262,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         csvPath = basepath + ".csv"
         if os.path.isfile(imgPath):
             imgProfile = QtGui.QImage(imgPath)  # QImage object
-            imgProfile = imgProfile.scaled(self.scheduleImageDisplay.width(), self.scheduleImageDisplay.height(), aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio,
+            imgProfile = imgProfile.scaled(self.scheduleImageDisplay.width(), self.scheduleImageDisplay.height(),
+                                           aspectRatioMode=QtCore.Qt.AspectRatioMode.KeepAspectRatio,
                                            transformMode=QtCore.Qt.TransformationMode.SmoothTransformation)
             self.scheduleImageDisplay.setPixmap(QtGui.QPixmap.fromImage(imgProfile))
         else:
             print("Can't find saved image!")
         if os.path.isfile(csvPath):
             self.scheduleDf = pd.read_csv(csvPath)
-            loadDfInTable(self.scheduleDf,self.scheduleTable)
+            loadDfInTable(self.scheduleDf, self.scheduleTable)
+
     def autoSetSchedulerTimes(self):
         start = datetimeToQDateTime(max(self.sunsetUTC, pytz.UTC.localize(datetime.utcnow())))
         end = datetimeToQDateTime(self.sunriseUTC)
@@ -357,7 +359,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                     candidates.append(i)
                     continue
                 candidates.append(self.candidateDict[i])
-            except:
+            except KeyError:
                 # TODO: Handle this
                 if handleErrorFunc:
                     handleErrorFunc("Couldn't find candidate for entry " + i)
@@ -397,6 +399,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ephemProcess = Process("Ephemerides")
         self.processModel.add(self.ephemProcess)
         self.ephemProcess.ended.connect(lambda: print(self.processModel.rootItem.__dict__))
+        self.ephemProcess.msg.connect(lambda msg: print(msg))
         self.ephemProcess.ended.connect(lambda: self.getEphemsButton.setDisabled(False))
         targetDict = {
             candidate.CandidateType: [c.CandidateName for c in candidatesToRequest if
@@ -405,8 +408,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         print(targetDict)
         self.ephemProcess.start("python", ['./MaestroCore/ephemerides.py', json.dumps(targetDict),
                                            json.dumps(self.settings.asDict())])
-        # ephemPopUp.exec()
-
         # launch waiting window
         # gather the candidates indicated
         # read the specified ephem parameters

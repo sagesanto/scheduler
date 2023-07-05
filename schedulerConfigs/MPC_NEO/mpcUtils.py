@@ -1,5 +1,6 @@
 # Sage Santomenna 2023
 import sys
+import time
 from datetime import datetime, timedelta
 
 import astropy
@@ -284,7 +285,7 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
 
         ephem = ephem[0].contents
         numRecs = len(ephem)
-
+        # print("Num recs:",numRecs)
         # get object coordinates
         if numRecs == 1:
             logger.warning('Target ' + designation + ' is not observable')
@@ -294,16 +295,25 @@ async def asyncMultiEphem(designations, when, minAltitudeLimit, mpcInst: mpc, as
             for i in range(0, numRecs - 3, 4):
                 # get datetime, ra, dec, vmag and motion
                 if i == 0:
-                    obsRec = ephem[i].split('\n')[-1].replace('\n', '').replace("... <suppressed> ...", '')
-                else:
-                    obsRec = ephem[i].replace('\n', '').replace('!', '').replace('*', '').replace("... <suppressed> ...",'')
+                    obsRec = ephem[i].split('\n')[-1].replace('\n', '')
 
+                else:
+                    obsRec = ephem[i].replace('\n', '').replace('!', '').replace('*', '')
+
+                if "... <suppressed> ..." in obsRec:
+                    print("Suppressed:", obsRec)
+                    sys.stdout.flush()
+                    time.sleep(0.5)
+                    obsRec = obsRec.replace("... <suppressed> ...", '')
                 # keep a running count of ephem entries
                 ephem_entry_num += 1
 
                 # parse obs_rec
+                # sys.stdout.write("Parsing "+repr(obsRec))
+                # sys.stdout.flush()
                 obsDatetime, coords, vMag, vRa, vDec = mpcInst._MPCNeoConfirm__parse_ephemeris(obsRec)
-
+                # sys.stdout.write("Parsed "+repr(obsRec))
+                # sys.stdout.flush()
                 deltaErr = None
 
                 obsList.append((obsDatetime, coords, vMag, vRa, vDec, deltaErr))

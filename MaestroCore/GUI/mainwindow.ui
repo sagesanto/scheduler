@@ -42,7 +42,7 @@
      </sizepolicy>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <property name="movable">
      <bool>true</bool>
@@ -251,7 +251,7 @@
               </sizepolicy>
              </property>
              <property name="text">
-              <string notr="true"> </string>
+              <string notr="true"/>
              </property>
              <property name="textFormat">
               <enum>Qt::PlainText</enum>
@@ -379,6 +379,16 @@
             </widget>
            </item>
            <item>
+            <widget class="QCheckBox" name="allCandidatesCheckbox">
+             <property name="toolTip">
+              <string>Show all candidates, not just recent ones</string>
+             </property>
+             <property name="text">
+              <string>All Candidates</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <spacer name="horizontalSpacer_3">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -493,7 +503,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="statusPage">
           <property name="geometry">
