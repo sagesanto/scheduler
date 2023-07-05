@@ -1,5 +1,5 @@
 from datetime import datetime as datetime, timedelta
-
+import os, sys
 import astroplan
 import astropy
 import astropy.units as u
@@ -7,9 +7,18 @@ import numpy
 import numpy as np
 from astropy.time import Time
 
-from schedulerConfigs.MPC_NEO import mpcUtils
-from scheduleLib.candidateDatabase import CandidateDatabase
-from scheduleLib.genUtils import stringToTime, TypeConfiguration
+try:
+    grandparentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+    sys.path.append(
+        grandparentDir)
+    from schedulerConfigs.MPC_NEO import mpcUtils
+    from scheduleLib.candidateDatabase import CandidateDatabase
+    from scheduleLib.genUtils import stringToTime, TypeConfiguration
+    sys.path.remove(grandparentDir)
+except:
+    from schedulerConfigs.MPC_NEO import mpcUtils
+    from scheduleLib.candidateDatabase import CandidateDatabase
+    from scheduleLib.genUtils import stringToTime, TypeConfiguration
 
 
 def reverseNonzeroRunInplace(arr):
@@ -28,10 +37,11 @@ class MpcConfig(TypeConfiguration):
         self.candidateDict = None
         self.designations = None
 
-    def selectCandidates(self, startTimeUTC: datetime, endTimeUTC: datetime):
-        dbConnection = CandidateDatabase("./candidate database.db", "Night Obs Tool")
+    def selectCandidates(self, startTimeUTC: datetime, endTimeUTC: datetime, dbPath):
+        dbConnection = CandidateDatabase(dbPath, "Night Obs Tool")
         candidates = [c for c in mpcUtils.candidatesForTimeRange(startTimeUTC, endTimeUTC, 1, dbConnection) if
                       c.CandidateName]
+        print("Candidates:",candidates)
         self.designations = [c.CandidateName for c in candidates]
         self.candidateDict = zip(candidates, self.designations)
         return candidates

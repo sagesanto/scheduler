@@ -1,7 +1,7 @@
 # Sage Santomenna 2023
 
 from datetime import datetime, timezone, timedelta
-
+import sys, os
 # ---webtools
 import httpx
 # ---standard
@@ -19,9 +19,16 @@ from bs4 import BeautifulSoup  # to parse html files
 from numpy import sqrt
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 
-from scheduleLib import genUtils, asyncUtils
 from schedulerConfigs.MPC_NEO import mpcUtils
-
+# general fuckery
+try:
+    grandparentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+    sys.path.append(
+        grandparentDir)
+    from scheduleLib import genUtils, asyncUtils
+    sys.path.remove(grandparentDir)
+except:
+    from scheduleLib import genUtils, asyncUtils
 
 utc = pytz.UTC
 

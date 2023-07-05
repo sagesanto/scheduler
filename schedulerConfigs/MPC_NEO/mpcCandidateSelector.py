@@ -1,10 +1,20 @@
-import asyncio
+import asyncio, os, sys
 import logging
 from datetime import datetime as dt, timedelta
 
-from scheduleLib import genUtils
-from scheduleLib.candidateDatabase import CandidateDatabase
-from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
+try:
+    grandparentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+    sys.path.append(
+        grandparentDir)
+    from scheduleLib import genUtils
+    from scheduleLib.candidateDatabase import CandidateDatabase
+    from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
+    sys.path.remove(grandparentDir)
+
+except:
+    from scheduleLib import genUtils
+    from scheduleLib.candidateDatabase import CandidateDatabase
+    from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
 
 
 # pull MPC NEO candidates that are not removed and have been added in the last [lookback] hours

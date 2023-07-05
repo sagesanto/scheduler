@@ -1,3 +1,5 @@
+import os.path
+
 from PyQt6.QtCore import pyqtSignal
 from PyQt6.QtWidgets import QPushButton, QFileDialog
 
@@ -48,7 +50,7 @@ class FileSelectionButton(QPushButton):
                            0]
         #         filepath = QFileDialog.getOpenFileName(self, 'Select Database File', "./", "Database File (*.db)")[
         #                        0] or self.default
-        filepath = (self.default if self.path is None else self.path) if not filepath else filepath
+        filepath = (self.default if self.path is None else os.path.abspath(self.path)) if not filepath else filepath
         self.updateFilePath(filepath)
         print("Filepath:", filepath)
         self.chosen.emit()

@@ -1,6 +1,6 @@
 import asyncio
 import logging
-import sys
+import sys, os
 import time
 from datetime import datetime as dt, timedelta
 
@@ -8,7 +8,15 @@ from colorlog import ColoredFormatter
 
 from mpcCandidateLogger import runLogging
 from mpcCandidateSelector import selectTargets
-from scheduleLib import genUtils
+
+try:
+    grandparentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+    sys.path.append(
+        grandparentDir)
+    from scheduleLib import genUtils
+    sys.path.remove(grandparentDir)
+except:
+    from scheduleLib import genUtils
 
 dateFormat = '%m/%d/%Y %H:%M:%S'
 

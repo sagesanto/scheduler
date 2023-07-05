@@ -6,8 +6,17 @@ import sys, time
 from mpcUtils import asyncMultiEphem
 from photometrics.mpc_neo_confirm import MPCNeoConfirm
 from datetime import datetime, timedelta
-from scheduleLib.asyncUtils import AsyncHelper
 import traceback
+
+try:
+    grandparentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+    sys.path.append(
+        grandparentDir)
+    from scheduleLib.asyncUtils import AsyncHelper
+    sys.path.remove(grandparentDir)
+except:
+    from scheduleLib.asyncUtils import AsyncHelper
+
 
 try:
     desigs, settings = sys.argv[1:3]

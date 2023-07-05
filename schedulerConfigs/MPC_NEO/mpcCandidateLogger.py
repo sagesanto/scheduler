@@ -1,14 +1,24 @@
-import asyncio
+import asyncio, os, sys
 import logging
 from datetime import datetime as dt, timedelta
 
 from colorlog import ColoredFormatter
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpcObj
 
-from scheduleLib import genUtils
-from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
-from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
-from schedulerConfigs.MPC_NEO import mpcUtils
+try:
+    grandparentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+    sys.path.append(
+        grandparentDir)
+    from scheduleLib import genUtils
+    from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
+    from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
+    from schedulerConfigs.MPC_NEO import mpcUtils
+    sys.path.remove(grandparentDir)
+except:
+    from scheduleLib import genUtils
+    from scheduleLib.candidateDatabase import CandidateDatabase, Candidate
+    from schedulerConfigs.MPC_NEO.mpcTargetSelectorCore import TargetSelector
+    from schedulerConfigs.MPC_NEO import mpcUtils
 
 
 async def testGetVelocities(desig, mpc, logger, targetSelector):  # get dRA and dDec

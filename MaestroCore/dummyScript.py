@@ -1,13 +1,12 @@
 import sys
 import time
 
-
+print("Executable:", sys.executable)
 def flush_then_wait():
     sys.stdout.flush()
     sys.stderr.flush()
     time.sleep(0.5)
 
-print(h)
 sys.stdout.write("Script stdout 1\n")  # sys.stdout.write
 sys.stdout.write("Script stdout 2\n")
 print("Script stdout 3\n")

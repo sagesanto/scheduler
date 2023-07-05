@@ -5,6 +5,13 @@ import time
 
 import pandas as pd
 import pytz
+import PyQt6
+
+# don't worry about this, but if this is in here and you still get Qt plugin errors, it's so over:
+dirname = os.path.dirname(PyQt6.__file__)
+plugin_path = os.path.join(dirname, 'plugins', 'platforms')
+os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
+
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, \
     QTableWidgetItem as QTableItem, QLineEdit, QListView, QDockWidget, QComboBox, QPushButton
@@ -138,9 +145,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__(parent)
         self.setWindowIcon(QtGui.QIcon("MaestroCore/logosAndIcons/windowIcon.png"))  # ----
         self.setupUi(self)
-
-        # initialize custom things
-        self.dbConnection = CandidateDatabase("candidate database.db", "Maestro")
+            # initialize custom things
+        self.dbConnection = CandidateDatabase("files/candidate database.db", "Maestro")
         self.processModel = ProcessModel(statusBar=self.statusBar())
         self.ephemListModel = FlexibleListModel()
         self.settings = Settings("./MaestroCore/settings.txt")
@@ -175,7 +181,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.startCoordinator()
 
     def setConnections(self):
-        self.refreshCandButton.clicked.connect(lambda: self.getTargets().displayCandidates())
+        self.refreshCandButton.clicked.connect(lambda: print(QtCore.QCoreApplication.applicationDirPath() + QtCore.QDir.separator() + "qt.conf"))
+        # self.refreshCandButton.clicked.connect(lambda: self.getTargets().displayCandidates())
         self.showRejectedCheckbox.stateChanged.connect(self.displayCandidates)
         self.showRemovedCheckbox.stateChanged.connect(self.displayCandidates)
         self.candidateEphemerisButton.clicked.connect(self.useCandidateTableEphemeris)
@@ -261,7 +268,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.scheduleProcess = Process("Scheduler")
         self.processModel.add(self.scheduleProcess)
         self.scheduleProcess.msg.connect(lambda msg: print("Scheduler: ", msg))
-        self.scheduleProcess.start("python", ["newScheduler.py", json.dumps(self.settings.asDict())])
+        self.scheduleProcess.start("python", ["./scheduler.py", json.dumps(self.settings.asDict())])
         self.scheduleProcess.ended.connect(lambda: self.genScheduleButton.setDisabled(False))
         self.scheduleProcess.ended.connect(self.displaySchedule)
 

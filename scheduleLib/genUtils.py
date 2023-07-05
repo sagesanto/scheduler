@@ -38,7 +38,7 @@ class TypeConfiguration(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def selectCandidates(self, startTimeUTC: datetime, endTimeUTC: datetime):
+    def selectCandidates(self, startTimeUTC: datetime, endTimeUTC: datetime, dbPath):
         pass
 
     @abstractmethod

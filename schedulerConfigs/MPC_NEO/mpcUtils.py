@@ -11,9 +11,19 @@ import pytz
 from astroplan.scheduling import ObservingBlock
 from photometrics.mpc_neo_confirm import MPCNeoConfirm as mpc
 from astropy import units as u
-from scheduleLib import asyncUtils
-from scheduleLib import genUtils
-from scheduleLib.candidateDatabase import Candidate
+
+try:
+    grandparentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir, os.path.pardir))
+    sys.path.append(
+        grandparentDir)
+    from scheduleLib import asyncUtils
+    from scheduleLib import genUtils
+    from scheduleLib.candidateDatabase import Candidate
+    sys.path.remove(grandparentDir)
+except:
+    from scheduleLib import asyncUtils
+    from scheduleLib import genUtils
+    from scheduleLib.candidateDatabase import Candidate
 
 mpcInst = mpc()
 mpcInst.int = 3
