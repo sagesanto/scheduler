@@ -526,6 +526,13 @@
                </property>
               </widget>
              </item>
+             <item>
+              <widget class="QPushButton" name="hardModeButton">
+               <property name="text">
+                <string>Hard Mode</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </item>
            <item>

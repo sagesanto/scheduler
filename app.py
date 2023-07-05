@@ -191,6 +191,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.genScheduleButton.clicked.connect(self.runScheduler)
         self.pingButton.clicked.connect(self.pingProcess)
         self.requestDbCycleButton.clicked.connect(self.requestDbCycle)
+        self.hardModeButton.clicked.connect(self.hardMode)
 
         self.settings.linkWatch(self.intervalComboBox.currentTextChanged, "ephemInterval",
                                 lambda: comboValToIndex(self.intervalComboBox, self.intervalComboBox.currentText),
