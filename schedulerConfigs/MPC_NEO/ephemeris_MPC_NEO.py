@@ -13,11 +13,9 @@ try:
     desigs, settings = sys.argv[1:3]
     desigs, settings = json.loads(desigs), json.loads(settings)
     print("MPC argv:", sys.argv)
-
     intervalDict = {0: 3, 1: 2, 2: 1, 3: 0}
-
     mpcInst = MPCNeoConfirm()
-    interval = intervalDict[settings["ephemInterval"]]
+    interval = intervalDict[settings["ephemInterval"]]  # this maps ephem interval number from settings (which is the index of the dropdown the user uses) to the mpc's numbering system
     # interval = settings["ephemInterval"]
     mpcInst.int = interval
     asyncInst = AsyncHelper(True, timeout=int(settings["ephemTimeout"]))

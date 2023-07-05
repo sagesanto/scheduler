@@ -1,4 +1,5 @@
 import json
+import random
 import sys, os
 import time
 
@@ -6,13 +7,14 @@ import pandas as pd
 import pytz
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, \
-    QTableWidgetItem as QTableItem, QLineEdit, QListView, QDockWidget, QComboBox
+    QTableWidgetItem as QTableItem, QLineEdit, QListView, QDockWidget, QComboBox, QPushButton
 from PyQt6.QtCore import Qt, QItemSelectionModel, QDateTime
 from MaestroCore.GUI.MainWindow import Ui_MainWindow
 from scheduleLib import genUtils
 from scheduleLib.candidateDatabase import Candidate, CandidateDatabase
 from MaestroCore.utils.processes import ProcessModel, Process  # , ProcessDialog
 from MaestroCore.utils.listModel import FlexibleListModel
+from MaestroCore.utils.fileButton import FileSelectionButton
 from datetime import datetime, timedelta
 
 defaultSettings = {}  # don't know how this should be stored/managed/updated - should submodules be able to register their own settings? probably. that's annoying
@@ -170,9 +172,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.processesTreeView.selectionModel().selectionChanged.connect(self.toggleProcessButtons)
         self.startCoordinator()
 
-        if self.settings.query("candidateDbPath") != "":
-            self.databasePathChooseButton.setText(self.settings.query("candidateDbPath")[0].split(os.sep)[-1])
-
     def setConnections(self):
         self.refreshCandButton.clicked.connect(lambda refresh: self.getTargets().displayCandidates())
         self.showRejectedCheckbox.stateChanged.connect(self.displayCandidates)
@@ -255,6 +254,17 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.scheduleProcess.start("python", ["newScheduler.py", json.dumps(self.settings.asDict())])
         self.scheduleProcess.ended.connect(lambda: self.genScheduleButton.setDisabled(False))
         self.scheduleProcess.ended.connect(self.displaySchedule)
+
+    def hardMode(self):
+        buttons = [attr for attr in self.__dict__.values() if isinstance(attr, QPushButton) and not isinstance(attr, FileSelectionButton)]
+        displayTexts = [button.text() for button in buttons]
+        for b in buttons:
+            while True:
+                t = random.choice(displayTexts)
+                if t != b.text() or len(displayTexts) == 1:
+                    b.setText(t)
+                    displayTexts.remove(t)
+                    break
 
     def displaySchedule(self):
         basepath = self.settings.query("scheduleSaveDir")[0] + os.sep + "schedule"
