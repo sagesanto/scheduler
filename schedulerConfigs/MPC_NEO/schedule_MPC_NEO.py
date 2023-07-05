@@ -49,14 +49,14 @@ class MpcConfig(TypeConfiguration):
     def generateTypeConstraints(self):
         return None
 
-    def generateSchedulerLine(self, row, targetName, candidateDict):
+    def generateSchedulerLine(self, row, targetName, candidateDict, spath):
         desig = targetName[:-2]
         c = candidateDict[desig]
         startDt = stringToTime(row["Start Time (UTC)"])
         duration = timedelta(minutes=row["Duration (Minutes)"])
         center = startDt + duration / 2
         center -= timedelta(seconds=center.second, microseconds=center.microsecond)
-        return mpcUtils.candidateToScheduleLine(c, startDt, center, targetName)
+        return mpcUtils.candidateToScheduleLine(c, startDt, center, spath, name=targetName)
 
 
 def linearDecrease(lenArr, x1, xIntercept):

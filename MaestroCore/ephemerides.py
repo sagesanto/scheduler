@@ -4,7 +4,7 @@ import subprocess
 import sys
 
 ephemPrograms = {}
-print(sys.argv)
+# print(sys.argv)
 
 try:
     # i = 0

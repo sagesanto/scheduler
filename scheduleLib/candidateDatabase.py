@@ -69,9 +69,9 @@ class Candidate:
         if not len(candidateList):
             return None
         candidateDicts = [candidate.asDict() for candidate in candidateList]
-        keys = list(OrderedDict.fromkeys(key for dictionary in candidateDicts for key in dictionary.keys()))
+        keys = list(OrderedDict.fromkeys(key for dictionary in candidateDicts.copy() for key in dictionary.keys()))
         seriesList = [pd.Series(d) for d in candidateDicts]
-        df = pd.concat(seriesList, axis=1, keys=keys, ignore_index=True).transpose()
+        df = pd.DataFrame(seriesList, columns=keys)
         return df
 
     def hasField(self, field):

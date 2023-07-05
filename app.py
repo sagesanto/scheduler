@@ -76,7 +76,6 @@ class Settings:
         self.saveSettings()
 
     def asDict(self):
-        print(self._settings)
         return {k: v for k, [v, _] in self._settings.items()}
 
 
@@ -105,11 +104,13 @@ def getSelectedFromTable(table, colIndex):
 
 
 def loadDfInTable(dataframe: pd.DataFrame, table: QTableWidget):  # SHARED MUTABLE STATE!!!!! :D
+    # dataframe.info()
     df = dataframe.copy()  # .reset_index()
     columnHeaders = df.columns
     numRows, numCols = len(df.index), len(columnHeaders)
     table.setRowCount(numRows)
     table.setColumnCount(numCols)
+    # df.info()
     for i in range(numRows):
         for j in range(numCols):
             item = QTableItem(str(df.iloc[i][j]))
@@ -128,14 +129,13 @@ def datetimeToQDateTime(dt: datetime):
 
 
 def qDateTimeToDatetime(t):
-    print("t in qdatetimetodatetime:", type(t.toSecsSinceEpoch()))
+    # print("t in qdatetimetodatetime:", type(t.toSecsSinceEpoch()))
     return datetime.fromtimestamp(t.toSecsSinceEpoch())
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.scheduleDf = None
         self.setWindowIcon(QtGui.QIcon("MaestroCore/logosAndIcons/windowIcon.png"))  # ----
         self.setupUi(self)
 
@@ -162,6 +162,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.ephemProcess = None
         self.ephemProcessIDs = []
         self.databaseProcess = None
+        self.scheduleProcess = None
+        self.scheduleDf = None
 
         # call setup functions
         self.settings.loadSettings()
@@ -173,13 +175,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.startCoordinator()
 
     def setConnections(self):
-        self.refreshCandButton.clicked.connect(lambda refresh: self.getTargets().displayCandidates())
+        self.refreshCandButton.clicked.connect(lambda: self.getTargets().displayCandidates())
         self.showRejectedCheckbox.stateChanged.connect(self.displayCandidates)
         self.showRemovedCheckbox.stateChanged.connect(self.displayCandidates)
         self.candidateEphemerisButton.clicked.connect(self.useCandidateTableEphemeris)
         self.getEphemsButton.clicked.connect(self.getEphemeris)
         self.ephemRemoveSelected.clicked.connect(
-            lambda g: self.ephemListModel.removeSelectedItems(self.ephemListView))
+            lambda: self.ephemListModel.removeSelectedItems(self.ephemListView))
         self.ephemNameEntry.returnPressed.connect(
             lambda: addLineContentsToList(self.ephemNameEntry, self.ephemListModel))
         self.processPauseButton.clicked.connect(self.pauseProcess)
@@ -187,11 +189,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.processAbortButton.clicked.connect(self.abortProcess)
         self.processModel.rowsInserted.connect(lambda parent: self.processesTreeView.expandRecursively(parent))
         self.requestDbRestartButton.clicked.connect(self.startCoordinator)
-        self.scheduleAutoTimeSetButton.clicked.connect(self.autoSetSchedulerTimes)
         self.genScheduleButton.clicked.connect(self.runScheduler)
         self.pingButton.clicked.connect(self.pingProcess)
         self.requestDbCycleButton.clicked.connect(self.requestDbCycle)
         self.hardModeButton.clicked.connect(self.hardMode)
+        self.allCandidatesCheckbox.stateChanged.connect(lambda: self.getTargets().displayCandidates())
+        self.scheduleAutoTimeSetCheckbox.stateChanged.connect(lambda state: self.autoSetSchedulerTimes(state))
+        self.scheduleAutoTimeSetCheckbox.stateChanged.connect(lambda state: self.scheduleStartTimeEdit.setDisabled(state))  # disable the time entry when auto is checked
+        self.scheduleAutoTimeSetCheckbox.stateChanged.connect(lambda state: self.scheduleEndTimeEdit.setDisabled(state))
+        self.scheduleEndTimeEdit.dateTimeChanged.connect(lambda Qdt: self.scheduleStartTimeEdit.setMaximumDateTime(Qdt))  # so start is always < end
+
 
         self.settings.linkWatch(self.intervalComboBox.currentTextChanged, "ephemInterval",
                                 lambda: comboValToIndex(self.intervalComboBox, self.intervalComboBox.currentText),
@@ -222,7 +229,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                 self.databasePathChooseButton.getPath,
                                 self.databasePathChooseButton.updateFilePath, str)
         self.settings.linkWatch(self.allCandidatesCheckbox.stateChanged, "showAllCandidates", self.allCandidatesCheckbox.isChecked, self.allCandidatesCheckbox.setChecked, bool)
-
+        self.settings.linkWatch(self.schedulerSaveEphemsBox.stateChanged, "schedulerSaveEphems", self.schedulerSaveEphemsBox.isChecked, self.schedulerSaveEphemsBox.setChecked, bool)
+        self.settings.linkWatch(self.scheduleAutoTimeSetCheckbox.stateChanged, "autoSetScheduleTimes", self.scheduleAutoTimeSetCheckbox.isChecked, self.scheduleAutoTimeSetCheckbox.setChecked, bool)
         self.settings.update()
 
     def startCoordinator(self):
@@ -240,15 +248,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 return
         self.databaseProcess = Process("Database")
         self.processModel.add(self.databaseProcess)
-        self.databaseProcess.msg.connect(lambda message: print(message))
+        # self.databaseProcess.msg.connect(lambda message: print(message))
         self.databaseProcess.msg.connect(self.dbStatusChecker)
         self.databaseProcess.ended.connect(self.getTargets)
 
         self.databaseProcess.start("python", ['./MaestroCore/database.py', json.dumps(self.settings.asDict())])
 
     def runScheduler(self):
-        print("Generating...")
         self.genScheduleButton.setDisabled(True)
+        if self.scheduleAutoTimeSetCheckbox.isChecked():
+            self.autoSetSchedulerTimes()
         self.scheduleProcess = Process("Scheduler")
         self.processModel.add(self.scheduleProcess)
         self.scheduleProcess.msg.connect(lambda msg: print("Scheduler: ", msg))
@@ -283,12 +292,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.scheduleDf = pd.read_csv(csvPath)
             loadDfInTable(self.scheduleDf, self.scheduleTable)
 
-    def autoSetSchedulerTimes(self):
-        start = datetimeToQDateTime(max(self.sunsetUTC, pytz.UTC.localize(datetime.utcnow())))
-        end = datetimeToQDateTime(self.sunriseUTC)
+    def autoSetSchedulerTimes(self, run=True):
+        if run:
+            print("auto")
+            start = datetimeToQDateTime(max(self.sunsetUTC, pytz.UTC.localize(datetime.utcnow())))
+            end = datetimeToQDateTime(self.sunriseUTC)
 
-        self.scheduleStartTimeEdit.setDateTime(start)
-        self.scheduleEndTimeEdit.setDateTime(end)
+            self.scheduleStartTimeEdit.setDateTime(start)
+            self.scheduleEndTimeEdit.setDateTime(end)
 
     def requestDbCycle(self):
         print("Requesting")
@@ -349,8 +360,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def getTargets(self):
         self.candidates = self.dbConnection.table_query("Candidates", "*",
-                                                        "DateAdded > ?",
-                                                        [datetime.utcnow() - timedelta(hours=36)],
+                                                        "DateAdded > ?" if not self.settings.query("showAllCandidates")[0] else "1=1",
+                                                        [datetime.utcnow() - timedelta(hours=36)] if not self.settings.query("showAllCandidates")[0] else [],
                                                         returnAsCandidates=True)
         if self.candidates:
             self.candidateDf = Candidate.candidatesToDf(self.candidates)
@@ -358,6 +369,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.candidateDict = {c.CandidateName: c for c in self.candidates}
             self.indexOfIDColumn = self.candidateDf.columns.get_loc("ID")
             self.indexOfNameColumn = self.candidateDf.columns.get_loc("CandidateName")
+        else:
+            print("No candidates")
         return self
 
     def getEntriesAsCandidates(self, entries, handleErrorFunc=None):
@@ -385,7 +398,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.getTargets()
         if self.candidates:
             dispDf = self.candidateDf.copy()
-            if not self.showRejectedCheckbox.isChecked():
+            if not self.showRejectedCheckbox.isChecked() and "RejectedReason" in dispDf.columns:
                 dispDf = dispDf[dispDf["RejectedReason"].isna()]
             if not self.showRemovedCheckbox.isChecked() and "RemovedReason" in dispDf.columns:
                 dispDf = dispDf[dispDf["RemovedReason"].isna()]

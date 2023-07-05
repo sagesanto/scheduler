@@ -1,2 +1,15 @@
 Target,Start Time (UTC),End Time (UTC),Duration (Minutes),RA,Dec,Tags
-Unused Time,2023-07-04 09:03:10,2023-07-04 15:40:00,396.8,,,
+Unused Time,2023-07-05 04:00:00,2023-07-05 07:32:00,212.0,,,
+Focus,2023-07-05 07:32:00,2023-07-05 07:37:00,5.0,0.0,0.0,"{'object': 'Focus', 'type': 'Focus', 'duration': 300}"
+P21GIIj_1,2023-07-05 07:37:00,2023-07-05 08:07:00,30.0,329.784,22.2875,"{'object': 'P21GIIj_1', 'type': 'MPC NEO', 'duration': 1800.0, 'candidate': Candidate P21GIIj (MPC NEO)}"
+P21GJLK_1,2023-07-05 08:11:00,2023-07-05 08:41:00,30.0,337.662,10.471,"{'object': 'P21GJLK_1', 'type': 'MPC NEO', 'duration': 1800.0, 'candidate': Candidate P21GJLK (MPC NEO)}"
+Focus,2023-07-05 08:45:00,2023-07-05 08:50:00,5.0,0.0,0.0,"{'object': 'Focus', 'type': 'Focus', 'duration': 300}"
+A10VJYv_1,2023-07-05 08:50:00,2023-07-05 08:55:00,5.0,326.0505,-10.2964,"{'object': 'A10VJYv_1', 'type': 'MPC NEO', 'duration': 300.0, 'candidate': Candidate A10VJYv (MPC NEO)}"
+P21GGRT_1,2023-07-05 08:59:00,2023-07-05 09:29:00,30.0,328.026,7.8152,"{'object': 'P21GGRT_1', 'type': 'MPC NEO', 'duration': 1800.0, 'candidate': Candidate P21GGRT (MPC NEO)}"
+A10VJYv_2,2023-07-05 09:33:00,2023-07-05 09:38:00,5.0,326.0505,-10.2964,"{'object': 'A10VJYv_2', 'type': 'MPC NEO', 'duration': 300.0, 'candidate': Candidate A10VJYv (MPC NEO)}"
+Focus,2023-07-05 09:42:00,2023-07-05 09:47:00,5.0,0.0,0.0,"{'object': 'Focus', 'type': 'Focus', 'duration': 300}"
+P21GGRT_2,2023-07-05 09:47:00,2023-07-05 10:17:00,30.0,328.026,7.8152,"{'object': 'P21GGRT_2', 'type': 'MPC NEO', 'duration': 1800.0, 'candidate': Candidate P21GGRT (MPC NEO)}"
+P21GJLK_2,2023-07-05 10:21:00,2023-07-05 10:51:00,30.0,337.662,10.471,"{'object': 'P21GJLK_2', 'type': 'MPC NEO', 'duration': 1800.0, 'candidate': Candidate P21GJLK (MPC NEO)}"
+Focus,2023-07-05 10:55:00,2023-07-05 11:00:00,5.0,0.0,0.0,"{'object': 'Focus', 'type': 'Focus', 'duration': 300}"
+P21GIIj_2,2023-07-05 11:00:00,2023-07-05 11:30:00,30.0,329.784,22.2875,"{'object': 'P21GIIj_2', 'type': 'MPC NEO', 'duration': 1800.0, 'candidate': Candidate P21GIIj (MPC NEO)}"
+Unused Time,2023-07-05 11:30:00,2023-07-05 11:40:00,10.0,,,

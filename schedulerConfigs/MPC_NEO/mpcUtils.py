@@ -1,4 +1,5 @@
 # Sage Santomenna 2023
+import os.path
 import sys
 import time
 from datetime import datetime, timedelta
@@ -120,16 +121,25 @@ def timeFromEphem(ephem):
     return datetime.strptime(inBetween, "%Y-%m-%d %H:%M").replace(tzinfo=pytz.UTC)
 
 
-def candidateToScheduleLine(candidate: Candidate, startDt, centerDt: datetime,name=None):
+def candidateToScheduleLine(candidate: Candidate, startDt, centerDt: datetime, spath: str, name=None):
     c = candidate
     truncated = centerDt - timedelta(minutes=(centerDt.minute - 5))
     ephems = pullEphem(mpcInst, c.CandidateName, truncated,
                        0, True)
+
     lineAtObs = ephems[centerDt].split("|")
     lineAtObs[0] = startDt.strftime('%Y-%m-%dT%H:%M:%S.000')
     line = "|".join(lineAtObs)
     if name is not None:
         line = line.replace(c.CandidateName,name,1)
+
+    if spath is not None:
+        path = spath + c.CandidateName + ".txt"
+        if os.path.exists(path): # we already saved this same candidate (_1 vs _2)
+            return line
+        with open(path, "w+") as f:
+            f.writelines("\n".join(list(ephems.values())))
+
     return line
     # RA = Angle(float(ephemAtTransit["RA"]), unit=u.degree) * 15
     # Dec = genUtils.ensureAngle(ephemAtTransit["dec"])
@@ -164,7 +174,7 @@ def mpcScheduleLine(desig, startDt, centerDt, skycoord, dRA: float, dDec: float,
 
 def _formatEphem(ephems, desig):
     # Internal: take an object in the form returned from self.mpc.get_ephemeris() and convert each line to the scheduler format, before returning it in a dictionary of {startDt : line}
-    ephemDict = {None: "DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"}
+    ephemDict = {None: genUtils.scheduleHeader()}
     if ephems is None:
         return None
     for i in ephems:

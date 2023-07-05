@@ -34,7 +34,7 @@ class TypeConfiguration(metaclass=ABCMeta):
         self.minMinutesBetweenObs = minMinutesBetweenObs  # minimum time, in minutes, between the start times of multiple observations of the same object
 
     @abstractmethod
-    def generateSchedulerLine(self, row, targetName, candidateDict):
+    def generateSchedulerLine(self, row, targetName, candidateDict, spath):
         pass
 
     @abstractmethod
@@ -79,6 +79,9 @@ class AutoFocus:
         time = line.split('|')[0]
         time = stringToTime(time)
         return cls(time)
+
+def scheduleHeader():
+    return "DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"
 
 
 def findCenterTime(startTime: datetime, duration: timedelta):

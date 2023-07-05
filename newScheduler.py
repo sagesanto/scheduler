@@ -32,7 +32,6 @@ utc = pytz.UTC
 
 # and the flags are all dead at the tops of their poles
 
-
 BLACK = [0, 0, 0]
 RED = [255, 0, 0]
 GREEN = [0, 255, 0]
@@ -528,7 +527,7 @@ def createSchedule(startTime, endTime, savepath):
                                 transitioner=transitioner,
                                 time_resolution=60 * u.second, gap_time=1 * u.minute)
     schedule = copy.deepcopy(Schedule(Time(startTime), Time(endTime)))
-    tmoScheduler(copy.deepcopy(blocks), schedule)  # do the scheduling (modifies schedule inplace)
+    tmoScheduler(copy.deepcopy(blocks), schedule)  # do the scheduling (modifies schedule inplace) ----
     # print(schedule)
     scheduleDf = cleanScheduleDf(schedule.to_table(show_unused=True).to_pandas())
     # print(scheduleDf.dtypes)
@@ -545,7 +544,12 @@ def createSchedule(startTime, endTime, savepath):
     # logDf.loc[len(logDf)] = newRow
     visualizeSchedule2(scheduleDf, savepath, startTime, endTime, fullness, temp=temperature)
     # temperature += 10
-    schedLines = scheduleToTextFile(scheduleDf, configDict, candidateDict)
+    ephemSpath = None
+    if settings["schedulerSaveEphems"] is not None:
+        ephemSpath = os.sep.join([savepath, "ephems" + os.sep])
+        os.mkdir(ephemSpath)
+    schedLines = scheduleToTextFile(scheduleDf, configDict, candidateDict, spath=ephemSpath)
+    
     with open(os.sep.join([savepath, "schedule.txt"]), "w") as f:
         f.writelines(schedLines)
 
@@ -553,7 +557,7 @@ def createSchedule(startTime, endTime, savepath):
     return scheduleDf, blocks, schedule  # maybe don't need to return all of this
 
 
-def lineConverter(row: pd.Series, configDict, candidateDict, runningList: list):
+def lineConverter(row: pd.Series, configDict, candidateDict, runningList: list, spath):
     targetName = row[0]
 
     if targetName in ["Unused Time", "TransitionBlock"]:
@@ -566,17 +570,17 @@ def lineConverter(row: pd.Series, configDict, candidateDict, runningList: list):
 
     try:
         runningList.append(
-            configDict[row["Tags"]["type"]].generateSchedulerLine(row, targetName, candidateDict))
+            configDict[row["Tags"]["type"]].generateSchedulerLine(row, targetName, candidateDict, spath))
     except Exception as e:
         raise e
-        raise ValueError("Object " + str(targetName) + " doesn't have a schedule line generator. " + str(row))
+        # raise ValueError("Object " + str(targetName) + " doesn't have a schedule line generator. " + str(row))
 
 
-def scheduleToTextFile(scheduleDf, configDict, candidateDict, prevSched=None):
+def scheduleToTextFile(scheduleDf, configDict, candidateDict, prevSched=None, spath=None):
     # each target type will need to have the machinery to turn an entry from the scheduleDf + the candidateDict into a
     # scheduler line - maybe we'll make a default version later
-    linesList = ["DateTime|Occupied|Target|Move|RA|Dec|ExposureTime|#Exposure|Filter|Description"]
-    scheduleDf.apply(lambda row: lineConverter(row, configDict, candidateDict, runningList=linesList), axis=1)
+    linesList = [genUtils.scheduleHeader()]
+    scheduleDf.apply(lambda row: lineConverter(row, configDict, candidateDict, linesList, spath), axis=1)
     # print(linesList)
     return linesList
 
