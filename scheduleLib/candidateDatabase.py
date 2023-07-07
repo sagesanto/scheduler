@@ -121,8 +121,8 @@ class Candidate:
                 # print("difference", dur)
                 if dur >= timedelta(hours=duration):  # the window is longer than min allowed duration
                     return True, dur
-            elif start < startObs and endObs >= end:
-                # print("spanning case")
+            elif startObs < start and endObs >= end:
+                print("spanning case: {} observable between {} and {}".format(self.CandidateName,self.StartObservability,self.EndObservability))
                 dur = end-start
                 # print("difference", dur)
                 if dur >= timedelta(hours=duration):  # the window is longer than min allowed duration

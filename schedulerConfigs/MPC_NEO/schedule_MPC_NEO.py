@@ -39,8 +39,7 @@ class MpcConfig(TypeConfiguration):
 
     def selectCandidates(self, startTimeUTC: datetime, endTimeUTC: datetime, dbPath):
         dbConnection = CandidateDatabase(dbPath, "Night Obs Tool")
-        candidates = [c for c in mpcUtils.candidatesForTimeRange(startTimeUTC, endTimeUTC, 1, dbConnection) if
-                      c.CandidateName]
+        candidates = [c for c in mpcUtils.candidatesForTimeRange(startTimeUTC, endTimeUTC, 1, dbConnection)]
         print("Candidates:",candidates)
         self.designations = [c.CandidateName for c in candidates]
         self.candidateDict = zip(candidates, self.designations)

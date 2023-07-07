@@ -42,6 +42,7 @@ try:
         else:
             sys.stdout.write("No configured ephemerides file for "+key)
 
+    sys.stdout.flush()
     sys.stdout.write("Done fetching ephems.")
     sys.stdout.flush()
 

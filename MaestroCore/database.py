@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import pytz
 
 ephemPrograms = {}
-print(sys.argv)
+# print(sys.argv)
 
 
 def generateNextRunTimestampString(delay):
@@ -28,7 +28,7 @@ try:
             databasePrograms[subdirectory.replace("_", " ")] = desired_files
     # sys.stdout.write("ephemPrograms:" + str(ephemPrograms))
     # sys.stdout.flush()
-    print("Db programs:", databasePrograms)
+    # print("Db programs:", databasePrograms)
     settingsJstr = sys.argv[1]
     settings = json.loads(settingsJstr)
     waitTime = int(settings["databaseWaitTimeMinutes"])
@@ -47,7 +47,6 @@ try:
                     sys.stdout.write("Database: Pong!")
                     sys.stdout.flush()
                     time.sleep(0.5)
-            print("Broke out")
             run += 1
             sys.stdout.write("Database: {}/{}: Run program {}. \n".format(str(run), str(total), name))
             sys.stdout.flush()

@@ -1,21 +1,25 @@
 import json
+import logging
+import pathlib
 import random
 import sys, os
 import time
-
+from pathlib import Path
 import pandas as pd
 import pytz
-import PyQt6
 
 # don't worry about this, but if this is in here and you still get Qt plugin errors, it's so over:
-dirname = os.path.dirname(PyQt6.__file__)
-plugin_path = os.path.join(dirname, 'plugins', 'platforms')
-os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
+# dirname = os.path.dirname(PyQt6.__file__)
+# plugin_path = os.path.join(dirname, 'Qt6', 'plugins', 'platforms')
+#
+# plugin_path = os.path.join(Path(__file__).parent, 'PyQt6', 'Qt6', 'plugins')
+# os.environ['QT_PLUGIN_PATH'] = plugin_path
+# # os.environ['QT_QPA_PLATFORM_PLUGIN_PATH'] = plugin_path
 
 from PyQt6 import QtGui, QtCore
 from PyQt6.QtWidgets import QApplication, QWidget, QMainWindow, QTableWidget, \
-    QTableWidgetItem as QTableItem, QLineEdit, QListView, QDockWidget, QComboBox, QPushButton
-from PyQt6.QtCore import Qt, QItemSelectionModel, QDateTime
+    QTableWidgetItem as QTableItem, QLineEdit, QListView, QDockWidget, QComboBox, QPushButton, QMessageBox
+from PyQt6.QtCore import Qt, QItemSelectionModel, QDateTime, QLibraryInfo, QSysInfo
 from MaestroCore.GUI.MainWindow import Ui_MainWindow
 from scheduleLib import genUtils
 from scheduleLib.candidateDatabase import Candidate, CandidateDatabase
@@ -26,6 +30,7 @@ from datetime import datetime, timedelta
 
 defaultSettings = {}  # don't know how this should be stored/managed/updated - should submodules be able to register their own settings? probably. that's annoying
 
+debug = False
 
 class Settings:
     def __init__(self, settingsFilePath):
@@ -73,7 +78,7 @@ class Settings:
             value = value()
         if key in self._settings.keys():
             self._settings[key][0] = datatype(value)
-            print(self.asDict())
+            # print(self.asDict())
             self.saveSettings()
             return
         raise ValueError("No such setting " + key)
@@ -136,16 +141,29 @@ def datetimeToQDateTime(dt: datetime):
 
 
 def qDateTimeToDatetime(t):
-    # print("t in qdatetimetodatetime:", type(t.toSecsSinceEpoch()))
     return datetime.fromtimestamp(t.toSecsSinceEpoch())
 
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
-        self.setWindowIcon(QtGui.QIcon("MaestroCore/logosAndIcons/windowIcon.png"))  # ----
+        self.setWindowIcon(QtGui.QIcon("MaestroCore/logosAndIcons/windowIcon.ico"))  # ----
         self.setupUi(self)
-            # initialize custom things
+
+        with open("version.txt","r") as f:
+            self.version = f.readline()
+
+        # set up logger
+        dateFormat = '%m/%d/%Y %H:%M:%S'
+        fileFormatter = logging.Formatter(fmt='%(asctime)s %(levelname)-2s | %(message)s', datefmt=dateFormat)
+        self.fileHandler = logging.FileHandler(os.path.abspath("./maestro.log"))
+        self.fileHandler.setFormatter(fileFormatter)
+        self.fileHandler.setLevel(logging.DEBUG)
+        logger = logging.getLogger(__name__)
+        logger.addHandler(self.fileHandler)
+        logger.setLevel(logging.ERROR)
+
+        # initialize custom things
         self.dbConnection = CandidateDatabase("files/candidate database.db", "Maestro")
         self.processModel = ProcessModel(statusBar=self.statusBar())
         self.ephemListModel = FlexibleListModel()
@@ -180,9 +198,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.processesTreeView.selectionModel().selectionChanged.connect(self.toggleProcessButtons)
         self.startCoordinator()
 
+    def initProcess(self, name, *args, **kwargs):
+        p = Process(name,self.fileHandler,*args,**kwargs)
+        self.processModel.add(p)
+        return p
+
+
     def setConnections(self):
-        self.refreshCandButton.clicked.connect(lambda: print(QtCore.QCoreApplication.applicationDirPath() + QtCore.QDir.separator() + "qt.conf"))
-        # self.refreshCandButton.clicked.connect(lambda: self.getTargets().displayCandidates())
+        # self.refreshCandButton.clicked.connect(
+        #     lambda: print(QtCore.QCoreApplication.applicationDirPath() + QtCore.QDir.separator() + "qt.conf"))
+        self.refreshCandButton.clicked.connect(lambda: self.getTargets().displayCandidates())
         self.showRejectedCheckbox.stateChanged.connect(self.displayCandidates)
         self.showRemovedCheckbox.stateChanged.connect(self.displayCandidates)
         self.candidateEphemerisButton.clicked.connect(self.useCandidateTableEphemeris)
@@ -202,10 +227,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.hardModeButton.clicked.connect(self.hardMode)
         self.allCandidatesCheckbox.stateChanged.connect(lambda: self.getTargets().displayCandidates())
         self.scheduleAutoTimeSetCheckbox.stateChanged.connect(lambda state: self.autoSetSchedulerTimes(state))
-        self.scheduleAutoTimeSetCheckbox.stateChanged.connect(lambda state: self.scheduleStartTimeEdit.setDisabled(state))  # disable the time entry when auto is checked
+        self.scheduleAutoTimeSetCheckbox.stateChanged.connect(
+            lambda state: self.scheduleStartTimeEdit.setDisabled(state))  # disable the time entry when auto is checked
         self.scheduleAutoTimeSetCheckbox.stateChanged.connect(lambda state: self.scheduleEndTimeEdit.setDisabled(state))
-        self.scheduleEndTimeEdit.dateTimeChanged.connect(lambda Qdt: self.scheduleStartTimeEdit.setMaximumDateTime(Qdt))  # so start is always < end
-
+        self.scheduleEndTimeEdit.dateTimeChanged.connect(
+            lambda Qdt: self.scheduleStartTimeEdit.setMaximumDateTime(Qdt))  # so start is always < end
+        self.debugInfoButton.clicked.connect(self.displayInfo)
 
         self.settings.linkWatch(self.intervalComboBox.currentTextChanged, "ephemInterval",
                                 lambda: comboValToIndex(self.intervalComboBox, self.intervalComboBox.currentText),
@@ -235,10 +262,19 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.settings.linkWatch(self.databasePathChooseButton.chosen, "candidateDbPath",
                                 self.databasePathChooseButton.getPath,
                                 self.databasePathChooseButton.updateFilePath, str)
-        self.settings.linkWatch(self.allCandidatesCheckbox.stateChanged, "showAllCandidates", self.allCandidatesCheckbox.isChecked, self.allCandidatesCheckbox.setChecked, bool)
-        self.settings.linkWatch(self.schedulerSaveEphemsBox.stateChanged, "schedulerSaveEphems", self.schedulerSaveEphemsBox.isChecked, self.schedulerSaveEphemsBox.setChecked, bool)
-        self.settings.linkWatch(self.scheduleAutoTimeSetCheckbox.stateChanged, "autoSetScheduleTimes", self.scheduleAutoTimeSetCheckbox.isChecked, self.scheduleAutoTimeSetCheckbox.setChecked, bool)
+        self.settings.linkWatch(self.allCandidatesCheckbox.stateChanged, "showAllCandidates",
+                                self.allCandidatesCheckbox.isChecked, self.allCandidatesCheckbox.setChecked, bool)
+        self.settings.linkWatch(self.schedulerSaveEphemsBox.stateChanged, "schedulerSaveEphems",
+                                self.schedulerSaveEphemsBox.isChecked, self.schedulerSaveEphemsBox.setChecked, bool)
+        self.settings.linkWatch(self.scheduleAutoTimeSetCheckbox.stateChanged, "autoSetScheduleTimes",
+                                self.scheduleAutoTimeSetCheckbox.isChecked, self.scheduleAutoTimeSetCheckbox.setChecked,
+                                bool)
         self.settings.update()
+
+    def closeEvent(self, a0: QtGui.QCloseEvent):
+        print("Closing")
+        self.processModel.terminateAllProcesses()
+        super().closeEvent(a0)
 
     def startCoordinator(self):
         if not os.path.exists(self.settings.query("candidateDbPath")[0]):
@@ -247,15 +283,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                 10000)
         if self.databaseProcess is not None:
             if self.databaseProcess.isActive:  # run a restart
-                print("Restarting database coordinator.")
+                if debug:
+                    print("Restarting database coordinator.")
                 self.databaseProcess.abort()
                 time.sleep(1)
                 self.databaseProcess = None
                 self.startCoordinator()
                 return
-        self.databaseProcess = Process("Database")
-        self.processModel.add(self.databaseProcess)
-        # self.databaseProcess.msg.connect(lambda message: print(message))
+        self.databaseProcess = self.initProcess("Database")
+        if debug:
+            self.databaseProcess.msg.connect(lambda message: print(message))
         self.databaseProcess.msg.connect(self.dbStatusChecker)
         self.databaseProcess.ended.connect(self.getTargets)
 
@@ -265,15 +302,16 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.genScheduleButton.setDisabled(True)
         if self.scheduleAutoTimeSetCheckbox.isChecked():
             self.autoSetSchedulerTimes()
-        self.scheduleProcess = Process("Scheduler")
-        self.processModel.add(self.scheduleProcess)
-        self.scheduleProcess.msg.connect(lambda msg: print("Scheduler: ", msg))
+        self.scheduleProcess = self.initProcess("Scheduler")
+        if debug:
+            self.scheduleProcess.msg.connect(lambda msg: print("Scheduler: ", msg))
         self.scheduleProcess.start("python", ["./scheduler.py", json.dumps(self.settings.asDict())])
         self.scheduleProcess.ended.connect(lambda: self.genScheduleButton.setDisabled(False))
         self.scheduleProcess.ended.connect(self.displaySchedule)
 
     def hardMode(self):
-        buttons = [attr for attr in self.__dict__.values() if isinstance(attr, QPushButton) and not isinstance(attr, FileSelectionButton)]
+        buttons = [attr for attr in self.__dict__.values() if
+                   isinstance(attr, QPushButton) and not isinstance(attr, FileSelectionButton)]
         displayTexts = [button.text() for button in buttons]
         for b in buttons:
             while True:
@@ -294,14 +332,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
                                            transformMode=QtCore.Qt.TransformationMode.SmoothTransformation)
             self.scheduleImageDisplay.setPixmap(QtGui.QPixmap.fromImage(imgProfile))
         else:
-            print("Can't find saved image!")
+            self.statusbar.showMessage("Can't find saved scheduler image. If and only if it reports that it ran correctly, please report this.")
+            if debug:
+                print("Can't find saved image!")
         if os.path.isfile(csvPath):
             self.scheduleDf = pd.read_csv(csvPath)
             loadDfInTable(self.scheduleDf, self.scheduleTable)
 
     def autoSetSchedulerTimes(self, run=True):
         if run:
-            print("auto")
             start = datetimeToQDateTime(max(self.sunsetUTC, pytz.UTC.localize(datetime.utcnow())))
             end = datetimeToQDateTime(self.sunriseUTC)
 
@@ -314,7 +353,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def dbStatusChecker(self, msg):
         if "Database: Status:" in msg:
-            print("Db status received:", msg)
+            if debug:
+                print("Db status received:", msg)
             self.databaseProcess.ended.emit(msg.replace("Database: Status:", ""))  # this is cheating
 
     def toggleProcessButtons(self):
@@ -367,8 +407,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
     def getTargets(self):
         self.candidates = self.dbConnection.table_query("Candidates", "*",
-                                                        "DateAdded > ?" if not self.settings.query("showAllCandidates")[0] else "1=1",
-                                                        [datetime.utcnow() - timedelta(hours=36)] if not self.settings.query("showAllCandidates")[0] else [],
+                                                        "DateAdded > ?" if not self.settings.query("showAllCandidates")[
+                                                            0] else "1=1",
+                                                        [datetime.utcnow() - timedelta(hours=36)] if not
+                                                        self.settings.query("showAllCandidates")[0] else [],
                                                         returnAsCandidates=True)
         if self.candidates:
             self.candidateDf = Candidate.candidatesToDf(self.candidates)
@@ -377,12 +419,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             self.indexOfIDColumn = self.candidateDf.columns.get_loc("ID")
             self.indexOfNameColumn = self.candidateDf.columns.get_loc("CandidateName")
         else:
-            print("No candidates")
+            if debug:
+                print("No candidates")
         return self
 
     def getEntriesAsCandidates(self, entries, handleErrorFunc=None):
         # strings is a list of strings that can be resolved in this way
-        print("Selected", entries)
+        if debug:
+            print("Selected", entries)
         candidates = []
         for i in entries:
             try:
@@ -416,27 +460,31 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def getEphemeris(self):
         if self.ephemProcess is not None:
             if self.ephemProcess.isActive:
-                print("Already getting.")
+                if debug:
+                    print("Already getting.")
                 return
-            print("EphemProcess is not None and not active")
+            if debug:
+                print("EphemProcess is not None and not active")
             self.ephemProcess.reset()
 
         candidatesToRequest = self.getEntriesAsCandidates(self.ephemListModel.data)
         if len(candidatesToRequest) == 0:
-            print("No ephems to get.")
+            if debug:
+                print("No ephems to get.")
             return
 
         self.getEphemsButton.setDisabled(True)
-        self.ephemProcess = Process("Ephemerides")
-        self.processModel.add(self.ephemProcess)
-        self.ephemProcess.ended.connect(lambda: print(self.processModel.rootItem.__dict__))
-        self.ephemProcess.msg.connect(lambda msg: print(msg))
+        self.ephemProcess = self.initProcess("Ephemerides")
+        if debug:
+            self.ephemProcess.ended.connect(lambda: print(self.processModel.rootItem.__dict__))
+            self.ephemProcess.msg.connect(lambda msg: print(msg))
         self.ephemProcess.ended.connect(lambda: self.getEphemsButton.setDisabled(False))
         targetDict = {
             candidate.CandidateType: [c.CandidateName for c in candidatesToRequest if
                                       c.CandidateType == candidate.CandidateType] for
             candidate in candidatesToRequest}
-        print(targetDict)
+        if debug:
+            print(targetDict)
         self.ephemProcess.start("python", ['./MaestroCore/ephemerides.py', json.dumps(targetDict),
                                            json.dumps(self.settings.asDict())])
         # launch waiting window
@@ -447,6 +495,27 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # collect the results (lists of strings, each list being its own file, each string being its own line)
         # launch save window
         # save the files to the indicated location
+
+    def displayInfo(self):
+        infoTexts = ["Version: " + self.version,
+                     # "Default prefix: " + str(QLibraryInfo.path(QLibraryInfo.LibraryPath.PrefixPath)),
+                     # "Libraries path: " + str(QLibraryInfo.path(QLibraryInfo.LibraryPath.LibrariesPath)),
+                     # "Plugins path: " + str(QLibraryInfo.path(QLibraryInfo.LibraryPath.PluginsPath)),
+                     # "QML imports path: " + str(QLibraryInfo.path(QLibraryInfo.LibraryPath.QmlImportsPath)),
+                     # "Binaries path: " + str(QLibraryInfo.path(QLibraryInfo.LibraryPath.BinariesPath)),
+                     # "Default prefix: " + str(QLibraryInfo.path(QLibraryInfo.LibraryPath.PrefixPath)),
+                     # "Application dir path: " + QtCore.QCoreApplication.applicationDirPath(),
+                     "Working directory: " + os.path.join(os.path.dirname(__file__)),
+                     "Package install: " + str(pathlib.Path(pd.__file__).parent.parent.absolute())
+                     # "Modified dirname: " + os.path.join(dirname, 'Qt6', 'plugins', 'platforms')]
+                     # "Environ: " + os.environ['QT_PLUGIN_PATH'],
+                     # "Modified dirname: " + plugin_path
+                     ]
+        infoText = '\n'.join(infoTexts)
+        infoWindow = QMessageBox(self)
+        infoWindow.setWindowTitle("Debug Info")
+        infoWindow.setText(infoText)
+        infoWindow.exec()
 
 
 app = QApplication([])

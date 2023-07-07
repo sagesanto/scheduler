@@ -1,3 +1,4 @@
+import logging
 import os
 import signal
 from datetime import datetime, timedelta
@@ -95,12 +96,15 @@ class Process(QProcess):
     lastLog = pyqtSignal(str)
     paused = pyqtSignal()
     resumed = pyqtSignal()
-    ended = pyqtSignal(str)
+    ended = pyqtSignal(str)  # what kind
     ponged = pyqtSignal(str)
 
-    def __init__(self, name: str, *args, **kwargs):
+    def __init__(self, name: str, loggingFileHandler: logging.FileHandler, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        if isinstance(self.parent(), QProcess):
+            self.setInputChannelMode()
         self.name = name
+        self.fullName = self.parent().name + "/" + self.name if self.parent() else self.name
         self.startLocal = datetime.now()
         self.startUTC = datetime.now(pytz.UTC)
         self.startString = generateTimestampString()
@@ -111,15 +115,49 @@ class Process(QProcess):
         self.isPaused = False
         self.connect()
         self.lastPing = None
+        self.logger = logging.getLogger(__file__)
+        self.logger.addHandler(loggingFileHandler)
+        self.logger.setLevel(logging.DEBUG)
 
     def connect(self):
         self.readyReadStandardError.connect(lambda: self.writeToErrorLog(decodeStdErr(self)))
         self.readyReadStandardOutput.connect(lambda: self.writeToLog(decodeStdOut(self)))
-        self.finished.connect(lambda: self.lastLog.emit(self.log[-1] if len(self.log) else ""))
+        self.finished.connect(self.onFinished)
+        self.errorOccurred.connect(self.onErrorOcurred)
         self.finished.connect(self.terminate)  # this might not be necessary
-        self.finished.connect(lambda exitCode: self.ended.emit("Finished" if not exitCode else "Error"))
+        # self.finished.connect(lambda exitCode: self.ended.emit("Finished" if not exitCode else "Error"))
         self.msg.connect(self.pong)
-        self.errorOccurred.connect(lambda: self.ended.emit("Error"))
+
+    def start(self, *args, **kwargs):
+        self.logger.info("Starting process "+self.fullName)
+        super().start(*args,**kwargs)
+
+    def onFinished(self, exitCode, exitStatus: QProcess.ExitStatus):
+        if exitStatus == QProcess.ExitStatus.CrashExit:
+            self.logger.error(self.fullName + " experienced a fatal error")
+            return  # handle in onErrorOccurred
+        if not exitCode: # good state
+            self.logger.info("Good state: {} finished with error code {} and error message {}".format(self.fullName, exitCode,self.error() or ""))
+            self.lastLog.emit(self.log[-1] if len(self.log) else "No message")
+            self.ended.emit("Finished successfully")
+            return
+        partialString = "Partial failure: finished with error " + self.error().name
+        self.ended.emit(partialString)
+        self.errorSignal.emit(partialString)
+        self.logger.error(self.fullName + " got a non-zero exit code with error " + self.error().name + ".")
+        self.logger.error(decodeStdErr(self))
+
+    def onErrorOcurred(self, exitCode, exitStatus: QProcess.ExitStatus):
+        self.errorSignal("Error with error reason " + self.errorString())
+        if exitStatus == QProcess.ExitStatus.CrashExit:
+            self.logger.error(decodeStdErr(self))
+            self.ended.emit("Crashed")
+            return
+
+        processErrorReason = QProcess.ProcessError[exitCode].name
+        self.logger.error("Error occurred:" + self.fullName + " got " + self.errorString() + " with error reason " + processErrorReason)
+        self.logger.error(decodeStdErr(self))
+        self.ended.emit("Error")
 
     def __del__(self):
         print("Deleting process", self.name, "with PID", self.processId())
@@ -128,7 +166,8 @@ class Process(QProcess):
         del self
 
     def reset(self):
-        print("Resetting")
+        # print("Resetting")
+        pass
         # self.deleted.emit()
 
     @property
@@ -144,7 +183,7 @@ class Process(QProcess):
         Attempt to pause this process. If it has subprocesses of its own, pausing may not acheive complete stoppage
         """
         if not self.isPaused and self.isActive:
-            print("Pausing", self.name)
+            # print("Pausing", self.name)
             self.paused.emit()
             self.isPaused = True
             os.kill(self.processId(), signal.SIGSTOP)
@@ -152,7 +191,7 @@ class Process(QProcess):
 
     def resume(self):
         if self.paused:
-            print("Resuming", self.name)
+            # print("Resuming", self.name)
             self.resumed.emit()
             self.isPaused = False
             os.kill(self.processId(), signal.SIGCONT)
@@ -169,25 +208,29 @@ class Process(QProcess):
             self.writeToErrorLog("Dead ping!")
             return
         if "{}: Pong!".format(self.name) in msg:
-            print("Got pong: ", msg)
-            self.ponged.emit(msg.replace("{}: ".format(self.name),""))
+            # print("Got pong: ", msg)
+            self.ponged.emit(msg.replace("{}: ".format(self.name), ""))
             self.lastPing = None
 
     def writeToErrorLog(self, error):
-        error = self.name + " encountered an error: " + error
+        error = self.fullName + ", reading nonfatal error: " + error
+        self.logger.error(error)
         self.errorLog.append(error)
         self.errorSignal.emit(error)
         self.msg.emit(error)
 
     def writeToLog(self, content):
+        self.logger.info(self.fullName + ": " + content)
         self.log.append(content)
         self.logged.emit(content)
         self.msg.emit(content)
 
     def abort(self):
         if self.isActive:
+            self.logger.info("User aborted" + self.fullName)
             self.writeToErrorLog("User Abort")
             self.ended.emit("Aborted")
+            self.setErrorString("Aborted")
             self.kill()
             self.blockSignals(True)
 
@@ -295,19 +338,23 @@ class ProcessModel(QtCore.QAbstractItemModel):
         process.ended.connect(lambda: self.setData(endItem.index, generateTimestampString()))
 
         process.lastLog.connect(lambda msg: self.setData(resultItem.index, msg))
-        process.ponged.connect(lambda msg: self.setData(resultItem.index, msg))
+        # process.ponged.connect(lambda msg: self.setData(resultItem.index, msg))
         process.errorOccurred.connect(lambda: self.setData(resultItem.index, process.error()))
         process.errorSignal.connect(lambda msg: self.setData(resultItem.index, msg))
 
         if self.statusBar is not None:
-            process.ponged.connect(lambda msg: self.statusBar.showMessage("Process '{}': '{}'".format(process.name, msg),
-                                                   750))
+            process.ponged.connect(
+                lambda msg: self.statusBar.showMessage("Process '{}': '{}'".format(process.name, msg),
+                                                       750))
             process.ended.connect(
                 lambda msg: self.statusBar.showMessage("Process '{}' ended with status '{}'".format(process.name, msg),
                                                        10000))
         self.endInsertRows()
-        print("Done")
 
+    def terminateAllProcesses(self):
+        for item in self.rootItem.childItems:
+            item.tags["Process"].terminate()
+            print("Terminated", item.tags["Process"].name)
 
 # class ProcessDialog(QDialog):
 #     def __init__(self, windowName, process: Process, parent=None):

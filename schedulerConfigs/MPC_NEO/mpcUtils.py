@@ -431,7 +431,7 @@ def updatedStringToDatetime(updated):
 
 def candidatesForTimeRange(obsStart, obsEnd, duration, dbConnection):
     candidates = dbConnection.table_query("Candidates", "*",
-                                          "RemovedReason IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateAdded > ?",
+                                          "RemovedReason IS NULL AND RejectedReason IS NULL AND CandidateType IS \"MPC NEO\" AND DateLastEdited > ?",
                                           [datetime.utcnow() - timedelta(hours=36)], returnAsCandidates=True)
 
     if candidates is None:

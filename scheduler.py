@@ -1,12 +1,18 @@
+import os, sys
+# from pathlib import Path
+
+# dirname = os.path.dirname(PyQt6.__file__)
+# plugin_path = os.path.join(Path(__file__).parent, 'PyQt6', 'Qt6', 'plugins')
+# os.environ['QT_PLUGIN_PATH'] = plugin_path
+# os.environ['QT_DEBUG_PLUGINS']="1"
 import copy
 import json
-import os
 import queue
 import random
 import shutil
-import sys
 from datetime import datetime, timedelta
 from importlib import import_module
+# import PyQt6
 
 import astroplan.utils
 import astropy.units as u
@@ -21,6 +27,8 @@ from astroplan.target import get_skycoord
 from astropy.coordinates import EarthLocation
 from astropy.coordinates import SkyCoord
 from astropy.time import Time
+import matplotlib
+# matplotlib.use('TKAgg')  # very important
 from matplotlib import pyplot as plt
 from matplotlib.colors import ListedColormap
 
@@ -146,8 +154,6 @@ def plotScores(scoreArray, targetNames, times, title, savepath):
 
     plt.tight_layout()
     plt.savefig(os.sep.join([savepath, "scorePlot.png"]))
-    plt.show()
-    plt.close()
 
 
 def visualizeSchedule(scheduleDf: pd.DataFrame, startDt=None, endDt=None, full=None, temp=None):
@@ -227,7 +233,6 @@ def visualizeSchedule(scheduleDf: pd.DataFrame, startDt=None, endDt=None, full=N
             "%b %d, %Y, %H:%M"))
 
     # Show the plot
-    plt.show()
 
     schedule.to_csv("schedule.csv")
 
@@ -442,8 +447,6 @@ def visualizeSchedule2(scheduleDf: pd.DataFrame, savepath, startDt=None, endDt=N
             "%H:%M") + " UTC\n")
 
     plt.savefig(os.sep.join([savepath, "schedule.png"]))
-    plt.show()
-    plt.close()
     schedule.to_csv(os.sep.join([savepath, "schedule.csv"]), index=None)
 
 
@@ -474,8 +477,8 @@ def createSchedule(startTime, endTime, savepath):
         typeName, conf = module.getConfig()
         configDict[typeName] = conf
 
-
-    candidates = [candidate for candidateList in [c.selectCandidates(startTime, endTime, settings["candidateDbPath"]) for c in configDict.values()]
+    candidates = [candidate for candidateList in
+                  [c.selectCandidates(startTime, endTime, settings["candidateDbPath"]) for c in configDict.values()]
                   for candidate in
                   candidateList]  # turn the lists of candidates into one list
 
@@ -488,6 +491,7 @@ def createSchedule(startTime, endTime, savepath):
         c.Dec = genUtils.ensureAngle(float(c.Dec))
 
     designations = [candidate.CandidateName for candidate in candidates]
+    print("Candidates to schedule:", designations)
     candidateDict = dict(zip(designations, candidates))
 
     # constraint on when the observation can *start*
@@ -495,12 +499,17 @@ def createSchedule(startTime, endTime, savepath):
                                                           Time(stringToTime(c.EndObservability) - timedelta(
                                                               seconds=float(c.NumExposures) * float(c.ExposureTime))))
                           for c in candidates}
+    timeDict = {c.CandidateName: (Time(stringToTime(c.StartObservability)),
+                                  Time(stringToTime(c.EndObservability) - timedelta(
+                                      seconds=float(c.NumExposures) * float(c.ExposureTime))))
+                for c in candidates}
+    print(timeDict)
     typeSpecificConstraints = {}  # make a dict of constraints to put on all targets of a given type (specified by specs (config) py file)
     for typeName, conf in configDict.items():
         typeSpecificConstraints[
             typeName] = conf.generateTypeConstraints()  # dictionary of {type of target: list of astroplan constraints, initialized}
 
-    print("Candidates:", candidates)
+    # print("Candidates:", candidates)
     blocks = []
     for c in candidates:
         exposureDuration = float(c.NumExposures) * float(c.ExposureTime)
@@ -614,6 +623,7 @@ if __name__ == "__main__":
         settings = json.loads(sys.argv[1])
         sunsetUTC = datetime.fromtimestamp(settings["scheduleStartTimeSecs"]) + timedelta(hours=7)
         sunriseUTC = datetime.fromtimestamp(settings["scheduleEndTimeSecs"]) + timedelta(hours=7)
+        print("Making schedule from", sunsetUTC, "to", sunriseUTC)
         savepath = settings["scheduleSaveDir"]
         overwrite = True
     # sunsetUTC = datetime.now()
@@ -626,7 +636,7 @@ if __name__ == "__main__":
         shutil.rmtree(savepath)
         os.mkdir(savepath)
 
-    print(sunsetUTC, sunriseUTC)
+    # print(sunsetUTC, sunriseUTC)
     scheduleTable, _, _ = createSchedule(sunsetUTC, sunriseUTC, savepath)
     # scheduleTable.pprint(max_width=2000)
     # visualizeSchedule(scheduleTable, sunsetUTC, sunriseUTC)

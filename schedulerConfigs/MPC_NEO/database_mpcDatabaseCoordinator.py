@@ -22,19 +22,20 @@ dateFormat = '%m/%d/%Y %H:%M:%S'
 
 LOGFORMAT = " %(asctime)s %(log_color)s%(levelname)-2s%(reset)s | %(log_color)s%(message)s%(reset)s"
 colorFormatter = ColoredFormatter(LOGFORMAT, datefmt=dateFormat)
-fileFormatter = formatter = logging.Formatter(fmt='%(asctime)s %(levelname)-2s | %(message)s', datefmt=dateFormat)
 
 stream = logging.StreamHandler()
 stream.setFormatter(colorFormatter)
 stream.setLevel(logging.INFO if len(sys.argv) == 1 else logging.ERROR)
 
+fileFormatter = logging.Formatter(fmt='%(asctime)s %(levelname)-2s | %(message)s', datefmt=dateFormat)
 fileHandler = logging.FileHandler("mpcCandidate.log")
 fileHandler.setFormatter(fileFormatter)
 fileHandler.setLevel(logging.DEBUG)
-
 logger = logging.getLogger(__name__)
 
 logger.addHandler(fileHandler)
+# logger.setLevel(logging.DEBUG)
+
 logger.addHandler(stream)
 
 logger.setLevel(logging.DEBUG if len(sys.argv) == 1 else logging.ERROR)
@@ -61,6 +62,6 @@ except Exception:
 
 # logger.info("---Done. will run again at " + (dt.now() + timedelta(minutes=interval)).strftime(dateFormat) + " PST.")
 logger.info("---Done---")
-print("\n")
+# print("\n")
 exit()
     # time.sleep(interval * 60)

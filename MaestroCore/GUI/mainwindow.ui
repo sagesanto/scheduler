@@ -1307,6 +1307,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="debugInfoButton">
+             <property name="text">
+              <string>Debug Info</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="pingButton">
              <property name="enabled">
               <bool>false</bool>

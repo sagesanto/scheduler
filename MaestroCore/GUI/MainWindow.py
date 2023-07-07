@@ -583,6 +583,9 @@ class Ui_MainWindow(object):
         self.processAbortButton.setEnabled(False)
         self.processAbortButton.setObjectName("processAbortButton")
         self.horizontalLayout_5.addWidget(self.processAbortButton)
+        self.debugInfoButton = QtWidgets.QPushButton(parent=self.layoutWidget_2)
+        self.debugInfoButton.setObjectName("debugInfoButton")
+        self.horizontalLayout_5.addWidget(self.debugInfoButton)
         self.pingButton = QtWidgets.QPushButton(parent=self.layoutWidget_2)
         self.pingButton.setEnabled(False)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Fixed)
@@ -684,6 +687,7 @@ class Ui_MainWindow(object):
         self.processPauseButton.setShortcut(_translate("MainWindow", "R"))
         self.processResumeButton.setText(_translate("MainWindow", "Resume"))
         self.processAbortButton.setText(_translate("MainWindow", "Abort"))
+        self.debugInfoButton.setText(_translate("MainWindow", "Debug Info"))
         self.pingButton.setText(_translate("MainWindow", "Ping"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.processesTab), _translate("MainWindow", "Processes"))
 from MaestroCore.utils.fileButton import FileSelectionButton

@@ -21,7 +21,7 @@ except:
 try:
     desigs, settings = sys.argv[1:3]
     desigs, settings = json.loads(desigs), json.loads(settings)
-    print("MPC argv:", sys.argv)
+    # print("MPC argv:", sys.argv)
     intervalDict = {0: 3, 1: 2, 2: 1, 3: 0}
     mpcInst = MPCNeoConfirm()
     interval = intervalDict[settings["ephemInterval"]]  # this maps ephem interval number from settings (which is the index of the dropdown the user uses) to the mpc's numbering system
@@ -33,12 +33,12 @@ try:
                         asyncInst, logger=logging.getLogger("__name__"),
                         autoFormat=settings["ephemFormat"] == 0, obsCode=settings["ephemsObsCode"]))
 
-    print(len(ephems))
-    print("Saving")
-    sys.stdout.flush()
+    # print(len(ephems))
+    # print("Saving")
+    # sys.stdout.flush()
     for desig, ephDict in ephems.items():
         lines = [l for (_, l) in ephDict.items()] if settings["ephemFormat"] == 0 else [str(e) for e in ephDict]
-        with open(settings["ephemsSavePath"] + os.sep + desig, "w") as f:
+        with open(settings["ephemsSavePath"] + os.sep + desig+".txt", "w") as f:
             f.write('\n'.join(lines))
 
 except Exception as e:
